@@ -1,1 +1,6 @@
-
+#ignore all folders in vivado folder
+vivado/EDRICO_v1/EDRICO_v1.cache
+vivado/EDRICO_v1/EDRICO_v1.hw
+vivado/EDRICO_v1/EDRICO_v1.ip_user_files
+vivado/EDRICO_v1/EDRICO_v1.sim
+vivado/EDRICO_v1/EDRICO_v1.xpr
