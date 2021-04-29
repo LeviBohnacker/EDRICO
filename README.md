@@ -1,5 +1,6 @@
-# RISC-V-IP
+# EDRICO
 
+EDRICO is an open source RISC-V based processor developed during a students work at DHBW Ravensburg. 
 RISC-V is an open source instruction set standard, developed by Berkely University. Due to the open nature of the architecture it has a high potential to become one of the big ISAs in years to come.
 Companys like Alibaba, Western Digital and Nvidia are currently increasing research on RISC-V based processors.
 Due to the predicted future market share of RISC-V processors, it would surely be interessting for students to work on the developement of an IP as well as corresponding software.
