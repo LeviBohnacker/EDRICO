@@ -1,68 +1,76 @@
--------------------------------------------------------------------
---File Name:
---  PMP_unit.vhd
---Author:
---  Levi Bohnacker
---Description:
+----------------------------------------------------------------------------------
+-- Company: DHBW
+-- Engineer: Levi Bohnacker
+-- 
+-- Create Date: 05/01/2021 09:10:02 AM
+-- Design Name: PMP_PMA_checker
+-- Module Name: PMP_unit
+-- Project Name: EDRICO
+-- Target Devices: Arty Z7
+-- Tool Versions: 
+-- Description: 
 --  module to check an address againsta PMP CSR entry, depending on
 --  the readWrite, instruction and size inputs. 
 --  if a match is found the address_hit signal is set to high.
 --  if a match is found and an excption musst be raised, the
 --  excpetion_hit signal is set to high.
--------------------------------------------------------------------
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --ENTITY
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 entity PMP_unit is
 port (
-    ----------------------------------------------------------------
+    ------------------------------------------------------------------------------
     --input signals
-    ----------------------------------------------------------------
+    ------------------------------------------------------------------------------
     --PMP register inputs
     pmpcfg : in std_logic_vector(7 downto 0);
     pmpaddr : in std_logic_vector(31 downto 0);
     pmpaddrLow : in std_logic_vector(31 downto 0);
     --control signal inputs
-    size: in std_logic_vector(1 downto 0);
+    address_upper: in std_logic_vector(31 downto 0);
     readWrite, instruction : in std_logic;
     --address to check
     address : in std_logic_vector(31 downto 0);
     
-    ----------------------------------------------------------------
+    ------------------------------------------------------------------------------
     --output signals
-    ----------------------------------------------------------------
+    ------------------------------------------------------------------------------
     address_hit: out std_logic;
     exception_hit: out std_logic
 );
 end entity;
 
 
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --ARCHITECTURE
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 architecture rtl of PMP_unit is
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --signals
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 signal NAPOT_size: integer range 3 to 32;  --hold size of napot region
-signal access_size: unsigned(31 downto 0);  --hold size of the access in an 32-bit unsigned
-signal address_upper: unsigned(31 downto 0);--hold the upper address of the access (address+access_size)
-
 signal address_hit_int: std_logic; --to loopback address_hit signal
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --constants
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 
 begin
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --NAPOT_gen
 --  generate a NAPOT size from the pmpaddr input
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 NAPOT_size <=   3 when pmpaddr(0) = '0' else
                 4 when pmpaddr(1 downto 0) = "01" else
                 5 when pmpaddr(2 downto 0) = "011" else
@@ -94,41 +102,35 @@ NAPOT_size <=   3 when pmpaddr(0) = '0' else
                 31 when pmpaddr(28 downto 0) = "0" & x"FFFFFFF" else
                 32 when pmpaddr(29 downto 0) = "01" & x"FFFFFFF" else
                 32;
+               
                 
---caclualte access_size from coded signal to actual number
-access_size <= x"00000001" when size = "00" else
-               x"00000002" when size = "01" else
-               x"00000004" when size = "10" else
-               x"00000000"; --is that okay? what happens if size is "11", should not happen but still be defined
-                
---calculate upper address border for access.
-address_upper <= unsigned(address)+access_size;--overflow should not be a sproblem since RISC-V address space wraps arround (cehck this!)
+
    
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --address_hit_detection
 --  check pmp entry for address hit, depending on the pmpcfg settings
--------------------------------------------------------------------                             
-address_hit_detection: process(pmpcfg, pmpaddr, size, NAPOT_size, address)
+----------------------------------------------------------------------------------
+address_hit_detection: process(pmpcfg, pmpaddr, address_upper, NAPOT_size, address)
 begin
     if(pmpcfg(7) = '1') then
         case pmpcfg(4 downto 3) is
             --PMP check for TOR configuration
             when "01" =>
-                if ((unsigned(address(31 downto 2))>=unsigned(pmpaddrLow(29 downto 0))) and (address_upper(31 downto 2)<=unsigned(pmpaddr(29 downto 0)))) then
+                if ((unsigned(address(31 downto 2))>=unsigned(pmpaddrLow(29 downto 0))) and (unsigned(address_upper(31 downto 2))<=unsigned(pmpaddr(29 downto 0)))) then
                     address_hit_int <= '1';
                 else
                     address_hit_int <= '0';
                 end if;
             --PMP check for NA4 configuration
             when "10" =>
-                if ((address(31 downto 2)=pmpaddr(29 downto 0)) and (std_logic_vector(address_upper(31 downto 2))=pmpaddr(29 downto 0))) then
+                if ((address(31 downto 2)=pmpaddr(29 downto 0)) and (address_upper(31 downto 2)=pmpaddr(29 downto 0))) then
                     address_hit_int <= '1';
                 else
                     address_hit_int <= '0';
                 end if;
             --PMP check for NAPOT configuration
             when "11" =>
-                if((address(31 downto NAPOT_size)=pmpaddr(29 downto NAPOT_size-2)) and (std_logic_vector(address_upper(31 downto NAPOT_size))=pmpaddr(29 downto NAPOT_size-2))) then
+                if((address(31 downto NAPOT_size)=pmpaddr(29 downto NAPOT_size-2)) and (address_upper(31 downto NAPOT_size)=pmpaddr(29 downto NAPOT_size-2))) then
                     address_hit_int <= '1';
                 else
                     address_hit_int <= '0';
@@ -142,13 +144,13 @@ begin
     end if;
 end process address_hit_detection;  
 
--------------------------------------------------------------------
+----------------------------------------------------------------------------------
 --exception_hit detection
 --  check for possible exception hit, instruction and the pmpcfg.I 
 --  bit must either be both one or both zero to not raise an 
 --  exception, if an address_hit is detected (therefore a xor)
 --  gate is used.
--------------------------------------------------------------------       
+----------------------------------------------------------------------------------
 exception_hit <= '0' when address_hit_int='0' else
                  '0' when ((readWrite='1' and pmpcfg(1)='1') or (readWrite='0' and pmpcfg(0)='0')) and (instruction xor pmpcfg(2))='0' else
                  '1';           
