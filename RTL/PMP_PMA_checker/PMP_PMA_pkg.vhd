@@ -52,7 +52,9 @@ port (
     --output signals
     ------------------------------------------------------------------------------
     address_hit: out std_logic;
-    exception_hit: out std_logic
+    load_afe_P: out std_logic;
+    storeAMO_afe_P: out std_logic;
+    instruction_afe_P: out std_logic
 );
 end component;
 

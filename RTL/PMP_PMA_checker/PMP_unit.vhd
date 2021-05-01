@@ -48,7 +48,9 @@ port (
     --output signals
     ------------------------------------------------------------------------------
     address_hit: out std_logic;
-    exception_hit: out std_logic
+    load_afe_P: out std_logic;
+    storeAMO_afe_P: out std_logic;
+    instruction_afe_P: out std_logic
 );
 end entity;
 
@@ -116,7 +118,7 @@ begin
         case pmpcfg(4 downto 3) is
             --PMP check for TOR configuration
             when "01" =>
-                if ((unsigned(address(31 downto 2))>=unsigned(pmpaddrLow(29 downto 0))) and (unsigned(address_upper(31 downto 2))<=unsigned(pmpaddr(29 downto 0)))) then
+                if ((unsigned(address(31 downto 2))>=unsigned(pmpaddrLow(29 downto 0))) and (unsigned(address(31 downto 2))<unsigned(pmpaddr(29 downto 0))) and (unsigned(address_upper(31 downto 2))<unsigned(pmpaddr(29 downto 0)))) then
                     address_hit_int <= '1';
                 else
                     address_hit_int <= '0';
@@ -145,16 +147,15 @@ begin
 end process address_hit_detection;  
 
 ----------------------------------------------------------------------------------
---exception_hit detection
---  check for possible exception hit, instruction and the pmpcfg.I 
---  bit must either be both one or both zero to not raise an 
---  exception, if an address_hit is detected (therefore a xor)
---  gate is used.
+--exception detection
+--  check for possible exception hits
 ----------------------------------------------------------------------------------
-exception_hit <= '0' when address_hit_int='0' else
-                 '0' when ((readWrite='1' and pmpcfg(1)='1') or (readWrite='0' and pmpcfg(0)='0')) and (instruction xor pmpcfg(2))='0' else
-                 '1';           
+load_afe_P <= '1' when readWrite = '0' and pmpcfg(0)='0' and address_hit_int = '1' else
+              '0';
               
+storeAMO_afe_P <= '1' when readWrite = '1' and pmpcfg(1)='0' and address_hit_int = '1' else
+                  '0';
               
-
+instruction_afe_P <= '1' when instruction = '1' and pmpcfg(2) = '0' and address_hit_int = '1' else
+                     '0';
 end architecture;
