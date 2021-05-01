@@ -58,4 +58,55 @@ port (
 );
 end component;
 
+component PMA_checker is
+port ( 
+    ------------------------------------------------------------------------------
+    --input signals
+    ------------------------------------------------------------------------------
+    --control signals
+    size : in std_logic_vector(1 downto 0);
+    readWrite : in std_logic;
+    instruction : in std_logic;
+    enable : in std_logic;
+    --address to check
+    address : in std_logic_vector (31 downto 0);
+    ------------------------------------------------------------------------------
+    --output signals
+    ------------------------------------------------------------------------------
+    --enable signals
+    enable_PMA : out std_logic;
+    --exception signals
+    load_ame_P : out std_logic;
+    storeAMO_ame_P : out std_logic;
+    instruction_ame_P : out std_logic
+);
+end component;
+
+component PMP_checker is
+port(
+    ------------------------------------------------------------------------------
+    --input signals
+    ------------------------------------------------------------------------------
+    --PMP information
+    pmpcfg: in type_pmpcfg; --array of 32 7-bit std_logic_vector
+    pmpaddr: in type_pmpaddr; --array of 32 32-bit std_logic_vector
+    --address to check
+    address: in std_logic_vector(31 downto 0);
+    --control signals
+    readWrite: in std_logic;
+    instruction: in std_logic;
+    enable: in std_logic;
+    size: in std_logic_vector(1 downto 0);
+    ------------------------------------------------------------------------------
+    --output signals
+    ------------------------------------------------------------------------------
+    --enable signal
+    enable_pmp: out std_logic;
+    --exception signals
+    load_afe_P: out std_logic;
+    instruction_afe_P: out std_logic;
+    storeAMO_afe_P: out std_logic
+);
+end component;
+
 end package;
