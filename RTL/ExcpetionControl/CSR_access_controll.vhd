@@ -106,6 +106,6 @@ data_out_EC <=  interrupt & exception_code(30 downto 0) when store_mcause = '1' 
 jump_addr <= std_logic_vector(shift_left(unsigned("00" & data_in_EC(31 downto 2)) + unsigned(exception_code), 2));
 data_in_CSR <=  data_in_EC(31 downto 2) & "00" when (interrupt = '0' and data_in_EC(1 downto 0) = "01" and load_mtvec = '1') or (data_in_EC(1 downto 0) = "00" and load_mtvec = '1')else
                 jump_addr when (interrupt = '1' and data_in_EC(1 downto 0) = "01" and load_mtvec = '1') else
-                data_in_CSR;
+                data_in_EC;
 
 end rtl;
