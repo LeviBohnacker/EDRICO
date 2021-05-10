@@ -113,9 +113,7 @@ begin
 
             when "1001" =>--"ashift_right"
 
-                -- ???????????????
-                alu_result <= std_logic_vector(shift_right(unsigned(in_b), to_integer(unsigned(in_a))));
-                -- ???????????????
+                alu_result <= std_logic_vector(shift_right(signed(in_b), to_integer(unsigned(in_a))));
 
             when "1010" =>--"<"
 
