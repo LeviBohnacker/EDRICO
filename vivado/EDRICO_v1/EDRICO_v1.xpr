@@ -76,14 +76,14 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMA_checker.vhd">
+      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd">
         <FileInfo>
           <Attr Name="Library" Val="PMP_PMA_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd">
+      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMA_checker.vhd">
         <FileInfo>
           <Attr Name="Library" Val="PMP_PMA_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -154,6 +154,38 @@
       <File Path="$PPRDIR/../../RTL/ExceptionControll/Exception_Controll.vhd">
         <FileInfo>
           <Attr Name="Library" Val="exception_controll"/>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../RTL/RegisterFile/CSR_controller.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="CSR_lib"/>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../RTL/RegisterFile/CSR_top.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="CSR_lib"/>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../RTL/RegisterFile/CSR_interrupt_gen.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="CSR_lib"/>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../RTL/RegisterFile/CSR_pkg.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="CSR_lib"/>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
