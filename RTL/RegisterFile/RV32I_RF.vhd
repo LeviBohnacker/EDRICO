@@ -28,14 +28,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 --ENTITY
 ----------------------------------------------------------------------------------
 entity RV32I_RF is
-    Port ( register_write : in STD_LOGIC_VECTOR (31 downto 0);
-           register_read_A : in STD_LOGIC_VECTOR (31 downto 0);
-           register_read_B : in STD_LOGIC_VECTOR (31 downto 0);
-           data_in : in STD_LOGIC_VECTOR (31 downto 0);
-           clk : in STD_LOGIC;
-           reset : in STD_LOGIC;
-           data_bus_A : out STD_LOGIC_VECTOR (31 downto 0);
-           data_bus_B : out STD_LOGIC_VECTOR (31 downto 0));
+port (
+    ------------------------------------------------------------------------------
+    --input signals 
+    ------------------------------------------------------------------------------
+    --control singlas
+    register_write : in STD_LOGIC_VECTOR (31 downto 0);
+    register_read_A : in STD_LOGIC_VECTOR (31 downto 0);
+    register_read_B : in STD_LOGIC_VECTOR (31 downto 0);
+    --data in
+    data_in : in STD_LOGIC_VECTOR (31 downto 0);
+    --clock and reset
+    clk : in STD_LOGIC;
+    reset : in STD_LOGIC;
+    ------------------------------------------------------------------------------
+    --output signals 
+    ------------------------------------------------------------------------------
+    data_bus_A : out STD_LOGIC_VECTOR (31 downto 0);
+    data_bus_B : out STD_LOGIC_VECTOR (31 downto 0)
+);
 end RV32I_RF;
 
 ----------------------------------------------------------------------------------
