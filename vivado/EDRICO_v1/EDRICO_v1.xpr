@@ -84,7 +84,7 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMP_unit.vhd">
+      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMA_checker.vhd">
         <FileInfo>
           <Attr Name="Library" Val="PMP_PMA_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -98,30 +98,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-<<<<<<< HEAD
-      <File Path="$PSRCDIR/sources_1/ip/AXI4_Lite_Slave_0_1/AXI4_Lite_Slave_0.xci">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/bd/memory_mapped_CSR/memory_mapped_CSR.bd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-        <CompFileExtendedInfo CompFileName="memory_mapped_CSR.bd" FileRelPathName="ip/memory_mapped_CSR_AXI4_Lite_Slave_0_0/memory_mapped_CSR_AXI4_Lite_Slave_0_0.xci">
-          <Proxy FileSetName="memory_mapped_CSR_AXI4_Lite_Slave_0_0"/>
-        </CompFileExtendedInfo>
-      </File>
-      <File Path="$PPRDIR/../../RTL/ALU/ALU.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="ALU_lib"/>
-=======
       <File Path="$PPRDIR/../../RTL/ControlUnit/CU_decoder.vhd">
         <FileInfo>
           <Attr Name="Library" Val="CU_lib"/>
@@ -141,17 +117,14 @@
       <File Path="$PPRDIR/../../RTL/ControlUnit/CU_FSM.vhd">
         <FileInfo>
           <Attr Name="Library" Val="CU_lib"/>
->>>>>>> d9b0b623160014d5620a8040b5dae2052ba7897c
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-<<<<<<< HEAD
-      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMA_checker.vhd">
+      <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMP_unit.vhd">
         <FileInfo>
           <Attr Name="Library" Val="PMP_PMA_lib"/>
-          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -159,7 +132,6 @@
       <File Path="$PPRDIR/../../RTL/PMP_PMA_checker/PMP_PMA_checker.vhd">
         <FileInfo>
           <Attr Name="Library" Val="PMP_PMA_lib"/>
-          <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -268,6 +240,14 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../../RTL/ALU/ALU.vhd">
+        <FileInfo>
+          <Attr Name="Library" Val="ALU_lib"/>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../../RTL/ALU/ALU_pkg.vhd">
         <FileInfo>
           <Attr Name="Library" Val="ALU_lib"/>
@@ -276,29 +256,9 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../RTL/AXI4_Lite_Slave/mtip_comperator.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="mmCSR_lib"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/hdl/mmCSR_wrapper.vhd">
-        <FileInfo>
-          <Attr Name="Library" Val="mmCSR_lib"/>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../RTL/AXI4_Lite_Slave/mmCSR_wrapper.vhd"/>
-          <Attr Name="ImportTime" Val="1620818299"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-=======
->>>>>>> d9b0b623160014d5620a8040b5dae2052ba7897c
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="PMP_checker"/>
+        <Option Name="TopModule" Val="PMP_PMA_checker"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
       </Config>
     </FileSet>
@@ -312,7 +272,7 @@
       <Filter Type="Srcs"/>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="PMP_checker"/>
+        <Option Name="TopModule" Val="PMP_PMA_checker"/>
         <Option Name="TopLib" Val="PMP_PMA_lib"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
         <Option Name="TransportPathDelay" Val="0"/>
@@ -366,7 +326,6 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-<<<<<<< HEAD
     <Run Id="memory_mapped_CSR_AXI4_Lite_Slave_0_0_synth_1" Type="Ft3:Synth" SrcSet="memory_mapped_CSR_AXI4_Lite_Slave_0_0" Part="xc7z020clg400-1" ConstrsSet="memory_mapped_CSR_AXI4_Lite_Slave_0_0" Description="Vivado Synthesis Defaults" AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" Dir="$PRUNDIR/memory_mapped_CSR_AXI4_Lite_Slave_0_0_synth_1" IncludeInArchive="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/memory_mapped_CSR_AXI4_Lite_Slave_0_0_synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2020"/>
@@ -378,9 +337,6 @@
       <RQSFiles/>
     </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1">
-=======
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7z020clg400-1" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" GenFullBitstream="true" AutoIncrementalDir="C:/home/levi/Software/EDRICO/vivado/EDRICO_v1/EDRICO_v1.srcs/utils_1/imports/impl_1">
->>>>>>> d9b0b623160014d5620a8040b5dae2052ba7897c
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
         <Step Id="init_design"/>
