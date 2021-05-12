@@ -23,14 +23,12 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-library PMP_PMA_lib;
-use PMP_PMA_lib.PMP_PMA_pkg.ALL;
-
-library CSR_lib;
-use CSR_lib.CSR_pkg.ALL;
+library PMP_lib;
+use PMP_lib.PMP_PMA_pkg.ALL;
 
 library RF_lib;
 use RF_lib.RF_pkg.ALL;
+use RF_lib.CSR_pkg.ALL;
 
 ----------------------------------------------------------------------------------
 --ENTITY
