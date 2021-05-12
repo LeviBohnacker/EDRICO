@@ -137,7 +137,7 @@ begin
         return_out <= '0';
         ALU_op <= "0000";
         mask_ctrl <= "00";
-    elsif(clk'event and clk = '1' and execute_enable = '1') then
+    elsif(clk'event and clk = '0' and execute_enable = '1') then
         type_of_instruction <= type_of_instruction_int;
         PMP_enable <= PMP_enable_int;
         PMP_instruction <= PMP_instruction_int;

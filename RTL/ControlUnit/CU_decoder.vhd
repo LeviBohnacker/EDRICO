@@ -162,6 +162,9 @@ begin
 
         case decoded_cluster is
             when LOAD =>
+            -- for LOAD instructions adapt the PMP size and masking control
+            -- ALU performs addition to obtain target address and therefore receives an immediate
+            -- and data from register. loaded data stores in respective destination register
                 type_of_instruction_int <= "0001";
                 PMP_enable_int <= '1';  
                 PMP_instruction_int <= '1';
@@ -192,6 +195,9 @@ begin
                         iie_CU_int <= '1';                    
                 end case;
             when STORE =>
+            -- for STORE instructions adapt the PMP size and masking control
+            -- ALU performs addition to obtain target address and therefore receives an immediate
+            -- and data from register 
                 type_of_instruction_int <= "0001";
                 PMP_enable_int <= '1';
                 PMP_instruction_int <= '1';
@@ -218,6 +224,7 @@ begin
                             iie_CU_int <= '1';                                                                                          
                     end case;
             when BRANCH =>
+            -- Branch instructions adapt the
                 type_of_instruction_int <= "0010";
                 B_MUX_int <= '1';
                 A_MUX_int <= "10";
