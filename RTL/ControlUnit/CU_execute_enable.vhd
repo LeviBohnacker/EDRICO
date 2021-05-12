@@ -35,37 +35,37 @@ port (
     clk: in std_logic;
     reset: in std_logic;
     -- instruction register
-    type_of_instruction_int: out std_logic_vector(3 downto 0);
+    type_of_instruction_int: in std_logic_vector(3 downto 0);
     -- PMP ctrl
-    PMP_enable_int: out std_logic;
-    PMP_instruction_int: out std_logic;
-    PMP_size_int: out std_logic_vector(1 downto 0);
-    PMP_rw_int: out std_logic;
+    PMP_enable_int: in std_logic;
+    PMP_instruction_int: in std_logic;
+    PMP_size_int: in std_logic_vector(1 downto 0);
+    PMP_rw_int: in std_logic;
     -- MUX ctrl
-    DMU_IN_MUX_int: out std_logic;
-    DMU_OUT_MUX_int: out std_logic;
-    R_MUX_int: out std_logic;
-    PMP_MUX_int: out std_logic;
-    B_MUX_int: out std_logic;
-    A_MUX_int: out std_logic_vector(1 downto 0);
+    DMU_IN_MUX_int: in std_logic;
+    DMU_OUT_MUX_int: in std_logic;
+    R_MUX_int: in std_logic;
+    PMP_MUX_int: in std_logic;
+    B_MUX_int: in std_logic;
+    A_MUX_int: in std_logic_vector(1 downto 0);
     -- reg ctrl
-    reg_read_A_int: out std_logic_vector(4 downto 0);
-    reg_read_B_int: out std_logic_vector(4 downto 0);
-    reg_write_int: out std_logic_vector(4 downto 0);
+    reg_read_A_int: in std_logic_vector(4 downto 0);
+    reg_read_B_int: in std_logic_vector(4 downto 0);
+    reg_write_int: in std_logic_vector(4 downto 0);
     -- CSR ctrl
-    CSR_save_int: out std_logic;
-    CSR_address_int: out std_logic_vector(11 downto 0);
-    CSR_write_int: out std_logic;
-    CSR_read_int: out std_logic;
+    CSR_save_int: in std_logic;
+    CSR_address_int: in std_logic_vector(11 downto 0);
+    CSR_write_int: in std_logic;
+    CSR_read_int: in std_logic;
     -- exception ctrl
-    iie_CU_int: out std_logic;
-    ece_CU_int: out std_logic;
-    be_CU_int: out std_logic;
-    return_int: out std_logic;
+    iie_CU_int: in std_logic;
+    ece_CU_int: in std_logic;
+    be_CU_int: in std_logic;
+    return_int: in std_logic;
     -- other signals
-    ALU_op_int: out std_logic_vector(3 downto 0);
-    immediate_int: out std_logic_vector(31 downto 0);
-    mask_ctrl_int: out std_logic_vector(1 downto 0);
+    ALU_op_int: in std_logic_vector(3 downto 0);
+    immediate_int: in std_logic_vector(31 downto 0);
+    mask_ctrl_int: in std_logic_vector(1 downto 0);
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -84,8 +84,8 @@ port (
     B_MUX: out std_logic;
     A_MUX: out std_logic_vector(1 downto 0);
     -- reg ctrl
-    reg_read: out std_logic_vector(4 downto 0);
-    reg_read: out std_logic_vector(4 downto 0);
+    reg_read_A: out std_logic_vector(4 downto 0);
+    reg_read_B: out std_logic_vector(4 downto 0);
     reg_write: out std_logic_vector(4 downto 0);
     -- CSR ctrl
     CSR_save: out std_logic;
@@ -96,11 +96,11 @@ port (
     iie_CU: out std_logic;
     ece_CU: out std_logic;
     be_CU: out std_logic;
-    return_: out std_logic;
+    return_out: out std_logic;
     -- other signals
     ALU_op: out std_logic_vector(3 downto 0);
     immediate: out std_logic_vector(31 downto 0);
-    mask_ctrl: out std_logic_vector(1 downto 0);
+    mask_ctrl: out std_logic_vector(1 downto 0)
 );
 end entity;
 
@@ -134,10 +134,10 @@ begin
         iie_CU <= '0';
         ece_CU <= '0';
         be_CU <= '0';
-        return_ <= '0';
+        return_out <= '0';
         ALU_op <= "0000";
         mask_ctrl <= "00";
-    elsif(clk'event and clk = '1' and execute_enable = 1) then
+    elsif(clk'event and clk = '1' and execute_enable = '1') then
         type_of_instruction <= type_of_instruction_int;
         PMP_enable <= PMP_enable_int;
         PMP_instruction <= PMP_instruction_int;
@@ -159,7 +159,7 @@ begin
         iie_CU <= iie_CU_int;
         ece_CU <= ece_CU_int;
         be_CU <= be_CU_int;
-        return_ <= return_int;
+        return_out <= return_int;
         ALU_op <= ALU_op_int;
         mask_ctrl <= mask_ctrl_int;   
     end if;     
