@@ -2,7 +2,7 @@
 -- Company: DHBW
 -- Engineer: Noah Woelki
 -- 
--- Create Date: 05/10/2021 16:04:15 AM
+-- Create Date: 05/10/2021 06:04:15 AM
 -- Design Name: CU_decoder
 -- Module Name: Control Unit
 -- Project Name: EDRICO
@@ -87,7 +87,7 @@ signal decoded_cluster : instruction_cluster;
 begin
     decode: process(ir)
     begin
-    -- default values for safety reasons while instruction fetch not ready
+    -- default values
         type_of_instruction_int <= "0000";
         PMP_enable_int <= '0';
         PMP_instruction_int <= '0';
@@ -165,25 +165,12 @@ begin
                 type_of_instruction_int <= "0001";
                 PMP_enable_int <= '1';  
                 PMP_instruction_int <= '1';
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
                 DMU_OUT_MUX_int <= '1';
-                R_MUX_int <= '0';
                 PMP_MUX_int <= '1';
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
-                reg_read_A_int <= "00000";
                 reg_read_B_int <= ir(19 downto 15);
-                reg_write_int <= ir(11 downto 7);            
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                ALU_op_int <= "0000";            
+                reg_write_int <= ir(11 downto 7);                       
 
                 case ir(14 downto 12) is
                     when "000" => --LB
@@ -214,20 +201,9 @@ begin
                 R_MUX_int <= '0';
                 PMP_MUX_int <= '1';
                 B_MUX_int <= '1';
-                --------------------------------------------------------------
                 A_MUX_int <= "01";
-                reg_read_A_int <= "00000";
                 reg_read_B_int <= ir(19 downto 15); 
-                reg_write_int <= "00000";                                
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                ALU_op_int <= "0000";
+
                     case ir(14 downto 12) is 
                         when "000" => --SB
                             PMP_size_int <= "00";     
@@ -243,29 +219,12 @@ begin
                     end case;
             when BRANCH =>
                 type_of_instruction_int <= "0010";
-                PMP_enable_int <= '0';
-                PMP_instruction_int <= '0';
-                PMP_size_int <= "00";
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
-                DMU_OUT_MUX_int <= '0';
-                R_MUX_int <= '0';
-                PMP_MUX_int <= '0';
                 B_MUX_int <= '1';
                 A_MUX_int <= "10";
                 reg_read_A_int <= ir(24 downto 20);
                 reg_read_B_int <= ir(19 downto 15);
-                reg_write_int <= "00000";                                
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
                 ALU_op_int <= "1111";
-                mask_ctrl_int <= "00";
+
                     case ir(14 downto 12) is 
                         when "000" => --BEQ    
                             ALU_op_int <= "0101";                                                      
@@ -290,29 +249,13 @@ begin
                 type_of_instruction_int <= "0100"; 
                 reg_write_int <= ir(11 downto 7);                               
             when OPIMM =>
-                type_of_instruction_int <= "0000";
-                PMP_enable_int <= '0';
-                PMP_instruction_int <= '0';
-                PMP_size_int <= "00";
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
-                DMU_OUT_MUX_int <= '0';
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
-                reg_read_A_int <= "00000";
                 reg_read_B_int <= ir(19 downto 15);
                 reg_write_int <= ir(11 downto 7);
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                mask_ctrl_int <= "00";            
+
                     case ir(14 downto 12) is
                         when "000" => --ADDI
                             ALU_op_int <= "0000";
@@ -347,30 +290,14 @@ begin
                             iie_CU_int <= '1';                            
                     end case;
             when OP =>
-                type_of_instruction_int <= "0000";
-                PMP_enable_int <= '0';
-                PMP_instruction_int <= '0';
-                PMP_size_int <= "00";
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
-                DMU_OUT_MUX_int <= '0';
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '1';
                 A_MUX_int <= "10";
-                -----------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-----------------------
                 reg_read_A_int <= ir(24 downto 20);
                 reg_read_B_int <= ir(19 downto 15);
                 reg_write_int <= ir(11 downto 7);
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                mask_ctrl_int <= "00";            
+
                     case ir(14 downto 12) is
                         when "000" => --ADD/SUB
                             if(ir(30) = '0') then --ADD
@@ -400,23 +327,10 @@ begin
                             iie_CU_int <= '1';                           
                     end case;            
             when SYSTEM =>  
-                type_of_instruction_int <= "0000";
-                PMP_enable_int <= '0';
-                PMP_instruction_int <= '0';
-                PMP_size_int <= "00";
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
-                DMU_OUT_MUX_int <= '0';
-                PMP_MUX_int <= '0';
-                reg_read_A_int <= "00000";
                 CSR_save_int <= '1';
                 CSR_address_int <= ir(31 downto 20);
                 CSR_write_int <= '1';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                mask_ctrl_int <= "00";
+
                     case ir(14 downto 12) is
 
                         when "000" => --ECALL/EBREAK
@@ -475,8 +389,7 @@ begin
                             reg_read_B_int <= ir(19 downto 15);
                             reg_write_int <= ir(11 downto 7);                            
                             CSR_read_int <= '0';
-                            ALU_op_int <= "0000";
-                            immediate_int <= "00000000000000000000000000000000";                                                                                                    
+                            ALU_op_int <= "0000";                                                                                                  
                         when "010" => --CSRRS
                             R_MUX_int <= '1';
                             B_MUX_int <= '1';
@@ -484,8 +397,7 @@ begin
                             reg_read_B_int <= ir(19 downto 15);
                             reg_write_int <= ir(11 downto 7);                             
                             CSR_read_int <= '1';
-                            ALU_op_int <= "0011";
-                            immediate_int <= "00000000000000000000000000000000";                         
+                            ALU_op_int <= "0011";                         
                         when "011" => --CSRRC
                             R_MUX_int <= '1';
                             B_MUX_int <= '1';
@@ -493,8 +405,7 @@ begin
                             reg_read_B_int <= ir(19 downto 15);
                             reg_write_int <= ir(11 downto 7);                              
                             CSR_read_int <= '1';
-                            ALU_op_int <= "0010";
-                            immediate_int <= "00000000000000000000000000000000";                         
+                            ALU_op_int <= "0010";                       
                         when "101" => --CSRRWI
                             R_MUX_int <= '1';
                             B_MUX_int <= '1';
@@ -526,55 +437,19 @@ begin
                             iie_CU_int <= '1';                      
                     end case;
             when AUIPC =>
-                type_of_instruction_int <= "0000";
-                PMP_enable_int <= '0';
-                PMP_instruction_int <= '0';
-                PMP_size_int <= "00";
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
-                DMU_OUT_MUX_int <= '0';
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '0';
                 A_MUX_int <= "01";
-                reg_read_A_int <= "00000";
-                reg_read_B_int <= "00000";
                 reg_write_int <= ir(11 downto 7);
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                ALU_op_int <= "0000";
-                mask_ctrl_int <= "00";            
+
             when LUI =>
-                type_of_instruction_int <= "0000";
-                PMP_enable_int <= '0';
-                PMP_instruction_int <= '0';
-                PMP_size_int <= "00";
-                PMP_rw_int <= '0';
-                DMU_IN_MUX_int <= '0';
-                DMU_OUT_MUX_int <= '0';
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
-                reg_read_A_int <= "00000";
-                reg_read_B_int <= "00000";
                 reg_write_int <= ir(11 downto 7);
-                CSR_save_int <= '0';
-                CSR_address_int <= "000000000000";
-                CSR_write_int <= '0';
-                CSR_read_int <= '0';
-                iie_CU_int <= '0';
-                ece_CU_int <= '0';
-                be_CU_int <= '0';
-                return_int <= '0';
-                ALU_op_int <= "0000";
-                mask_ctrl_int <= "00";            
+
             when INVALID => --illegal instruction exception
                 iie_CU_int <= '1';
         end case;
