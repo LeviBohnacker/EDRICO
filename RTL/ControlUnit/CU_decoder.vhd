@@ -224,13 +224,13 @@ begin
                             iie_CU_int <= '1';                                                                                          
                     end case;
             when BRANCH =>
-            -- Branch instructions adapt the
+            -- Branch instructions adapt the ALU operation to compare regA and regB
                 type_of_instruction_int <= "0010";
                 B_MUX_int <= '1';
                 A_MUX_int <= "10";
                 reg_read_A_int <= ir(24 downto 20);
                 reg_read_B_int <= ir(19 downto 15);
-                ALU_op_int <= "1111";
+                ALU_op_int <= "0000";
 
                     case ir(14 downto 12) is 
                         when "000" => --BEQ    
@@ -249,13 +249,20 @@ begin
                             iie_CU_int <= '1';
                     end case;                                         
             when JALR => --JALR
+            -- JALR adds + 4 to the program counter and stores it to rd
+            -- target address is obtained by PC_top control which adds regB to the immediate
+                R_MUX_int <= '1';
                 type_of_instruction_int <= "1000";
+                reg_read_B_int <= ir(19 downto 15);
                 reg_write_int <= ir(11 downto 7);
             when FENCE => --NOP            
             when JAL => --JAL
+            -- JAL stores PC +4 into rd, jump target address obtained by PC_top (adds immediate to PC)
+                R_MUX_int <= '1';
                 type_of_instruction_int <= "0100"; 
                 reg_write_int <= ir(11 downto 7);                               
             when OPIMM =>
+            -- Immediate operations perform ALU operations on data from regB and immediate
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '1';
@@ -297,6 +304,7 @@ begin
                             iie_CU_int <= '1';                            
                     end case;
             when OP =>
+            -- Normal operation performs ALU operation on regA and regB, stores in rd (regwrite)
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '1';
@@ -444,6 +452,7 @@ begin
                             iie_CU_int <= '1';                      
                     end case;
             when AUIPC =>
+            -- AUIPC adds upper immediate to the pgroam counter and stores to rd (regwrite)
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '0';
@@ -451,6 +460,7 @@ begin
                 reg_write_int <= ir(11 downto 7);
 
             when LUI =>
+            -- loads upper immediate 
                 R_MUX_int <= '1';
                 PMP_MUX_int <= '0';
                 B_MUX_int <= '1';

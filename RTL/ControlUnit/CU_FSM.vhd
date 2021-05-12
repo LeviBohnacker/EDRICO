@@ -80,6 +80,7 @@ comb_process: process(halt_core, memOP_finished, reset, type_of_instruction)
 begin 
     case present_state is
         when FSM_RESET =>
+        -- when in FSM reset, either go to halt core or in next clock cycle co to fetch status
             if(halt_core = '1') then
                 next_state <= FSM_HALT_CORE;
             else
@@ -95,6 +96,7 @@ begin
             instruction_finished <= '0';    
 
         when FSM_HALT_CORE =>
+        -- when in halt core, stay if still active or go to fetch status if halt over
             if(halt_core = '1') then
                 next_state <= FSM_HALT_CORE;
             else
@@ -110,6 +112,7 @@ begin
             instruction_finished <= '0';
 
         when FSM_FETCH =>
+        -- when in fetch either go to halt, go to execute (only if memory operation is finished) or stay in fetch
             if(halt_core = '1') then
                 next_state <= FSM_HALT_CORE;
             elsif(memOP_finished = '1') then
@@ -127,6 +130,7 @@ begin
             instruction_finished <= '0';
         
         when FSM_EXECUTE =>
+        -- when in execute, go to execute_mem if instruction type is memory type, or go to wait if normal operation
             if(halt_core = '1') then
                 next_state <= FSM_HALT_CORE;
             elsif(type_of_instruction(0) = '1') then
@@ -144,6 +148,7 @@ begin
             instruction_finished <= '0'; 
 
         when FSM_EXECUTE_MEM =>
+        -- wait for memory execution or go to wait state if operation finished
             if(halt_core = '1') then
                 next_state <= FSM_HALT_CORE;
             elsif(memOP_finished = '1') then
@@ -161,6 +166,7 @@ begin
             instruction_finished <= '0'; 
 
         when FSM_WAIT =>
+        -- when in wait either go to halt core or to fetch state in next clock cycle
             if(halt_core = '1') then
                 next_state <= FSM_HALT_CORE;
             else

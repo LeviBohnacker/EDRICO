@@ -113,6 +113,7 @@ begin
 exec_en: process(clk, execute_enable, reset)
 begin
     if(reset = '1') then
+    -- if reset, default value for all signals
         type_of_instruction <= "0000";
         PMP_enable <= '0';
         PMP_instruction <= '0';
@@ -138,6 +139,7 @@ begin
         ALU_op <= "0000";
         mask_ctrl <= "00";
     elsif(clk'event and clk = '0' and execute_enable = '1') then
+    -- if clock is falling and execute_enable is 1, signals are fed through
         type_of_instruction <= type_of_instruction_int;
         PMP_enable <= PMP_enable_int;
         PMP_instruction <= PMP_instruction_int;
