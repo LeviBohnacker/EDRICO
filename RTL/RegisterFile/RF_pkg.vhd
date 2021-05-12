@@ -39,9 +39,9 @@ port (
     --input signals 
     ------------------------------------------------------------------------------
     --control singlas
-    register_write : in STD_LOGIC_VECTOR (31 downto 0);
-    register_read_A : in STD_LOGIC_VECTOR (31 downto 0);
-    register_read_B : in STD_LOGIC_VECTOR (31 downto 0);
+    register_write : in STD_LOGIC_VECTOR (4 downto 0);
+    register_read_A : in STD_LOGIC_VECTOR (4 downto 0);
+    register_read_B : in STD_LOGIC_VECTOR (4 downto 0);
     --data in
     data_in : in STD_LOGIC_VECTOR (31 downto 0);
     --clock and reset
