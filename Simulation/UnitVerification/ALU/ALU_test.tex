@@ -1,0 +1,63 @@
+%!TEX option = --shell-escape
+\documentclass[12pt, a4paper]{article}
+\usepackage[scaled]{helvet}
+\usepackage[T1]{fontenc}
+\renewcommand\familydefault{\sfdefault}
+\usepackage{minted}
+
+\author{Noah Woelki}
+\title{ALU unit verification}
+\date{05/10/2021}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+To verify the functionality of the ALU unit, the VHDL code is tested using Verilog Simulation process. The implementation of the ALU consists of the entity and an architecture.\\
+For verification a so called \textit{testbench} is designed. The testbench creates a new unit of the ALU the \textit{Unit under test (UUT)}.
+
+\section{UUT}
+The UUT represents a unit of the ALU and following test procedure is performed:\\
+
+\begin{minted}{vhdl}
+        -- set input signal
+        wait for 100ns;
+        in_a <= "00000000000000000000000000000010";
+        in_b <= "00000000000000000000000001000000";
+
+        -- set op signal
+        alu_op <= "0000";
+        wait for 100ns;
+        alu_op <= "0001";
+        wait for 100ns;
+        alu_op <= "0010";
+        wait for 100ns;
+        alu_op <= "0011";
+        wait for 100ns;
+        alu_op <= "0100";
+        wait for 100ns;
+        alu_op <= "0101";
+        wait for 100ns;
+        alu_op <= "0110";
+        wait for 100ns;
+        alu_op <= "0111";
+        wait for 100ns;
+        alu_op <= "1000";
+        wait for 100ns;
+        alu_op <= "1001";
+        wait for 100ns;
+        alu_op <= "1010";
+        wait for 100ns;
+        alu_op <= "1011";
+        wait for 100ns;
+        alu_op <= "1100";
+        wait for 100ns;
+        alu_op <= "1101";
+        wait for 100ns;
+\end{minted}
+
+
+
+
+
+
+\end{document}
