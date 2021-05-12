@@ -62,7 +62,7 @@ if { [info exists ::origin_dir_loc] } {
 }
 
 # Set the project name
-set _xil_proj_name_ "EDRICO_v1"
+set _xil_proj_name_ "EDRICO"
 
 # Use project name variable, if specified in the tcl shell
 if { [info exists ::user_project_name] } {
@@ -70,7 +70,7 @@ if { [info exists ::user_project_name] } {
 }
 
 variable script_file
-set script_file "EDRICO_v1.tcl"
+set script_file "EDRICO.tcl"
 
 # Help information for this script
 proc print_help {} {
@@ -401,7 +401,7 @@ if { $obj != "" } {
 
 }
 set obj [get_runs synth_1]
-set_property -name "auto_incremental_checkpoint.directory" -value "/home/levi/Software/EDRICO/vivado/EDRICO_v1.srcs/utils_1/imports/synth_1" -objects $obj
+set_property -name "auto_incremental_checkpoint.directory" -value "/home/levi/Software/EDRICO/vivado/EDRICO.srcs/utils_1/imports/synth_1" -objects $obj
 set_property -name "strategy" -value "Vivado Synthesis Defaults" -objects $obj
 
 # set the current synth run
@@ -615,7 +615,7 @@ set_property -name "options.warn_on_violation" -value "1" -objects $obj
 
 }
 set obj [get_runs impl_1]
-set_property -name "auto_incremental_checkpoint.directory" -value "/home/levi/Software/EDRICO/vivado/EDRICO_v1.srcs/utils_1/imports/impl_1" -objects $obj
+set_property -name "auto_incremental_checkpoint.directory" -value "/home/levi/Software/EDRICO/vivado/EDRICO.srcs/utils_1/imports/impl_1" -objects $obj
 set_property -name "strategy" -value "Vivado Implementation Defaults" -objects $obj
 set_property -name "steps.write_bitstream.args.readback_file" -value "0" -objects $obj
 set_property -name "steps.write_bitstream.args.verbose" -value "0" -objects $obj
