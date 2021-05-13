@@ -1,7 +1,7 @@
 #*****************************************************************************************
 # Vivado (TM) v2020.2 (64-bit)
 #
-# EDRICO_v1.tcl: Tcl script for re-creating project 'EDRICO_v1'
+# EDRICO.tcl: Tcl script for re-creating project 'EDRICO'
 #
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
 #
@@ -17,6 +17,16 @@
 # Check file required for this script exists
 proc checkRequiredFiles { origin_dir} {
   set status true
+  set files [list \
+   "/home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sources_1/ip/mmCSR_AXI4_slave_0/mmCSR_AXI4_slave_0.xci" \
+  ]
+  foreach ifile $files {
+    if { ![file isfile $ifile] } {
+      puts " Could not find local file $ifile "
+      set status false
+    }
+  }
+
   set files [list \
    "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd" \
    "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd" \
@@ -41,12 +51,21 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd" \
    "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd" \
    "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd" \
-   "${origin_dir}/RTL/RegisterFile/RF_lib.vhd" \
    "${origin_dir}/RTL/ALU/ALU_pkg.vhd" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
       puts " Could not find remote file $ifile "
+      set status false
+    }
+  }
+
+  set paths [list \
+   [file normalize "$origin_dir/ip_repo/mmCSR_AXI4_slave_1.0"] \
+  ]
+  foreach ipath $paths {
+    if { ![file isdirectory $ipath] } {
+      puts " Could not access $ipath "
       set status false
     }
   }
@@ -150,10 +169,27 @@ set_property -name "sim.central_dir" -value "$proj_dir/${_xil_proj_name_}.ip_use
 set_property -name "sim.ip.auto_export_scripts" -value "1" -objects $obj
 set_property -name "simulator_language" -value "Mixed" -objects $obj
 set_property -name "target_language" -value "VHDL" -objects $obj
+set_property -name "webtalk.activehdl_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.ies_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.modelsim_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.xcelium_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
   create_fileset -srcset sources_1
+}
+
+# Set IP repository paths
+set obj [get_filesets sources_1]
+if { $obj != {} } {
+set_property "ip_repo_paths" "[file normalize "$origin_dir/ip_repo/mmCSR_AXI4_slave_1.0"]" $obj
+
+# Rebuild user ip_repo's index before adding any source files
+update_ip_catalog -rebuild
 }
 
 # Set 'sources_1' fileset object
@@ -182,7 +218,6 @@ set files [list \
  [file normalize "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/RF_lib.vhd"] \
  [file normalize "${origin_dir}/RTL/ALU/ALU_pkg.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
@@ -326,12 +361,6 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "RF_lib" -objects $file_obj
 
-set file "$origin_dir/RTL/RegisterFile/RF_lib.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
 set file "$origin_dir/RTL/ALU/ALU_pkg.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -345,6 +374,28 @@ set_property -name "library" -value "ALU_lib" -objects $file_obj
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
 set_property -name "top" -value "Exception_Controll" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
+
+# Set 'sources_1' fileset object
+set obj [get_filesets sources_1]
+# Add local files from the original project (-no_copy_sources specified)
+set files [list \
+ [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sources_1/ip/mmCSR_AXI4_slave_0/mmCSR_AXI4_slave_0.xci" ]\
+]
+set added_files [add_files -fileset sources_1 $files]
+
+# Set 'sources_1' fileset file properties for remote files
+# None
+
+# Set 'sources_1' fileset file properties for local files
+set file "mmCSR_AXI4_slave_0/mmCSR_AXI4_slave_0.xci"
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
+set_property -name "registered_with_manager" -value "1" -objects $file_obj
+if { ![get_property "is_locked" $file_obj] } {
+  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
+}
+
 
 # Create 'constrs_1' fileset (if not found)
 if {[string equal [get_filesets -quiet constrs_1] ""]} {
@@ -372,6 +423,7 @@ set obj [get_filesets sim_1]
 set obj [get_filesets sim_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "top" -value "Exception_Controll" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 
 # Set 'utils_1' fileset object
