@@ -53,6 +53,8 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd" \
    "${origin_dir}/RTL/ALU/ALU_pkg.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_PC.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_top.vhd" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -221,6 +223,8 @@ set files [list \
  [file normalize "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd"] \
  [file normalize "${origin_dir}/RTL/ALU/ALU_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_PC.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_top.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
 
@@ -370,6 +374,18 @@ set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "ALU_lib" -objects $file_obj
 
 set file "$origin_dir/RTL/ControlUnit/CU_PC.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_top.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
