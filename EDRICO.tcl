@@ -173,6 +173,7 @@ set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xcelium_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "1" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -433,7 +434,9 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 set obj [get_filesets sim_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "top" -value "CU_top" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "CU_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "10000ns" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
