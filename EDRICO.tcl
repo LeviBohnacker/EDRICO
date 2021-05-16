@@ -18,7 +18,6 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
-   "/home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sources_1/new/AXI4_lite_master_pkg.vhd" \
    "/home/levi/Software/EDRICO/vivado_project/DMU_UV_1_tb_behav.wcfg" \
   ]
   foreach ifile $files {
@@ -60,6 +59,7 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd" \
    "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd" \
    "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd" \
   ]
   foreach ifile $files {
@@ -236,14 +236,9 @@ set files [list \
  [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"] \
  [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd"] \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
-
-# Add local files from the original project (-no_copy_sources specified)
-set files [list \
- [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sources_1/new/AXI4_lite_master_pkg.vhd" ]\
-]
-set added_files [add_files -fileset sources_1 $files]
 
 # Set 'sources_1' fileset file properties for remote files
 set file "$origin_dir/RTL/ExceptionControll/CSR_access_controll.vhd"
@@ -442,13 +437,15 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "AXI4M_lib" -objects $file_obj
 
-
-# Set 'sources_1' fileset file properties for local files
-set file "new/AXI4_lite_master_pkg.vhd"
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"
+set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "AXI4M_lib" -objects $file_obj
 
+
+# Set 'sources_1' fileset file properties for local files
+# None
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
