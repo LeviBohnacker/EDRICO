@@ -18,7 +18,7 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
-   "/home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sources_1/ip/mmCSR_AXI4_slave_0/mmCSR_AXI4_slave_0.xci" \
+   "/home/levi/Software/EDRICO/vivado_project/DMU_UV_1_tb_behav.wcfg" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -55,6 +55,9 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/ControlUnit/CU_PC.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_top.vhd" \
+   "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd" \
+   "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd" \
+   "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -180,6 +183,7 @@ set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xcelium_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "3" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -225,6 +229,8 @@ set files [list \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_PC.vhd"] \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_top.vhd"] \
+ [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd"] \
+ [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
 
@@ -264,6 +270,8 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "EC_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
 set file "$origin_dir/RTL/ALU/ALU.vhd"
 set file [file normalize $file]
@@ -276,6 +284,8 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "ALU_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
 set file "$origin_dir/RTL/RegisterFile/CSR_controller.vhd"
 set file [file normalize $file]
@@ -336,6 +346,8 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "PMP_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
 set file "$origin_dir/RTL/PMP_PMA_checker/PMP_checker.vhd"
 set file [file normalize $file]
@@ -366,6 +378,8 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "RF_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
 set file "$origin_dir/RTL/ALU/ALU_pkg.vhd"
 set file [file normalize $file]
@@ -390,6 +404,20 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "CU_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
+
+set file "$origin_dir/RTL/DataMaskUnit/data_mask_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "DMU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/DataMaskUnit/data_mask_unit_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "DMU_lib" -objects $file_obj
 
 
 # Set 'sources_1' fileset file properties for local files
@@ -399,27 +427,6 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 set obj [get_filesets sources_1]
 set_property -name "top" -value "Exception_Controll" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
-
-# Set 'sources_1' fileset object
-set obj [get_filesets sources_1]
-# Add local files from the original project (-no_copy_sources specified)
-set files [list \
- [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sources_1/ip/mmCSR_AXI4_slave_0/mmCSR_AXI4_slave_0.xci" ]\
-]
-set added_files [add_files -fileset sources_1 $files]
-
-# Set 'sources_1' fileset file properties for remote files
-# None
-
-# Set 'sources_1' fileset file properties for local files
-set file "mmCSR_AXI4_slave_0/mmCSR_AXI4_slave_0.xci"
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "generate_files_for_reference" -value "0" -objects $file_obj
-set_property -name "registered_with_manager" -value "1" -objects $file_obj
-if { ![get_property "is_locked" $file_obj] } {
-  set_property -name "synth_checkpoint_mode" -value "Singular" -objects $file_obj
-}
-
 
 # Create 'constrs_1' fileset (if not found)
 if {[string equal [get_filesets -quiet constrs_1] ""]} {
@@ -446,9 +453,43 @@ set obj [get_filesets sim_1]
 # Set 'sim_1' fileset properties
 set obj [get_filesets sim_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
-set_property -name "top" -value "Exception_Controll" -objects $obj
+set_property -name "top" -value "CSR_top" -objects $obj
+set_property -name "top_lib" -value "RF_lib" -objects $obj
+
+# Create 'sim_DMU_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_DMU_UV_1] ""]} {
+  create_fileset -simset sim_DMU_UV_1
+}
+
+# Set 'sim_DMU_UV_1' fileset object
+set obj [get_filesets sim_DMU_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Add local files from the original project (-no_copy_sources specified)
+set files [list \
+ [file normalize "${origin_dir}/vivado_project/DMU_UV_1_tb_behav.wcfg" ]\
+]
+set added_files [add_files -fileset sim_DMU_UV_1 $files]
+
+# Set 'sim_DMU_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/DataMaskUnit/DMU_UV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_DMU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+
+
+# Set 'sim_DMU_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_DMU_UV_1' fileset properties
+set obj [get_filesets sim_DMU_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "top" -value "DMU_UV_1_tb" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
-set_property -name "top_lib" -value "EC_lib" -objects $obj
+set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
@@ -477,7 +518,6 @@ if { $obj != "" } {
 
 }
 set obj [get_runs synth_1]
-set_property -name "auto_incremental_checkpoint.directory" -value "/home/levi/Software/EDRICO/vivado/EDRICO.srcs/utils_1/imports/synth_1" -objects $obj
 set_property -name "strategy" -value "Vivado Synthesis Defaults" -objects $obj
 
 # set the current synth run
@@ -691,7 +731,6 @@ set_property -name "options.warn_on_violation" -value "1" -objects $obj
 
 }
 set obj [get_runs impl_1]
-set_property -name "auto_incremental_checkpoint.directory" -value "/home/levi/Software/EDRICO/vivado/EDRICO.srcs/utils_1/imports/impl_1" -objects $obj
 set_property -name "strategy" -value "Vivado Implementation Defaults" -objects $obj
 set_property -name "steps.write_bitstream.args.readback_file" -value "0" -objects $obj
 set_property -name "steps.write_bitstream.args.verbose" -value "0" -objects $obj
