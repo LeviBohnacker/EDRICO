@@ -65,7 +65,7 @@ port (
     -- other signals
     ALU_op_int: in std_logic_vector(3 downto 0);
     immediate_int: in std_logic_vector(31 downto 0);
-    mask_ctrl_int: in std_logic_vector(1 downto 0);
+    mask_ctrl_int: in std_logic_vector(2 downto 0);
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -100,7 +100,7 @@ port (
     -- other signals
     ALU_op: out std_logic_vector(3 downto 0);
     immediate: out std_logic_vector(31 downto 0);
-    mask_ctrl: out std_logic_vector(1 downto 0)
+    mask_ctrl: out std_logic_vector(2 downto 0)
 );
 end entity;
 
@@ -137,7 +137,7 @@ begin
         be_CU <= '0';
         return_out <= '0';
         ALU_op <= "0000";
-        mask_ctrl <= "00";
+        mask_ctrl <= "100";
     elsif(clk'event and clk = '0' and execute_enable = '1') then
     -- if clock is falling and execute_enable is 1, signals are fed through
         type_of_instruction <= type_of_instruction_int;
