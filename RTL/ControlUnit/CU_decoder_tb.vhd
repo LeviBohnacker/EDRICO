@@ -74,7 +74,7 @@ port(
     -- other signals
     ALU_op_int: out std_logic_vector(3 downto 0);
     immediate_int: out std_logic_vector(31 downto 0);
-    mask_ctrl_int: out std_logic_vector(1 downto 0)
+    mask_ctrl_int: out std_logic_vector(2 downto 0)
 );
 end component;
 ----------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ end component;
     -- other signals
     signal ALU_op_int: std_logic_vector(3 downto 0);
     signal immediate_int: std_logic_vector(31 downto 0);
-    signal mask_ctrl_int: std_logic_vector(1 downto 0);
+    signal mask_ctrl_int: std_logic_vector(2 downto 0);
 ----------------------------------------------------------------------------------
 --constants
 ----------------------------------------------------------------------------------
@@ -150,6 +150,7 @@ uut: decoder port map(
         be_CU_int => be_CU_int,
         return_int => return_int,
         ALU_op_int => ALU_op_int,
+        immediate_int => immediate_int,
         mask_ctrl_int => mask_ctrl_int
 );
 
