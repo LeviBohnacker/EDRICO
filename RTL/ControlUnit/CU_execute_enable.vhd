@@ -145,7 +145,7 @@ begin
         PMP_instruction <= PMP_instruction_int;
         PMP_size <= PMP_size_int;
         PMP_rw <= PMP_rw_int;
-        DMU_IN_MUX<= DMU_IN_MUX_int;
+        DMU_IN_MUX <= DMU_IN_MUX_int;
         DMU_OUT_MUX <= DMU_OUT_MUX_int;
         R_MUX <= R_MUX_int;
         PMP_MUX <= PMP_MUX_int;

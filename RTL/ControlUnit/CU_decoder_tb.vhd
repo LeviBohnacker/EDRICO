@@ -150,6 +150,7 @@ uut: decoder port map(
         be_CU_int => be_CU_int,
         return_int => return_int,
         ALU_op_int => ALU_op_int,
+        immediate_int => immediate_int,
         mask_ctrl_int => mask_ctrl_int
 );
 
