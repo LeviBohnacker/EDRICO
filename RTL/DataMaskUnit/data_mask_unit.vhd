@@ -69,10 +69,10 @@ data_in <=  data_bus_A when DMU_IN_MUX_ctrl = '1' else
 --DMU OUT DEMUX
 ----------------------------------------------------------------------------------
 data_load <=    data_out when DMU_OUT_MUX_ctrl = '1' else
-                (others => '1');
+                (others => '0');
 
 data_store <=   data_out when DMU_OUT_MUX_ctrl = '0' else
-                (others => '1');
+                (others => '0');
                 
 ----------------------------------------------------------------------------------
 --DataMaskUnit
