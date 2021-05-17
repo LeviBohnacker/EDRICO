@@ -66,7 +66,7 @@ port (
     -- other signals
     ALU_op_int: out std_logic_vector(3 downto 0);
     immediate_int: out std_logic_vector(31 downto 0);
-    mask_ctrl_int: out std_logic_vector(1 downto 0)
+    mask_ctrl_int: out std_logic_vector(2 downto 0)
 );
 end entity;
 
@@ -111,7 +111,7 @@ begin
         be_CU_int <= '0';
         return_int <= '0';
         ALU_op_int <= "0000";
-        mask_ctrl_int <= "00";
+        mask_ctrl_int <= "100";
 
         case ir(1 downto 0) is
             when "00" =>
@@ -183,19 +183,19 @@ begin
                 case ir(14 downto 12) is
                     when "000" => --LB
                         PMP_size_int <= "00";
-                        mask_ctrl_int <= "00";                    
+                        mask_ctrl_int <= "000";                    
                     when "001" => --LH
                         PMP_size_int <= "01";
-                        mask_ctrl_int <= "10";                     
+                        mask_ctrl_int <= "010";                     
                     when "010" => --LW
                         PMP_size_int <= "10";
-                        mask_ctrl_int <= "00";                     
+                        mask_ctrl_int <= "100";                     
                     when "100" => --LBU
                         PMP_size_int <= "00";
-                        mask_ctrl_int <= "01";                     
+                        mask_ctrl_int <= "001";                     
                     when "101" => --LHU
                         PMP_size_int <= "01";
-                        mask_ctrl_int <= "11"; 
+                        mask_ctrl_int <= "011"; 
                     when others =>
                         iie_CU_int <= '1';                    
                 end case;
@@ -218,15 +218,15 @@ begin
                     case ir(14 downto 12) is 
                         when "000" => --SB
                             PMP_size_int <= "00";     
-                            mask_ctrl_int <= "01";                                                
+                            mask_ctrl_int <= "001";                                                
                         when "001" => --SH
                             PMP_size_int <= "01";  
-                            mask_ctrl_int <= "11";                                                                                                             
+                            mask_ctrl_int <= "011";                                       
                         when "010" => --SW
                             PMP_size_int <= "10";  
-                            mask_ctrl_int <= "00";
+                            mask_ctrl_int <= "100";
                         when others =>
-                            iie_CU_int <= '1';                                                                                          
+                            iie_CU_int <= '1';                              
                     end case;
             when BRANCH =>
             -- Branch instructions adapt the ALU operation to compare regA and regB
@@ -375,7 +375,7 @@ begin
                             iie_CU_int <= '0';
                             return_int <= '0';
                             ALU_op_int <= "0000";
-                            mask_ctrl_int <= "00";
+                            mask_ctrl_int <= "100";
 
                             case ir(22 downto 20) is
                                 when "000" => --ECALL
