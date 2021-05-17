@@ -63,7 +63,7 @@ end component;
     signal memOP_finished: std_logic;
     signal halt_core: std_logic;
     signal reset: std_logic;
-    signal clk: std_logic;
+    signal clk: std_logic := '0';
     signal type_of_instruction: std_logic_vector(3 downto 0);
     signal PMP_enable_FSM: std_logic;
     signal PMP_instruction_FSM: std_logic;
@@ -91,6 +91,7 @@ uut: FSM port map(
     instruction_finished => instruction_finished
 );
 
+clk <= not clk after 5ns;
 --states: FSM_RESET, FSM_HALT_CORE, FSM_FETCH, FSM_EXECUTE, FSM_EXECUTE_MEM, FSM_WAIT
 stim: process
 --to test the FSM all states and processes have to be covered. therefore different parts of testing are implemented 
