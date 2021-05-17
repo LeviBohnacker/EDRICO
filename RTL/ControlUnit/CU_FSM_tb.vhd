@@ -34,7 +34,7 @@ end CU_FSM_tb;
 --ARCHITECTURE
 ----------------------------------------------------------------------------------
 architecture rtl of CU_FSM_tb is
-component FSM
+component CU_FSM
 port(
     ------------------------------------------------------------------------------
     --input signals
@@ -75,7 +75,7 @@ end component;
     signal instruction_finished: std_logic
 
 begin
-uut: FSM port map(
+dut: FSM port map(
     memOP_finished => memOP_finished,
     halt_core => halt_core,
     reset => reset,
