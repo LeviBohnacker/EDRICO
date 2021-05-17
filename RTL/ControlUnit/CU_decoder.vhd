@@ -124,6 +124,7 @@ begin
                             when "01" => decoded_cluster <= STORE;
                             when "10" => decoded_cluster <= INVALID;
                             when "11" => decoded_cluster <= BRANCH;
+                            when others => decoded_cluster <= INVALID;
                         end case;
                     when "001" =>
                         case ir(6 downto 5) is
@@ -131,6 +132,7 @@ begin
                             when "01" => decoded_cluster <= INVALID;
                             when "10" => decoded_cluster <= INVALID;
                             when "11" => decoded_cluster <= JALR;
+                            when others => decoded_cluster <= INVALID;
                         end case;                   
                     when "010" =>
                         decoded_cluster <= INVALID;
@@ -140,6 +142,7 @@ begin
                             when "01" => decoded_cluster <= INVALID;
                             when "10" => decoded_cluster <= INVALID;
                             when "11" => decoded_cluster <= JAL;
+                            when others => decoded_cluster <= INVALID;
                         end case; 
                     when "100" =>
                         case ir(6 downto 5) is
@@ -147,6 +150,7 @@ begin
                             when "01" => decoded_cluster <= OP;
                             when "10" => decoded_cluster <= INVALID;
                             when "11" => decoded_cluster <= SYSTEM;
+                            when others => decoded_cluster <= INVALID;
                         end case;  
                     when "101" =>
                         case ir(6 downto 5) is
@@ -154,6 +158,7 @@ begin
                             when "01" => decoded_cluster <= LUI;
                             when "10" => decoded_cluster <= INVALID;
                             when "11" => decoded_cluster <= INVALID;
+                            when others => decoded_cluster <= INVALID;
                         end case;  
                     when others =>
                         decoded_cluster <= INVALID; 
@@ -273,7 +278,7 @@ begin
                     case ir(14 downto 12) is
                         when "000" => --ADDI
                             ALU_op_int <= "0000";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);                        
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));
                         when "001" => --SLLI
                             ALU_op_int <= "0111";
                             immediate_int <= (31 downto 5 => ir(24)) & ir(24 downto 20);                      
@@ -316,7 +321,7 @@ begin
                     case ir(14 downto 12) is
                         when "000" => --ADD/SUB
                             if(ir(30) = '0') then --ADD
-                                ALU_op_int <= "000";
+                                ALU_op_int <= "0000";
                             else --SUB
                                 ALU_op_int <= "0001";
                             end if;                            
@@ -469,13 +474,13 @@ begin
 
             when INVALID => --illegal instruction exception
                 iie_CU_int <= '1';
+            when others => iie_CU_int <= '1';
         end case;
 
     end process decode;
 
-    imm_gen: process(decoded_cluster)
+    imm_gen: process(ir, decoded_cluster)
     begin
-    immediate_int <= "00000000000000000000000000000000";
         case decoded_cluster is
             when LOAD =>
                 immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);
@@ -493,6 +498,8 @@ begin
                 -- since immediate only required for 3 instructions from this cluster, implementation during decode
             when LUI|AUIPC =>
                 immediate_int <= ir(31 downto 12) & (11 downto 0 => '0');
+            when others => 
+                immediate_int <= "00000000000000000000000000000000";
         end case;    
     end process imm_gen;
     
