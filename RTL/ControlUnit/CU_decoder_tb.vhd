@@ -159,8 +159,9 @@ dut: CU_decoder port map(
 stim: process
     begin
         -- parse through different instruction strings
+        --WFI
+        ir <= "00010000010100000000000001110011"; --WFI 
         --OPIMM
-        wait for 100ns;
         ir <= "00000000001000100000000010010011"; --ADDI
         wait for 100ns;
         ir <= "00000000001000100010000010010011"; --SLTI
