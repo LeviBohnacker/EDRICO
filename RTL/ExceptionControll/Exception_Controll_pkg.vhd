@@ -89,6 +89,8 @@ Port (
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
+    --present state debug
+    present_state_debug : out type_EC_state;
     --halt core signal
     halt_core : out STD_LOGIC;
     --buffer register signals
