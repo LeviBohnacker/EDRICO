@@ -18,16 +18,6 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
-   "/home/levi/Software/EDRICO/vivado_project/DMU_UV_1_tb_behav.wcfg" \
-  ]
-  foreach ifile $files {
-    if { ![file isfile $ifile] } {
-      puts " Could not find local file $ifile "
-      set status false
-    }
-  }
-
-  set files [list \
    "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd" \
    "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd" \
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
@@ -61,6 +51,7 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd" \
    "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd" \
+   "${origin_dir}/simulation/sim_DMU_UV_1/sim_DMU_UV_1.wcfg" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -186,7 +177,7 @@ set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xcelium_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "3" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "4" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -465,22 +456,6 @@ set obj [get_filesets constrs_1]
 # Set 'constrs_1' fileset properties
 set obj [get_filesets constrs_1]
 
-# Create 'sim_1' fileset (if not found)
-if {[string equal [get_filesets -quiet sim_1] ""]} {
-  create_fileset -simset sim_1
-}
-
-# Set 'sim_1' fileset object
-set obj [get_filesets sim_1]
-# Empty (no sources present)
-
-# Set 'sim_1' fileset properties
-set obj [get_filesets sim_1]
-set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
-set_property -name "top" -value "CSR_top" -objects $obj
-set_property -name "top_auto_set" -value "0" -objects $obj
-set_property -name "top_lib" -value "RF_lib" -objects $obj
-
 # Create 'sim_DMU_UV_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sim_DMU_UV_1] ""]} {
   create_fileset -simset sim_DMU_UV_1
@@ -490,14 +465,9 @@ if {[string equal [get_filesets -quiet sim_DMU_UV_1] ""]} {
 set obj [get_filesets sim_DMU_UV_1]
 set files [list \
  [file normalize "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_DMU_UV_1/sim_DMU_UV_1.wcfg"] \
 ]
 add_files -norecurse -fileset $obj $files
-
-# Add local files from the original project (-no_copy_sources specified)
-set files [list \
- [file normalize "${origin_dir}/vivado_project/DMU_UV_1_tb_behav.wcfg" ]\
-]
-set added_files [add_files -fileset sim_DMU_UV_1 $files]
 
 # Set 'sim_DMU_UV_1' fileset file properties for remote files
 set file "$origin_dir/RTL/DataMaskUnit/DMU_UV_1_tb.vhd"

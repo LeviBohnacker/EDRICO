@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="DMU_UV_1_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="DMU_UV_1_tb" />
+            <top_module name="data_mask_unit_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="264516700001fs"></ZoomEndTime>
+      <Cursor1Time time="999999fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="7" />
+   <wvobject type="logic" fp_name="/DMU_UV_1_tb/DMU_OUT_MUX_ctrl">
+      <obj_property name="ElementShortName">DMU_OUT_MUX_ctrl</obj_property>
+      <obj_property name="ObjectShortName">DMU_OUT_MUX_ctrl</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DMU_UV_1_tb/DMU_IN_MUX_ctrl">
+      <obj_property name="ElementShortName">DMU_IN_MUX_ctrl</obj_property>
+      <obj_property name="ObjectShortName">DMU_IN_MUX_ctrl</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DMU_UV_1_tb/mask_ctrl">
+      <obj_property name="ElementShortName">mask_ctrl[2:0]</obj_property>
+      <obj_property name="ObjectShortName">mask_ctrl[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DMU_UV_1_tb/data_bus_A">
+      <obj_property name="ElementShortName">data_bus_A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_bus_A[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DMU_UV_1_tb/LoadBufferRegister">
+      <obj_property name="ElementShortName">LoadBufferRegister[31:0]</obj_property>
+      <obj_property name="ObjectShortName">LoadBufferRegister[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DMU_UV_1_tb/data_load">
+      <obj_property name="ElementShortName">data_load[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_load[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DMU_UV_1_tb/data_store">
+      <obj_property name="ElementShortName">data_store[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_store[31:0]</obj_property>
+   </wvobject>
+</wave_config>
