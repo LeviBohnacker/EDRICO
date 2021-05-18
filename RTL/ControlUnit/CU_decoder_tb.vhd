@@ -23,6 +23,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+library CU_lib;
+use CU_lib.CU_pkg.all;
 ----------------------------------------------------------------------------------
 --ENTITY
 ----------------------------------------------------------------------------------
@@ -34,7 +36,7 @@ end CU_decoder_tb;
 --ARCHITECTURE
 ----------------------------------------------------------------------------------
 architecture rtl of CU_decoder_tb is
-component decoder
+component CU_decoder
 port(
     ------------------------------------------------------------------------------
     --input signals
@@ -125,7 +127,7 @@ end component;
 
 -- instantiate uut
 begin
-uut: decoder port map(
+dut: CU_decoder port map(
         ir => ir,
         type_of_instruction_int => type_of_instruction_int,
         PMP_enable_int => PMP_enable_int,
@@ -150,7 +152,7 @@ uut: decoder port map(
         be_CU_int => be_CU_int,
         return_int => return_int,
         ALU_op_int => ALU_op_int,
-        immediate_int => immediate_int,
+        immediate_int => immediate_int,        
         mask_ctrl_int => mask_ctrl_int
 );
 
