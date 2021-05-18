@@ -23,8 +23,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-library exception_controll;
-use exception_controll.Exception_Controll_pkg.all;
+library EC_lib;
+use EC_lib.Exception_Controll_pkg.all;
 
 ----------------------------------------------------------------------------------
 --ENTITY
