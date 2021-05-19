@@ -10,7 +10,7 @@
 -- Tool Versions: 
 -- Description: 
 --  This is the testbench to verify the EC_FSM behaviour on Exception Entry, 
---  save_address is set to high in this case.
+--  save_PC is set to high in this case.
 -- 
 -- Dependencies: 
 -- 
@@ -30,13 +30,13 @@ use EC_lib.Exception_Controll_pkg.ALL;
 ----------------------------------------------------------------------------------
 --ENTITY
 ----------------------------------------------------------------------------------
-entity EC_FSM_UV_1_tb is
-end EC_FSM_UV_1_tb;
+entity EC_FSM_UV_4_tb is
+end EC_FSM_UV_4_tb;
 
 ----------------------------------------------------------------------------------
 --ARCHITECTURE
 ----------------------------------------------------------------------------------
-architecture rtl of EC_FSM_UV_1_tb is
+architecture rtl of EC_FSM_UV_4_tb is
 
 ----------------------------------------------------------------------------------
 --signals
@@ -102,9 +102,9 @@ stim: process
 begin
 
     reset <= '1';
-    save_address <= '1';
+    save_address <= '0';
     save_IR <= '0';
-    save_PC <= '0';
+    save_PC <= '1';
     ret <= '0';
     wait for 23 ns;
     reset <= '0';
@@ -137,7 +137,7 @@ begin
     wait for 5 ns;
     assert present_state_debug = sMEPC report "wrong state, expected: sMEPC" severity error; 
     assert CSR_access_signals = "0001000" report "CSR_access signals false state: sMEPC" severity error;
-    assert DRA_control_signals = "001" report "DRA_control signals false, state: sMEPC" severity error;
+    assert DRA_control_signals = "100" report "DRA_control signals false, state: sMEPC" severity error;
     assert buffer_register_signals = "10000" report "buffer_register signals false, state: sMEPC" severity error;
     assert halt_core = '1' report "halt_core signal false, state: sMEPC" severity error;
     assert PC_rw = '0' report "PC_rw signal false, state: sMEPC" severity error;

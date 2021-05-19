@@ -9,8 +9,7 @@
 -- Target Devices: Arty Z7
 -- Tool Versions: 
 -- Description: 
---  This is the testbench to verify the EC_FSM behaviour on Exception Entry, 
---  save_address is set to high in this case.
+--  This is the testbench to verify the EC_FSM behaviour on TrapExit
 -- 
 -- Dependencies: 
 -- 
@@ -30,13 +29,13 @@ use EC_lib.Exception_Controll_pkg.ALL;
 ----------------------------------------------------------------------------------
 --ENTITY
 ----------------------------------------------------------------------------------
-entity EC_FSM_UV_1_tb is
-end EC_FSM_UV_1_tb;
+entity EC_FSM_UV_6_tb is
+end EC_FSM_UV_6_tb;
 
 ----------------------------------------------------------------------------------
 --ARCHITECTURE
 ----------------------------------------------------------------------------------
-architecture rtl of EC_FSM_UV_1_tb is
+architecture rtl of EC_FSM_UV_6_tb is
 
 ----------------------------------------------------------------------------------
 --signals
@@ -105,12 +104,12 @@ begin
     save_address <= '1';
     save_IR <= '0';
     save_PC <= '0';
-    ret <= '0';
+    EI_flag <= '0';
     wait for 23 ns;
     reset <= '0';
-    EI_flag <= '1';
+    ret <= '1';
     wait for 2*T;
-    EI_flag <= '0';
+    ret <= '0';
     wait for 5*T;
     stop <= '1';
     wait until stop='1';
@@ -128,47 +127,26 @@ begin
     assert halt_core = '0' report "halt_core signal false, state: WFI" severity error;
     assert PC_rw = '0' report "PC_rw signal false, state: WFI" severity error;
     wait for 27 ns;
-    assert present_state_debug = TrapEntry report "wrong state, expected: TrapEntry" severity error; 
-    assert CSR_access_signals = "0000000" report "CSR_access signals false state: TrapEntry" severity error;
-    assert DRA_control_signals = "100" report "DRA_control signals false, state: TrapEntry" severity error;
-    assert buffer_register_signals = "10000" report "buffer_register signals false, state: TrapEntry" severity error;
-    assert halt_core = '1' report "halt_core signal false, state: TrapEntry" severity error;
-    assert PC_rw = '0' report "PC_rw signal false, state: TrapEntry" severity error;
+    assert present_state_debug = TrapExit report "wrong state, expected: TrapExit" severity error; 
+    assert CSR_access_signals = "1000000" report "CSR_access signals false state: TrapExit" severity error;
+    assert DRA_control_signals = "000" report "DRA_control signals false, state: TrapExit" severity error;
+    assert buffer_register_signals = "11000" report "buffer_register signals false, state: TrapExit" severity error;
+    assert halt_core = '1' report "halt_core signal false, state: TrapExit" severity error;
+    assert PC_rw = '0' report "PC_rw signal false, state: TrapExit" severity error;
     wait for 5 ns;
-    assert present_state_debug = sMEPC report "wrong state, expected: sMEPC" severity error; 
-    assert CSR_access_signals = "0001000" report "CSR_access signals false state: sMEPC" severity error;
-    assert DRA_control_signals = "001" report "DRA_control signals false, state: sMEPC" severity error;
-    assert buffer_register_signals = "10000" report "buffer_register signals false, state: sMEPC" severity error;
-    assert halt_core = '1' report "halt_core signal false, state: sMEPC" severity error;
-    assert PC_rw = '0' report "PC_rw signal false, state: sMEPC" severity error;
+    assert present_state_debug = sPC_ex report "wrong state, expected: sPC_ex" severity error; 
+    assert CSR_access_signals = "0010000" report "CSR_access signals false state: sPC_ex" severity error;
+    assert DRA_control_signals = "000" report "DRA_control signals false, state: sPC_ex" severity error;
+    assert buffer_register_signals = "11000" report "buffer_register signals false, state: sPC_ex" severity error;
+    assert halt_core = '1' report "halt_core signal false, state: sPC_ex" severity error;
+    assert PC_rw = '1' report "PC_rw signal false, state: sPC_ex" severity error;
     wait for 5 ns;
-    assert present_state_debug = sMTVAL report "wrong state, expected: sMTVAL" severity error;
-    assert CSR_access_signals = "0000010" report "CSR_access signals false state: sMTVAL" severity error;
-    assert DRA_control_signals = "000" report "DRA_control signals false, state: sMTVAL" severity error;
-    assert buffer_register_signals = "00000" report "buffer_register signals false, state: sMTVAL" severity error;
-    assert halt_core = '1' report "halt_core signal false, state: sMTVAL" severity error;
-    assert PC_rw = '0' report "PC_rw signal false, state: sMTVAL" severity error;
-    wait for 5 ns;
-    assert present_state_debug = lMSTATUS report "wrong state, expected: lMSTATUS" severity error;
-    assert CSR_access_signals = "0010000" report "CSR_access signals false state: lMSTATUS" severity error;
-    assert DRA_control_signals = "000" report "DRA_control signals false, state: lMSTATUS" severity error;
-    assert buffer_register_signals = "11100" report "buffer_register signals false, state: lMSTATUS" severity error;
-    assert halt_core = '1' report "halt_core signal false, state: lMSTATUS" severity error;
-    assert PC_rw = '0' report "PC_rw signal false, state: lMSTATUS" severity error;
-    wait for 5 ns;
-    assert present_state_debug = sMSTATUS report "wrong state, expected: sMSTATUS" severity error;
-    assert CSR_access_signals = "0100001" report "CSR_access signals false state: sMSTATUS" severity error;
-    assert DRA_control_signals = "000" report "DRA_control signals false, state: sMSTATUS" severity error;
-    assert buffer_register_signals = "11100" report "buffer_register signals false, state: sMSTATUS" severity error;
-    assert halt_core = '1' report "halt_core signal false, state: sMSTATUS" severity error;
-    assert PC_rw = '0' report "PC_rw signal false, state: sMSTATUS" severity error;
-    wait for 5 ns;
-    assert present_state_debug = sPC report "wrong state, expected: sPC" severity error;
-    assert CSR_access_signals = "0000000" report "CSR_access signals false state: sPC" severity error;
-    assert DRA_control_signals = "000" report "DRA_control signals false, state: sPC" severity error;
-    assert buffer_register_signals = "00000" report "buffer_register signals false, state: sPC" severity error;
-    assert halt_core = '1' report "halt_core signal false, state: sPC" severity error;
-    assert PC_rw = '1' report "PC_rw signal false, state: sPC" severity error;
+    assert present_state_debug = sMSTATUS_ex report "wrong state, expected: sMSTATUS_ex" severity error;
+    assert CSR_access_signals = "0000001" report "CSR_access signals false state: sMSTATUS_ex" severity error;
+    assert DRA_control_signals = "000" report "DRA_control signals false, state: sMSTATUS_ex" severity error;
+    assert buffer_register_signals = "00010" report "buffer_register signals false, state: sMSTATUS_ex" severity error;
+    assert halt_core = '1' report "halt_core signal false, state: sMSTATUS_ex" severity error;
+    assert PC_rw = '0' report "PC_rw signal false, state: sMSTATUS_ex" severity error;
     wait for 5 ns;
     assert present_state_debug = WFI report "wrong state, expected: WFI" severity error;
     assert CSR_access_signals = "0000000" report "CSR_access signals false state: WFI" severity error;
