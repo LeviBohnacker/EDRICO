@@ -33,7 +33,7 @@ end CU_execute_enable_tb;
 --ARCHITECTURE
 ----------------------------------------------------------------------------------
 architecture rtl of CU_execute_enable_tb is
-component exec_enable
+component CU_execute_enable
 port(
     ------------------------------------------------------------------------------
     --input signals
@@ -194,7 +194,7 @@ end component;
 
 -- instantiate uut
 begin
-uut: exec_enable port map(
+dut: exec_enable port map(
 
         execute_enable => execute_enable,
         clk => clk,
