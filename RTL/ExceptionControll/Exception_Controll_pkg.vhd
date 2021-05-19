@@ -31,7 +31,7 @@ package Exception_Controll_pkg is
 ----------------------------------------------------------------------------------
 --TYPES
 ----------------------------------------------------------------------------------
-type type_EC_state is (WFI, TrapEntry, sMEPC, sMTVAL, lMSTATUS, sMSTATUS, sPC, TrapExit, sPC_ex, sMSTATUS_ex);
+type type_EC_state is (WFI, TrapEntry, sMEPC, sMTVAL, lMSTATUS, sMSTATUS, lMTVEC, sPC, TrapExit, sPC_ex, sMSTATUS_ex);
 
 ----------------------------------------------------------------------------------
 --COMPONENTS
