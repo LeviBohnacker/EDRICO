@@ -74,6 +74,19 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_6/EC_FSM_UV_6_tb.vhd" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_6/EC_FSM_UV_6_tb_behav.wcfg" \
+   "${origin_dir}/RTL/ControlUnit/CU_decoder_tb.vhd" \
+   "${origin_dir}/simulation/sim_CU_UV_1/CU_decoder_tb_behav.wcfg" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd" \
+   "${origin_dir}/simulation/sim_EC_DRA_cont_UV_1/DRA_control_tb.vhd" \
+   "${origin_dir}/simulation/sim_EC_DRA_cont_UV_1/DRA_control_tb_behav.wcfg" \
+   "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
+   "${origin_dir}/simulation/sim_EC_CSR_ac_UV_1/EC_CSR_ac_UV_1_tb.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd" \
+   "${origin_dir}/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb.vhd" \
+   "${origin_dir}/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb_behav.wcfg" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -198,7 +211,7 @@ set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "16" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "53" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -477,6 +490,22 @@ set obj [get_filesets constrs_1]
 # Set 'constrs_1' fileset properties
 set obj [get_filesets constrs_1]
 
+# Create 'sim_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_1] ""]} {
+  create_fileset -simset sim_1
+}
+
+# Set 'sim_1' fileset object
+set obj [get_filesets sim_1]
+# Empty (no sources present)
+
+# Set 'sim_1' fileset properties
+set obj [get_filesets sim_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "top" -value "CSR_top" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
+set_property -name "top_lib" -value "RF_lib" -objects $obj
+
 # Create 'sim_DMU_UV_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sim_DMU_UV_1] ""]} {
   create_fileset -simset sim_DMU_UV_1
@@ -582,6 +611,7 @@ set obj [get_filesets sim_EC_FSM_UV_2]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_2_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -628,6 +658,7 @@ set obj [get_filesets sim_EC_FSM_UV_3]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_3_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -674,6 +705,7 @@ set obj [get_filesets sim_EC_FSM_UV_4]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_4_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -720,6 +752,7 @@ set obj [get_filesets sim_EC_FSM_UV_5]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_5_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -766,8 +799,178 @@ set obj [get_filesets sim_EC_FSM_UV_6]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_6_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
+
+# Create 'sim_CU_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_CU_UV_1] ""]} {
+  create_fileset -simset sim_CU_UV_1
+}
+
+# Set 'sim_CU_UV_1' fileset object
+set obj [get_filesets sim_CU_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_decoder_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_CU_UV_1/CU_decoder_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_CU_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/ControlUnit/CU_decoder_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_CU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+
+# Set 'sim_CU_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_CU_UV_1' fileset properties
+set obj [get_filesets sim_CU_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "top" -value "CU_decoder_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
+set_property -name "top_lib" -value "CU_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "10000ns" -objects $obj
+
+# Create 'sim_EC_DRA_cont_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_EC_DRA_cont_UV_1] ""]} {
+  create_fileset -simset sim_EC_DRA_cont_UV_1
+}
+
+# Set 'sim_EC_DRA_cont_UV_1' fileset object
+set obj [get_filesets sim_EC_DRA_cont_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_DRA_cont_UV_1/DRA_control_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_DRA_cont_UV_1/DRA_control_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_EC_DRA_cont_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_DRA_cont_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/DRA_controll.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_DRA_cont_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_DRA_cont_UV_1/DRA_control_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_DRA_cont_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+
+# Set 'sim_EC_DRA_cont_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_EC_DRA_cont_UV_1' fileset properties
+set obj [get_filesets sim_EC_DRA_cont_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "DRA_control_tb" -objects $obj
+set_property -name "top_lib" -value "EC_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
+
+# Create 'sim_EC_CSR_ac_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_EC_CSR_ac_UV_1] ""]} {
+  create_fileset -simset sim_EC_CSR_ac_UV_1
+}
+
+# Set 'sim_EC_CSR_ac_UV_1' fileset object
+set obj [get_filesets sim_EC_CSR_ac_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_CSR_ac_UV_1/EC_CSR_ac_UV_1_tb.vhd"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_EC_CSR_ac_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/ExceptionControll/CSR_access_controll.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_CSR_ac_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_CSR_ac_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_CSR_ac_UV_1/EC_CSR_ac_UV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_CSR_ac_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+
+# Set 'sim_EC_CSR_ac_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_EC_CSR_ac_UV_1' fileset properties
+set obj [get_filesets sim_EC_CSR_ac_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "EC_CSR_ac_UV_1_tb" -objects $obj
+set_property -name "top_lib" -value "EC_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
+
+# Create 'sim_EC_FSM_UV_7' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_EC_FSM_UV_7] ""]} {
+  create_fileset -simset sim_EC_FSM_UV_7
+}
+
+# Set 'sim_EC_FSM_UV_7' fileset object
+set obj [get_filesets sim_EC_FSM_UV_7]
+set files [list \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_EC_FSM_UV_7' fileset file properties for remote files
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_FSM_UV_7] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_FSM.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_FSM_UV_7] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_FSM_UV_7] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+
+# Set 'sim_EC_FSM_UV_7' fileset file properties for local files
+# None
+
+# Set 'sim_EC_FSM_UV_7' fileset properties
+set obj [get_filesets sim_EC_FSM_UV_7]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "Exception_Control_FSM" -objects $obj
+set_property -name "top_lib" -value "EC_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]

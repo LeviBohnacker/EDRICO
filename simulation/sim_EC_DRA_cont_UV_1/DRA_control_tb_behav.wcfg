@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="DRA_control_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="DRA_control_tb" />
+            <top_module name="exception_controll_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="30151fs"></ZoomEndTime>
+      <Cursor1Time time="8700fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="9" />
+   <wvobject type="array" fp_name="/DRA_control_tb/PC_dra_read">
+      <obj_property name="ElementShortName">PC_dra_read[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_dra_read[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DRA_control_tb/IR_dra">
+      <obj_property name="ElementShortName">IR_dra[31:0]</obj_property>
+      <obj_property name="ObjectShortName">IR_dra[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DRA_control_tb/PMP_dra">
+      <obj_property name="ElementShortName">PMP_dra[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PMP_dra[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DRA_control_tb/load_PC">
+      <obj_property name="ElementShortName">load_PC</obj_property>
+      <obj_property name="ObjectShortName">load_PC</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DRA_control_tb/load_IR">
+      <obj_property name="ElementShortName">load_IR</obj_property>
+      <obj_property name="ObjectShortName">load_IR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DRA_control_tb/load_PMP">
+      <obj_property name="ElementShortName">load_PMP</obj_property>
+      <obj_property name="ObjectShortName">load_PMP</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DRA_control_tb/data_out">
+      <obj_property name="ElementShortName">data_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DRA_control_tb/PC_dra_write">
+      <obj_property name="ElementShortName">PC_dra_write[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_dra_write[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DRA_control_tb/data_in_dra">
+      <obj_property name="ElementShortName">data_in_dra[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_dra[31:0]</obj_property>
+   </wvobject>
+</wave_config>
