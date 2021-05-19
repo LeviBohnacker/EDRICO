@@ -113,7 +113,6 @@ begin
         ALU_op_int <= "0000";
         immediate_int <= "00000000000000000000000000000000";
         mask_ctrl_int <= "100";
-
         case ir(1 downto 0) is
             when "00" =>
                 decoded_cluster <= INVALID;
