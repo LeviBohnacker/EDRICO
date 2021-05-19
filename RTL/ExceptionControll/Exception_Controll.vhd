@@ -285,7 +285,7 @@ port map(
     --control signals
     interrupt => interrupt,
     exception_code => exception_code,
-    EI_flag => EI_falg
+    EI_flag => EI_flag
 );
 
 end rtl;
