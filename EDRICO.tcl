@@ -211,7 +211,7 @@ set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "53" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "60" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -878,6 +878,7 @@ set obj [get_filesets sim_EC_DRA_cont_UV_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "DRA_control_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
 
@@ -923,8 +924,9 @@ set obj [get_filesets sim_EC_CSR_ac_UV_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_CSR_ac_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
-set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "110ns" -objects $obj
 
 # Create 'sim_EC_FSM_UV_7' fileset (if not found)
 if {[string equal [get_filesets -quiet sim_EC_FSM_UV_7] ""]} {
@@ -969,6 +971,7 @@ set obj [get_filesets sim_EC_FSM_UV_7]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_7_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
 
