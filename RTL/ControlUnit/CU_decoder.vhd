@@ -87,32 +87,6 @@ signal decoded_cluster : instruction_cluster;
 begin
     decode: process(ir)
     begin
-    -- default values
-        type_of_instruction_int <= "0000";
-        PMP_enable_int <= '0';
-        PMP_instruction_int <= '0';
-        PMP_size_int <= "00";
-        PMP_rw_int <= '0';
-        DMU_IN_MUX_int <= '0';
-        DMU_OUT_MUX_int <= '0';
-        R_MUX_int <= '0';
-        PMP_MUX_int <= '0';
-        B_MUX_int <= '0';
-        A_MUX_int <= "00";
-        reg_read_A_int <= "00000";
-        reg_read_B_int <= "00000";
-        reg_write_int <= "00000";
-        CSR_save_int <= '0';
-        CSR_address_int <= "000000000000";
-        CSR_write_int <= '0';
-        CSR_read_int <= '0';
-        iie_CU_int <= '0';
-        ece_CU_int <= '0';
-        be_CU_int <= '0';
-        return_int <= '0';
-        ALU_op_int <= "0000";
-        immediate_int <= "00000000000000000000000000000000";
-        mask_ctrl_int <= "100";
         case ir(1 downto 0) is
             when "00" =>
                 decoded_cluster <= INVALID;
@@ -164,6 +138,36 @@ begin
                         decoded_cluster <= INVALID; 
                 end case;
         end case;
+    end process decode; 
+
+    assign: process(ir, decoded_cluster)
+    begin
+        -- default values
+        type_of_instruction_int <= "0000";
+        PMP_enable_int <= '0';
+        PMP_instruction_int <= '0';
+        PMP_size_int <= "00";
+        PMP_rw_int <= '0';
+        DMU_IN_MUX_int <= '0';
+        DMU_OUT_MUX_int <= '0';
+        R_MUX_int <= '0';
+        PMP_MUX_int <= '0';
+        B_MUX_int <= '0';
+        A_MUX_int <= "00";
+        reg_read_A_int <= "00000";
+        reg_read_B_int <= "00000";
+        reg_write_int <= "00000";
+        CSR_save_int <= '0';
+        CSR_address_int <= "000000000000";
+        CSR_write_int <= '0';
+        CSR_read_int <= '0';
+        iie_CU_int <= '0';
+        ece_CU_int <= '0';
+        be_CU_int <= '0';
+        return_int <= '0';
+        ALU_op_int <= "0000";
+        immediate_int <= "00000000000000000000000000000000";
+        mask_ctrl_int <= "100";
 
         case decoded_cluster is
             when LOAD =>
@@ -482,7 +486,6 @@ begin
             when INVALID => --illegal instruction exception
                 iie_CU_int <= '1';
             when others => iie_CU_int <= '1';
-        end case;
-
-    end process decode;    
+        end case;        
+    end process assign;   
 end architecture;
