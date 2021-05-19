@@ -23,6 +23,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+library CU_lib;
+use CU_lib.CU_pkg.all;
 ----------------------------------------------------------------------------------
 --ENTITY
 ----------------------------------------------------------------------------------
@@ -34,7 +36,7 @@ end CU_decoder_tb;
 --ARCHITECTURE
 ----------------------------------------------------------------------------------
 architecture rtl of CU_decoder_tb is
-component decoder
+component CU_decoder
 port(
     ------------------------------------------------------------------------------
     --input signals
@@ -125,7 +127,7 @@ end component;
 
 -- instantiate uut
 begin
-uut: decoder port map(
+dut: CU_decoder port map(
         ir => ir,
         type_of_instruction_int => type_of_instruction_int,
         PMP_enable_int => PMP_enable_int,
@@ -150,15 +152,17 @@ uut: decoder port map(
         be_CU_int => be_CU_int,
         return_int => return_int,
         ALU_op_int => ALU_op_int,
-        immediate_int => immediate_int,
+        immediate_int => immediate_int,        
         mask_ctrl_int => mask_ctrl_int
 );
 
 stim: process
     begin
         -- parse through different instruction strings
-        --OPIMM
+        --WFI NOP in the beginning to avoid simulation errors
+        ir <= "00010000010100000000000001110011"; --WFI 
         wait for 100ns;
+        --OPIMM
         ir <= "00000000001000100000000010010011"; --ADDI
         wait for 100ns;
         ir <= "00000000001000100010000010010011"; --SLTI
@@ -180,7 +184,7 @@ stim: process
         --OP
         ir <= "00000000010000100000000010110011"; --ADD                             
         wait for 100ns;
-        ir <= "00000000010000100000000010110011"; --SUB
+        ir <= "01000000010000100000000010110011"; --SUB
         wait for 100ns;
         ir <= "00000000010000100001000010110011"; --SLL
         wait for 100ns;
@@ -203,13 +207,17 @@ stim: process
         ir <= "00000000000000000111000010010111"; --AUIPC
         wait for 100ns;
         ir <= "00000100000100001001000011101111"; --JAL
+        assert type_of_instruction_int = "0100" report "JAL -> false type_of_instruction" severity note;
         wait for 100ns;
         ir <= "00000010101000100000000011100111"; --JALR
+        assert type_of_instruction_int = "1000" report "JALR -> false type_of_instruction" severity note;
         -- branch operation
         wait for 100ns;
         ir <= "10000010011100100000100011100011"; --BEQ
+        assert type_of_instruction_int = "0010" report "BEQ -> false type_of_instruction" severity note;
         wait for 100ns;
-        ir <= "10000100011100100110100101100011"; --BLTU 
+        ir <= "10000100011100100110100101100011"; --BLTU
+        assert type_of_instruction_int = "0010" report "BLTU -> false type_of_instruction" severity note;
         --exception operations
         wait for 100ns;
         ir <= "00000000000000000000000001110011"; --ECALL
@@ -224,6 +232,7 @@ stim: process
         ir <= "00000000010000110001001001110011"; --CSRRW
         wait for 100ns;
         ir <= "00000000010000100101001001110011"; --CSRRWI
+
     end process;
     
 end architecture;

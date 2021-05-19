@@ -280,38 +280,13 @@ begin
                 store_mstatus <= '0';            
             when sMSTATUS =>
                 --next state generation
-                next_state <= lMTVEC;
-                --halt core signal
-                halt_core <= '1';
-                --buffer register signals
-                buffer_register_w <= '0';
-                buffer_register_CSR_DRA <= '0';
-                modify_mstatus_EI <= '1';
-                modify_mstatus_RET <= '0';
-                reset_buffer <= '0';
-                --DRA signal
-                PC_rw <= '0';
-                --DRA_controll signals
-                load_PC <= '0';
-                load_IR <= '0';
-                load_PMP <= '0';
-                --CSR_access_unit signals
-                load_mepc <= '0';
-                load_mtvec <= '0';
-                load_mstatus <= '0';
-                store_mepc <= '0';
-                store_mcause <= '0';
-                store_mtval <= '0';
-                store_mstatus <= '1';  
-            when lMTVEC =>
-                --next state generation
                 next_state <= sPC;
                 --halt core signal
                 halt_core <= '1';
                 --buffer register signals
                 buffer_register_w <= '1';
                 buffer_register_CSR_DRA <= '1';
-                modify_mstatus_EI <= '0';
+                modify_mstatus_EI <= '1';
                 modify_mstatus_RET <= '0';
                 reset_buffer <= '0';
                 --DRA signal
@@ -327,7 +302,7 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '0';            
+                store_mstatus <= '1';            
             when sPC =>
                 --next state generation
                 next_state <= WFI;

@@ -968,7 +968,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_7]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
-set_property -name "top" -value "Exception_Control_FSM" -objects $obj
+set_property -name "top" -value "EC_FSM_UV_7_tb" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
 

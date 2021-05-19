@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="EC_FSM_UV_7_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="EC_FSM_UV_7_tb" />
+            <top_module name="exception_controll_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="18771fs"></ZoomStartTime>
+      <ZoomEndTime time="71785fs"></ZoomEndTime>
+      <Cursor1Time time="59007fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="30" />
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/EI_flag">
+      <obj_property name="ElementShortName">EI_flag</obj_property>
+      <obj_property name="ObjectShortName">EI_flag</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/ret">
+      <obj_property name="ElementShortName">ret</obj_property>
+      <obj_property name="ObjectShortName">ret</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/save_address">
+      <obj_property name="ElementShortName">save_address</obj_property>
+      <obj_property name="ObjectShortName">save_address</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/save_PC">
+      <obj_property name="ElementShortName">save_PC</obj_property>
+      <obj_property name="ObjectShortName">save_PC</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/save_IR">
+      <obj_property name="ElementShortName">save_IR</obj_property>
+      <obj_property name="ObjectShortName">save_IR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/EC_FSM_UV_7_tb/present_state_debug">
+      <obj_property name="ElementShortName">present_state_debug</obj_property>
+      <obj_property name="ObjectShortName">present_state_debug</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/halt_core">
+      <obj_property name="ElementShortName">halt_core</obj_property>
+      <obj_property name="ObjectShortName">halt_core</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/buffer_register_w">
+      <obj_property name="ElementShortName">buffer_register_w</obj_property>
+      <obj_property name="ObjectShortName">buffer_register_w</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/buffer_register_CSR_DRA">
+      <obj_property name="ElementShortName">buffer_register_CSR_DRA</obj_property>
+      <obj_property name="ObjectShortName">buffer_register_CSR_DRA</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/modify_mstatus_EI">
+      <obj_property name="ElementShortName">modify_mstatus_EI</obj_property>
+      <obj_property name="ObjectShortName">modify_mstatus_EI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/modify_mstatus_RET">
+      <obj_property name="ElementShortName">modify_mstatus_RET</obj_property>
+      <obj_property name="ObjectShortName">modify_mstatus_RET</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/reset_buffer">
+      <obj_property name="ElementShortName">reset_buffer</obj_property>
+      <obj_property name="ObjectShortName">reset_buffer</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/PC_rw">
+      <obj_property name="ElementShortName">PC_rw</obj_property>
+      <obj_property name="ObjectShortName">PC_rw</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/load_PC">
+      <obj_property name="ElementShortName">load_PC</obj_property>
+      <obj_property name="ObjectShortName">load_PC</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/load_IR">
+      <obj_property name="ElementShortName">load_IR</obj_property>
+      <obj_property name="ObjectShortName">load_IR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/load_PMP">
+      <obj_property name="ElementShortName">load_PMP</obj_property>
+      <obj_property name="ObjectShortName">load_PMP</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/load_mepc">
+      <obj_property name="ElementShortName">load_mepc</obj_property>
+      <obj_property name="ObjectShortName">load_mepc</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/load_mtvec">
+      <obj_property name="ElementShortName">load_mtvec</obj_property>
+      <obj_property name="ObjectShortName">load_mtvec</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/load_mstatus">
+      <obj_property name="ElementShortName">load_mstatus</obj_property>
+      <obj_property name="ObjectShortName">load_mstatus</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/store_mepc">
+      <obj_property name="ElementShortName">store_mepc</obj_property>
+      <obj_property name="ObjectShortName">store_mepc</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/store_mcause">
+      <obj_property name="ElementShortName">store_mcause</obj_property>
+      <obj_property name="ObjectShortName">store_mcause</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/store_mtval">
+      <obj_property name="ElementShortName">store_mtval</obj_property>
+      <obj_property name="ObjectShortName">store_mtval</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/store_mstatus">
+      <obj_property name="ElementShortName">store_mstatus</obj_property>
+      <obj_property name="ObjectShortName">store_mstatus</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_FSM_UV_7_tb/CSR_access_signals">
+      <obj_property name="ElementShortName">CSR_access_signals[6:0]</obj_property>
+      <obj_property name="ObjectShortName">CSR_access_signals[6:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_FSM_UV_7_tb/DRA_control_signals">
+      <obj_property name="ElementShortName">DRA_control_signals[2:0]</obj_property>
+      <obj_property name="ObjectShortName">DRA_control_signals[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_FSM_UV_7_tb/buffer_register_signals">
+      <obj_property name="ElementShortName">buffer_register_signals[4:0]</obj_property>
+      <obj_property name="ObjectShortName">buffer_register_signals[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_FSM_UV_7_tb/stop">
+      <obj_property name="ElementShortName">stop</obj_property>
+      <obj_property name="ObjectShortName">stop</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/EC_FSM_UV_7_tb/T">
+      <obj_property name="ElementShortName">T</obj_property>
+      <obj_property name="ObjectShortName">T</obj_property>
+   </wvobject>
+</wave_config>

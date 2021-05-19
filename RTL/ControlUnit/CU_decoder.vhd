@@ -87,7 +87,62 @@ signal decoded_cluster : instruction_cluster;
 begin
     decode: process(ir)
     begin
-    -- default values
+        case ir(1 downto 0) is
+            when "00" =>
+                decoded_cluster <= INVALID;
+            when others =>
+                case ir(4 downto 2) is
+                    when "000" =>
+                        case ir(6 downto 5) is
+                            when "00" => decoded_cluster <= LOAD;
+                            when "01" => decoded_cluster <= STORE;
+                            when "10" => decoded_cluster <= INVALID;
+                            when "11" => decoded_cluster <= BRANCH;
+                            when others => decoded_cluster <= INVALID;
+                        end case;
+                    when "001" =>
+                        case ir(6 downto 5) is
+                            when "00" => decoded_cluster <= INVALID;
+                            when "01" => decoded_cluster <= INVALID;
+                            when "10" => decoded_cluster <= INVALID;
+                            when "11" => decoded_cluster <= JALR;
+                            when others => decoded_cluster <= INVALID;
+                        end case;                   
+                    when "010" =>
+                        decoded_cluster <= INVALID;
+                    when "011" =>
+                        case ir(6 downto 5) is
+                            when "00" => decoded_cluster <= FENCE;
+                            when "01" => decoded_cluster <= INVALID;
+                            when "10" => decoded_cluster <= INVALID;
+                            when "11" => decoded_cluster <= JAL;
+                            when others => decoded_cluster <= INVALID;
+                        end case; 
+                    when "100" =>
+                        case ir(6 downto 5) is
+                            when "00" => decoded_cluster <= OPIMM;
+                            when "01" => decoded_cluster <= OP;
+                            when "10" => decoded_cluster <= INVALID;
+                            when "11" => decoded_cluster <= SYSTEM;
+                            when others => decoded_cluster <= INVALID;
+                        end case;  
+                    when "101" =>
+                        case ir(6 downto 5) is
+                            when "00" => decoded_cluster <= AUIPC;
+                            when "01" => decoded_cluster <= LUI;
+                            when "10" => decoded_cluster <= INVALID;
+                            when "11" => decoded_cluster <= INVALID;
+                            when others => decoded_cluster <= INVALID;
+                        end case;  
+                    when others =>
+                        decoded_cluster <= INVALID; 
+                end case;
+        end case;
+    end process decode; 
+
+    assign: process(ir, decoded_cluster)
+    begin
+        -- default values
         type_of_instruction_int <= "0000";
         PMP_enable_int <= '0';
         PMP_instruction_int <= '0';
@@ -111,54 +166,8 @@ begin
         be_CU_int <= '0';
         return_int <= '0';
         ALU_op_int <= "0000";
+        immediate_int <= "00000000000000000000000000000000";
         mask_ctrl_int <= "100";
-
-        case ir(1 downto 0) is
-            when "00" =>
-                decoded_cluster <= INVALID;
-            when others =>
-                case ir(4 downto 2) is
-                    when "000" =>
-                        case ir(6 downto 5) is
-                            when "00" => decoded_cluster <= LOAD;
-                            when "01" => decoded_cluster <= STORE;
-                            when "10" => decoded_cluster <= INVALID;
-                            when "11" => decoded_cluster <= BRANCH;
-                        end case;
-                    when "001" =>
-                        case ir(6 downto 5) is
-                            when "00" => decoded_cluster <= INVALID;
-                            when "01" => decoded_cluster <= INVALID;
-                            when "10" => decoded_cluster <= INVALID;
-                            when "11" => decoded_cluster <= JALR;
-                        end case;                   
-                    when "010" =>
-                        decoded_cluster <= INVALID;
-                    when "011" =>
-                        case ir(6 downto 5) is
-                            when "00" => decoded_cluster <= FENCE;
-                            when "01" => decoded_cluster <= INVALID;
-                            when "10" => decoded_cluster <= INVALID;
-                            when "11" => decoded_cluster <= JAL;
-                        end case; 
-                    when "100" =>
-                        case ir(6 downto 5) is
-                            when "00" => decoded_cluster <= OPIMM;
-                            when "01" => decoded_cluster <= OP;
-                            when "10" => decoded_cluster <= INVALID;
-                            when "11" => decoded_cluster <= SYSTEM;
-                        end case;  
-                    when "101" =>
-                        case ir(6 downto 5) is
-                            when "00" => decoded_cluster <= AUIPC;
-                            when "01" => decoded_cluster <= LUI;
-                            when "10" => decoded_cluster <= INVALID;
-                            when "11" => decoded_cluster <= INVALID;
-                        end case;  
-                    when others =>
-                        decoded_cluster <= INVALID; 
-                end case;
-        end case;
 
         case decoded_cluster is
             when LOAD =>
@@ -173,7 +182,8 @@ begin
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
                 reg_read_B_int <= ir(19 downto 15);
-                reg_write_int <= ir(11 downto 7);                       
+                reg_write_int <= ir(11 downto 7);
+                immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20)); 
 
                 case ir(14 downto 12) is
                     when "000" => --LB
@@ -208,7 +218,8 @@ begin
                 PMP_MUX_int <= '1';
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
-                reg_read_B_int <= ir(19 downto 15); 
+                reg_read_B_int <= ir(19 downto 15);
+                immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 25) & ir(11 downto 7));
 
                     case ir(14 downto 12) is 
                         when "000" => --SB
@@ -231,6 +242,7 @@ begin
                 reg_read_A_int <= ir(24 downto 20);
                 reg_read_B_int <= ir(19 downto 15);
                 ALU_op_int <= "0000";
+                immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31) & ir(7) & ir(30 downto 25) & ir(11 downto 8));
 
                     case ir(14 downto 12) is 
                         when "000" => --BEQ    
@@ -255,12 +267,14 @@ begin
                 type_of_instruction_int <= "1000";
                 reg_read_B_int <= ir(19 downto 15);
                 reg_write_int <= ir(11 downto 7);
+                immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));
             when FENCE => --NOP            
             when JAL => --JAL
             -- JAL stores PC +4 into rd, jump target address obtained by PC_top (adds immediate to PC)
                 R_MUX_int <= '1';
                 type_of_instruction_int <= "0100"; 
-                reg_write_int <= ir(11 downto 7);                               
+                reg_write_int <= ir(11 downto 7);
+                immediate_int <= std_logic_vector((31 downto 20 => ir(31)) & ir(31) & ir(19 downto 12) & ir(20) & ir(30 downto 21));                         
             when OPIMM =>
             -- Immediate operations perform ALU operations on data from regB and immediate
                 R_MUX_int <= '1';
@@ -273,33 +287,33 @@ begin
                     case ir(14 downto 12) is
                         when "000" => --ADDI
                             ALU_op_int <= "0000";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);                        
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));
                         when "001" => --SLLI
                             ALU_op_int <= "0111";
-                            immediate_int <= (31 downto 5 => ir(24)) & ir(24 downto 20);                      
+                            immediate_int <= std_logic_vector((31 downto 5 => ir(24)) & ir(24 downto 20));                      
                         when "010" => --SLTI
                             ALU_op_int <= "1010";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);                               
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));                               
                         when "011" => --SLTIU
                             ALU_op_int <= "1011";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);                              
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));                              
                         when "100" => --XORI
                             ALU_op_int <= "0100";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);                                
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));                                
                         when "101" => --SRLI/SRAI
                             if(ir(30) = '0') then --SRLI
                                 ALU_op_int <= "1000";
-                                immediate_int <= (31 downto 5 => ir(24)) & ir(24 downto 20);
+                                immediate_int <= std_logic_vector((31 downto 5 => ir(24)) & ir(24 downto 20));
                             else --SRAI
                                 ALU_op_int <= "1001";
-                                immediate_int <= (31 downto 5 => ir(24)) & ir(24 downto 20); 
+                                immediate_int <= std_logic_vector((31 downto 5 => ir(24)) & ir(24 downto 20)); 
                             end if;                                                           
                         when "110" => --ORI
                             ALU_op_int <= "0011";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);                                
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));                                
                         when "111" => --ANDI
                             ALU_op_int <= "0010";
-                            immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);    
+                            immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 20));    
                         when others =>
                             iie_CU_int <= '1';                            
                     end case;
@@ -316,7 +330,7 @@ begin
                     case ir(14 downto 12) is
                         when "000" => --ADD/SUB
                             if(ir(30) = '0') then --ADD
-                                ALU_op_int <= "000";
+                                ALU_op_int <= "0000";
                             else --SUB
                                 ALU_op_int <= "0001";
                             end if;                            
@@ -429,7 +443,7 @@ begin
                             reg_write_int <= ir(11 downto 7);                              
                             CSR_read_int <= '0';
                             ALU_op_int <= "0000";
-                            immediate_int <= (31 downto 5 => '0') & ir(19 downto 15);                         
+                            immediate_int <= std_logic_vector((31 downto 5 => '0') & ir(19 downto 15));                         
                         when "110" => --CSRRSI
                             R_MUX_int <= '1';
                             B_MUX_int <= '1';
@@ -438,7 +452,7 @@ begin
                             reg_write_int <= ir(11 downto 7);                             
                             CSR_read_int <= '1';
                             ALU_op_int <= "0011";
-                            immediate_int <= (31 downto 5 => '0') & ir(19 downto 15);                            
+                            immediate_int <= std_logic_vector((31 downto 5 => '0') & ir(19 downto 15));                            
                         when "111" => --CSRRCI
                             R_MUX_int <= '1';
                             B_MUX_int <= '1';
@@ -447,7 +461,7 @@ begin
                             reg_write_int <= ir(11 downto 7);                             
                             CSR_read_int <= '1';
                             ALU_op_int <= "0010";
-                            immediate_int <= (31 downto 5 => '0') & ir(19 downto 15);     
+                            immediate_int <= std_logic_vector((31 downto 5 => '0') & ir(19 downto 15));     
                         when others =>
                             iie_CU_int <= '1';                      
                     end case;
@@ -458,6 +472,7 @@ begin
                 B_MUX_int <= '0';
                 A_MUX_int <= "01";
                 reg_write_int <= ir(11 downto 7);
+                immediate_int <= std_logic_vector(ir(31 downto 12) & (11 downto 0 => '0'));
 
             when LUI =>
             -- loads upper immediate 
@@ -466,34 +481,11 @@ begin
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
                 reg_write_int <= ir(11 downto 7);
+                immediate_int <= std_logic_vector(ir(31 downto 12) & (11 downto 0 => '0'));
 
             when INVALID => --illegal instruction exception
                 iie_CU_int <= '1';
-        end case;
-
-    end process decode;
-
-    imm_gen: process(decoded_cluster)
-    begin
-    immediate_int <= "00000000000000000000000000000000";
-        case decoded_cluster is
-            when LOAD =>
-                immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);
-            when STORE =>
-                immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 25) & ir(11 downto 7);
-            when BRANCH =>
-                immediate_int <= (31 downto 12 => ir(31)) & ir(31) & ir(7) & ir(30 downto 25) & ir(11 downto 8);
-            when JAL =>
-                immediate_int <= (31 downto 20 => ir(31)) & ir(31) & ir(19 downto 12) & ir(20) & ir(30 downto 21);
-            when JALR =>
-                immediate_int <= (31 downto 12 => ir(31)) & ir(31 downto 20);
-            when OPIMM =>
-                -- since immediate generation differs between math operation and shift operation, implementation during decode
-            when SYSTEM =>
-                -- since immediate only required for 3 instructions from this cluster, implementation during decode
-            when LUI|AUIPC =>
-                immediate_int <= ir(31 downto 12) & (11 downto 0 => '0');
-        end case;    
-    end process imm_gen;
-    
+            when others => iie_CU_int <= '1';
+        end case;        
+    end process assign;   
 end architecture;
