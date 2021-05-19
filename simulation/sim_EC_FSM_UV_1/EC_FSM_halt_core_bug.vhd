@@ -186,7 +186,7 @@ begin
                 --next state generation
                 next_state <= sMTVAL;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_CSR_DRA <= '0';
                 modify_mstatus_EI <= '0';
@@ -232,7 +232,7 @@ begin
                 --next state generation
                 next_state <= lMSTATUS;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_w <= '0';
                 buffer_register_CSR_DRA <= '0';
@@ -257,7 +257,7 @@ begin
                 --next state generation
                 next_state <= sMSTATUS;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_w <= '1';
                 buffer_register_CSR_DRA <= '1';
@@ -282,7 +282,7 @@ begin
                 --next state generation
                 next_state <= sPC;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_w <= '1';
                 buffer_register_CSR_DRA <= '1';
@@ -307,7 +307,7 @@ begin
                 --next state generation
                 next_state <= WFI;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_w <= '0';
                 buffer_register_CSR_DRA <= '0';
@@ -357,7 +357,7 @@ begin
                 --next state generation
                 next_state <= sMSTATUS_ex;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_w <= '1';
                 buffer_register_CSR_DRA <= '1';
@@ -382,7 +382,7 @@ begin
                 --next state generation
                 next_state <= WFI;
                 --halt core signal
-                halt_core <= '1';
+                halt_core <= '0';
                 --buffer register signals
                 buffer_register_w <= '0';
                 buffer_register_CSR_DRA <= '0';
