@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="EC_CSR_ac_UV_1_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="EC_CSR_ac_UV_1_tb" />
+            <top_module name="exception_controll_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="110000fs"></ZoomEndTime>
+      <Cursor1Time time="77347fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="16" />
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/store_mepc">
+      <obj_property name="ElementShortName">store_mepc</obj_property>
+      <obj_property name="ObjectShortName">store_mepc</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/store_mstatus">
+      <obj_property name="ElementShortName">store_mstatus</obj_property>
+      <obj_property name="ObjectShortName">store_mstatus</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/store_mtval">
+      <obj_property name="ElementShortName">store_mtval</obj_property>
+      <obj_property name="ObjectShortName">store_mtval</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/store_mcause">
+      <obj_property name="ElementShortName">store_mcause</obj_property>
+      <obj_property name="ObjectShortName">store_mcause</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/load_mtvec">
+      <obj_property name="ElementShortName">load_mtvec</obj_property>
+      <obj_property name="ObjectShortName">load_mtvec</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/load_mepc">
+      <obj_property name="ElementShortName">load_mepc</obj_property>
+      <obj_property name="ObjectShortName">load_mepc</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/load_mstatus">
+      <obj_property name="ElementShortName">load_mstatus</obj_property>
+      <obj_property name="ObjectShortName">load_mstatus</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_CSR_ac_UV_1_tb/exception_code">
+      <obj_property name="ElementShortName">exception_code[31:0]</obj_property>
+      <obj_property name="ObjectShortName">exception_code[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/interrupt">
+      <obj_property name="ElementShortName">interrupt</obj_property>
+      <obj_property name="ObjectShortName">interrupt</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_CSR_ac_UV_1_tb/data_in_EC">
+      <obj_property name="ElementShortName">data_in_EC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_EC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_CSR_ac_UV_1_tb/data_out">
+      <obj_property name="ElementShortName">data_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/CSR_read_EC">
+      <obj_property name="ElementShortName">CSR_read_EC</obj_property>
+      <obj_property name="ObjectShortName">CSR_read_EC</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_CSR_ac_UV_1_tb/CSR_write_EC">
+      <obj_property name="ElementShortName">CSR_write_EC</obj_property>
+      <obj_property name="ObjectShortName">CSR_write_EC</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_CSR_ac_UV_1_tb/CSR_address_EC">
+      <obj_property name="ElementShortName">CSR_address_EC[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CSR_address_EC[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_CSR_ac_UV_1_tb/data_out_EC">
+      <obj_property name="ElementShortName">data_out_EC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out_EC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_CSR_ac_UV_1_tb/data_in_CSR">
+      <obj_property name="ElementShortName">data_in_CSR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in_CSR[31:0]</obj_property>
+   </wvobject>
+</wave_config>
