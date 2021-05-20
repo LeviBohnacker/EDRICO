@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="EC_arbiter_UV_1_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="EC_arbiter_UV_1_tb" />
+            <top_module name="ec_arbiter_uv_1_pkg" />
+            <top_module name="exception_controll_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="110000fs"></ZoomEndTime>
+      <Cursor1Time time="57645fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/load_afe_P">
+      <obj_property name="ElementShortName">load_afe_P</obj_property>
+      <obj_property name="ObjectShortName">load_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/storeAMO_afe_P">
+      <obj_property name="ElementShortName">storeAMO_afe_P</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/instruction_afe_P">
+      <obj_property name="ElementShortName">instruction_afe_P</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/load_ame_P">
+      <obj_property name="ElementShortName">load_ame_P</obj_property>
+      <obj_property name="ObjectShortName">load_ame_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/storeAMO_ame_P">
+      <obj_property name="ElementShortName">storeAMO_ame_P</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_ame_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/instruction_ame_P">
+      <obj_property name="ElementShortName">instruction_ame_P</obj_property>
+      <obj_property name="ObjectShortName">instruction_ame_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/load_afe_AXI">
+      <obj_property name="ElementShortName">load_afe_AXI</obj_property>
+      <obj_property name="ObjectShortName">load_afe_AXI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/storeAMO_afe_AXI">
+      <obj_property name="ElementShortName">storeAMO_afe_AXI</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_AXI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/instruction_afe_AXI">
+      <obj_property name="ElementShortName">instruction_afe_AXI</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_AXI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/iie_CU">
+      <obj_property name="ElementShortName">iie_CU</obj_property>
+      <obj_property name="ObjectShortName">iie_CU</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/ece_CU">
+      <obj_property name="ElementShortName">ece_CU</obj_property>
+      <obj_property name="ObjectShortName">ece_CU</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/be_CU">
+      <obj_property name="ElementShortName">be_CU</obj_property>
+      <obj_property name="ObjectShortName">be_CU</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/iie_CSR">
+      <obj_property name="ElementShortName">iie_CSR</obj_property>
+      <obj_property name="ObjectShortName">iie_CSR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/si_CSR">
+      <obj_property name="ElementShortName">si_CSR</obj_property>
+      <obj_property name="ObjectShortName">si_CSR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/ti_CSR">
+      <obj_property name="ElementShortName">ti_CSR</obj_property>
+      <obj_property name="ObjectShortName">ti_CSR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/save_address">
+      <obj_property name="ElementShortName">save_address</obj_property>
+      <obj_property name="ObjectShortName">save_address</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/save_PC">
+      <obj_property name="ElementShortName">save_PC</obj_property>
+      <obj_property name="ObjectShortName">save_PC</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/save_IR">
+      <obj_property name="ElementShortName">save_IR</obj_property>
+      <obj_property name="ObjectShortName">save_IR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/interrupt">
+      <obj_property name="ElementShortName">interrupt</obj_property>
+      <obj_property name="ObjectShortName">interrupt</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_arbiter_UV_1_tb/exception_code">
+      <obj_property name="ElementShortName">exception_code[31:0]</obj_property>
+      <obj_property name="ObjectShortName">exception_code[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/EC_arbiter_UV_1_tb/EI_flag">
+      <obj_property name="ElementShortName">EI_flag</obj_property>
+      <obj_property name="ObjectShortName">EI_flag</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/EC_arbiter_UV_1_tb/stim_in">
+      <obj_property name="ElementShortName">stim_in[14:0]</obj_property>
+      <obj_property name="ObjectShortName">stim_in[14:0]</obj_property>
+   </wvobject>
+</wave_config>
