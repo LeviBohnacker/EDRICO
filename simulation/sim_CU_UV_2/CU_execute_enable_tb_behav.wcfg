@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="CU_execute_enable_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="CU_execute_enable_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="276146fs"></ZoomEndTime>
+      <Cursor1Time time="160000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="156"></NameColumnWidth>
+      <ValueColumnWidth column_width="110"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="53" />
+   <wvobject fp_name="/CU_execute_enable_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+      <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/execute_enable" type="logic">
+      <obj_property name="ElementShortName">execute_enable</obj_property>
+      <obj_property name="ObjectShortName">execute_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/type_of_instruction" type="array">
+      <obj_property name="ElementShortName">type_of_instruction[3:0]</obj_property>
+      <obj_property name="ObjectShortName">type_of_instruction[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_enable" type="logic">
+      <obj_property name="ElementShortName">PMP_enable</obj_property>
+      <obj_property name="ObjectShortName">PMP_enable</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_instruction" type="logic">
+      <obj_property name="ElementShortName">PMP_instruction</obj_property>
+      <obj_property name="ObjectShortName">PMP_instruction</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_size" type="array">
+      <obj_property name="ElementShortName">PMP_size[1:0]</obj_property>
+      <obj_property name="ObjectShortName">PMP_size[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_rw" type="logic">
+      <obj_property name="ElementShortName">PMP_rw</obj_property>
+      <obj_property name="ObjectShortName">PMP_rw</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/DMU_IN_MUX" type="logic">
+      <obj_property name="ElementShortName">DMU_IN_MUX</obj_property>
+      <obj_property name="ObjectShortName">DMU_IN_MUX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/DMU_OUT_MUX" type="logic">
+      <obj_property name="ElementShortName">DMU_OUT_MUX</obj_property>
+      <obj_property name="ObjectShortName">DMU_OUT_MUX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/R_MUX" type="logic">
+      <obj_property name="ElementShortName">R_MUX</obj_property>
+      <obj_property name="ObjectShortName">R_MUX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_MUX" type="logic">
+      <obj_property name="ElementShortName">PMP_MUX</obj_property>
+      <obj_property name="ObjectShortName">PMP_MUX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/B_MUX" type="logic">
+      <obj_property name="ElementShortName">B_MUX</obj_property>
+      <obj_property name="ObjectShortName">B_MUX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/A_MUX" type="array">
+      <obj_property name="ElementShortName">A_MUX[1:0]</obj_property>
+      <obj_property name="ObjectShortName">A_MUX[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reg_read_A" type="array">
+      <obj_property name="ElementShortName">reg_read_A[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_read_A[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reg_read_B" type="array">
+      <obj_property name="ElementShortName">reg_read_B[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_read_B[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reg_write" type="array">
+      <obj_property name="ElementShortName">reg_write[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_write[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_save" type="logic">
+      <obj_property name="ElementShortName">CSR_save</obj_property>
+      <obj_property name="ObjectShortName">CSR_save</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_address" type="array">
+      <obj_property name="ElementShortName">CSR_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CSR_address[11:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_write" type="logic">
+      <obj_property name="ElementShortName">CSR_write</obj_property>
+      <obj_property name="ObjectShortName">CSR_write</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_read" type="logic">
+      <obj_property name="ElementShortName">CSR_read</obj_property>
+      <obj_property name="ObjectShortName">CSR_read</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/iie_CU" type="logic">
+      <obj_property name="ElementShortName">iie_CU</obj_property>
+      <obj_property name="ObjectShortName">iie_CU</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/ece_CU" type="logic">
+      <obj_property name="ElementShortName">ece_CU</obj_property>
+      <obj_property name="ObjectShortName">ece_CU</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/be_CU" type="logic">
+      <obj_property name="ElementShortName">be_CU</obj_property>
+      <obj_property name="ObjectShortName">be_CU</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/return_out" type="logic">
+      <obj_property name="ElementShortName">return_out</obj_property>
+      <obj_property name="ObjectShortName">return_out</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/ALU_op" type="array">
+      <obj_property name="ElementShortName">ALU_op[3:0]</obj_property>
+      <obj_property name="ObjectShortName">ALU_op[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/immediate" type="array">
+      <obj_property name="ElementShortName">immediate[31:0]</obj_property>
+      <obj_property name="ObjectShortName">immediate[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/mask_ctrl" type="array">
+      <obj_property name="ElementShortName">mask_ctrl[2:0]</obj_property>
+      <obj_property name="ObjectShortName">mask_ctrl[2:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#800080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/type_of_instruction_int" type="array">
+      <obj_property name="ElementShortName">type_of_instruction_int[3:0]</obj_property>
+      <obj_property name="ObjectShortName">type_of_instruction_int[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_enable_int" type="logic">
+      <obj_property name="ElementShortName">PMP_enable_int</obj_property>
+      <obj_property name="ObjectShortName">PMP_enable_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_instruction_int" type="logic">
+      <obj_property name="ElementShortName">PMP_instruction_int</obj_property>
+      <obj_property name="ObjectShortName">PMP_instruction_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_size_int" type="array">
+      <obj_property name="ElementShortName">PMP_size_int[1:0]</obj_property>
+      <obj_property name="ObjectShortName">PMP_size_int[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_rw_int" type="logic">
+      <obj_property name="ElementShortName">PMP_rw_int</obj_property>
+      <obj_property name="ObjectShortName">PMP_rw_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/DMU_IN_MUX_int" type="logic">
+      <obj_property name="ElementShortName">DMU_IN_MUX_int</obj_property>
+      <obj_property name="ObjectShortName">DMU_IN_MUX_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/DMU_OUT_MUX_int" type="logic">
+      <obj_property name="ElementShortName">DMU_OUT_MUX_int</obj_property>
+      <obj_property name="ObjectShortName">DMU_OUT_MUX_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/R_MUX_int" type="logic">
+      <obj_property name="ElementShortName">R_MUX_int</obj_property>
+      <obj_property name="ObjectShortName">R_MUX_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/PMP_MUX_int" type="logic">
+      <obj_property name="ElementShortName">PMP_MUX_int</obj_property>
+      <obj_property name="ObjectShortName">PMP_MUX_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/B_MUX_int" type="logic">
+      <obj_property name="ElementShortName">B_MUX_int</obj_property>
+      <obj_property name="ObjectShortName">B_MUX_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/A_MUX_int" type="array">
+      <obj_property name="ElementShortName">A_MUX_int[1:0]</obj_property>
+      <obj_property name="ObjectShortName">A_MUX_int[1:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reg_read_A_int" type="array">
+      <obj_property name="ElementShortName">reg_read_A_int[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_read_A_int[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reg_read_B_int" type="array">
+      <obj_property name="ElementShortName">reg_read_B_int[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_read_B_int[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/reg_write_int" type="array">
+      <obj_property name="ElementShortName">reg_write_int[4:0]</obj_property>
+      <obj_property name="ObjectShortName">reg_write_int[4:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_save_int" type="logic">
+      <obj_property name="ElementShortName">CSR_save_int</obj_property>
+      <obj_property name="ObjectShortName">CSR_save_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_address_int" type="array">
+      <obj_property name="ElementShortName">CSR_address_int[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CSR_address_int[11:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_write_int" type="logic">
+      <obj_property name="ElementShortName">CSR_write_int</obj_property>
+      <obj_property name="ObjectShortName">CSR_write_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/CSR_read_int" type="logic">
+      <obj_property name="ElementShortName">CSR_read_int</obj_property>
+      <obj_property name="ObjectShortName">CSR_read_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/iie_CU_int" type="logic">
+      <obj_property name="ElementShortName">iie_CU_int</obj_property>
+      <obj_property name="ObjectShortName">iie_CU_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/ece_CU_int" type="logic">
+      <obj_property name="ElementShortName">ece_CU_int</obj_property>
+      <obj_property name="ObjectShortName">ece_CU_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/be_CU_int" type="logic">
+      <obj_property name="ElementShortName">be_CU_int</obj_property>
+      <obj_property name="ObjectShortName">be_CU_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/return_int" type="logic">
+      <obj_property name="ElementShortName">return_int</obj_property>
+      <obj_property name="ObjectShortName">return_int</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/ALU_op_int" type="array">
+      <obj_property name="ElementShortName">ALU_op_int[3:0]</obj_property>
+      <obj_property name="ObjectShortName">ALU_op_int[3:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/immediate_int" type="array">
+      <obj_property name="ElementShortName">immediate_int[31:0]</obj_property>
+      <obj_property name="ObjectShortName">immediate_int[31:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="/CU_execute_enable_tb/mask_ctrl_int" type="array">
+      <obj_property name="ElementShortName">mask_ctrl_int[2:0]</obj_property>
+      <obj_property name="ObjectShortName">mask_ctrl_int[2:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+      <obj_property name="CustomSignalColor">#FF0000</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+</wave_config>
