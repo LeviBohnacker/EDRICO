@@ -87,6 +87,11 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb.vhd" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_7/EC_FSM_UV_7_tb_behav.wcfg" \
+   "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_pkg.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/arbiter.vhd" \
+   "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb.vhd" \
+   "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb_behav.wcfg" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -211,7 +216,7 @@ set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "60" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "64" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -974,6 +979,59 @@ set_property -name "top" -value "EC_FSM_UV_7_tb" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
+
+# Create 'sim_EC_arbiter_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_EC_arbiter_UV_1] ""]} {
+  create_fileset -simset sim_EC_arbiter_UV_1
+}
+
+# Set 'sim_EC_arbiter_UV_1' fileset object
+set obj [get_filesets sim_EC_arbiter_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/arbiter.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_EC_arbiter_UV_1' fileset file properties for remote files
+set file "$origin_dir/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/arbiter.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+
+
+# Set 'sim_EC_arbiter_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_EC_arbiter_UV_1' fileset properties
+set obj [get_filesets sim_EC_arbiter_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "EC_arbiter_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
+set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "110ns" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
