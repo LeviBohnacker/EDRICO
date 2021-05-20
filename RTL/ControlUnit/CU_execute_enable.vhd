@@ -137,6 +137,7 @@ begin
         be_CU <= '0';
         return_out <= '0';
         ALU_op <= "0000";
+        immediate <= "00000000000000000000000000000000";
         mask_ctrl <= "100";
     elsif(clk'event and clk = '0' and execute_enable = '1') then
     -- if clock is falling and execute_enable is 1, signals are fed through
@@ -163,6 +164,7 @@ begin
         be_CU <= be_CU_int;
         return_out <= return_int;
         ALU_op <= ALU_op_int;
+        immediate <= immediate_int;
         mask_ctrl <= mask_ctrl_int;   
     end if;     
 end process exec_en;

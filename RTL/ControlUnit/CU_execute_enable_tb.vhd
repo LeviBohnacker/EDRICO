@@ -9,7 +9,12 @@
 -- Target Devices: Arty Z7
 -- Tool Versions: 
 -- Description: 
---  testbench 
+--  purpose of the execute_enable unit is to hold the signals from decoding unit
+--  which is constantly decoding the ir input and output them once the instruction
+--  was successfully fetched. This enables the Control Unit to output all signals
+--  in the same clock cycle as the instruction is fetched.
+--  All of the signals require to be resetted asynchronously and only guide throgh
+--  the signals on a falling clock and a false reset flag.
 --
 -- Dependencies: 
 -- 
@@ -118,41 +123,41 @@ end component;
     --input signals
     ------------------------------------------------------------------------------
     -- control signals:
-    signal execute_enable: std_logic;
-    signal clk: std_logic;
-    signal reset: std_logic;
+    signal execute_enable: std_logic := '0';
+    signal clk: std_logic := '0';
+    signal reset: std_logic := '0';
     -- instruction register
-    signal type_of_instruction_int: std_logic_vector(3 downto 0);
+    signal type_of_instruction_int: std_logic_vector(3 downto 0) := "0010";
     -- PMP ctrl
-    signal PMP_enable_int: std_logic;
-    signal PMP_instruction_int: std_logic;
-    signal PMP_size_int: std_logic_vector(1 downto 0);
-    signal PMP_rw_int: std_logic;
+    signal PMP_enable_int: std_logic := '1';
+    signal PMP_instruction_int: std_logic := '1';
+    signal PMP_size_int: std_logic_vector(1 downto 0) := "10";
+    signal PMP_rw_int: std_logic := '1';
     -- MUX ctrl
-    signal DMU_IN_MUX_int: std_logic;
-    signal DMU_OUT_MUX_int: std_logic;
-    signal R_MUX_int: std_logic;
-    signal PMP_MUX_int: std_logic;
-    signal B_MUX_int: std_logic;
-    signal A_MUX_int: std_logic_vector(1 downto 0);
+    signal DMU_IN_MUX_int: std_logic := '1';
+    signal DMU_OUT_MUX_int: std_logic := '1';
+    signal R_MUX_int: std_logic := '1';
+    signal PMP_MUX_int: std_logic := '1';
+    signal B_MUX_int: std_logic := '1';
+    signal A_MUX_int: std_logic_vector(1 downto 0) := "01";
     -- reg ctrl
-    signal reg_read_A_int: std_logic_vector(4 downto 0);
-    signal reg_read_B_int: std_logic_vector(4 downto 0);
-    signal reg_write_int: std_logic_vector(4 downto 0);
+    signal reg_read_A_int: std_logic_vector(4 downto 0) := "00101";
+    signal reg_read_B_int: std_logic_vector(4 downto 0) := "11101";
+    signal reg_write_int: std_logic_vector(4 downto 0) := "00001";
     -- CSR ctrl
-    signal CSR_save_int: std_logic;
-    signal CSR_address_int: std_logic_vector(11 downto 0);
-    signal CSR_write_int: std_logic;
-    signal CSR_read_int: std_logic;
+    signal CSR_save_int: std_logic := '1';
+    signal CSR_address_int: std_logic_vector(11 downto 0) := "001001100010";
+    signal CSR_write_int: std_logic := '1';
+    signal CSR_read_int: std_logic := '1';
     -- exception ctrl
-    signal iie_CU_int: std_logic;
-    signal ece_CU_int: std_logic;
-    signal be_CU_int: std_logic;
-    signal return_int: std_logic;
+    signal iie_CU_int: std_logic := '1';
+    signal ece_CU_int: std_logic := '1';
+    signal be_CU_int: std_logic := '1';
+    signal return_int: std_logic := '1';
     -- other signals
-    signal ALU_op_int: std_logic_vector(3 downto 0);
-    signal immediate_int: std_logic_vector(31 downto 0);
-    signal mask_ctrl_int: std_logic_vector(2 downto 0);
+    signal ALU_op_int: std_logic_vector(3 downto 0) := "0100";
+    signal immediate_int: std_logic_vector(31 downto 0) := "00000001000100000001000010000000";
+    signal mask_ctrl_int: std_logic_vector(2 downto 0) := "110";
     ------------------------------------------------------------------------------
     --output signals
     ----------------------------------------------------------------
@@ -191,10 +196,11 @@ end component;
 ----------------------------------------------------------------------------------
 --constants
 ----------------------------------------------------------------------------------
-
 -- instantiate uut
 begin
-dut: exec_enable port map(
+--clock should trigger every 5ns and change reset flag to 0 on every clock
+clk <= not clk after 5ns;
+dut: CU_execute_enable port map(
 
         execute_enable => execute_enable,
         clk => clk,
@@ -256,52 +262,31 @@ dut: exec_enable port map(
 
 stim: process
     begin
-        reset <= '0';
-        clk <= '1';
-        execute_enable <= '0';
 
-        type_of_instruction_int <= "0010";
-        PMP_enable_int <= '1';
-        PMP_instruction_int <= '1';
-        PMP_size_int <= "10";
-        PMP_rw_int <= '0';
-        DMU_IN_MUX_int <= '0';
-        DMU_OUT_MUX_int <= '1';
-        R_MUX_int <= '1';
-        PMP_MUX_int <= '0';
-        B_MUX_int <= '0';
-        A_MUX_int <= "01";
-        reg_read_A_int <= "01100";
-        reg_read_B_int <= "00001";
-        reg_write_int <= "00010";
-        CSR_save_int <= '0';
-        CSR_address_int <= "000000000000";
-        CSR_write_int <= '0';
-        CSR_read_int <= '0';
-        iie_CU_int <= '0';
-        ece_CU_int <= '0';
-        be_CU_int <= '0';
-        return_int <= '1';
-        ALU_op_int <= "0010";
-        immediate_int <= "00000001000000000001000000000000";
-        mask_ctrl_int <= "100";
-        
-        wait for 100ns;
-        --simulate falling edge and execute_enable = 1
-        clk <= '0';
-        execute_enable <= '1';
-
-        wait for 10ns;
-        --reset clock to 1
-        clk <= '1';
-
-        wait for 100ns;
-        --simulate execute_enable = 1 but also reset = 1
-        clk <= '0';
+        wait for 20ns;
         reset <= '1';
+        wait for 5ns; 
+        reset <= not reset;
+        
+        wait for 10ns;
+        --execute_enable = 1
         execute_enable <= '1';
-
-
+        --reset enable after 10ns
+        wait for 10ns;
+        execute_enable <= not execute_enable;
+        
+        --reset enable to 0
+        wait for 20ns;
+        reset <= '1';
+        wait for 5ns;
+        reset <= not reset;
+        
+        wait for 20ns;
+        execute_enable <= '1';
+        reset <= '1';
+        wait for 20ns;
+        execute_enable <= not execute_enable;
+        reset <= not reset;        
 
     end process;
     
