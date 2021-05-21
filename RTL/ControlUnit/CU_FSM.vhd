@@ -45,7 +45,16 @@ port (
     instruction_fetch: out std_logic;
     execute_enable: out std_logic;
     PC_load: out std_logic;
-    instruction_finished: out std_logic
+    instruction_finished: out std_logic;
+    
+    --------------------for DEBUG PURPOSE
+    debug_state: out std_logic_vector(4 downto 0)
+    --00000 = FSM_HALT_CORE
+    --00001 = FSM_RESET
+    --00010 = FSM_FETCH
+    --00100 = FSM_EXECUTE
+    --01000 = FSM_EXECUTE_MEM
+    --10000 = FSM_WAIT                    
 );
 end entity;
 
@@ -76,7 +85,7 @@ begin
     end if;
 end process sync_process;
 
-comb_process: process(halt_core, memOP_finished, reset, type_of_instruction)
+comb_process: process(halt_core, memOP_finished, reset, type_of_instruction, present_state)
 begin 
     case present_state is
         when FSM_RESET =>
@@ -93,7 +102,9 @@ begin
             instruction_fetch <= '0';
             execute_enable <= '0';
             PC_load <= '0';
-            instruction_finished <= '0';    
+            instruction_finished <= '0';
+            
+            debug_state <= "00001";   
 
         when FSM_HALT_CORE =>
         -- when in halt core, stay if still active or go to fetch status if halt over
@@ -110,6 +121,8 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0';
+            
+            debug_state <= "00000";               
 
         when FSM_FETCH =>
         -- when in fetch either go to halt, go to execute (only if memory operation is finished) or stay in fetch
@@ -128,6 +141,8 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0';
+            
+            debug_state <= "00010";               
         
         when FSM_EXECUTE =>
         -- when in execute, go to execute_mem if instruction type is memory type, or go to wait if normal operation
@@ -145,7 +160,9 @@ begin
             instruction_fetch <= '0';
             execute_enable <= '1';
             PC_load <= '0';
-            instruction_finished <= '0'; 
+            instruction_finished <= '0';
+            
+            debug_state <= "00100";                
 
         when FSM_EXECUTE_MEM =>
         -- wait for memory execution or go to wait state if operation finished
@@ -164,6 +181,8 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0'; 
+            
+            debug_state <= "01000";               
 
         when FSM_WAIT =>
         -- when in wait either go to halt core or to fetch state in next clock cycle
@@ -180,7 +199,9 @@ begin
             execute_enable <= '0';
             PC_load <= '1';
             instruction_finished <= '1';
+            
+            debug_state <= "10000";               
     end case;
-
 end process comb_process;
 end architecture;
+
