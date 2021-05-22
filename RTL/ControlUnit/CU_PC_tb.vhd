@@ -93,14 +93,14 @@ dut:CU_PC port map(
     branch_re => branch_re,
     type_of_instruction => type_of_instruction,
     immediate => immediate,
-    data_bus_B => data_bus,
+    data_bus_B => data_bus_B,
     PC_out => PC_out
 );
 
 stim: process
 begin
     --define values
-    PC_dra <= "00000000000000000000000000001000"
+    PC_dra <= "00000000000000000000000000001000";
     PC_write <= '0';
     PC_load <= '1';
     reset <= '0';
@@ -124,7 +124,7 @@ begin
     wait for 10ns;
 
     -- fourth case: operation is a JAL operation
-    type_of_instruction <= "0100"
+    type_of_instruction <= "0100";
     --result should be PC = PC + immediate
     wait for 10ns;
 
@@ -134,6 +134,7 @@ begin
     wait for 10ns;
 
     --test if PC_write works
+    PC_load <= '0';
     PC_write <= '1';
     --output should be the PC_dra without any change
     wait for 10ns;
