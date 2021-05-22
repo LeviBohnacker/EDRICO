@@ -138,13 +138,15 @@ begin
                     address_hit_int <= '0';
                 end if;
             --PMP check for OFF configuration
-            when "00" =>
+            when others =>
                 address_hit_int <= '0';
         end case;
     else
         address_hit_int <= '0';
     end if;
 end process address_hit_detection;  
+
+address_hit <= address_hit_int;
 
 ----------------------------------------------------------------------------------
 --exception detection

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_PMP_unit_UV_1_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="sim_PMP_unit_UV_1" />
+            <top_module name="sim_pmp_unit_uv_1_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="200000fs"></ZoomEndTime>
+      <Cursor1Time time="120000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="13" />
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/pmpcfg">
+      <obj_property name="ElementShortName">pmpcfg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpcfg[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/pmpaddr">
+      <obj_property name="ElementShortName">pmpaddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpaddr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/pmpaddrLow">
+      <obj_property name="ElementShortName">pmpaddrLow[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpaddrLow[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/address_upper">
+      <obj_property name="ElementShortName">address_upper[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address_upper[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_unit_UV_1/readWrite">
+      <obj_property name="ElementShortName">readWrite</obj_property>
+      <obj_property name="ObjectShortName">readWrite</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_unit_UV_1/instruction">
+      <obj_property name="ElementShortName">instruction</obj_property>
+      <obj_property name="ObjectShortName">instruction</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/address">
+      <obj_property name="ElementShortName">address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_unit_UV_1/address_hit">
+      <obj_property name="ElementShortName">address_hit</obj_property>
+      <obj_property name="ObjectShortName">address_hit</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_unit_UV_1/load_afe_P">
+      <obj_property name="ElementShortName">load_afe_P</obj_property>
+      <obj_property name="ObjectShortName">load_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_unit_UV_1/storeAMO_afe_P">
+      <obj_property name="ElementShortName">storeAMO_afe_P</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_unit_UV_1/instruction_afe_P">
+      <obj_property name="ElementShortName">instruction_afe_P</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/phys_pmpaddr">
+      <obj_property name="ElementShortName">phys_pmpaddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">phys_pmpaddr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_unit_UV_1/phys_pmpaddrLOW">
+      <obj_property name="ElementShortName">phys_pmpaddrLOW[31:0]</obj_property>
+      <obj_property name="ObjectShortName">phys_pmpaddrLOW[31:0]</obj_property>
+   </wvobject>
+</wave_config>
