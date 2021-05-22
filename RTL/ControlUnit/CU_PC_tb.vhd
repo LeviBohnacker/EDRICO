@@ -69,7 +69,7 @@ end component;
     --PC load signal
     signal PC_load : STD_LOGIC;
     --clock and reset
-    signal clk : STD_LOGIC;
+    signal clk : STD_LOGIC := '0';
     signal reset : STD_LOGIC;
     --incrementation control signals
     signal branch_re : STD_LOGIC;
@@ -83,7 +83,7 @@ end component;
     signal PC_out : STD_LOGIC_VECTOR (31 downto 0);
 
 begin
-clk <= no clk after 5ns;
+clk <= not clk after 5ns;
 dut:CU_PC port map(
     PC_dra => Pc_dra,
     PC_write => PC_write,
@@ -99,7 +99,53 @@ dut:CU_PC port map(
 
 stim: process
 begin
+    --define values
+    PC_dra <= "00000000000000000000000000001000"
+    PC_write <= '0';
+    PC_load <= '1';
+    reset <= '0';
+    branch_re <= '0';
+    type_of_instruction <= "0000";
+    immediate <= "00000000000000000000000000000010";
+    data_bus_B <= "00000000000000000000000000000111";
+    wait for 5ns;
 
+    --test different cases for the PC control:
+    --first case: normal/memory operation -> output should be just PC + 4
+
+    wait for 10ns;
+    --second case: branch instruction with branch_re = 0
+    type_of_instruction <= "0010";
+    --result should be PC + immediate
+    wait for 10ns;
+
+    --third case: branch instruction with branch_re = 1
+    branch_re <= '1';
+    wait for 10ns;
+
+    -- fourth case: operation is a JAL operation
+    type_of_instruction <= "0100"
+    --result should be PC = PC + immediate
+    wait for 10ns;
+
+    --fifth case: JALR operation 
+    type_of_instruction <= "1000";
+    --result should be PC = data_bus_B + immediate
+    wait for 10ns;
+
+    --test if PC_write works
+    PC_write <= '1';
+    --output should be the PC_dra without any change
+    wait for 10ns;
+    
+    -- test asynchronus reset:
+    type_of_instruction <= "0000";
+    reset <= '1';
+    wait for 10ns;   
 
 end process;
+
+--check_out: process
+--begin
+--end process;
 end architecture;
