@@ -88,8 +88,8 @@ port(
     --input signals
     ------------------------------------------------------------------------------
     --PMP information
-    pmpcfg: in type_pmpcfg; --array of 32 7-bit std_logic_vector
-    pmpaddr: in type_pmpaddr; --array of 32 32-bit std_logic_vector
+    pmpcfg: in type_pmpcfg; --array of 16 7-bit std_logic_vector
+    pmpaddr: in type_pmpaddr; --array of 16 32-bit std_logic_vector
     --address to check
     address: in std_logic_vector(31 downto 0);
     --control signals
@@ -100,6 +100,11 @@ port(
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
+    --debug outputs
+    address_hit_verify : out std_logic_vector(15 downto 0);
+    load_afe_verify : out std_logic_vector(15 downto 0);
+    storeAMO_afe_verify : out std_logic_vector(15 downto 0);
+    instruction_afe_verify : out std_logic_vector(15 downto 0);
     --enable signal
     enable_pmp: out std_logic;
     --exception signals
