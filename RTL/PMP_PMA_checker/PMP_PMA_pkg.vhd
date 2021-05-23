@@ -105,6 +105,7 @@ port(
     load_afe_verify : out std_logic_vector(15 downto 0);
     storeAMO_afe_verify : out std_logic_vector(15 downto 0);
     instruction_afe_verify : out std_logic_vector(15 downto 0);
+    address_upper_verify : out std_logic_vector(31 downto 0);
     --enable signal
     enable_pmp: out std_logic;
     --exception signals

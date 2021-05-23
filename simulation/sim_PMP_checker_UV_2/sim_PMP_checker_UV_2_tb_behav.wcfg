@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_PMP_checker_UV_2_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="sim_PMP_checker_UV_2_tb" />
+            <top_module name="sim_pmp_checker_uv_1_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="200000fs"></ZoomEndTime>
+      <Cursor1Time time="199998fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="16" />
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/pmpcfg">
+      <obj_property name="ElementShortName">pmpcfg[15:0][7:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpcfg[15:0][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/pmpaddr">
+      <obj_property name="ElementShortName">pmpaddr[15:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpaddr[15:0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/address">
+      <obj_property name="ElementShortName">address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/readWrite">
+      <obj_property name="ElementShortName">readWrite</obj_property>
+      <obj_property name="ObjectShortName">readWrite</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/instruction">
+      <obj_property name="ElementShortName">instruction</obj_property>
+      <obj_property name="ObjectShortName">instruction</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/enable">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/size">
+      <obj_property name="ElementShortName">size[1:0]</obj_property>
+      <obj_property name="ObjectShortName">size[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/address_hit_verify">
+      <obj_property name="ElementShortName">address_hit_verify[15:0]</obj_property>
+      <obj_property name="ObjectShortName">address_hit_verify[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/load_afe_verify">
+      <obj_property name="ElementShortName">load_afe_verify[15:0]</obj_property>
+      <obj_property name="ObjectShortName">load_afe_verify[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/storeAMO_afe_verify">
+      <obj_property name="ElementShortName">storeAMO_afe_verify[15:0]</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_verify[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/instruction_afe_verify">
+      <obj_property name="ElementShortName">instruction_afe_verify[15:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_verify[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PMP_checker_UV_2_tb/address_upper_verify">
+      <obj_property name="ElementShortName">address_upper_verify[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address_upper_verify[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/enable_pmp">
+      <obj_property name="ElementShortName">enable_pmp</obj_property>
+      <obj_property name="ObjectShortName">enable_pmp</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/load_afe_P">
+      <obj_property name="ElementShortName">load_afe_P</obj_property>
+      <obj_property name="ObjectShortName">load_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/instruction_afe_P">
+      <obj_property name="ElementShortName">instruction_afe_P</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PMP_checker_UV_2_tb/storeAMO_afe_P">
+      <obj_property name="ElementShortName">storeAMO_afe_P</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_P</obj_property>
+   </wvobject>
+</wave_config>
