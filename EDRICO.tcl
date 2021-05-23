@@ -96,7 +96,23 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb_behav.wcfg" \
    "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_FSM_tb.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_PC_tb.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
+   "${origin_dir}/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1_pkg.vhd" \
+   "${origin_dir}/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1.vhd" \
+   "${origin_dir}/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1_behav.wcfg" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_pkg.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_tb.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_tb_behav.wcfg" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_2/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_2/PMP_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_pkg.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_tb.vhd" \
+   "${origin_dir}/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_tb_behav.wcfg" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -203,7 +219,6 @@ set proj_dir [get_property directory [current_project]]
 
 # Set project properties
 set obj [current_project]
-set_property -name "board_part_repo_paths" -value "C:/Users/noahw/AppData/Roaming/Xilinx/Vivado/2020.2/xhub/board_store/xilinx_board_store" -objects $obj
 set_property -name "board_part" -value "digilentinc.com:arty-z7-20:part0:1.0" -objects $obj
 set_property -name "default_lib" -value "xil_defaultlib" -objects $obj
 set_property -name "enable_vhdl_2008" -value "1" -objects $obj
@@ -222,8 +237,7 @@ set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "78" -objects $obj
-
+set_property -name "webtalk.xsim_launch_sim" -value "95" -objects $obj
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
   create_fileset -srcset sources_1
@@ -1059,6 +1073,7 @@ set file "$origin_dir/simulation/sim_EC_arbiter_UV_1/EC_arbiter_UV_1_tb.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
 
 
 # Set 'sim_EC_arbiter_UV_1' fileset file properties for local files
@@ -1112,36 +1127,178 @@ set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "CU_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
-# Create 'sim_CU_PC_UV_1' fileset (if not found)
-if {[string equal [get_filesets -quiet sim_CU_PC_UV_1] ""]} {
-  create_fileset -simset sim_CU_PC_UV_1
+# Create 'sim_PMP_unit_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_PMP_unit_UV_1] ""]} {
+  create_fileset -simset sim_PMP_unit_UV_1
 }
 
-# Set 'sim_CU_PC_UV_1' fileset object
-set obj [get_filesets sim_CU_PC_UV_1]
+# Set 'sim_PMP_unit_UV_1' fileset object
+set obj [get_filesets sim_PMP_unit_UV_1]
 set files [list \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_PC_tb.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1_behav.wcfg"] \
 ]
 add_files -norecurse -fileset $obj $files
 
-# Set 'sim_CU_PC_UV_1' fileset file properties for remote files
-set file "$origin_dir/RTL/ControlUnit/CU_PC_tb.vhd"
+# Set 'sim_PMP_unit_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
 set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sim_CU_PC_UV_1] [list "*$file"]]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_unit_UV_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_unit_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_unit_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_unit_UV_1/sim_PMP_unit_UV_1.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_unit_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
 
 
-# Set 'sim_CU_PC_UV_1' fileset file properties for local files
+# Set 'sim_PMP_unit_UV_1' fileset file properties for local files
 # None
 
-# Set 'sim_CU_PC_UV_1' fileset properties
-set obj [get_filesets sim_CU_PC_UV_1]
+# Set 'sim_PMP_unit_UV_1' fileset properties
+set obj [get_filesets sim_PMP_unit_UV_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
-set_property -name "top" -value "CU_PC_tb" -objects $obj
-set_property -name "top_lib" -value "CU_lib" -objects $obj
-set_property -name "xsim.simulate.runtime" -value "500ns" -objects $obj
+set_property -name "top" -value "sim_PMP_unit_UV_1" -objects $obj
+set_property -name "top_lib" -value "PMP_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "200ns" -objects $obj
+
+# Create 'sim_PMP_checker_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_PMP_checker_UV_1] ""]} {
+  create_fileset -simset sim_PMP_checker_UV_1
+}
+
+# Set 'sim_PMP_checker_UV_1' fileset object
+set obj [get_filesets sim_PMP_checker_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_PMP_checker_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_checker_UV_1/sim_PMP_checker_UV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+
+# Set 'sim_PMP_checker_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_PMP_checker_UV_1' fileset properties
+set obj [get_filesets sim_PMP_checker_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "sim_PMP_checker_UV_1_tb" -objects $obj
+set_property -name "top_lib" -value "PMP_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "200ns" -objects $obj
+
+# Create 'sim_PMP_checker_UV_2' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_PMP_checker_UV_2] ""]} {
+  create_fileset -simset sim_PMP_checker_UV_2
+}
+
+# Set 'sim_PMP_checker_UV_2' fileset object
+set obj [get_filesets sim_PMP_checker_UV_2]
+set files [list \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_2/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_2/PMP_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_PMP_checker_UV_2' fileset file properties for remote files
+set file "$origin_dir/simulation/sim_PMP_checker_UV_2/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_checker_UV_2/PMP_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_PMP_checker_UV_2/sim_PMP_checker_UV_2_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_PMP_checker_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+
+# Set 'sim_PMP_checker_UV_2' fileset file properties for local files
+# None
+
+# Set 'sim_PMP_checker_UV_2' fileset properties
+set obj [get_filesets sim_PMP_checker_UV_2]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "sim_PMP_checker_UV_2_tb" -objects $obj
+set_property -name "top_lib" -value "PMP_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "200ns" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
