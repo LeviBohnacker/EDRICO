@@ -48,11 +48,11 @@ port(
     --output signals
     ------------------------------------------------------------------------------
     --debug outputs
-    --address_hit_verify : out std_logic_vector(15 downto 0);
-    --load_afe_verify : out std_logic_vector(15 downto 0);
-    --storeAMO_afe_verify : out std_logic_vector(15 downto 0);
-    --instruction_afe_verify : out std_logic_vector(15 downto 0);
-    --address_upper_verify : out std_logic_vector(31 downto 0);
+    address_hit_verify : out std_logic_vector(15 downto 0);
+    load_afe_verify : out std_logic_vector(15 downto 0);
+    storeAMO_afe_verify : out std_logic_vector(15 downto 0);
+    instruction_afe_verify : out std_logic_vector(15 downto 0);
+    address_upper_verify : out std_logic_vector(31 downto 0);
     --enable signal
     enable_pmp: out std_logic;
     --exception signals
@@ -76,11 +76,11 @@ signal enable_int: std_logic; --internal enable signal
 signal exception_vect: std_logic_vector(2 downto 0); --internal exception signal exception_vect(2) = load_afe_P, exception_vect(1) = storeAMO_afe_P, exception_vect(0) = instruction_afe_P
 begin
 --debug outputs
---address_hit_verify <=address_hit;
---load_afe_verify <= load_afe_P_unit;
---storeAMO_afe_verify <= storeAMO_afe_P_unit;
---instruction_afe_verify <= instruction_afe_P_unit;
---address_upper_verify <= address_upper;
+address_hit_verify <=address_hit;
+load_afe_verify <= load_afe_P_unit;
+storeAMO_afe_verify <= storeAMO_afe_P_unit;
+instruction_afe_verify <= instruction_afe_P_unit;
+address_upper_verify <= address_upper;
 
 
 ----------------------------------------------------------------------------------
