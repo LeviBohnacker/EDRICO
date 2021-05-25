@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_RV32I_RF_UV_1_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="rf_pkg" />
+            <top_module name="sim_RV32I_RF_UV_1_tb" />
+            <top_module name="sim_rv32i_rf_uv_1_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="243931fs"></ZoomStartTime>
+      <ZoomEndTime time="304232fs"></ZoomEndTime>
+      <Cursor1Time time="287231fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="9" />
+   <wvobject type="array" fp_name="/sim_RV32I_RF_UV_1_tb/register_write">
+      <obj_property name="ElementShortName">register_write[4:0]</obj_property>
+      <obj_property name="ObjectShortName">register_write[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_RV32I_RF_UV_1_tb/register_read_A">
+      <obj_property name="ElementShortName">register_read_A[4:0]</obj_property>
+      <obj_property name="ObjectShortName">register_read_A[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_RV32I_RF_UV_1_tb/register_read_B">
+      <obj_property name="ElementShortName">register_read_B[4:0]</obj_property>
+      <obj_property name="ObjectShortName">register_read_B[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_RV32I_RF_UV_1_tb/data_in">
+      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_RV32I_RF_UV_1_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_RV32I_RF_UV_1_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_RV32I_RF_UV_1_tb/data_bus_A">
+      <obj_property name="ElementShortName">data_bus_A[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_bus_A[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_RV32I_RF_UV_1_tb/data_bus_B">
+      <obj_property name="ElementShortName">data_bus_B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_bus_B[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_RV32I_RF_UV_1_tb/T">
+      <obj_property name="ElementShortName">T</obj_property>
+      <obj_property name="ObjectShortName">T</obj_property>
+   </wvobject>
+</wave_config>

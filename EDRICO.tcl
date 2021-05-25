@@ -144,6 +144,12 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/simulation/sim_CSR_top_UV_2/sim_CSR_top_UV_2_pkg.vhd" \
    "${origin_dir}/simulation/sim_CSR_top_UV_2/sim_CSR_top_UV_2_tb.vhd" \
    "${origin_dir}/simulation/sim_CSR_top_UV_2/sim_CSR_top_UV_2_tb_behav.wcfg" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd" \
+   "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd" \
+   "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_pkg.vhd" \
+   "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb.vhd" \
+   "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb_behav.wcfg" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -268,7 +274,7 @@ set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "129" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "131" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -1511,6 +1517,7 @@ set obj [get_filesets sim_CSR_interrupt_gen_UV_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_CSR_interrupt_gen_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "30ns" -objects $obj
 
@@ -1578,6 +1585,7 @@ set obj [get_filesets sim_CSR_top_UV_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_CSR_top_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "2000ns" -objects $obj
 
@@ -1652,8 +1660,69 @@ set obj [get_filesets sim_CSR_top_UV_2]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_CSR_top_UV_2_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "2000ns" -objects $obj
+
+# Create 'sim_RV32I_RF_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_RV32I_RF_UV_1] ""]} {
+  create_fileset -simset sim_RV32I_RF_UV_1
+}
+
+# Set 'sim_RV32I_RF_UV_1' fileset object
+set obj [get_filesets sim_RV32I_RF_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_RV32I_RF_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_RV32I_RF_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/RF_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_RV32I_RF_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/RV32I_RF.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_RV32I_RF_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_RV32I_RF_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_RV32I_RF_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+
+# Set 'sim_RV32I_RF_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_RV32I_RF_UV_1' fileset properties
+set obj [get_filesets sim_RV32I_RF_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "sim_RV32I_RF_UV_1_tb" -objects $obj
+set_property -name "top_lib" -value "RF_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "400 ns" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
