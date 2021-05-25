@@ -208,14 +208,9 @@ begin
         mip_reg <= data_in(7) & data_in(3);
     end if;
 end process;
-
---interrupt pending flag updates
-mip_reg <= MTIP_dra & mip_reg(0) when MTIP_dra = '1' else
-           mip_reg(1) & MSIP_dra when MSIP_dra = '1' else
-           mip_reg;
            
 --outputs
-mip <= x"000000" & mip_reg(1) & "000" & mip_reg(0) & "000";
+mip <= x"000000" & (mip_reg(1) or MTIP_dra) & "000" & (mip_reg(0) or MSIP_dra) & "000";
 
 mie_proc: process(reset, clk)
 begin
