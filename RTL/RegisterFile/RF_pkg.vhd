@@ -23,8 +23,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-library PMP_PMA_lib;
-use PMP_PMA_lib.PMP_PMA_pkg.ALL;
+library PMP_lib;
+use PMP_lib.PMP_PMA_pkg.ALL;
 
 ----------------------------------------------------------------------------------
 --PACKAGE
