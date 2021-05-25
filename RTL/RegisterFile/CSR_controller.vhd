@@ -102,7 +102,7 @@ CSR_read_sel_int <= "000001" when CSR_address = x"300" else    --mstatus
                     "100010" when CSR_address = x"301" else    --misa
                     "000000" when ((unsigned(CSR_address) >= x"323" and unsigned(CSR_address) <= x"33F") or (unsigned(CSR_address) >= x"B03" and unsigned(CSR_address) <= x"B1F") or (unsigned(CSR_address) >= x"B83" and unsigned(CSR_address) <= x"B9F") or (unsigned(CSR_address) >= x"F11" and unsigned(CSR_address) <= x"F14")) else --hardwired to zero registers 
                     "111111"; --cause illegal instruction_exception
-CSR_read_sel <= CSR_read_sel_int when CSR_read = '1' else
+CSR_read_sel <= CSR_read_sel_int when (CSR_read = '1' and CSR_read_sel_int /= "111111") else
                 (others => '0');
 
 ----------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ CSR_read_sel <= CSR_read_sel_int when CSR_read = '1' else
 set_write_sel:process(CSR_read_sel_int, CSR_write)
 variable CSR_write_buffer: std_logic_vector(32 downto 0);
 begin
-    if(CSR_read_sel_int = "100010" or CSR_read_sel_int = "000000" or CSR_write = '0') then
+    if(CSR_read_sel_int = "100010" or CSR_read_sel_int = "000000" or CSR_read_sel_int = "111111" or CSR_read_sel_int = "UUUUUU" or CSR_write = '0') then
         CSR_write_sel <= (others => '0');
     else
         CSR_write_buffer := (others => '0');

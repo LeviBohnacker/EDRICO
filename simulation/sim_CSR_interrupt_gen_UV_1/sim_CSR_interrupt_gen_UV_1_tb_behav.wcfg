@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_CSR_interrupt_gen_UV_1_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="csr_pkg" />
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="sim_CSR_interrupt_gen_UV_1_tb" />
+            <top_module name="sim_csr_interrupt_gen_uv_1_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="30001fs"></ZoomEndTime>
+      <Cursor1Time time="15224fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="7" />
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/MSIE">
+      <obj_property name="ElementShortName">MSIE</obj_property>
+      <obj_property name="ObjectShortName">MSIE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/MTIE">
+      <obj_property name="ElementShortName">MTIE</obj_property>
+      <obj_property name="ObjectShortName">MTIE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/MIE">
+      <obj_property name="ElementShortName">MIE</obj_property>
+      <obj_property name="ObjectShortName">MIE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/MSIP">
+      <obj_property name="ElementShortName">MSIP</obj_property>
+      <obj_property name="ObjectShortName">MSIP</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/MTIP">
+      <obj_property name="ElementShortName">MTIP</obj_property>
+      <obj_property name="ObjectShortName">MTIP</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/mtime_interrupt">
+      <obj_property name="ElementShortName">mtime_interrupt</obj_property>
+      <obj_property name="ObjectShortName">mtime_interrupt</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_interrupt_gen_UV_1_tb/mSW_interrupt">
+      <obj_property name="ElementShortName">mSW_interrupt</obj_property>
+      <obj_property name="ObjectShortName">mSW_interrupt</obj_property>
+   </wvobject>
+</wave_config>

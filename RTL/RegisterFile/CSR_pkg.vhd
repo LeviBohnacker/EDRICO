@@ -22,8 +22,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-library PMP_PMA_lib;
-use PMP_PMA_lib.PMP_PMA_pkg.all;
+library PMP_lib;
+use PMP_lib.PMP_PMA_pkg.all;
 
 package CSR_pkg is
 

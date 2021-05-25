@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_CSR_top_UV_1_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="csr_pkg" />
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="sim_CSR_top_UV_1_tb" />
+            <top_module name="sim_csr_top_uv_1_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="2900001fs"></ZoomEndTime>
+      <Cursor1Time time="2041930fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="120"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="16" />
+   <wvobject type="array" fp_name="/sim_CSR_top_UV_1_tb/data_in">
+      <obj_property name="ElementShortName">data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/MSIP_dra">
+      <obj_property name="ElementShortName">MSIP_dra</obj_property>
+      <obj_property name="ObjectShortName">MSIP_dra</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/MTIP_dra">
+      <obj_property name="ElementShortName">MTIP_dra</obj_property>
+      <obj_property name="ObjectShortName">MTIP_dra</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/instr_finished">
+      <obj_property name="ElementShortName">instr_finished</obj_property>
+      <obj_property name="ObjectShortName">instr_finished</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_CSR_top_UV_1_tb/CSR_address">
+      <obj_property name="ElementShortName">CSR_address[11:0]</obj_property>
+      <obj_property name="ObjectShortName">CSR_address[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/CSR_read">
+      <obj_property name="ElementShortName">CSR_read</obj_property>
+      <obj_property name="ObjectShortName">CSR_read</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/CSR_write">
+      <obj_property name="ElementShortName">CSR_write</obj_property>
+      <obj_property name="ObjectShortName">CSR_write</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_CSR_top_UV_1_tb/data_bus_B">
+      <obj_property name="ElementShortName">data_bus_B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_bus_B[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_CSR_top_UV_1_tb/pmpcfg_dra">
+      <obj_property name="ElementShortName">pmpcfg_dra[15:0][7:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpcfg_dra[15:0][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_CSR_top_UV_1_tb/pmpaddr_dra">
+      <obj_property name="ElementShortName">pmpaddr_dra[15:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpaddr_dra[15:0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/iie_CSR">
+      <obj_property name="ElementShortName">iie_CSR</obj_property>
+      <obj_property name="ObjectShortName">iie_CSR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/mtime_interrupt">
+      <obj_property name="ElementShortName">mtime_interrupt</obj_property>
+      <obj_property name="ObjectShortName">mtime_interrupt</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_CSR_top_UV_1_tb/mSW_interrupt">
+      <obj_property name="ElementShortName">mSW_interrupt</obj_property>
+      <obj_property name="ObjectShortName">mSW_interrupt</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_CSR_top_UV_1_tb/T">
+      <obj_property name="ElementShortName">T</obj_property>
+      <obj_property name="ObjectShortName">T</obj_property>
+   </wvobject>
+</wave_config>
