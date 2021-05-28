@@ -1721,6 +1721,7 @@ set obj [get_filesets sim_RV32I_RF_UV_1]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_RV32I_RF_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "400 ns" -objects $obj
 
