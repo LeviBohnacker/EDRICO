@@ -35,8 +35,8 @@ port (
     --AXI channels
     ------------------------------------------------------------------------------
     --clock and reset
-    M_AXI_ACLK : out STD_LOGIC;
-    M_AXI_ARSTN : out STD_LOGIC;
+    M_AXI_ACLK : in STD_LOGIC;
+    M_AXI_ARSTN : in STD_LOGIC;
     --read address channel
     M_AXI_ARADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_ARCACHE : out STD_LOGIC_VECTOR (3 downto 0);
@@ -74,7 +74,6 @@ port (
     --halt core signal
     halt_core : in STD_LOGIC;
     --clock and reset
-    clk : in STD_LOGIC;
     reset : in STD_LOGIC;
     --address and data input
     address_in : in STD_LOGIC_VECTOR (31 downto 0);
@@ -160,7 +159,6 @@ port map(
     --halt core
     halt_core => halt_core,
     --clock and reset
-    clk => clk,
     reset => reset,
     ------------------------------------------------------------------------------
     --output signals
@@ -180,24 +178,32 @@ port map(
 ----------------------------------------------------------------------------------
 --address register
 ----------------------------------------------------------------------------------
-addr_reg: process(clk, reset, reset_local)
+addr_reg: process(M_AXI_ACLK, reset, M_AXI_ARSTN, reset_local)
 begin
-    if(reset = '1' or reset_local = '1') then
+    if(reset = '1' or M_AXI_ARSTN = '0') then
         address_register <= (others => '0');
-    elsif(clk'event and clk = '1' and load_address = '1') then
-        address_register <= address_in;
+    elsif(M_AXI_ACLK'event and M_AXI_ACLK = '1') then
+        if(reset_local = '1') then
+            address_register <= (others => '0');
+        elsif(load_address = '1') then
+            address_register <= address_in;
+        end if;
     end if;
 end process;
 
 ----------------------------------------------------------------------------------
 --data register
 ----------------------------------------------------------------------------------
-data_reg: process(clk, reset, reset_local)
+data_reg: process(M_AXI_ACLK, reset, M_AXI_ARSTN, reset_local)
 begin
-    if(reset = '1' or reset_local = '1') then
+    if(reset = '1' or M_AXI_ARSTN = '1') then
         data_register <= (others => '0');
-    elsif(clk'event and clk = '1' and load_data = '1') then
-        data_register <= data_in;
+    elsif(M_AXI_ACLK'event and M_AXI_ACLK = '1') then
+        if(reset_local = '1') then
+            data_register <= (others => '1');
+        elsif(load_data = '1') then
+            data_register <= data_in;
+        end if;
     end if;
 end process;
 

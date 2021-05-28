@@ -37,8 +37,8 @@ port (
     --AXI channels
     ------------------------------------------------------------------------------
     --clock and reset
-    M_AXI_ACLK : out STD_LOGIC;
-    M_AXI_ARSTN : out STD_LOGIC;
+    M_AXI_ACLK : in STD_LOGIC;
+    M_AXI_ARSTN : in STD_LOGIC;
     --read address channel
     M_AXI_ARADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_ARCACHE : out STD_LOGIC_VECTOR (3 downto 0);
@@ -75,8 +75,7 @@ port (
     size : in STD_LOGIC_VECTOR(1 downto 0);
     --halt core
     halt_core : in STD_LOGIC;
-    --clock and reset
-    clk : in STD_LOGIC;
+    --reset
     reset : in STD_LOGIC;
     ------------------------------------------------------------------------------
     --output signals
