@@ -82,8 +82,10 @@ end component;
     ------------------------------------------------------------------------------
     signal PC_out : STD_LOGIC_VECTOR (31 downto 0);
 
+constant T : time := 10 ns;
+
 begin
-clk <= not clk after 5ns;
+clk <= not clk after T/2;
 dut:CU_PC port map(
     PC_dra => Pc_dra,
     PC_write => PC_write,
@@ -99,50 +101,78 @@ dut:CU_PC port map(
 
 stim: process
 begin
-    --define values
+    --predefine values
     PC_dra <= "00000000000000000000000000001000";
     PC_write <= '0';
     PC_load <= '1';
-    reset <= '0';
+    reset <= '1';
     branch_re <= '0';
     type_of_instruction <= "0000";
     immediate <= "00000000000000000000000000000010";
     data_bus_B <= "00000000000000000000000000000111";
-    wait for 5ns;
+    wait for 1ns;
+    reset <= '0';
 
+    wait for 4ns;
+    --clock up
     --test different cases for the PC control:
-    --first case: normal/memory operation -> output should be just PC + 4
+    wait for 5ns;
+    --clock down 
+    --first case: normal/memory operation -> output should be just PC(initial PC = ...0000) + 4
+    --successfull
 
-    wait for 10ns;
-    --second case: branch instruction with branch_re = 0
+    wait for 5ns;
+    --clock up
     type_of_instruction <= "0010";
-    --result should be PC + immediate
-    wait for 10ns;
+    wait for 5ns;
+    --clock down
+    --second case: branch instruction with branch_re = 0
+    --result should be PC + 4 since no branch performed
+    --succ
 
-    --third case: branch instruction with branch_re = 1
+    wait for 5ns;
+    --clock up
     branch_re <= '1';
-    wait for 10ns;
+    wait for 5ns;
+    --clock down
+    --third case: branch instruction with branch_re = 1
+    --result should be PC + immediate
+    --succ
 
-    -- fourth case: operation is a JAL operation
+    wait for 5ns;
+    --clock up
     type_of_instruction <= "0100";
+    wait for 5ns;
+    --clock down
+    -- fourth case: operation is a JAL operation
     --result should be PC = PC + immediate
-    wait for 10ns;
+    --succ
 
-    --fifth case: JALR operation 
+    wait for 5ns;
+    --clock up
     type_of_instruction <= "1000";
+    wait for 5ns;
+    --clock down
+    --fifth case: JALR operation 
     --result should be PC = data_bus_B + immediate
-    wait for 10ns;
+    --succ
 
-    --test if PC_write works
+    wait for 5ns;
+    --clock up
     PC_load <= '0';
     PC_write <= '1';
+    wait for 5ns;
+    --clock down
+    --test if PC_write works
     --output should be the PC_dra without any change
-    wait for 10ns;
-    
+    --succ
+
+    wait for 3ns;
     -- test asynchronus reset:
     type_of_instruction <= "0000";
     reset <= '1';
-    wait for 10ns;   
+    --succ
+    wait for 17ns;   
 
 end process;
 
