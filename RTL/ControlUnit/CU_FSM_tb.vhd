@@ -54,8 +54,7 @@ port(
     instruction_fetch: out std_logic;
     execute_enable: out std_logic;
     PC_load: out std_logic;
-    instruction_finished: out std_logic;
-    debug_state: out std_logic_vector(4 downto 0)
+    instruction_finished: out std_logic
 );
 end component;
 ----------------------------------------------------------------------------------
@@ -76,7 +75,6 @@ end component;
     signal execute_enable: std_logic;
     signal PC_load: std_logic;
     signal instruction_finished: std_logic;
-    signal debug_state: std_logic_vector(4 downto 0);
 
 begin
 clk <= not clk after 2.5ns;
@@ -93,8 +91,7 @@ dut: CU_FSM port map(
     instruction_fetch => instruction_fetch,
     execute_enable => execute_enable,
     PC_load => PC_load,
-    instruction_finished => instruction_finished,
-    debug_state => debug_state
+    instruction_finished => instruction_finished
 );
 
 --states: FSM_RESET, FSM_HALT_CORE, FSM_FETCH, FSM_EXECUTE, FSM_EXECUTE_MEM, FSM_WAIT
@@ -126,18 +123,4 @@ begin
     
     
 end process;
-
---check_output: process
---begin
---    wait for 1ns;
---    assert debug_state = "00001" report "NOT in FSM_RESET!" severity error;
---    assert PMP_enable_FSM = '0' report "PMP_enable_FSM wrong" severity error;
---    assert PMP_instruction_FSM = '0' report "PMP_instruction_FSM wrong" severity error;
---    assert PMP_size_FSM = '0' report "PMP_size_FSM wrong" severity error;
---    assert PMP_rw_FSM = '0' report "PMP_rw_FSM wrong" severity error;
---    assert instruction_fetch = '0' report "instruction_fetch wrong" severity error;
---    assert execute_enable = '0' report "execute_enable wrong" severity error;
---    assert PC_load = '0' report "PC_load wrong" severity error;
---    assert instruction_finished = '0' report "instruction_finished wrong" severity error;
---end process;  
 end architecture;
