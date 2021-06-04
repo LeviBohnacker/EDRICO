@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_AXI4_CU_UV_2_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi4_lite_master_pkg" />
+            <top_module name="sim_AXI4_CU_UV_2_tb" />
+            <top_module name="sim_axi4_cu_uv_2_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="152000000001fs"></ZoomEndTime>
+      <Cursor1Time time="232500fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="173"></NameColumnWidth>
+      <ValueColumnWidth column_width="66"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="47" />
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/AW_ack">
+      <obj_property name="ElementShortName">AW_ack</obj_property>
+      <obj_property name="ObjectShortName">AW_ack</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/WD_ack">
+      <obj_property name="ElementShortName">WD_ack</obj_property>
+      <obj_property name="ObjectShortName">WD_ack</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/BD_ack">
+      <obj_property name="ElementShortName">BD_ack</obj_property>
+      <obj_property name="ObjectShortName">BD_ack</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/AR_ack">
+      <obj_property name="ElementShortName">AR_ack</obj_property>
+      <obj_property name="ObjectShortName">AR_ack</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/RD_ack">
+      <obj_property name="ElementShortName">RD_ack</obj_property>
+      <obj_property name="ObjectShortName">RD_ack</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_AXI4_CU_UV_2_tb/PS_debug">
+      <obj_property name="ElementShortName">PS_debug</obj_property>
+      <obj_property name="ObjectShortName">PS_debug</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_AXI4_CU_UV_2_tb/NS_debug">
+      <obj_property name="ElementShortName">NS_debug</obj_property>
+      <obj_property name="ObjectShortName">NS_debug</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_ACLK">
+      <obj_property name="ElementShortName">M_AXI_ACLK</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_ACLK</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_ARSTN">
+      <obj_property name="ElementShortName">M_AXI_ARSTN</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_ARSTN</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_ARCACHE">
+      <obj_property name="ElementShortName">M_AXI_ARCACHE[3:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_ARCACHE[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_ARPROT">
+      <obj_property name="ElementShortName">M_AXI_ARPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_ARPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_ARVALID">
+      <obj_property name="ElementShortName">M_AXI_ARVALID</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_ARVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_ARREADY">
+      <obj_property name="ElementShortName">M_AXI_ARREADY</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_ARREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_RRESP">
+      <obj_property name="ElementShortName">M_AXI_RRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_RRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_RVALID">
+      <obj_property name="ElementShortName">M_AXI_RVALID</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_RVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_RREADY">
+      <obj_property name="ElementShortName">M_AXI_RREADY</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_RREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_AWCACHE">
+      <obj_property name="ElementShortName">M_AXI_AWCACHE[3:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_AWCACHE[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_AWPROT">
+      <obj_property name="ElementShortName">M_AXI_AWPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_AWPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_AWVALID">
+      <obj_property name="ElementShortName">M_AXI_AWVALID</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_AWVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_AWREADY">
+      <obj_property name="ElementShortName">M_AXI_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_WSTRB">
+      <obj_property name="ElementShortName">M_AXI_WSTRB[3:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_WSTRB[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_WVALID">
+      <obj_property name="ElementShortName">M_AXI_WVALID</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_WVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_WREADY">
+      <obj_property name="ElementShortName">M_AXI_WREADY</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_BRESP">
+      <obj_property name="ElementShortName">M_AXI_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_BRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_BVALID">
+      <obj_property name="ElementShortName">M_AXI_BVALID</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/M_AXI_BREADY">
+      <obj_property name="ElementShortName">M_AXI_BREADY</obj_property>
+      <obj_property name="ObjectShortName">M_AXI_BREADY</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/enable">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/readWrite">
+      <obj_property name="ElementShortName">readWrite</obj_property>
+      <obj_property name="ObjectShortName">readWrite</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/instruction">
+      <obj_property name="ElementShortName">instruction</obj_property>
+      <obj_property name="ObjectShortName">instruction</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/size">
+      <obj_property name="ElementShortName">size[1:0]</obj_property>
+      <obj_property name="ObjectShortName">size[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/halt_core">
+      <obj_property name="ElementShortName">halt_core</obj_property>
+      <obj_property name="ObjectShortName">halt_core</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/memOp_finished">
+      <obj_property name="ElementShortName">memOp_finished</obj_property>
+      <obj_property name="ObjectShortName">memOp_finished</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/store_systemData">
+      <obj_property name="ElementShortName">store_systemData</obj_property>
+      <obj_property name="ObjectShortName">store_systemData</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/load_afe_AXI">
+      <obj_property name="ElementShortName">load_afe_AXI</obj_property>
+      <obj_property name="ObjectShortName">load_afe_AXI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/storeAMO_afe_AXI">
+      <obj_property name="ElementShortName">storeAMO_afe_AXI</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_AXI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/instruction_afe_AXI">
+      <obj_property name="ElementShortName">instruction_afe_AXI</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_AXI</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/load_address">
+      <obj_property name="ElementShortName">load_address</obj_property>
+      <obj_property name="ObjectShortName">load_address</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/load_data">
+      <obj_property name="ElementShortName">load_data</obj_property>
+      <obj_property name="ObjectShortName">load_data</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/check_result">
+      <obj_property name="ElementShortName">check_result</obj_property>
+      <obj_property name="ObjectShortName">check_result</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/update_stimuli">
+      <obj_property name="ElementShortName">update_stimuli</obj_property>
+      <obj_property name="ObjectShortName">update_stimuli</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_AXI4_CU_UV_2_tb/iteration">
+      <obj_property name="ElementShortName">iteration</obj_property>
+      <obj_property name="ObjectShortName">iteration</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_AXI4_CU_UV_2_tb/T">
+      <obj_property name="ElementShortName">T</obj_property>
+      <obj_property name="ObjectShortName">T</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/dut/enable_buf">
+      <obj_property name="ElementShortName">enable_buf</obj_property>
+      <obj_property name="ObjectShortName">enable_buf</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/dut/instruction_buf">
+      <obj_property name="ElementShortName">instruction_buf</obj_property>
+      <obj_property name="ObjectShortName">instruction_buf</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_AXI4_CU_UV_2_tb/dut/readWrite_buf">
+      <obj_property name="ElementShortName">readWrite_buf</obj_property>
+      <obj_property name="ObjectShortName">readWrite_buf</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_AXI4_CU_UV_2_tb/dut/size_buf">
+      <obj_property name="ElementShortName">size_buf[1:0]</obj_property>
+      <obj_property name="ObjectShortName">size_buf[1:0]</obj_property>
+   </wvobject>
+</wave_config>
