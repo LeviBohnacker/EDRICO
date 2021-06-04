@@ -24,7 +24,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
+library AXI4M_lib;
+use AXI4M_lib.AXI4_lite_master_pkg.ALL;
 
 ----------------------------------------------------------------------------------
 --ENTITY
@@ -34,28 +35,27 @@ port (
     ------------------------------------------------------------------------------
     --AXI channels
     ------------------------------------------------------------------------------
+    AW_ack, WD_ack, BD_ack, AR_ack, RD_ack : out std_logic;
+    PS_debug : out FSM_state;
+    NS_debug : out FSM_state;
     --clock and reset
     M_AXI_ACLK : in STD_LOGIC;
     M_AXI_ARSTN : in STD_LOGIC;
     --read address channel
-    M_AXI_ARADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_ARCACHE : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_ARPROT : out STD_LOGIC_VECTOR (2 downto 0);
     M_AXI_ARVALID : out STD_LOGIC;
     M_AXI_ARREADY : in STD_LOGIC;
     --read data channel
-    M_AXI_RDATA : in STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_RRESP : in STD_LOGIC_VECTOR (1 downto 0);
     M_AXI_RVALID : in STD_LOGIC;
     M_AXI_RREADY : out STD_LOGIC;
     --write address channel
-    M_AXI_AWADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_AWCACHE : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_AWPROT : out STD_LOGIC_VECTOR (2 downto 0);
     M_AXI_AWVALID : out STD_LOGIC;
     M_AXI_AWREADY : in STD_LOGIC;
     --write data channel
-    M_AXI_WDATA : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_WSTRB : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_WVALID : out STD_LOGIC;
     M_AXI_WREADY : in STD_LOGIC;
@@ -98,7 +98,7 @@ architecture rtl of AXI4_lite_master_control_unit is
 ----------------------------------------------------------------------------------
 --types
 ----------------------------------------------------------------------------------
-type FSM_state is (idle, read, end_read, error, pause, write, end_write);
+
 
 ----------------------------------------------------------------------------------
 --signals
@@ -155,7 +155,7 @@ store_systemData <= M_AXI_RREADY_int and M_AXI_RVALID;
 ----------------------------------------------------------------------------------
 --generate memOp_finished signal
 ----------------------------------------------------------------------------------
-memOp_finished <= memOp_finished_int and RRESP_buffed(1);
+memOp_finished <= memOp_finished_int and not RRESP_buffed(1);
 
 ----------------------------------------------------------------------------------
 --generate register load signals
@@ -270,7 +270,7 @@ begin
         if(reset_local = '1') then
             AWack <= '0';
         --set AWack
-        elsif(M_AXI_ARVALID_int = '1' and M_AXI_ARREADY = '1') then
+        elsif(M_AXI_AWVALID_int = '1' and M_AXI_AWREADY = '1') then
             AWack <= '1';
         end if;
     end if;
@@ -286,7 +286,7 @@ begin
         if((M_AXI_AWVALID_int = '1' and M_AXI_AWREADY = '1') or AWack = '1') then
             M_AXI_AWVALID_int <= '0';
         --set write valid, if no handshake happend and the transfer is initated
-        elsif(readWrite = '0' and enable = '1') then
+        elsif(readWrite = '1' and enable = '1') then
             M_AXI_AWVALID_int <= '1';
         --reset write valid if no handshake happens/happend and no transfer is initated
         else
@@ -337,7 +337,7 @@ begin
         if((M_AXI_BREADY_int = '1' and M_AXI_BVALID = '1') or BDack = '1') then
             M_AXI_BREADY_int <= '0';
         --set read ready, if no handshake happend and the transfer is initated
-        elsif(readWrite = '0' and enable = '1') then
+        elsif(readWrite = '1' and enable = '1') then
             M_AXI_BREADY_int <= '1';
         --reset read ready if no handshake happens/happend and no transfer is initated
         else
@@ -375,7 +375,7 @@ begin
         if((M_AXI_WVALID_int = '1' and M_AXI_WREADY = '1') or WDack = '1') then
             M_AXI_WVALID_int <= '0';
         --set write data valid, if no handshake happend and the transfer is initated
-        elsif(readWrite = '0' and enable = '1') then
+        elsif(readWrite = '1' and enable = '1') then
             M_AXI_WVALID_int <= '1';
         --reset write data valid if no handshake happens/happend and no transfer is initated
         else
@@ -441,7 +441,16 @@ begin
     end if;
 end process;
 
-FSM_comb_proc: process(present_state)
+--DEBUG PORTS
+PS_debug <= present_state;
+NS_debug <= next_state;
+AR_ack <= ARack;
+RD_ack <= RDack;
+AW_ack <= AWack;
+BD_ack <= BDack;
+WD_ack <= WDack;
+
+FSM_comb_proc: process(present_state, readWrite, enable, ARack, RDack, RRESP_buffed, AWack, BDack, WDack, BRESP_buffed, halt_core)
 begin
     case present_state is
         when idle =>
