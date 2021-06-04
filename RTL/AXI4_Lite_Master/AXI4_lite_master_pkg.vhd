@@ -28,6 +28,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 ----------------------------------------------------------------------------------
 package AXI4_lite_master_pkg is
 
+type FSM_state is (idle, read, end_read, error, pause, write, end_write);
 ----------------------------------------------------------------------------------
 --components
 ----------------------------------------------------------------------------------
@@ -36,28 +37,27 @@ port (
     ------------------------------------------------------------------------------
     --AXI channels
     ------------------------------------------------------------------------------
+    AW_ack, WD_ack, BD_ack, AR_ack, RD_ack : out std_logic;
+    PS_debug : out FSM_state;
+    NS_debug : out FSM_state;
     --clock and reset
     M_AXI_ACLK : in STD_LOGIC;
     M_AXI_ARSTN : in STD_LOGIC;
     --read address channel
-    M_AXI_ARADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_ARCACHE : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_ARPROT : out STD_LOGIC_VECTOR (2 downto 0);
     M_AXI_ARVALID : out STD_LOGIC;
     M_AXI_ARREADY : in STD_LOGIC;
     --read data channel
-    M_AXI_RDATA : in STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_RRESP : in STD_LOGIC_VECTOR (1 downto 0);
     M_AXI_RVALID : in STD_LOGIC;
     M_AXI_RREADY : out STD_LOGIC;
     --write address channel
-    M_AXI_AWADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_AWCACHE : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_AWPROT : out STD_LOGIC_VECTOR (2 downto 0);
     M_AXI_AWVALID : out STD_LOGIC;
     M_AXI_AWREADY : in STD_LOGIC;
     --write data channel
-    M_AXI_WDATA : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_WSTRB : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_WVALID : out STD_LOGIC;
     M_AXI_WREADY : in STD_LOGIC;

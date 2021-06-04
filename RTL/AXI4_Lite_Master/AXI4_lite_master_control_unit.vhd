@@ -24,7 +24,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
+library AXI4M_lib;
+use AXI4M_lib.AXI4_lite_master_pkg.ALL;
 
 ----------------------------------------------------------------------------------
 --ENTITY
@@ -34,28 +35,27 @@ port (
     ------------------------------------------------------------------------------
     --AXI channels
     ------------------------------------------------------------------------------
+    AW_ack, WD_ack, BD_ack, AR_ack, RD_ack : out std_logic;
+    PS_debug : out FSM_state;
+    NS_debug : out FSM_state;
     --clock and reset
     M_AXI_ACLK : in STD_LOGIC;
     M_AXI_ARSTN : in STD_LOGIC;
     --read address channel
-    M_AXI_ARADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_ARCACHE : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_ARPROT : out STD_LOGIC_VECTOR (2 downto 0);
     M_AXI_ARVALID : out STD_LOGIC;
     M_AXI_ARREADY : in STD_LOGIC;
     --read data channel
-    M_AXI_RDATA : in STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_RRESP : in STD_LOGIC_VECTOR (1 downto 0);
     M_AXI_RVALID : in STD_LOGIC;
     M_AXI_RREADY : out STD_LOGIC;
     --write address channel
-    M_AXI_AWADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_AWCACHE : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_AWPROT : out STD_LOGIC_VECTOR (2 downto 0);
     M_AXI_AWVALID : out STD_LOGIC;
     M_AXI_AWREADY : in STD_LOGIC;
     --write data channel
-    M_AXI_WDATA : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_WSTRB : out STD_LOGIC_VECTOR (3 downto 0);
     M_AXI_WVALID : out STD_LOGIC;
     M_AXI_WREADY : in STD_LOGIC;
@@ -98,7 +98,7 @@ architecture rtl of AXI4_lite_master_control_unit is
 ----------------------------------------------------------------------------------
 --types
 ----------------------------------------------------------------------------------
-type FSM_state is (idle, read, end_read, error, pause, write, end_write);
+
 
 ----------------------------------------------------------------------------------
 --signals
@@ -145,17 +145,20 @@ signal reset_local : STD_LOGIC;
 signal error_detected : STD_LOGIC;
 
 signal present_state, next_state : FSM_state;
+
+signal enable_buf, instruction_buf, readWrite_buf : std_logic;
+signal size_buf : std_logic_vector(1 downto 0);
 begin
 
 ----------------------------------------------------------------------------------
 --generate store_systemData signal
 ----------------------------------------------------------------------------------
-store_systemData <= M_AXI_RREADY_int and M_AXI_RVALID;
+store_systemData <= M_AXI_RREADY_int and M_AXI_RVALID and not M_AXI_RRESP(1);
 
 ----------------------------------------------------------------------------------
 --generate memOp_finished signal
 ----------------------------------------------------------------------------------
-memOp_finished <= memOp_finished_int and RRESP_buffed(1);
+memOp_finished <= memOp_finished_int and not (RRESP_buffed(1) or BRESP_buffed(1));
 
 ----------------------------------------------------------------------------------
 --generate register load signals
@@ -170,14 +173,11 @@ load_data <= readWrite and not halt_core and enable;
 AR_handshake : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK) 
 begin
     --asynchronous AXI reset
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0'or reset_local = '1') then
         ARack <= '0';
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        --synchronous local reset
-        if(reset_local = '1') then
-            ARack <= '0';
         --set ARack
-        elsif(M_AXI_ARVALID_int = '1' and M_AXI_ARREADY = '1') then
+        if(M_AXI_ARVALID_int = '1' and M_AXI_ARREADY = '1') then
             ARack <= '1';
         end if;
     end if;
@@ -207,12 +207,10 @@ M_AXI_ARVALID <= M_AXI_ARVALID_int;
 --read data channel
 RD_buffer : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK)
 begin
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0' or reset_local = '1') then
         RRESP_buffed <= "00";
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        if(reset_local = '1') then
-            RRESP_buffed <= "00";
-        elsif(M_AXI_RREADY_int = '1' and M_AXI_RVALID = '1') then
+        if(M_AXI_RREADY_int = '1' and M_AXI_RVALID = '1') then
             RRESP_buffed <= M_AXI_RRESP;
         end if;
     end if;
@@ -221,14 +219,11 @@ end process;
 RD_handshake : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK) 
 begin
     --asynchronous AXI reset
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0' or reset_local = '1') then
         RDack <= '0';
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        --synchronous local reset
-        if(reset_local = '1') then
-            RDack <= '0';
         --set RDack
-        elsif(M_AXI_RREADY_int = '1' and M_AXI_RVALID = '1') then
+        if(M_AXI_RREADY_int = '1' and M_AXI_RVALID = '1') then
             RDack <= '1';
         end if;
     end if;
@@ -263,14 +258,11 @@ M_AXI_RREADY <= M_AXI_RREADY_int;
 AW_handshake : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK) 
 begin
     --asynchronous AXI reset
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0' or reset_local = '1') then
         AWack <= '0';
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        --synchronous local reset
-        if(reset_local = '1') then
-            AWack <= '0';
         --set AWack
-        elsif(M_AXI_ARVALID_int = '1' and M_AXI_ARREADY = '1') then
+        if(M_AXI_AWVALID_int = '1' and M_AXI_AWREADY = '1') then
             AWack <= '1';
         end if;
     end if;
@@ -286,7 +278,7 @@ begin
         if((M_AXI_AWVALID_int = '1' and M_AXI_AWREADY = '1') or AWack = '1') then
             M_AXI_AWVALID_int <= '0';
         --set write valid, if no handshake happend and the transfer is initated
-        elsif(readWrite = '0' and enable = '1') then
+        elsif(readWrite = '1' and enable = '1') then
             M_AXI_AWVALID_int <= '1';
         --reset write valid if no handshake happens/happend and no transfer is initated
         else
@@ -300,13 +292,11 @@ M_AXI_AWVALID <= M_AXI_AWVALID_int;
 --write response channel
 BR_buffer : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK)
 begin
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0' or reset_local = '1') then
         BRESP_buffed <= "00";
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        if(reset_local = '1') then
-            BRESP_buffed <= "00";
-        elsif(M_AXI_BREADY_int = '1' and M_AXI_BVALID = '1') then
-            BRESP_buffed <= M_AXI_RRESP;
+        if(M_AXI_BREADY_int = '1' and M_AXI_BVALID = '1') then
+            BRESP_buffed <= M_AXI_BRESP;
         end if;
     end if;
 end process;
@@ -314,14 +304,11 @@ end process;
 BD_handshake : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK) 
 begin
     --asynchronous AXI reset
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0' or reset_local = '1') then
         BDack <= '0';
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        --synchronous local reset
-        if(reset_local = '1') then
-            BDack <= '0';
         --set ARack
-        elsif(M_AXI_BREADY_int = '1' and M_AXI_BVALID = '1') then
+        if(M_AXI_BREADY_int = '1' and M_AXI_BVALID = '1') then
             BDack <= '1';
         end if;
     end if;
@@ -337,7 +324,7 @@ begin
         if((M_AXI_BREADY_int = '1' and M_AXI_BVALID = '1') or BDack = '1') then
             M_AXI_BREADY_int <= '0';
         --set read ready, if no handshake happend and the transfer is initated
-        elsif(readWrite = '0' and enable = '1') then
+        elsif(readWrite = '1' and enable = '1') then
             M_AXI_BREADY_int <= '1';
         --reset read ready if no handshake happens/happend and no transfer is initated
         else
@@ -352,14 +339,11 @@ M_AXI_BREADY <= M_AXI_BREADY_int;
 WD_handshake : process(reset_local, M_AXI_ARSTN, M_AXI_ACLK) 
 begin
     --asynchronous AXI reset
-    if(M_AXI_ARSTN = '0') then
+    if(M_AXI_ARSTN = '0' or reset_local = '1') then
         WDack <= '0';
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
-        --synchronous local reset
-        if(reset_local = '1') then
-            WDack <= '0';
         --set WDack
-        elsif(M_AXI_WVALID_int = '1' and M_AXI_WREADY = '1') then
+        if(M_AXI_WVALID_int = '1' and M_AXI_WREADY = '1') then
             WDack <= '1';
         end if;
     end if;
@@ -375,7 +359,7 @@ begin
         if((M_AXI_WVALID_int = '1' and M_AXI_WREADY = '1') or WDack = '1') then
             M_AXI_WVALID_int <= '0';
         --set write data valid, if no handshake happend and the transfer is initated
-        elsif(readWrite = '0' and enable = '1') then
+        elsif(readWrite = '1' and enable = '1') then
             M_AXI_WVALID_int <= '1';
         --reset write data valid if no handshake happens/happend and no transfer is initated
         else
@@ -408,11 +392,11 @@ M_AXI_ARPROT <= instruction & "00";
 exception_gen: process(error_detected)
 begin
     if (error_detected = '1') then
-        if(readWrite = '0' and instruction = '0') then
+        if(readWrite_buf = '0' and instruction_buf = '0') then
             load_afe_AXI <= '1';
             instruction_afe_AXI <= '0';
             storeAMO_afe_AXI <= '0';
-        elsif(readWrite = '1' and instruction = '0') then
+        elsif(readWrite_buf = '1' and instruction_buf = '0') then
             load_afe_AXI <= '0';
             instruction_afe_AXI <= '0';
             storeAMO_afe_AXI <= '1';
@@ -438,10 +422,29 @@ begin
         present_state <= idle;
     elsif(M_AXI_ACLK'event and M_AXI_ACLK='1') then
         present_state <= next_state;
+        if((next_state = write and present_state = idle) or (next_state = read and present_state = idle)) then
+            instruction_buf <= instruction;
+            enable_buf <= enable;
+            readWrite_buf <= readWrite;
+        elsif(next_state = idle) then
+            instruction_buf <= '0';
+            enable_buf <= '0';
+            readWrite_buf <= '0';
+        end if;
+        
     end if;
 end process;
 
-FSM_comb_proc: process(present_state)
+--DEBUG PORTS
+PS_debug <= present_state;
+NS_debug <= next_state;
+AR_ack <= ARack;
+RD_ack <= RDack;
+AW_ack <= AWack;
+BD_ack <= BDack;
+WD_ack <= WDack;
+
+FSM_comb_proc: process(present_state, readWrite, enable, ARack, RDack, RRESP_buffed, AWack, BDack, WDack, BRESP_buffed, halt_core)
 begin
     case present_state is
         when idle =>
@@ -454,10 +457,8 @@ begin
                 next_state <= idle;
             end if;
             --output decoder
+            size_buf <= "00";
             reset_local <= '1';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '0';
             memOp_finished_int <= '0';
         when read => 
@@ -468,10 +469,8 @@ begin
                 next_state <= read;
             end if;
             --output decoder
+            size_buf <= size;
             reset_local <= '0';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '0';
             memOp_finished_int <= '0';
         when end_read =>
@@ -483,9 +482,6 @@ begin
             end if;
             --output decoder
             reset_local <= '0';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '0';
             memOp_finished_int <= '1';
         when write =>
@@ -496,10 +492,8 @@ begin
                 next_state <= write;
             end if;
             --output decoder
+            size_buf <= size;
             reset_local <= '0';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '0';
             memOp_finished_int <= '0';
         when end_write =>
@@ -511,9 +505,6 @@ begin
             end if;
             --output decoder
             reset_local <= '0';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '0';
             memOp_finished_int <= '1';
         when error =>
@@ -525,9 +516,6 @@ begin
             end if;
             --output decoder
             reset_local <= '0';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '1';
             memOp_finished_int <= '0';
         when pause =>
@@ -539,9 +527,6 @@ begin
             end if;
             --output decoder
             reset_local <= '0';
-            load_afe_AXI <= '0';
-            storeAMO_afe_AXI <= '0';
-            instruction_afe_AXI <= '0';
             error_detected <= '0';
             memOp_finished_int <= '0';
     end case;

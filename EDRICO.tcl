@@ -150,6 +150,18 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_pkg.vhd" \
    "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb.vhd" \
    "${origin_dir}/simulation/sim_RV32I_RF_UV_1/sim_RV32I_RF_UV_1_tb_behav.wcfg" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd" \
+   "${origin_dir}/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_pkg.vhd" \
+   "${origin_dir}/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_tb.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_tb_behav.wcfg" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd" \
+   "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_pkg.vhd" \
+   "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_tb.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_tb_behav.wcfg" \
    "${origin_dir}/RTL/ControlUnit/CU_PC_tb.vhd" \
   ]
   foreach ifile $files {
@@ -276,7 +288,7 @@ set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
 set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "132" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "178" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -1727,6 +1739,131 @@ set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "400 ns" -objects $obj
 
+
+# Create 'sim_AXI4_CU_UV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_AXI4_CU_UV_1] ""]} {
+  create_fileset -simset sim_AXI4_CU_UV_1
+}
+
+# Set 'sim_AXI4_CU_UV_1' fileset object
+set obj [get_filesets sim_AXI4_CU_UV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_tb.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_AXI4_CU_UV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_AXI4_CU_UV_1/sim_AXI4_CU_UV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+
+# Set 'sim_AXI4_CU_UV_1' fileset file properties for local files
+# None
+
+# Set 'sim_AXI4_CU_UV_1' fileset properties
+set obj [get_filesets sim_AXI4_CU_UV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "top" -value "sim_AXI4_CU_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
+set_property -name "top_lib" -value "AXI4M_lib" -objects $obj
+set_property -name "xsim.elaborate.debug_level" -value "all" -objects $obj
+set_property -name "xsim.elaborate.relax" -value "0" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "2ns" -objects $obj
+
+# Create 'sim_AXI4_CU_UV_2' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_AXI4_CU_UV_2] ""]} {
+  create_fileset -simset sim_AXI4_CU_UV_2
+}
+
+# Set 'sim_AXI4_CU_UV_2' fileset object
+set obj [get_filesets sim_AXI4_CU_UV_2]
+set files [list \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_tb.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_tb_behav.wcfg"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_AXI4_CU_UV_2' fileset file properties for remote files
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_AXI4_CU_UV_2] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+
+# Set 'sim_AXI4_CU_UV_2' fileset file properties for local files
+# None
+
+# Set 'sim_AXI4_CU_UV_2' fileset properties
+set obj [get_filesets sim_AXI4_CU_UV_2]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "source_set" -value "" -objects $obj
+set_property -name "top" -value "sim_AXI4_CU_UV_2_tb" -objects $obj
+set_property -name "top_lib" -value "AXI4M_lib" -objects $obj
+set_property -name "xsim.elaborate.debug_level" -value "all" -objects $obj
+set_property -name "xsim.elaborate.relax" -value "0" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "2ns" -objects $obj
+
 # Create 'SIM_CU_PC_UV_1' fileset (if not found)
 if {[string equal [get_filesets -quiet SIM_CU_PC_UV_1] ""]} {
   create_fileset -simset SIM_CU_PC_UV_1
@@ -1757,6 +1894,7 @@ set_property -name "top" -value "CU_PC_tb" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "CU_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
+
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
