@@ -116,6 +116,9 @@ signal reset_buffer_register: std_logic;
 signal modify_mstatus_EI: std_logic;
 signal modify_mstatus_RET: std_logic;
 
+--arbiter control
+signal local_reset : STD_LOGIC;
+signal buffer_arbiter : STD_LOGIC;
 
 begin
 
@@ -187,7 +190,10 @@ port map(
     store_mepc => store_mepc,
     store_mcause => store_mcause,
     store_mtval => store_mtval,
-    store_mstatus => store_mstatus
+    store_mstatus => store_mstatus,
+    --arbiter control
+    local_reset => local_reset,
+    buffer_arbiter => buffer_arbiter
 );
 
 ----------------------------------------------------------------------------------
@@ -275,6 +281,12 @@ port map(
     --interrutp signals
     si_CSR => si_CSR,
     ti_CSR => ti_CSR,
+    --arbiter control
+    local_reset => local_reset,
+    buffer_arbiter => buffer_arbiter,
+    --clock and reset
+    clk => clk,
+    reset => reset,
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------

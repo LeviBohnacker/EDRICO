@@ -46,6 +46,12 @@ Port(
     --interrutp signals
     si_CSR : in STD_LOGIC;
     ti_CSR : in STD_LOGIC;
+    --arbiter control
+    local_reset : in STD_LOGIC;
+    buffer_arbiter : in STD_LOGIC;
+    --clock and reset
+    clk : in STD_LOGIC;
+    reset : in STD_LOGIC;
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -67,7 +73,57 @@ architecture rtl of arbiter is
 signal interrupt_int : std_logic;
 signal exception_code_int : std_logic_vector(31 downto 0);
 signal exception_bundle : std_logic_vector(10 downto 0);
+
+--buffered signals
+signal load_afe_buf : std_logic;
+signal storeAMO_afe_buf : std_logic;
+signal instruction_afe_buf : std_logic;
+signal load_ame_buf : std_logic;
+signal storeAMO_ame_buf : std_logic;
+signal instruction_ame_buf : std_logic;
+signal iie_buf : std_logic;
+signal ece_buf : std_logic;
+signal be_buf : std_logic;
+signal si_buf : std_logic;
+signal ti_buf : std_logic;
+
+signal EI_flag_int : std_logic;
 begin
+----------------------------------------------------------------------------------
+--signal buffer
+--  the exception and interrupt signals are buffere, when the EI_flag and the
+--  buffer_arbiter flag are set to high.
+--  Reset is asynchronous on local_reset or reset (global)
+----------------------------------------------------------------------------------
+signal_buffer: process(clk, reset, local_reset)
+begin
+    if(reset = '1' or local_reset = '1') then
+        load_afe_buf <= '0';
+        storeAMO_afe_buf <= '0';
+        instruction_afe_buf <= '0';
+        load_ame_buf <= '0';
+        storeAMO_ame_buf <= '0';
+        instruction_ame_buf <= '0';
+        iie_buf <= '0';
+        ece_buf <= '0';
+        be_buf <= '0';
+        si_buf <= '0';
+        ti_buf <= '0';
+    elsif(clk'event and clk= '1' and EI_flag_int = '1' and buffer_arbiter = '1') then
+        load_afe_buf <= load_afe_P or load_afe_AXI;
+        storeAMO_afe_buf <= storeAMO_afe_P or storeAMO_afe_AXI;
+        instruction_afe_buf <= instruction_afe_P or instruction_afe_AXI;
+        load_ame_buf <= load_ame_P;
+        storeAMO_ame_buf <= storeAMO_ame_P;
+        instruction_ame_buf <= instruction_ame_P;
+        iie_buf <= iie_CSR or iie_CU;
+        ece_buf <= ece_CU;
+        be_buf <= be_CU;
+        si_buf <= si_CSR;
+        ti_buf <= ti_CSR;
+    end if;
+end process;
+
 
 ----------------------------------------------------------------------------------
 --EI_flag and interrupt signal generation
@@ -75,7 +131,7 @@ begin
 --  edge. If either the si_CSR or the ti_CSR signal is high, the interrupt signal
 --  is raised additional.
 ----------------------------------------------------------------------------------
-EI_flag <=  --exception signals
+EI_flag_int <=  --exception signals
             load_afe_P or
             storeAMO_afe_P or
             instruction_afe_P or
@@ -92,8 +148,10 @@ EI_flag <=  --exception signals
             --interrutp signals
             si_CSR or
             ti_CSR;
+         
+EI_flag <= EI_flag_int;
             
-interrupt_int <= si_CSR or ti_CSR;
+interrupt_int <= si_buf or ti_buf;
 interrupt <= interrupt_int;
 
 ----------------------------------------------------------------------------------
@@ -101,7 +159,7 @@ interrupt <= interrupt_int;
 --  select the proper exception/interupt to execute (even if multiple at once ar
 --  raised) by selecting the proper exception code.
 ----------------------------------------------------------------------------------
-exception_bundle <= si_CSR & ti_CSR & instruction_ame_P & (instruction_afe_P or instruction_afe_AXI) & (iie_CU or iie_CSR) & be_CU & load_ame_P & (load_afe_P or load_afe_AXI) & storeAMO_ame_P & (storeAMO_afe_P or storeAMO_afe_AXI) & ece_CU;
+exception_bundle <= si_buf & ti_buf & instruction_ame_buf & (instruction_afe_buf) & (iie_buf) & be_buf & load_ame_buf & (load_afe_buf) & storeAMO_ame_buf & (storeAMO_afe_buf) & ece_buf;
 
 exception_code_int <=   x"0000" & x"0003" when exception_bundle(10) = '1' else
                         x"0000" & x"0007" when exception_bundle(10 downto 9) = "01" else
