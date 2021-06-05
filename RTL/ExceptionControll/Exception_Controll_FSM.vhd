@@ -69,7 +69,10 @@ Port (
     store_mepc : out STD_LOGIC;
     store_mcause : out STD_LOGIC;
     store_mtval : out STD_LOGIC;
-    store_mstatus : out STD_LOGIC
+    store_mstatus : out STD_LOGIC;
+    --arbiter control
+    local_reset : out STD_LOGIC;
+    buffer_arbiter : out STD_LOGIC
 );
 end Exception_Control_FSM;
 
@@ -157,6 +160,8 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';
+                local_reset <= '0';
+                buffer_arbiter <= '1';
             when TrapEntry =>
                 --next state generation
                 next_state <= sMEPC;
@@ -182,6 +187,8 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';
+                local_reset <= '0';
+                buffer_arbiter <= '0';
             when sMEPC =>
                 --next state generation
                 next_state <= sMTVAL;
@@ -228,6 +235,8 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';
+                local_reset <= '0';
+                buffer_arbiter <= '0';
             when sMTVAL =>
                 --next state generation
                 next_state <= lMSTATUS;
@@ -252,7 +261,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '1';
-                store_mstatus <= '0';            
+                store_mstatus <= '0';  
+                local_reset <= '0';
+                buffer_arbiter <= '0';          
             when lMSTATUS =>
                 --next state generation
                 next_state <= sMSTATUS;
@@ -277,7 +288,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '0';            
+                store_mstatus <= '0'; 
+                local_reset <= '0';
+                buffer_arbiter <= '0';           
             when sMSTATUS =>
                 --next state generation
                 next_state <= lMTVEC;
@@ -303,6 +316,8 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '1';  
+                local_reset <= '0';
+                buffer_arbiter <= '0';
             when lMTVEC =>
                 --next state generation
                 next_state <= sPC;
@@ -327,7 +342,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '0';            
+                store_mstatus <= '0';  
+                local_reset <= '0';
+                buffer_arbiter <= '0';          
             when sPC =>
                 --next state generation
                 next_state <= WFI;
@@ -352,7 +369,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '0';            
+                store_mstatus <= '0';   
+                local_reset <= '1';
+                buffer_arbiter <= '0';         
             when TrapExit =>
                 --next state generation
                 next_state <= sPC_ex;
@@ -377,7 +396,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '0';            
+                store_mstatus <= '0';  
+                local_reset <= '0';
+                buffer_arbiter <= '0';          
             when sPC_ex =>
                 --next state generation
                 next_state <= sMSTATUS_ex;
@@ -402,7 +423,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '0';            
+                store_mstatus <= '0';  
+                local_reset <= '0';
+                buffer_arbiter <= '0';          
             when sMSTATUS_ex =>
                 --next state generation
                 next_state <= WFI;
@@ -427,7 +450,9 @@ begin
                 store_mepc <= '0';
                 store_mcause <= '0';
                 store_mtval <= '0';
-                store_mstatus <= '1';            
+                store_mstatus <= '1'; 
+                local_reset <= '0';
+                buffer_arbiter <= '0';           
         end case;        
     end if;
 end process;

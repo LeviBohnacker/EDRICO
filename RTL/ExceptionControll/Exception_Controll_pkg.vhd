@@ -58,6 +58,12 @@ Port(
     --interrutp signals
     si_CSR : in STD_LOGIC;
     ti_CSR : in STD_LOGIC;
+    --arbiter control
+    local_reset : in STD_LOGIC;
+    buffer_arbiter : in STD_LOGIC;
+    --clock and reset
+    clk : in STD_LOGIC;
+    reset : in STD_LOGIC;
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -89,7 +95,7 @@ Port (
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
-    --present state debug
+    --debug current state output
     present_state_debug : out type_EC_state;
     --halt core signal
     halt_core : out STD_LOGIC;
@@ -112,7 +118,10 @@ Port (
     store_mepc : out STD_LOGIC;
     store_mcause : out STD_LOGIC;
     store_mtval : out STD_LOGIC;
-    store_mstatus : out STD_LOGIC
+    store_mstatus : out STD_LOGIC;
+    --arbiter control
+    local_reset : out STD_LOGIC;
+    buffer_arbiter : out STD_LOGIC
 );
 end component;
 
