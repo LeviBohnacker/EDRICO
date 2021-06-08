@@ -163,11 +163,15 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
    "${origin_dir}/simulation/sim_AXI4_CU_UV_2/sim_AXI4_CU_UV_2_tb_behav.wcfg" \
    "${origin_dir}/RTL/ControlUnit/CU_PC_tb.vhd" \
-   "${origin_dir}//home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_pkg.vhd" \
-   "${origin_dir}//home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
-   "${origin_dir}//home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/RTL/ExceptionControll/arbiter.vhd" \
-   "${origin_dir}//home/levi/Software/EDRICO/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_tb.vhd" \
-   "${origin_dir}/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_tb_behav.wcfg" \
+   "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/arbiter.vhd" \
+   "${origin_dir}/RTL/ExceptionControll/Exception_Controll.vhd" \
+   "${origin_dir}/simulation/sim_EC_IV_1/sim_EC_IV_1_registers.vhd" \
+   "${origin_dir}/simulation/sim_EC_IV_1/sim_EC_IV_1_tb.vhd" \
+   "${origin_dir}/simulation/sim_EC_IV_1/sim_EC_IV_1_pkg.vhd" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -1906,51 +1910,101 @@ if {[string equal [get_filesets -quiet sim_EC_arbiter_UV_2] ""]} {
 
 # Set 'sim_EC_arbiter_UV_2' fileset object
 set obj [get_filesets sim_EC_arbiter_UV_2]
-set files [list \
- [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_pkg.vhd"] \
- [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
- [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/RTL/ExceptionControll/arbiter.vhd"] \
- [file normalize "${origin_dir}/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_tb.vhd"] \
- [file normalize "${origin_dir}/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_tb_behav.wcfg"] \
-]
-add_files -norecurse -fileset $obj $files
-
-# Set 'sim_EC_arbiter_UV_2' fileset file properties for remote files
-set file "$origin_dir/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_2] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "EC_lib" -objects $file_obj
-
-set file "$origin_dir/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/RTL/ExceptionControll/Exception_Controll_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_2] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "EC_lib" -objects $file_obj
-
-set file "$origin_dir/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/RTL/ExceptionControll/arbiter.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_2] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "EC_lib" -objects $file_obj
-
-set file "$origin_dir/vivado_project/EDRICO.srcs/sim_EC_arbiter_UV_2/imports/EDRICO/simulation/sim_EC_arbiter_UV_2/EC_arbiter_UV_2_tb.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sim_EC_arbiter_UV_2] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "EC_lib" -objects $file_obj
-
-
-# Set 'sim_EC_arbiter_UV_2' fileset file properties for local files
-# None
+# Empty (no sources present)
 
 # Set 'sim_EC_arbiter_UV_2' fileset properties
 set obj [get_filesets sim_EC_arbiter_UV_2]
 set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
+set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_lib" -value "PMP_lib" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
+
+# Create 'sim_EC_IV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_EC_IV_1] ""]} {
+  create_fileset -simset sim_EC_IV_1
+}
+
+# Set 'sim_EC_IV_1' fileset object
+set obj [get_filesets sim_EC_IV_1]
+set files [list \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/arbiter.vhd"] \
+ [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_IV_1/sim_EC_IV_1_registers.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_IV_1/sim_EC_IV_1_tb.vhd"] \
+ [file normalize "${origin_dir}/simulation/sim_EC_IV_1/sim_EC_IV_1_pkg.vhd"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_EC_IV_1' fileset file properties for remote files
+set file "$origin_dir/RTL/ExceptionControll/CSR_access_controll.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/DRA_controll.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll_FSM.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/arbiter.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ExceptionControll/Exception_Controll.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_IV_1/sim_EC_IV_1_registers.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_IV_1/sim_EC_IV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+set file "$origin_dir/simulation/sim_EC_IV_1/sim_EC_IV_1_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EC_IV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "EC_lib" -objects $file_obj
+
+
+# Set 'sim_EC_IV_1' fileset file properties for local files
+# None
+
+# Set 'sim_EC_IV_1' fileset properties
+set obj [get_filesets sim_EC_IV_1]
+set_property -name "hbs.configure_design_for_hier_access" -value "1" -objects $obj
 set_property -name "source_set" -value "" -objects $obj
-set_property -name "top" -value "EC_arbiter_UV_2_tb" -objects $obj
+set_property -name "top" -value "Exception_Controll" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
-set_property -name "xsim.simulate.runtime" -value "900ns" -objects $obj
+set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
