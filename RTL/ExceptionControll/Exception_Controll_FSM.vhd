@@ -47,8 +47,8 @@ Port (
     --output signals
     ------------------------------------------------------------------------------
     --debug current state output
-    present_state_debug : out type_EC_state;
-    next_state_debug : out type_EC_state;
+    --present_state_debug : out type_EC_state;
+    --next_state_debug : out type_EC_state;
     --halt core signal
     halt_core : out STD_LOGIC;
     --buffer register signals
@@ -72,7 +72,6 @@ Port (
     store_mtval : out STD_LOGIC;
     store_mstatus : out STD_LOGIC;
     --arbiter control
-    local_reset : out STD_LOGIC;
     buffer_arbiter : out STD_LOGIC
 );
 end Exception_Control_FSM;
@@ -88,6 +87,10 @@ architecture rtl of Exception_Control_FSM is
 signal present_state, next_state : type_EC_state;
 
 begin
+
+--present_state_debug <= present_state;
+--next_state_debug <= next_state;
+
 
 ----------------------------------------------------------------------------------
 --sync_process
@@ -128,7 +131,6 @@ begin
         store_mcause <= '0';
         store_mtval <= '0';
         store_mstatus <= '0';
-        local_reset <= '0';
         buffer_arbiter <= '1';
     else
         case present_state is
@@ -163,7 +165,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';
-                local_reset <= '0';
                 buffer_arbiter <= '1';
             when TrapEntry =>
                 --next state generation
@@ -190,7 +191,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';
-                local_reset <= '0';
                 buffer_arbiter <= '0';
             when sMEPC =>
                 --next state generation
@@ -238,7 +238,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';
-                local_reset <= '0';
                 buffer_arbiter <= '0';
             when sMTVAL =>
                 --next state generation
@@ -265,7 +264,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '1';
                 store_mstatus <= '0';  
-                local_reset <= '0';
                 buffer_arbiter <= '0';          
             when lMSTATUS =>
                 --next state generation
@@ -292,7 +290,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0'; 
-                local_reset <= '0';
                 buffer_arbiter <= '0';           
             when sMSTATUS =>
                 --next state generation
@@ -319,7 +316,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '1';  
-                local_reset <= '0';
                 buffer_arbiter <= '0';
             when lMTVEC =>
                 --next state generation
@@ -346,7 +342,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';  
-                local_reset <= '0';
                 buffer_arbiter <= '0';          
             when sPC =>
                 --next state generation
@@ -373,7 +368,6 @@ begin
                 store_mcause <= '1';
                 store_mtval <= '0';
                 store_mstatus <= '0';   
-                --local_reset <= '1';
                 buffer_arbiter <= '0';         
             when TrapExit =>
                 --next state generation
@@ -400,7 +394,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';  
-                local_reset <= '0';
                 buffer_arbiter <= '0';          
             when sPC_ex =>
                 --next state generation
@@ -427,7 +420,6 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '0';  
-                local_reset <= '0';
                 buffer_arbiter <= '0';          
             when sMSTATUS_ex =>
                 --next state generation
@@ -454,13 +446,10 @@ begin
                 store_mcause <= '0';
                 store_mtval <= '0';
                 store_mstatus <= '1'; 
-                local_reset <= '0';
                 buffer_arbiter <= '0';           
         end case;        
     end if;
 end process;
 
-present_state_debug <= present_state;
-next_state_debug <= next_state;
 
 end rtl;

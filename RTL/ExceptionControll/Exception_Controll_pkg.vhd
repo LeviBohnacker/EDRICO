@@ -79,40 +79,40 @@ Port (
     PC_dra_write : out STD_LOGIC_VECTOR (31 downto 0);
     PC_write : out STD_LOGIC;
     --halt core
-    halt_core : out STD_LOGIC;
-    --debug outputs:
-    present_state_debug : out type_EC_state;
-    next_state_debug : out type_EC_state;
-        --Exception_Controll_FSM inputs:
-         EI_flag_deb: out std_logic;
-         save_address_deb: out std_logic;
-         save_PC_deb: out std_logic;
-         save_IR_deb: out std_logic;
+    halt_core : out STD_LOGIC
+--    --debug outputs:
+--    present_state_debug : out type_EC_state;
+--    next_state_debug : out type_EC_state;
+--        --Exception_Controll_FSM inputs:
+--         EI_flag_deb: out std_logic;
+--         save_address_deb: out std_logic;
+--         save_PC_deb: out std_logic;
+--         save_IR_deb: out std_logic;
         
-        --DRA_controll inputs:
-         load_PC_deb, load_IR_deb, load_PMP_deb: out std_logic;
-         store_PC_deb: out std_logic;
+--        --DRA_controll inputs:
+--         load_PC_deb, load_IR_deb, load_PMP_deb: out std_logic;
+--         store_PC_deb: out std_logic;
         
-        --CSR_access_unit inputs:
-         interrupt_deb: out std_logic;
-         exception_code_deb: out std_logic_vector(31 downto 0);
-         load_mepc_deb, load_mtvec_deb, load_mstatus_deb: out std_logic;
-         store_mepc_deb, store_mcause_deb, store_mtval_deb, store_mstatus_deb: out std_logic;
+--        --CSR_access_unit inputs:
+--         interrupt_deb: out std_logic;
+--         exception_code_deb: out std_logic_vector(31 downto 0);
+--         load_mepc_deb, load_mtvec_deb, load_mstatus_deb: out std_logic;
+--         store_mepc_deb, store_mcause_deb, store_mtval_deb, store_mstatus_deb: out std_logic;
         
-        --buffer_register signals:
-         data_in_DRA_deb: out std_logic_vector(31 downto 0);
-         buffer_register_deb: out std_logic_vector(31 downto 0);
-         data_in_CSR_deb: out std_logic_vector(31 downto 0);
-         data_out_deb: out std_logic_vector(31 downto 0);
-         buffer_register_w_deb: out std_logic;
-         buffer_register_CSR_DRA_deb: out std_logic;
-         reset_buffer_register_deb: out std_logic;
-         modify_mstatus_EI_deb: out std_logic;
-         modify_mstatus_RET_deb: out std_logic;
+--        --buffer_register signals:
+--         data_in_DRA_deb: out std_logic_vector(31 downto 0);
+--         buffer_register_deb: out std_logic_vector(31 downto 0);
+--         data_in_CSR_deb: out std_logic_vector(31 downto 0);
+--         data_out_deb: out std_logic_vector(31 downto 0);
+--         buffer_register_w_deb: out std_logic;
+--         buffer_register_CSR_DRA_deb: out std_logic;
+--         reset_buffer_register_deb: out std_logic;
+--         modify_mstatus_EI_deb: out std_logic;
+--         modify_mstatus_RET_deb: out std_logic;
         
-        --arbiter control
-         local_reset_deb : out STD_LOGIC;
-         buffer_arbiter_deb : out STD_LOGIC
+--        --arbiter control
+--         local_reset_deb : out STD_LOGIC;
+--         buffer_arbiter_deb : out STD_LOGIC
 );
 end component;
 
@@ -140,7 +140,6 @@ Port(
     si_CSR : in STD_LOGIC;
     ti_CSR : in STD_LOGIC;
     --arbiter control
-    local_reset : in STD_LOGIC;
     buffer_arbiter : in STD_LOGIC;
     --clock and reset
     clk : in STD_LOGIC;
@@ -177,8 +176,8 @@ Port (
     --output signals
     ------------------------------------------------------------------------------
     --debug current state output
-    present_state_debug : out type_EC_state;
-    next_state_debug : out type_EC_state;
+    --present_state_debug : out type_EC_state;
+    --next_state_debug : out type_EC_state;
     --halt core signal
     halt_core : out STD_LOGIC;
     --buffer register signals
@@ -202,7 +201,6 @@ Port (
     store_mtval : out STD_LOGIC;
     store_mstatus : out STD_LOGIC;
     --arbiter control
-    local_reset : out STD_LOGIC;
     buffer_arbiter : out STD_LOGIC
 );
 end component;

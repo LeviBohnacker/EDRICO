@@ -47,7 +47,6 @@ Port(
     si_CSR : in STD_LOGIC;
     ti_CSR : in STD_LOGIC;
     --arbiter control
-    local_reset : in STD_LOGIC;
     buffer_arbiter : in STD_LOGIC;
     --clock and reset
     clk : in STD_LOGIC;
@@ -95,9 +94,9 @@ begin
 --  buffer_arbiter flag are set to high.
 --  Reset is asynchronous on local_reset or reset (global)
 ----------------------------------------------------------------------------------
-signal_buffer: process(clk, reset, local_reset)
+signal_buffer: process(clk, reset)
 begin
-    if(reset = '1' or local_reset = '1') then
+    if(reset = '1') then
         load_afe_buf <= '0';
         storeAMO_afe_buf <= '0';
         instruction_afe_buf <= '0';
