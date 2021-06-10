@@ -76,8 +76,8 @@ CSR_reg : process(clk, reset, halt_core) begin
     if(reset = '1') then
         MEPC_int <= (others => '0');
         MTVAL_int <= (others => '0');
-        MSTATUS_int <= x"00001800";
-        MTVEC_int <= (others => '0');
+        MSTATUS_int <= x"00001808"; --interrupts allowed
+        MTVEC_int <= x"ABBA0001"; --base address = x"ABBA0000", vectored interrupts
         MCAUSE_int <= (others => '0');
     --update registers only on the falling edge
     elsif(clk'event and clk = '0' and CSR_write = '1'and halt_core = '1') then
@@ -92,6 +92,8 @@ CSR_reg : process(clk, reset, halt_core) begin
                 MTVEC_int <= CSR_data_in;
             when x"341" =>
                 MEPC_int <= CSR_data_in;
+            when others => 
+                MSTATUS_int <= x"BADC0DED";
         end case;    
     end if;
 end process;

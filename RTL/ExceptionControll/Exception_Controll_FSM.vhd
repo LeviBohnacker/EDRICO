@@ -48,6 +48,7 @@ Port (
     ------------------------------------------------------------------------------
     --debug current state output
     present_state_debug : out type_EC_state;
+    next_state_debug : out type_EC_state;
     --halt core signal
     halt_core : out STD_LOGIC;
     --buffer register signals
@@ -101,7 +102,7 @@ begin
     end if;
 end process;
 
-comb_process: process(present_state, reset, save_address, save_PC, save_IR)
+comb_process: process(present_state, reset, save_address, save_PC, save_IR, EI_flag, ret)
 begin
     if(reset='1') then
         next_state <= WFI;
@@ -127,6 +128,8 @@ begin
         store_mcause <= '0';
         store_mtval <= '0';
         store_mstatus <= '0';
+        local_reset <= '0';
+        buffer_arbiter <= '1';
     else
         case present_state is
             when WFI =>
@@ -367,10 +370,10 @@ begin
                 load_mtvec <= '0';
                 load_mstatus <= '0';
                 store_mepc <= '0';
-                store_mcause <= '0';
+                store_mcause <= '1';
                 store_mtval <= '0';
                 store_mstatus <= '0';   
-                local_reset <= '1';
+                --local_reset <= '1';
                 buffer_arbiter <= '0';         
             when TrapExit =>
                 --next state generation
@@ -458,5 +461,6 @@ begin
 end process;
 
 present_state_debug <= present_state;
+next_state_debug <= next_state;
 
 end rtl;
