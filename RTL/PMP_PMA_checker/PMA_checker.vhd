@@ -65,9 +65,9 @@ begin
 --enable generation
 --  set enable signal if the address is alligend (according to the size)
 ---------------------------------------------------------------------------------
-enable_int <=   '1' when size = "10" and address(0) = '0' else
-                '1' when size = "11" and address(1 downto 0) = "00" else
-                '1' when size = "01" else
+enable_int <=   '1' when size = "01" and address(0) = '0' else
+                '1' when size = "10" and address(1 downto 0) = "00" else
+                '1' when size = "00" else
                 '0';
 --set enable output only high if global enable is high               
 enable_PMA <= enable_int and enable;

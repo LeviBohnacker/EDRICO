@@ -33,6 +33,46 @@ type type_pmpaddr is array (15 downto 0) of std_logic_vector(31 downto 0);
 ----------------------------------------------------------------------------------
 --COMPONENTS
 ----------------------------------------------------------------------------------
+component PMP_PMA_checker is
+port 
+( 
+    ------------------------------------------------------------------------------
+    --input signals
+    ------------------------------------------------------------------------------
+    --clock and reset
+    clk : in std_logic;
+    reset : in std_logic;
+    --control signals
+    size : in std_logic_vector (1 downto 0);
+    readWrite : in std_logic;
+    instruction : in std_logic;
+    enable : in std_logic;
+    --address to check
+    address : in std_logic_vector (31 downto 0);
+    --pmp register dra
+    pmpcfg : in type_pmpcfg;
+    pmpaddr: in type_pmpaddr;
+    ------------------------------------------------------------------------------
+    --output signals
+    ------------------------------------------------------------------------------
+    --address outputs
+    address_out : out std_logic_vector (31 downto 0);
+    address_dra : out std_logic_vector (31 downto 0);
+    --control outputs
+    enable_out : out std_logic;
+    readWrite_out : out std_logic;
+    instruction_out : out std_logic;
+    size_out : out std_logic_vector (1 downto 0);
+    --exception pending signals
+    load_ame_P : out std_logic;
+    storeAMO_ame_P : out std_logic;
+    instruction_ame_P : out std_logic;
+    load_afe_P : out std_logic;
+    storeAMO_afe_P : out std_logic;
+    instruction_afe_P : out std_logic
+);
+end component;
+
 component PMP_unit is
 port (
     ------------------------------------------------------------------------------

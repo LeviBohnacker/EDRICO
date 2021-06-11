@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_PPC_IV_1_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="sim_PPC_IV_1" />
+            <top_module name="sim_ppc_iv_1_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="3974708fs"></ZoomStartTime>
+      <ZoomEndTime time="4005059fs"></ZoomEndTime>
+      <Cursor1Time time="4000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="116"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="23" />
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/size">
+      <obj_property name="ElementShortName">size[1:0]</obj_property>
+      <obj_property name="ObjectShortName">size[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/readWrite">
+      <obj_property name="ElementShortName">readWrite</obj_property>
+      <obj_property name="ObjectShortName">readWrite</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/instruction">
+      <obj_property name="ElementShortName">instruction</obj_property>
+      <obj_property name="ObjectShortName">instruction</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/enable">
+      <obj_property name="ElementShortName">enable</obj_property>
+      <obj_property name="ObjectShortName">enable</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/address">
+      <obj_property name="ElementShortName">address[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/pmpcfg">
+      <obj_property name="ElementShortName">pmpcfg[15:0][7:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpcfg[15:0][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/pmpaddr">
+      <obj_property name="ElementShortName">pmpaddr[15:0][31:0]</obj_property>
+      <obj_property name="ObjectShortName">pmpaddr[15:0][31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/address_out">
+      <obj_property name="ElementShortName">address_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/address_dra">
+      <obj_property name="ElementShortName">address_dra[31:0]</obj_property>
+      <obj_property name="ObjectShortName">address_dra[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/enable_out">
+      <obj_property name="ElementShortName">enable_out</obj_property>
+      <obj_property name="ObjectShortName">enable_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/readWrite_out">
+      <obj_property name="ElementShortName">readWrite_out</obj_property>
+      <obj_property name="ObjectShortName">readWrite_out</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/instruction_out">
+      <obj_property name="ElementShortName">instruction_out</obj_property>
+      <obj_property name="ObjectShortName">instruction_out</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_PPC_IV_1/size_out">
+      <obj_property name="ElementShortName">size_out[1:0]</obj_property>
+      <obj_property name="ObjectShortName">size_out[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/load_ame_P">
+      <obj_property name="ElementShortName">load_ame_P</obj_property>
+      <obj_property name="ObjectShortName">load_ame_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/storeAMO_ame_P">
+      <obj_property name="ElementShortName">storeAMO_ame_P</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_ame_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/instruction_ame_P">
+      <obj_property name="ElementShortName">instruction_ame_P</obj_property>
+      <obj_property name="ObjectShortName">instruction_ame_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/load_afe_P">
+      <obj_property name="ElementShortName">load_afe_P</obj_property>
+      <obj_property name="ObjectShortName">load_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/storeAMO_afe_P">
+      <obj_property name="ElementShortName">storeAMO_afe_P</obj_property>
+      <obj_property name="ObjectShortName">storeAMO_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_PPC_IV_1/instruction_afe_P">
+      <obj_property name="ElementShortName">instruction_afe_P</obj_property>
+      <obj_property name="ObjectShortName">instruction_afe_P</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_PPC_IV_1/iteration">
+      <obj_property name="ElementShortName">iteration</obj_property>
+      <obj_property name="ObjectShortName">iteration</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/sim_PPC_IV_1/T">
+      <obj_property name="ElementShortName">T</obj_property>
+      <obj_property name="ObjectShortName">T</obj_property>
+   </wvobject>
+</wave_config>
