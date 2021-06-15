@@ -1,0 +1,61 @@
+
+test_code:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <__BSS_END__-0x10d8>:
+   10054:	a00000b7          	lui	ra,0xa0000
+   10058:	c0bad137          	lui	sp,0xc0bad
+   1005c:	123451b7          	lui	gp,0x12345
+   10060:	00001237          	lui	tp,0x1
+   10064:	00400293          	li	t0,4
+   10068:	12345317          	auipc	t1,0x12345
+   1006c:	10008f13          	addi	t5,ra,256 # a0000100 <__global_pointer$+0x9ffee7d4>
+   10070:	7ff0ae93          	slti	t4,ra,2047
+   10074:	7ff0be13          	sltiu	t3,ra,2047
+   10078:	0042f713          	andi	a4,t0,4
+   1007c:	1ea1e693          	ori	a3,gp,490
+   10080:	0042c613          	xori	a2,t0,4
+   10084:	00421d93          	slli	s11,tp,0x4
+   10088:	0020dd13          	srli	s10,ra,0x2
+   1008c:	4030dc93          	srai	s9,ra,0x3
+   10090:	00310c33          	add	s8,sp,gp
+   10094:	40418bb3          	sub	s7,gp,tp
+   10098:	0040fb33          	and	s6,ra,tp
+   1009c:	00416ab3          	or	s5,sp,tp
+   100a0:	00414a33          	xor	s4,sp,tp
+   100a4:	003129b3          	slt	s3,sp,gp
+   100a8:	00313933          	sltu	s2,sp,gp
+   100ac:	005218b3          	sll	a7,tp,t0
+   100b0:	0050d833          	srl	a6,ra,t0
+   100b4:	4050d7b3          	sra	a5,ra,t0
+   100b8:	00209463          	bne	ra,sp,100c0 <__BSS_END__-0x106c>
+   100bc:	f49ef06f          	j	4 <__BSS_END__-0x11128>
+   100c0:	00208463          	beq	ra,sp,100c8 <__BSS_END__-0x1064>
+   100c4:	f45ef06f          	j	8 <__BSS_END__-0x11124>
+   100c8:	00418233          	add	tp,gp,tp
+   100cc:	0042d463          	bge	t0,tp,100d4 <__BSS_END__-0x1058>
+   100d0:	f41ef06f          	j	10 <__BSS_END__-0x1111c>
+   100d4:	0041c463          	blt	gp,tp,100dc <__BSS_END__-0x1050>
+   100d8:	f31ef06f          	j	8 <__BSS_END__-0x11124>
+   100dc:	00418233          	add	tp,gp,tp
+   100e0:	0030f463          	bgeu	ra,gp,100e8 <__BSS_END__-0x1044>
+   100e4:	f3def06f          	j	20 <__BSS_END__-0x1110c>
+   100e8:	0030e463          	bltu	ra,gp,100f0 <__BSS_END__-0x103c>
+   100ec:	f1def06f          	j	8 <__BSS_END__-0x11124>
+   100f0:	000101b3          	add	gp,sp,zero
+   100f4:	0020a023          	sw	sp,0(ra)
+   100f8:	0030a223          	sw	gp,4(ra)
+   100fc:	0040a423          	sw	tp,8(ra)
+   10100:	0ab00293          	li	t0,171
+   10104:	005086a3          	sb	t0,13(ra)
+   10108:	00209723          	sh	sp,14(ra)
+   1010c:	00308583          	lb	a1,3(ra)
+   10110:	00209503          	lh	a0,2(ra)
+   10114:	0040a483          	lw	s1,4(ra)
+   10118:	0030c403          	lbu	s0,3(ra)
+   1011c:	0020d383          	lhu	t2,2(ra)
+   10120:	ee9ef06f          	j	8 <__BSS_END__-0x11124>
+   10124:	00000013          	nop
+   10128:	00000067          	jr	zero # 0 <__BSS_END__-0x1112c>
