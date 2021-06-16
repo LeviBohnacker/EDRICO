@@ -80,7 +80,7 @@ port (
     --ALU control signals
     ALU_OP : out STD_LOGIC_VECTOR (3 downto 0);
     --data mask unit control signals
-    mask_ctrl : out STD_LOGIC_VECTOR (1 downto 0);
+    mask_ctrl : out STD_LOGIC_VECTOR (2 downto 0);
     --exception and return signals
     iie_CU : out STD_LOGIC;
     ece_CU : out STD_LOGIC;
@@ -135,7 +135,7 @@ signal be_CU_int : std_logic;
 signal return_int : std_logic;
 signal ALU_op_int : std_logic_vector(3 downto 0);
 signal immediate_int : std_logic_vector(31 downto 0);
-signal mask_ctrl_int : std_logic_vector(1 downto 0);
+signal mask_ctrl_int : std_logic_vector(2 downto 0);
 --execute buffer outputs
 signal type_of_instruction : std_logic_vector(3 downto 0);
 signal PMP_enable_EX : std_logic;
@@ -373,16 +373,4 @@ begin
 end process;
 
 end rtl;
-
-
-
-
-
-
-
-
-
-
-
-
 

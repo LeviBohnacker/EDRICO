@@ -120,7 +120,7 @@ port (
     -- other signals
     ALU_op_int: out std_logic_vector(3 downto 0);
     immediate_int: out std_logic_vector(31 downto 0);
-    mask_ctrl_int: out std_logic_vector(1 downto 0)
+    mask_ctrl_int: out std_logic_vector(2 downto 0)
 );
 end component;
 
@@ -164,7 +164,7 @@ port (
     -- other signals
     ALU_op_int: in std_logic_vector(3 downto 0);
     immediate_int: in std_logic_vector(31 downto 0);
-    mask_ctrl_int: in std_logic_vector(1 downto 0);
+    mask_ctrl_int: in std_logic_vector(2 downto 0);
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -199,7 +199,7 @@ port (
     -- other signals
     ALU_op: out std_logic_vector(3 downto 0);
     immediate: out std_logic_vector(31 downto 0);
-    mask_ctrl: out std_logic_vector(1 downto 0)
+    mask_ctrl: out std_logic_vector(2 downto 0)
 );
 end component;
 
