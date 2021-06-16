@@ -26,8 +26,8 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-library PMP_PMA_lib;
-use PMP_PMA_lib.PMP_PMA_pkg.all;
+library PMP_lib;
+use PMP_lib.PMP_PMA_pkg.all;
 
 ----------------------------------------------------------------------------------
 --ENTITY
@@ -146,8 +146,14 @@ port map(
 --  register to hold currently/last checked address. Updated on falling edge,
 --  if enable is high with asynchronous reset.
 ----------------------------------------------------------------------------------
-address_register <= address when clk'event and clk='0' and enable = '1' else
-                   x"00000000" when reset = '1';
+address_reg: process(reset , clk)
+begin
+    if(reset = '1') then
+        address_register <= x"00000000";
+    elsif(clk'event and clk = '0' and enable = '1') then
+        address_register <= address;
+    end if;
+end process;                   
                    
 ----------------------------------------------------------------------------------
 --output signals
