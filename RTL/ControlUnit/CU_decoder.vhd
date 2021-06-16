@@ -218,7 +218,7 @@ begin
                 PMP_MUX_int <= '1';
                 B_MUX_int <= '1';
                 A_MUX_int <= "01";
-                reg_read_A <= ir(24 downto 20);
+                reg_read_A_int <= ir(24 downto 20);
                 reg_read_B_int <= ir(19 downto 15);
                 immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31 downto 25) & ir(11 downto 7));
 

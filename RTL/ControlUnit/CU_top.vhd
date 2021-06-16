@@ -222,7 +222,6 @@ port map(
     mask_ctrl_int => mask_ctrl_int 
 );
 
-
 ----------------------------------------------------------------------------------
 --ExecuteBuffer
 --  register to hold the decoded values
@@ -305,6 +304,8 @@ port map(
     mask_ctrl => mask_ctrl
 );
 
+immediate <= immediate_EX;
+
 ----------------------------------------------------------------------------------
 --ProgramCounter
 --  component to hold and modify the PC
@@ -372,16 +373,4 @@ begin
 end process;
 
 end rtl;
-
-
-
-
-
-
-
-
-
-
-
-
 
