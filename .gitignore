@@ -1,2 +1,21 @@
 #ignore all folders in vivado folder
 vivado_project/
+*.aux
+*.bll
+*.bcf
+*.blg
+*.glo
+*.glsdefs
+*.ist
+*.lof
+*.log
+*.lol
+*.lot
+*.pdf
+*.xml
+*.gz
+*.toc
+*.bbl
+main.synctex.gz
+Docs/T3100_TeX/main.synctex.gz
+Docs/T3100_TeX/main.pdf
