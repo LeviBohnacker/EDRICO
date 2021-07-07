@@ -18,6 +18,28 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
+   "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd" \
+   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd" \
+   "${origin_dir}/RTL/RegisterFile/CSR_controller.vhd" \
+   "${origin_dir}/RTL/RegisterFile/CSR_interrupt_gen.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
+   "${origin_dir}/RTL/RegisterFile/CSR_pkg.vhd" \
+   "${origin_dir}/RTL/RegisterFile/CSR_top.vhd" \
+   "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd" \
+   "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd" \
+   "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_PC.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_decoder.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_execute_enable.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd" \
+   "${origin_dir}/RTL/ControlUnit/CU_top.vhd" \
    "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd" \
    "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd" \
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd" \
@@ -26,30 +48,9 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll.vhd" \
    "${origin_dir}/RTL/ALU/ALU.vhd" \
    "${origin_dir}/RTL/ALU/ALU_tb.vhd" \
-   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
-   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd" \
-   "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd" \
-   "${origin_dir}/RTL/RegisterFile/CSR_controller.vhd" \
-   "${origin_dir}/RTL/RegisterFile/CSR_interrupt_gen.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
-   "${origin_dir}/RTL/RegisterFile/CSR_pkg.vhd" \
-   "${origin_dir}/RTL/RegisterFile/CSR_top.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_PC.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_decoder.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_execute_enable.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd" \
-   "${origin_dir}/RTL/ControlUnit/CU_top.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
-   "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd" \
-   "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd" \
-   "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd" \
-   "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd" \
    "${origin_dir}/RTL/ALU/ALU_pkg.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd" \
+   "${origin_dir}/RTL/DataMaskUnit/IP/component.xml" \
    "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd" \
    "${origin_dir}/simulation/sim_DMU_UV_1/sim_DMU_UV_1.wcfg" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_1/EC_FSM_UV_1_tb.vhd" \
@@ -207,6 +208,12 @@ proc checkRequiredFiles { origin_dir} {
   }
 
   set paths [list \
+   [file normalize "$origin_dir/RTL/DataMaskUnit/IP"] \
+   [file normalize "$origin_dir/RTL/AXI4_Lite_Master/IP"] \
+   [file normalize "$origin_dir/RTL/RegisterFile/IP"] \
+   [file normalize "$origin_dir/RTL/PMP_PMA_checker/IP"] \
+   [file normalize "$origin_dir/RTL/ControlUnit/IP"] \
+   [file normalize "$origin_dir/RTL/ExceptionControll/IP"] \
    [file normalize "$origin_dir/ip_repo/mmCSR_AXI4_slave_1.0"] \
   ]
   foreach ipath $paths {
@@ -333,7 +340,7 @@ if {[string equal [get_filesets -quiet sources_1] ""]} {
 # Set IP repository paths
 set obj [get_filesets sources_1]
 if { $obj != {} } {
-set_property "ip_repo_paths" "[file normalize "$origin_dir/ip_repo/mmCSR_AXI4_slave_1.0"]" $obj
+set_property "ip_repo_paths" "[file normalize "$origin_dir/RTL/DataMaskUnit/IP"] [file normalize "$origin_dir/RTL/AXI4_Lite_Master/IP"] [file normalize "$origin_dir/RTL/RegisterFile/IP"] [file normalize "$origin_dir/RTL/PMP_PMA_checker/IP"] [file normalize "$origin_dir/RTL/ControlUnit/IP"] [file normalize "$origin_dir/RTL/ExceptionControll/IP"] [file normalize "$origin_dir/ip_repo/mmCSR_AXI4_slave_1.0"]" $obj
 
 # Rebuild user ip_repo's index before adding any source files
 update_ip_catalog -rebuild
@@ -342,6 +349,28 @@ update_ip_catalog -rebuild
 # Set 'sources_1' fileset object
 set obj [get_filesets sources_1]
 set files [list \
+ [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd"] \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"] \
+ [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/CSR_controller.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/CSR_interrupt_gen.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/CSR_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/CSR_top.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd"] \
+ [file normalize "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_PC.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_decoder.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_execute_enable.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ControlUnit/CU_top.vhd"] \
  [file normalize "${origin_dir}/RTL/ExceptionControll/CSR_access_controll.vhd"] \
  [file normalize "${origin_dir}/RTL/ExceptionControll/DRA_controll.vhd"] \
  [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_pkg.vhd"] \
@@ -350,34 +379,151 @@ set files [list \
  [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll.vhd"] \
  [file normalize "${origin_dir}/RTL/ALU/ALU.vhd"] \
  [file normalize "${origin_dir}/RTL/ALU/ALU_tb.vhd"] \
- [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"] \
- [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd"] \
- [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/CSR_controller.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/CSR_interrupt_gen.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/CSR_pkg.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/CSR_top.vhd"] \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd"] \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_PC.vhd"] \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_decoder.vhd"] \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_execute_enable.vhd"] \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_pkg.vhd"] \
- [file normalize "${origin_dir}/RTL/ControlUnit/CU_top.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd"] \
- [file normalize "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd"] \
- [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd"] \
  [file normalize "${origin_dir}/RTL/ALU/ALU_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/DataMaskUnit/IP/component.xml"] \
 ]
 add_files -norecurse -fileset $obj $files
 
 # Set 'sources_1' fileset file properties for remote files
+set file "$origin_dir/RTL/DataMaskUnit/data_mask_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "DMU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "AXI4M_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/CSR_controller.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/CSR_interrupt_gen.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/CSR_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/CSR_top.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/RF_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/RV32I_RF.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/RegisterFile/RegisterFile_top.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "RF_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMA_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_FSM.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_PC.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_decoder.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_execute_enable.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ControlUnit/CU_top.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "CU_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
+
 set file "$origin_dir/RTL/ExceptionControll/CSR_access_controll.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -430,144 +576,6 @@ set_property -name "library" -value "ALU_lib" -objects $file_obj
 set_property -name "used_in" -value "synthesis" -objects $file_obj
 set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
-set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "AXI4M_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "AXI4M_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "AXI4M_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/CSR_controller.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/CSR_interrupt_gen.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/CSR_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/CSR_top.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/ControlUnit/CU_FSM.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/ControlUnit/CU_PC.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/ControlUnit/CU_decoder.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/ControlUnit/CU_execute_enable.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/ControlUnit/CU_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/ControlUnit/CU_top.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "CU_lib" -objects $file_obj
-set_property -name "used_in" -value "synthesis" -objects $file_obj
-set_property -name "used_in_simulation" -value "0" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMA_checker.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-set_property -name "used_in" -value "synthesis" -objects $file_obj
-set_property -name "used_in_simulation" -value "0" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_checker.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/RF_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/RV32I_RF.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/RegisterFile/RegisterFile_top.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "RF_lib" -objects $file_obj
-set_property -name "used_in" -value "synthesis" -objects $file_obj
-set_property -name "used_in_simulation" -value "0" -objects $file_obj
-
-set file "$origin_dir/RTL/DataMaskUnit/data_mask_unit.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "DMU_lib" -objects $file_obj
-
 set file "$origin_dir/RTL/ALU/ALU_pkg.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -580,13 +588,18 @@ set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "DMU_lib" -objects $file_obj
 
+set file "$origin_dir/RTL/DataMaskUnit/IP/component.xml"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "IP-XACT" -objects $file_obj
+
 
 # Set 'sources_1' fileset file properties for local files
 # None
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-set_property -name "top" -value "Exception_Controll" -objects $obj
+set_property -name "top" -value "data_mask_unit" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 
 # Create 'constrs_1' fileset (if not found)
@@ -601,6 +614,20 @@ set obj [get_filesets constrs_1]
 
 # Set 'constrs_1' fileset properties
 set obj [get_filesets constrs_1]
+
+# Create 'sim_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_1] ""]} {
+  create_fileset -simset sim_1
+}
+
+# Set 'sim_1' fileset object
+set obj [get_filesets sim_1]
+# Empty (no sources present)
+
+# Set 'sim_1' fileset properties
+set obj [get_filesets sim_1]
+set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_lib" -value "PMP_lib" -objects $obj
 
 # Create 'sim_DMU_UV_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sim_DMU_UV_1] ""]} {
@@ -628,6 +655,7 @@ set_property -name "file_type" -value "VHDL" -objects $file_obj
 # Set 'sim_DMU_UV_1' fileset properties
 set obj [get_filesets sim_DMU_UV_1]
 set_property -name "top" -value "DMU_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -658,6 +686,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 # Set 'sim_EC_FSM_UV_1' fileset properties
 set obj [get_filesets sim_EC_FSM_UV_1]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -703,6 +732,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_2]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_2_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -748,6 +778,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_3]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_3_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -793,6 +824,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_4]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_4_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -838,6 +870,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_5]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_5_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -883,6 +916,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_6]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_6_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "60ns" -objects $obj
 
@@ -913,6 +947,7 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 # Set 'sim_CU_UV_1' fileset properties
 set obj [get_filesets sim_CU_UV_1]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "10000ns" -objects $obj
 
@@ -943,6 +978,7 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 # Set 'sim_CU_UV_2' fileset properties
 set obj [get_filesets sim_CU_UV_2]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -988,6 +1024,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_DRA_cont_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "DRA_control_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
 
@@ -1032,6 +1069,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_CSR_ac_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_CSR_ac_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "110ns" -objects $obj
 
@@ -1077,6 +1115,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_FSM_UV_7]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_FSM_UV_7_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "50ns" -objects $obj
 
@@ -1129,6 +1168,7 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set obj [get_filesets sim_EC_arbiter_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "EC_arbiter_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "EC_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -1173,6 +1213,7 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 set obj [get_filesets sim_CU_FSM_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "CSR_top" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -1225,6 +1266,7 @@ set_property -name "library" -value "PMP_lib" -objects $file_obj
 set obj [get_filesets sim_PMP_unit_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_PMP_unit_UV_1" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "200ns" -objects $obj
 
@@ -1284,6 +1326,7 @@ set_property -name "library" -value "PMP_lib" -objects $file_obj
 set obj [get_filesets sim_PMP_checker_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_PMP_checker_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "200ns" -objects $obj
 
@@ -1343,6 +1386,7 @@ set_property -name "library" -value "PMP_lib" -objects $file_obj
 set obj [get_filesets sim_PMP_checker_UV_2]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_PMP_checker_UV_2_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "200ns" -objects $obj
 
@@ -1394,6 +1438,7 @@ set_property -name "library" -value "PMP_lib" -objects $file_obj
 set obj [get_filesets sim_PMA_checker_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_PMA_checker_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -1451,6 +1496,7 @@ set_property -name "library" -value "RF_lib" -objects $file_obj
 # Set 'sim_CSR_controller_UV_1' fileset properties
 set obj [get_filesets sim_CSR_controller_UV_1]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "1300ns" -objects $obj
 
@@ -1510,6 +1556,7 @@ set_property -name "library" -value "RF_lib" -objects $file_obj
 set obj [get_filesets sim_CSR_interrupt_gen_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_CSR_interrupt_gen_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "30ns" -objects $obj
 
@@ -1576,6 +1623,7 @@ set_property -name "library" -value "RF_lib" -objects $file_obj
 set obj [get_filesets sim_CSR_top_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_CSR_top_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "2000ns" -objects $obj
 
@@ -1649,6 +1697,7 @@ set_property -name "library" -value "RF_lib" -objects $file_obj
 set obj [get_filesets sim_CSR_top_UV_2]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_CSR_top_UV_2_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "2000ns" -objects $obj
 
@@ -1708,6 +1757,7 @@ set_property -name "library" -value "RF_lib" -objects $file_obj
 set obj [get_filesets sim_RV32I_RF_UV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_RV32I_RF_UV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "RF_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "400 ns" -objects $obj
 
@@ -1766,6 +1816,7 @@ set_property -name "library" -value "AXI4M_lib" -objects $file_obj
 # Set 'sim_AXI4_CU_UV_1' fileset properties
 set obj [get_filesets sim_AXI4_CU_UV_1]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.elaborate.debug_level" -value "all" -objects $obj
 set_property -name "xsim.elaborate.relax" -value "0" -objects $obj
@@ -1827,6 +1878,7 @@ set_property -name "library" -value "PMP_lib" -objects $file_obj
 set obj [get_filesets sim_AXI4_CU_UV_2]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_AXI4_CU_UV_2_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "AXI4M_lib" -objects $obj
 set_property -name "xsim.elaborate.debug_level" -value "all" -objects $obj
 set_property -name "xsim.elaborate.relax" -value "0" -objects $obj
@@ -1858,6 +1910,7 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 # Set 'SIM_CU_PC_UV_1' fileset properties
 set obj [get_filesets SIM_CU_PC_UV_1]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -1873,6 +1926,7 @@ set obj [get_filesets sim_EC_arbiter_UV_2]
 # Set 'sim_EC_arbiter_UV_2' fileset properties
 set obj [get_filesets sim_EC_arbiter_UV_2]
 set_property -name "top" -value "PMP_checker" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -1976,6 +2030,7 @@ set_property -name "file_type" -value "VHDL" -objects $file_obj
 set obj [get_filesets sim_CU_top_IV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "CU_FSM_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "CU_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -2062,6 +2117,7 @@ set_property -name "library" -value "CU_lib" -objects $file_obj
 set obj [get_filesets sim_EC_IV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_EC_IV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "CU_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "750 ns" -objects $obj
 
@@ -2135,6 +2191,7 @@ set_property -name "library" -value "PMP_lib" -objects $file_obj
 set obj [get_filesets sim_PPC_IV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_PPC_IV_1" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "PMP_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "4000ns" -objects $obj
 
@@ -2194,6 +2251,7 @@ set_property -name "library" -value "AXI4M_lib" -objects $file_obj
 set obj [get_filesets sim_AXI4_IV_1]
 set_property -name "source_set" -value "" -objects $obj
 set_property -name "top" -value "sim_AXI4_IV_1_tb" -objects $obj
+set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "AXI4M_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "250 ns" -objects $obj
 

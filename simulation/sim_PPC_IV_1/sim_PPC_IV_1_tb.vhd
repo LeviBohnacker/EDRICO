@@ -56,8 +56,38 @@ architecture rtl of sim_PPC_IV_1 is
     --address to check
     signal address :  std_logic_vector (31 downto 0);
     --pmp register dra
-    signal pmpcfg :  type_pmpcfg;
-    signal pmpaddr:  type_pmpaddr;
+    signal pmpcfg_0 : std_logic_vector(7 downto 0);
+    signal pmpcfg_1 : std_logic_vector(7 downto 0);
+    signal pmpcfg_2 : std_logic_vector(7 downto 0);
+    signal pmpcfg_3 : std_logic_vector(7 downto 0);
+    signal pmpcfg_4 : std_logic_vector(7 downto 0);
+    signal pmpcfg_5 : std_logic_vector(7 downto 0);
+    signal pmpcfg_6 : std_logic_vector(7 downto 0);
+    signal pmpcfg_7 : std_logic_vector(7 downto 0);
+    signal pmpcfg_8 : std_logic_vector(7 downto 0);
+    signal pmpcfg_9 : std_logic_vector(7 downto 0);
+    signal pmpcfg_10 : std_logic_vector(7 downto 0);
+    signal pmpcfg_11 : std_logic_vector(7 downto 0);
+    signal pmpcfg_12 : std_logic_vector(7 downto 0);
+    signal pmpcfg_13 : std_logic_vector(7 downto 0);
+    signal pmpcfg_14 : std_logic_vector(7 downto 0);
+    signal pmpcfg_15 : std_logic_vector(7 downto 0);
+    signal pmpaddr_0: std_logic_vector(31 downto 0);
+    signal pmpaddr_1: std_logic_vector(31 downto 0);
+    signal pmpaddr_2: std_logic_vector(31 downto 0);
+    signal pmpaddr_3: std_logic_vector(31 downto 0);
+    signal pmpaddr_4: std_logic_vector(31 downto 0);
+    signal pmpaddr_5: std_logic_vector(31 downto 0);
+    signal pmpaddr_6: std_logic_vector(31 downto 0);
+    signal pmpaddr_7: std_logic_vector(31 downto 0);
+    signal pmpaddr_8: std_logic_vector(31 downto 0);
+    signal pmpaddr_9: std_logic_vector(31 downto 0);
+    signal pmpaddr_10: std_logic_vector(31 downto 0);
+    signal pmpaddr_11: std_logic_vector(31 downto 0);
+    signal pmpaddr_12: std_logic_vector(31 downto 0);
+    signal pmpaddr_13: std_logic_vector(31 downto 0);
+    signal pmpaddr_14: std_logic_vector(31 downto 0);
+    signal pmpaddr_15: std_logic_vector(31 downto 0);
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -187,45 +217,40 @@ end process;
 --  the pmp registers are configured according to the memory map, defined in the
 --  PMP_memory_map.txt file.                                                              
 ----------------------------------------------------------------------------------
-pmpcfg <= 
-    (
-    0 => "10001101",    --ROM0
-    1 => "10011111",    --RAM0
-    2 => "10011001",    --ROM1
-    3 => "10000000",    --RAM1_L
-    4 => "10001011",    --RAM1
-    5 => "10011011",    --RAM2
-    6 => "10011011",    --RAM3
-    7 => "10011011",    --RAM4
-    8 => "10011000",    --Region0
-    9 => "10010011",    --Region1
-    10 => "10000000",   --Region2_L
-    11 => "10001111",   --Region2
-    12 => "10011111",   --ROM1 redefined (error test this would allow instrcution and write accesses to a read-only region)
-    13 => "10000101",  --not used
-    14 => "10000101",   --not used
-    15 => "10000101"    --not used
-    );
+pmpcfg_0 <= "10001101";    --ROM0
+pmpcfg_1 <= "10011111";    --RAM0
+pmpcfg_2 <= "10011001";    --ROM1
+pmpcfg_3 <= "10000000";    --RAM1_L
+pmpcfg_4 <= "10001011";    --RAM1
+pmpcfg_5 <= "10011011";    --RAM2
+pmpcfg_6 <= "10011011";    --RAM3
+pmpcfg_7 <= "10011011";    --RAM4
+pmpcfg_8 <= "10011000";    --Region0
+pmpcfg_9 <= "10010011";    --Region1
+pmpcfg_10 <= "10000000";   --Region2_L
+pmpcfg_11 <= "10001111";   --Region2
+pmpcfg_12 <= "10011111";   --ROM1 redefined (error test this would allow instrcution and write accesses to a read-only region)
+pmpcfg_13 <= "10000101";  --not used
+pmpcfg_14 <= "10000101";   --not used
+pmpcfg_15 <= "10000101";    --not used
  
-pmpaddr <= 
-    (   
-    0 => x"00400000",   --ROM0
-    1 => x"005FFFFF",   --RAM0
-    2 => x"009FFFFF",   --ROM1
-    3 => x"00C00000",   --RAM1_L
-    4 => x"14000000",   --RAM1
-    5 => x"1400001F",   --RAM2
-    6 => x"1400005F",   --RAM3
-    7 => x"1400009F",   --RAM4
-    8 => x"140000DF",   --Region0
-    9 => x"14000100",   --Region1
-    10 => x"14000100",  --Region2_L
-    11 => x"FFFFFFFF",  --Region2
-    12 => x"009FFFFF",  --ROM1 redefind
-    13 => x"005FFFFF",  --not used
-    14 => x"003FFFFF",  --not used
-    15 => x"003FFFFF"   --not used
-    );  
+ 
+pmpaddr_0 <= x"00400000";   --ROM0
+pmpaddr_0 <= x"005FFFFF";   --RAM0
+pmpaddr_0 <= x"009FFFFF";   --ROM1
+pmpaddr_0 <= x"00C00000";   --RAM1_L
+pmpaddr_0 <= x"14000000";   --RAM1
+pmpaddr_0 <= x"1400001F";   --RAM2
+pmpaddr_0 <= x"1400005F";   --RAM3
+pmpaddr_0 <= x"1400009F";   --RAM4
+pmpaddr_0 <= x"140000DF";   --Region0
+pmpaddr_0 <= x"14000100";   --Region1
+pmpaddr_0 <= x"14000100";  --Region2_L
+pmpaddr_0 <= x"FFFFFFFF";  --Region2
+pmpaddr_0 <= x"009FFFFF";  --ROM1 redefind
+pmpaddr_0 <= x"005FFFFF";  --not used
+pmpaddr_0 <= x"003FFFFF";  --not used
+pmpaddr_0 <= x"003FFFFF";  --not used
 
 ----------------------------------------------------------------------------------
 --Design Under Test
@@ -247,8 +272,38 @@ port map
     --address to check
     address => address,
     --pmp register dra
-    pmpcfg => pmpcfg,
-    pmpaddr => pmpaddr,
+    pmpcfg_0 => pmpcfg_0,
+    pmpcfg_1 => pmpcfg_1,
+    pmpcfg_2 => pmpcfg_2,
+    pmpcfg_3 => pmpcfg_3,
+    pmpcfg_4 => pmpcfg_4,
+    pmpcfg_5 => pmpcfg_5,
+    pmpcfg_6 => pmpcfg_6,
+    pmpcfg_7 => pmpcfg_7,
+    pmpcfg_8 => pmpcfg_8,
+    pmpcfg_9 => pmpcfg_9,
+    pmpcfg_10 => pmpcfg_10,
+    pmpcfg_11 => pmpcfg_11,
+    pmpcfg_12 => pmpcfg_12,
+    pmpcfg_13 => pmpcfg_13,
+    pmpcfg_14 => pmpcfg_14,
+    pmpcfg_15 => pmpcfg_15,
+    pmpaddr_0 => pmpaddr_0,
+    pmpaddr_1 => pmpaddr_1,
+    pmpaddr_2 => pmpaddr_2,
+    pmpaddr_3 => pmpaddr_3,
+    pmpaddr_4 => pmpaddr_4,
+    pmpaddr_5 => pmpaddr_5,
+    pmpaddr_6 => pmpaddr_6,
+    pmpaddr_7 => pmpaddr_7,
+    pmpaddr_8 => pmpaddr_8,
+    pmpaddr_9 => pmpaddr_9,
+    pmpaddr_10 => pmpaddr_10,
+    pmpaddr_11 => pmpaddr_11,
+    pmpaddr_12 => pmpaddr_12,
+    pmpaddr_13 => pmpaddr_13,
+    pmpaddr_14 => pmpaddr_14,
+    pmpaddr_15 => pmpaddr_15,
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
