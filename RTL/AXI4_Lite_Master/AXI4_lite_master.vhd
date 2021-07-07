@@ -123,24 +123,20 @@ port map(
     M_AXI_ACLK => M_AXI_ACLK,
     M_AXI_ARSTN => M_AXI_ARSTN,
     --read address channel
-    M_AXI_ARADDR => M_AXI_ARADDR,
     M_AXI_ARCACHE => M_AXI_ARCACHE,
     M_AXI_ARPROT => M_AXI_ARPROT,
     M_AXI_ARVALID => M_AXI_ARVALID,
     M_AXI_ARREADY => M_AXI_ARREADY,
     --read data channel
-    M_AXI_RDATA => M_AXI_RDATA,
     M_AXI_RRESP => M_AXI_RRESP,
     M_AXI_RVALID => M_AXI_RVALID,
     M_AXI_RREADY => M_AXI_RREADY,
     --write address channel
-    M_AXI_AWADDR => M_AXI_AWADDR,
     M_AXI_AWCACHE => M_AXI_AWCACHE,
     M_AXI_AWPROT => M_AXI_AWPROT,
     M_AXI_AWVALID => M_AXI_AWVALID,
     M_AXI_AWREADY => M_AXI_AWREADY,
     --write data channel
-    M_AXI_WDATA => M_AXI_WDATA,
     M_AXI_WSTRB => M_AXI_WSTRB,
     M_AXI_WVALID => M_AXI_WVALID,
     M_AXI_WREADY => M_AXI_WREADY,
@@ -196,7 +192,7 @@ end process;
 ----------------------------------------------------------------------------------
 data_reg: process(M_AXI_ACLK, reset, M_AXI_ARSTN, reset_local)
 begin
-    if(reset = '1' or M_AXI_ARSTN = '1') then
+    if(reset = '1' or M_AXI_ARSTN = '0') then
         data_register <= (others => '0');
     elsif(M_AXI_ACLK'event and M_AXI_ACLK = '1') then
         if(reset_local = '1') then
