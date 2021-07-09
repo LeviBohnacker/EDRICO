@@ -101,7 +101,24 @@ port (
     --interrupt pending flags
     iie_CSR: out STD_LOGIC;
     mtime_interrupt : out STD_LOGIC;
-    mSW_interrupt : out STD_LOGIC
+    mSW_interrupt : out STD_LOGIC;
+    -------------------------------------------------------------------------------
+    --debug outputs
+    -------------------------------------------------------------------------------
+    mcycle_debug : out std_logic_vector(31 downto 0);
+    mcycleH_debug : out std_logic_vector(31 downto 0);
+    minstret_debug : out std_logic_vector(31 downto 0);
+    minstretH_debug : out std_logic_vector(31 downto 0);
+    mcountinhibit_debug : out std_logic_vector(31 downto 0);
+    mstatus_debug : out std_logic_vector(31 downto 0);
+    misa_debug : out std_logic_vector(31 downto 0);
+    mie_debug : out std_logic_vector(31 downto 0);
+    mtvec_debug : out std_logic_vector(31 downto 0);
+    mscratch_debug : out std_logic_vector(31 downto 0);
+    mepc_debug : out std_logic_vector(31 downto 0);
+    mcause_debug : out std_logic_vector(31 downto 0);
+    mtval_debug : out std_logic_vector(31 downto 0);
+    mip_debug : out std_logic_vector(31 downto 0)
 );
 end component;
 

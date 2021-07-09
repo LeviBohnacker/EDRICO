@@ -65,7 +65,24 @@ port (
     --interrupt pending flags
     iie_CSR: out STD_LOGIC;
     mtime_interrupt : out STD_LOGIC;
-    mSW_interrupt : out STD_LOGIC
+    mSW_interrupt : out STD_LOGIC;
+    -------------------------------------------------------------------------------
+    --debug outputs
+    -------------------------------------------------------------------------------
+    mcycle_debug : out std_logic_vector(31 downto 0);
+    mcycleH_debug : out std_logic_vector(31 downto 0);
+    minstret_debug : out std_logic_vector(31 downto 0);
+    minstretH_debug : out std_logic_vector(31 downto 0);
+    mcountinhibit_debug : out std_logic_vector(31 downto 0);
+    mstatus_debug : out std_logic_vector(31 downto 0);
+    misa_debug : out std_logic_vector(31 downto 0);
+    mie_debug : out std_logic_vector(31 downto 0);
+    mtvec_debug : out std_logic_vector(31 downto 0);
+    mscratch_debug : out std_logic_vector(31 downto 0);
+    mepc_debug : out std_logic_vector(31 downto 0);
+    mcause_debug : out std_logic_vector(31 downto 0);
+    mtval_debug : out std_logic_vector(31 downto 0);
+    mip_debug : out std_logic_vector(31 downto 0)
 );
 end CSR_top;
 
@@ -100,6 +117,23 @@ signal read: std_logic_vector(5 downto 0);
 signal write: std_logic_vector(32 downto 0);
 
 begin
+----------------------------------------------------------------------------------
+--debug output
+----------------------------------------------------------------------------------
+mcycle_debug <= mcycle;
+mcycleH_debug <= mcycleH;
+minstret_debug <= minstret;
+minstretH_debug <= minstretH;
+mcountinhibit_debug <= mcountinhibit;
+mstatus_debug <=mstatus;
+misa_debug <= misa;
+mie_debug <= mie;
+mtvec_debug <= mtvec;
+mscratch_debug <= mscratch;
+mepc_debug <= mepc;
+mcause_debug <= mcause;
+mtval_debug <= mtval;
+mip_debug <= mip;
 
 ----------------------------------------------------------------------------------
 --CSR controller

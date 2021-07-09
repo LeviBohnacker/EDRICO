@@ -46,7 +46,41 @@ port (
     --output signals 
     ------------------------------------------------------------------------------
     data_bus_A : out STD_LOGIC_VECTOR (31 downto 0);
-    data_bus_B : out STD_LOGIC_VECTOR (31 downto 0)
+    data_bus_B : out STD_LOGIC_VECTOR (31 downto 0);
+    ------------------------------------------------------------------------------
+    --debug outputs
+    ------------------------------------------------------------------------------
+    x1 : out STD_LOGIC_VECTOR(31 downto 0);
+    x2 : out STD_LOGIC_VECTOR(31 downto 0);
+    x3 : out STD_LOGIC_VECTOR(31 downto 0);
+    x4 : out STD_LOGIC_VECTOR(31 downto 0);
+    x5 : out STD_LOGIC_VECTOR(31 downto 0);
+    x6 : out STD_LOGIC_VECTOR(31 downto 0);
+    x7 : out STD_LOGIC_VECTOR(31 downto 0);
+    x8 : out STD_LOGIC_VECTOR(31 downto 0);
+    x9 : out STD_LOGIC_VECTOR(31 downto 0);
+    x10 : out STD_LOGIC_VECTOR(31 downto 0);
+    x11 : out STD_LOGIC_VECTOR(31 downto 0);
+    x12 : out STD_LOGIC_VECTOR(31 downto 0);
+    x13 : out STD_LOGIC_VECTOR(31 downto 0);
+    x14 : out STD_LOGIC_VECTOR(31 downto 0);
+    x15 : out STD_LOGIC_VECTOR(31 downto 0);
+    x16 : out STD_LOGIC_VECTOR(31 downto 0);
+    x17 : out STD_LOGIC_VECTOR(31 downto 0);
+    x18 : out STD_LOGIC_VECTOR(31 downto 0);
+    x19 : out STD_LOGIC_VECTOR(31 downto 0);
+    x20 : out STD_LOGIC_VECTOR(31 downto 0);
+    x21 : out STD_LOGIC_VECTOR(31 downto 0);
+    x22 : out STD_LOGIC_VECTOR(31 downto 0);
+    x23 : out STD_LOGIC_VECTOR(31 downto 0);
+    x24 : out STD_LOGIC_VECTOR(31 downto 0);
+    x25 : out STD_LOGIC_VECTOR(31 downto 0);
+    x26 : out STD_LOGIC_VECTOR(31 downto 0);
+    x27 : out STD_LOGIC_VECTOR(31 downto 0);
+    x28 : out STD_LOGIC_VECTOR(31 downto 0);
+    x29 : out STD_LOGIC_VECTOR(31 downto 0);
+    x30 : out STD_LOGIC_VECTOR(31 downto 0);
+    x31 : out STD_LOGIC_VECTOR(31 downto 0)
 );
 end RV32I_RF;
 
@@ -66,6 +100,41 @@ type RV32I_regs is array (31 downto 0) of std_logic_vector(31 downto 0);
 signal xReg: RV32I_regs;
 
 begin
+----------------------------------------------------------------------------------
+--debug outputs
+----------------------------------------------------------------------------------
+x1 <= x1;
+x2 <= x2;
+x3 <= x3;
+x4 <= x4;
+x5 <= x5;
+x6 <= x6;
+x7 <= x7;
+x8 <= x8;
+x9 <= x9;
+x10 <= x10;
+x11 <= x11;
+x12 <= x12;
+x13 <= x13;
+x14 <= x14;
+x15 <= x15;
+x16 <= x16;
+x17 <= x17;
+x18 <= x18;
+x19 <= x19;
+x20 <= x20;
+x21 <= x21;
+x22 <= x22;
+x23 <= x23;
+x24 <= x24;
+x25 <= x25;
+x26 <= x26;
+x27 <= x27;
+x28 <= x28;
+x29 <= x29;
+x30 <= x30;
+x31 <= x31;
+
 --tie x0 register to zero
 xReg(0) <= (others => '0');
 

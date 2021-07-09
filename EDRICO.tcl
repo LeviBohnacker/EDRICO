@@ -56,6 +56,7 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/MUX/MUX_32_3.vhd" \
    "${origin_dir}/RTL/MUX/MUX_CSR.vhd" \
    "${origin_dir}/RTL/LoadBufferRegister/LoadBufferRegister.vhd" \
+   "${origin_dir}/RTL/MUX/DEMUX_32_2.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd" \
    "${origin_dir}/simulation/sim_DMU_UV_1/sim_DMU_UV_1.wcfg" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_1/EC_FSM_UV_1_tb.vhd" \
@@ -393,6 +394,7 @@ set files [list \
  [file normalize "${origin_dir}/RTL/MUX/MUX_32_3.vhd"] \
  [file normalize "${origin_dir}/RTL/MUX/MUX_CSR.vhd"] \
  [file normalize "${origin_dir}/RTL/LoadBufferRegister/LoadBufferRegister.vhd"] \
+ [file normalize "${origin_dir}/RTL/MUX/DEMUX_32_2.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
 
@@ -632,6 +634,12 @@ set file "$origin_dir/RTL/LoadBufferRegister/LoadBufferRegister.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
+
+set file "$origin_dir/RTL/MUX/DEMUX_32_2.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "MUX_lib" -objects $file_obj
 
 
 # Set 'sources_1' fileset file properties for local files
@@ -2314,17 +2322,20 @@ if { [get_files MUX_32_3.vhd] == "" } {
 if { [get_files MUX_32_2.vhd] == "" } {
   import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
 }
-if { [get_files MUX_32_2.vhd] == "" } {
-  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
-}
-if { [get_files MUX_32_2.vhd] == "" } {
-  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
-}
-if { [get_files MUX_32_2.vhd] == "" } {
-  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
-}
 if { [get_files MUX_CSR.vhd] == "" } {
   import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_CSR.vhd
+}
+if { [get_files MUX_32_2.vhd] == "" } {
+  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
+}
+if { [get_files MUX_32_2.vhd] == "" } {
+  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
+}
+if { [get_files DEMUX_32_2.vhd] == "" } {
+  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/DEMUX_32_2.vhd
+}
+if { [get_files MUX_32_2.vhd] == "" } {
+  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
 }
 
 
@@ -2332,7 +2343,7 @@ if { [get_files MUX_CSR.vhd] == "" } {
 proc cr_bd_EDRICO { parentCell } {
 # The design that will be created by this Tcl proc contains the following 
 # module references:
-# LoadBufferRegister, MUX_32_3, MUX_32_2, MUX_CSR, MUX_32_2, MUX_32_2, MUX_32_2
+# DEMUX_32_2, LoadBufferRegister, MUX_32_3, MUX_32_2, MUX_CSR, MUX_32_2, MUX_32_2, MUX_32_2
 
 
 
@@ -2383,6 +2394,7 @@ proc cr_bd_EDRICO { parentCell } {
   set bCheckModules 1
   if { $bCheckModules == 1 } {
      set list_check_mods "\ 
+  DEMUX_32_2\
   LoadBufferRegister\
   MUX_32_3\
   MUX_32_2\
@@ -2441,8 +2453,103 @@ proc cr_bd_EDRICO { parentCell } {
 
 
   # Create interface ports
+  set M_AXI_0 [ create_bd_intf_port -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 M_AXI_0 ]
+  set_property -dict [ list \
+   CONFIG.ADDR_WIDTH {32} \
+   CONFIG.DATA_WIDTH {32} \
+   CONFIG.HAS_BURST {0} \
+   CONFIG.HAS_LOCK {0} \
+   CONFIG.HAS_QOS {0} \
+   CONFIG.HAS_REGION {0} \
+   CONFIG.PROTOCOL {AXI4LITE} \
+   ] $M_AXI_0
+
+  set mmCSR_AXI4_s_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 mmCSR_AXI4_s_0 ]
+  set_property -dict [ list \
+   CONFIG.ADDR_WIDTH {5} \
+   CONFIG.ARUSER_WIDTH {0} \
+   CONFIG.AWUSER_WIDTH {0} \
+   CONFIG.BUSER_WIDTH {0} \
+   CONFIG.DATA_WIDTH {32} \
+   CONFIG.HAS_BRESP {1} \
+   CONFIG.HAS_BURST {0} \
+   CONFIG.HAS_CACHE {0} \
+   CONFIG.HAS_LOCK {0} \
+   CONFIG.HAS_PROT {1} \
+   CONFIG.HAS_QOS {0} \
+   CONFIG.HAS_REGION {0} \
+   CONFIG.HAS_RRESP {1} \
+   CONFIG.HAS_WSTRB {1} \
+   CONFIG.ID_WIDTH {0} \
+   CONFIG.MAX_BURST_LENGTH {1} \
+   CONFIG.NUM_READ_OUTSTANDING {1} \
+   CONFIG.NUM_READ_THREADS {1} \
+   CONFIG.NUM_WRITE_OUTSTANDING {1} \
+   CONFIG.NUM_WRITE_THREADS {1} \
+   CONFIG.PROTOCOL {AXI4LITE} \
+   CONFIG.READ_WRITE_MODE {READ_WRITE} \
+   CONFIG.RUSER_BITS_PER_BYTE {0} \
+   CONFIG.RUSER_WIDTH {0} \
+   CONFIG.SUPPORTS_NARROW_BURST {0} \
+   CONFIG.WUSER_BITS_PER_BYTE {0} \
+   CONFIG.WUSER_WIDTH {0} \
+   ] $mmCSR_AXI4_s_0
+
 
   # Create ports
+  set IR_debug [ create_bd_port -dir O -from 31 -to 0 -type data IR_debug ]
+  set M_AXI_ACLK_0 [ create_bd_port -dir I -type clk M_AXI_ACLK_0 ]
+  set M_AXI_ARSTN_0 [ create_bd_port -dir I M_AXI_ARSTN_0 ]
+  set PC_debug [ create_bd_port -dir O -from 31 -to 0 -type data PC_debug ]
+  set mcause_debug_0 [ create_bd_port -dir O -from 31 -to 0 mcause_debug_0 ]
+  set mcountinhibit_debug_0 [ create_bd_port -dir O -from 31 -to 0 mcountinhibit_debug_0 ]
+  set mcycleH_debug_0 [ create_bd_port -dir O -from 31 -to 0 mcycleH_debug_0 ]
+  set mcycle_debug_0 [ create_bd_port -dir O -from 31 -to 0 mcycle_debug_0 ]
+  set mepc_debug_0 [ create_bd_port -dir O -from 31 -to 0 mepc_debug_0 ]
+  set mie_debug_0 [ create_bd_port -dir O -from 31 -to 0 mie_debug_0 ]
+  set minstretH_debug_0 [ create_bd_port -dir O -from 31 -to 0 minstretH_debug_0 ]
+  set minstret_debug_0 [ create_bd_port -dir O -from 31 -to 0 minstret_debug_0 ]
+  set mip_debug_0 [ create_bd_port -dir O -from 31 -to 0 mip_debug_0 ]
+  set misa_debug_0 [ create_bd_port -dir O -from 31 -to 0 misa_debug_0 ]
+  set mmcsr_axi4_s_aclk_0 [ create_bd_port -dir I -type clk mmcsr_axi4_s_aclk_0 ]
+  set mmcsr_axi4_s_aresetn_0 [ create_bd_port -dir I -type rst mmcsr_axi4_s_aresetn_0 ]
+  set mscratch_debug_0 [ create_bd_port -dir O -from 31 -to 0 mscratch_debug_0 ]
+  set mstatus_debug_0 [ create_bd_port -dir O -from 31 -to 0 mstatus_debug_0 ]
+  set mtval_debug_0 [ create_bd_port -dir O -from 31 -to 0 mtval_debug_0 ]
+  set mtvec_debug_0 [ create_bd_port -dir O -from 31 -to 0 mtvec_debug_0 ]
+  set system_clk [ create_bd_port -dir I -type clk system_clk ]
+  set system_reset_async [ create_bd_port -dir I -type rst system_reset_async ]
+  set x10_0 [ create_bd_port -dir O -from 31 -to 0 x10_0 ]
+  set x11_0 [ create_bd_port -dir O -from 31 -to 0 x11_0 ]
+  set x12_0 [ create_bd_port -dir O -from 31 -to 0 x12_0 ]
+  set x13_0 [ create_bd_port -dir O -from 31 -to 0 x13_0 ]
+  set x14_0 [ create_bd_port -dir O -from 31 -to 0 x14_0 ]
+  set x15_0 [ create_bd_port -dir O -from 31 -to 0 x15_0 ]
+  set x16_0 [ create_bd_port -dir O -from 31 -to 0 x16_0 ]
+  set x17_0 [ create_bd_port -dir O -from 31 -to 0 x17_0 ]
+  set x18_0 [ create_bd_port -dir O -from 31 -to 0 x18_0 ]
+  set x19_0 [ create_bd_port -dir O -from 31 -to 0 x19_0 ]
+  set x1_0 [ create_bd_port -dir O -from 31 -to 0 x1_0 ]
+  set x20_0 [ create_bd_port -dir O -from 31 -to 0 x20_0 ]
+  set x21_0 [ create_bd_port -dir O -from 31 -to 0 x21_0 ]
+  set x22_0 [ create_bd_port -dir O -from 31 -to 0 x22_0 ]
+  set x23_0 [ create_bd_port -dir O -from 31 -to 0 x23_0 ]
+  set x24_0 [ create_bd_port -dir O -from 31 -to 0 x24_0 ]
+  set x25_0 [ create_bd_port -dir O -from 31 -to 0 x25_0 ]
+  set x26_0 [ create_bd_port -dir O -from 31 -to 0 x26_0 ]
+  set x27_0 [ create_bd_port -dir O -from 31 -to 0 x27_0 ]
+  set x28_0 [ create_bd_port -dir O -from 31 -to 0 x28_0 ]
+  set x29_0 [ create_bd_port -dir O -from 31 -to 0 x29_0 ]
+  set x2_0 [ create_bd_port -dir O -from 31 -to 0 x2_0 ]
+  set x30_0 [ create_bd_port -dir O -from 31 -to 0 x30_0 ]
+  set x31_0 [ create_bd_port -dir O -from 31 -to 0 x31_0 ]
+  set x3_0 [ create_bd_port -dir O -from 31 -to 0 x3_0 ]
+  set x4_0 [ create_bd_port -dir O -from 31 -to 0 x4_0 ]
+  set x5_0 [ create_bd_port -dir O -from 31 -to 0 x5_0 ]
+  set x6_0 [ create_bd_port -dir O -from 31 -to 0 x6_0 ]
+  set x7_0 [ create_bd_port -dir O -from 31 -to 0 x7_0 ]
+  set x8_0 [ create_bd_port -dir O -from 31 -to 0 x8_0 ]
+  set x9_0 [ create_bd_port -dir O -from 31 -to 0 x9_0 ]
 
   # Create instance: ALU_0, and set properties
   set ALU_0 [ create_bd_cell -type ip -vlnv DHBWRavensburg:ALU_lib:ALU:1.0 ALU_0 ]
@@ -2453,6 +2560,17 @@ proc cr_bd_EDRICO { parentCell } {
   # Create instance: ControlUnit_0, and set properties
   set ControlUnit_0 [ create_bd_cell -type ip -vlnv user.org:CU_lib:ControlUnit:1.0 ControlUnit_0 ]
 
+  # Create instance: DEMUX_32_2_0, and set properties
+  set block_name DEMUX_32_2
+  set block_cell_name DEMUX_32_2_0
+  if { [catch {set DEMUX_32_2_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $DEMUX_32_2_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: DataMaskUnit_0, and set properties
   set DataMaskUnit_0 [ create_bd_cell -type ip -vlnv DHBWRavensburg:DMU_lib:DataMaskUnit:1.0 DataMaskUnit_0 ]
 
@@ -2514,13 +2632,13 @@ proc cr_bd_EDRICO { parentCell } {
      return 1
    }
   
-  # Create instance: MUX_EC_RF_out, and set properties
+  # Create instance: MUX_PMP, and set properties
   set block_name MUX_32_2
-  set block_cell_name MUX_EC_RF_out
-  if { [catch {set MUX_EC_RF_out [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+  set block_cell_name MUX_PMP
+  if { [catch {set MUX_PMP [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
-   } elseif { $MUX_EC_RF_out eq "" } {
+   } elseif { $MUX_PMP eq "" } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
@@ -2539,13 +2657,18 @@ proc cr_bd_EDRICO { parentCell } {
   # Create instance: PMP_PMA_checker_0, and set properties
   set PMP_PMA_checker_0 [ create_bd_cell -type ip -vlnv DHBWRavensburg:PMP_lib:PMP_PMA_checker:1.0 PMP_PMA_checker_0 ]
 
-  # Create instance: RegisterFile_0, and set properties
-  set RegisterFile_0 [ create_bd_cell -type ip -vlnv DHBWRavensburg:RF_lib:RegisterFile:1.0 RegisterFile_0 ]
+  # Create instance: RegisterFile_1, and set properties
+  set RegisterFile_1 [ create_bd_cell -type ip -vlnv DHBWRavensburg:RF_lib:RegisterFile:1.0 RegisterFile_1 ]
 
   # Create instance: mmCSR_AXI4_slave_0, and set properties
   set mmCSR_AXI4_slave_0 [ create_bd_cell -type ip -vlnv user.org:user:mmCSR_AXI4_slave:1.0 mmCSR_AXI4_slave_0 ]
 
+  # Create interface connections
+  connect_bd_intf_net -intf_net AXI4_lite_master_0_M_AXI [get_bd_intf_ports M_AXI_0] [get_bd_intf_pins AXI4_lite_master_0/M_AXI]
+  connect_bd_intf_net -intf_net mmCSR_AXI4_s_0_1 [get_bd_intf_ports mmCSR_AXI4_s_0] [get_bd_intf_pins mmCSR_AXI4_slave_0/mmCSR_AXI4_s]
+
   # Create port connections
+  connect_bd_net -net ALU_0_alu_result [get_bd_pins ALU_0/alu_result] [get_bd_pins MUX_PMP/B_in] [get_bd_pins MUX_R/B_in]
   connect_bd_net -net ALU_0_branch_re [get_bd_pins ALU_0/branch_re] [get_bd_pins ControlUnit_0/branch_re]
   connect_bd_net -net AXI4_lite_master_0_data_out [get_bd_pins AXI4_lite_master_0/data_out] [get_bd_pins ControlUnit_0/IR_inp] [get_bd_pins LoadBufferRegister_0/data_in]
   connect_bd_net -net AXI4_lite_master_0_instruction_afe_AXI [get_bd_pins AXI4_lite_master_0/instruction_afe_AXI] [get_bd_pins Exception_Control_0/instruction_afe_AXI]
@@ -2554,41 +2677,54 @@ proc cr_bd_EDRICO { parentCell } {
   connect_bd_net -net AXI4_lite_master_0_storeAMO_afe_AXI [get_bd_pins AXI4_lite_master_0/storeAMO_afe_AXI] [get_bd_pins Exception_Control_0/storeAMO_afe_AXI]
   connect_bd_net -net AXI4_lite_master_0_store_systemData [get_bd_pins AXI4_lite_master_0/store_systemData] [get_bd_pins ControlUnit_0/store_systemData] [get_bd_pins LoadBufferRegister_0/store_systemData]
   connect_bd_net -net ControlUnit_0_ALU_OP [get_bd_pins ALU_0/alu_op] [get_bd_pins ControlUnit_0/ALU_OP]
+  connect_bd_net -net ControlUnit_0_A_MUX_ctrl [get_bd_pins ControlUnit_0/A_MUX_ctrl] [get_bd_pins MUX_A/control]
+  connect_bd_net -net ControlUnit_0_B_MUX_ctrl [get_bd_pins ControlUnit_0/B_MUX_ctrl] [get_bd_pins MUX_B/control]
   connect_bd_net -net ControlUnit_0_CSR_address [get_bd_pins ControlUnit_0/CSR_address] [get_bd_pins MUX_EC_CSR/CSR_address_CU]
   connect_bd_net -net ControlUnit_0_DMU_IN_MUX_ctrl [get_bd_pins ControlUnit_0/DMU_IN_MUX_ctrl] [get_bd_pins DataMaskUnit_0/DMU_IN_MUX_ctrl]
   connect_bd_net -net ControlUnit_0_DMU_OUT_MUX_ctrl [get_bd_pins ControlUnit_0/DMU_OUT_MUX_ctrl] [get_bd_pins DataMaskUnit_0/DMU_OUT_MUX_ctrl]
-  connect_bd_net -net ControlUnit_0_IR_dra [get_bd_pins ControlUnit_0/IR_dra] [get_bd_pins Exception_Control_0/IR_dra]
-  connect_bd_net -net ControlUnit_0_PC_out [get_bd_pins ControlUnit_0/PC_out] [get_bd_pins Exception_Control_0/PC_dra]
+  connect_bd_net -net ControlUnit_0_IR_dra [get_bd_ports IR_debug] [get_bd_pins ControlUnit_0/IR_dra] [get_bd_pins Exception_Control_0/IR_dra]
+  connect_bd_net -net ControlUnit_0_PC_out [get_bd_ports PC_debug] [get_bd_pins ControlUnit_0/PC_out] [get_bd_pins Exception_Control_0/PC_dra] [get_bd_pins MUX_B/A_in] [get_bd_pins MUX_PMP/A_in]
+  connect_bd_net -net ControlUnit_0_PMP_MUX_ctrl [get_bd_pins ControlUnit_0/PMP_MUX_ctrl] [get_bd_pins MUX_PMP/control]
   connect_bd_net -net ControlUnit_0_PMP_enable [get_bd_pins ControlUnit_0/PMP_enable] [get_bd_pins PMP_PMA_checker_0/enable]
   connect_bd_net -net ControlUnit_0_PMP_instruction [get_bd_pins ControlUnit_0/PMP_instruction] [get_bd_pins PMP_PMA_checker_0/instruction]
   connect_bd_net -net ControlUnit_0_PMP_rw [get_bd_pins ControlUnit_0/PMP_rw] [get_bd_pins PMP_PMA_checker_0/readWrite]
   connect_bd_net -net ControlUnit_0_PMP_size [get_bd_pins ControlUnit_0/PMP_size] [get_bd_pins PMP_PMA_checker_0/size]
+  connect_bd_net -net ControlUnit_0_R_MUX_ctrl [get_bd_pins ControlUnit_0/R_MUX_ctrl] [get_bd_pins MUX_R/control]
   connect_bd_net -net ControlUnit_0_be_CU [get_bd_pins ControlUnit_0/be_CU] [get_bd_pins Exception_Control_0/be_CU]
   connect_bd_net -net ControlUnit_0_ece_CU [get_bd_pins ControlUnit_0/ece_CU] [get_bd_pins Exception_Control_0/ece_CU]
   connect_bd_net -net ControlUnit_0_iie_CU [get_bd_pins ControlUnit_0/iie_CU] [get_bd_pins Exception_Control_0/iie_CU]
-  connect_bd_net -net ControlUnit_0_instr_finished [get_bd_pins ControlUnit_0/instr_finished] [get_bd_pins RegisterFile_0/instr_finished]
+  connect_bd_net -net ControlUnit_0_immediate [get_bd_pins ControlUnit_0/immediate] [get_bd_pins MUX_A/A_in]
+  connect_bd_net -net ControlUnit_0_instr_finished [get_bd_pins ControlUnit_0/instr_finished] [get_bd_pins RegisterFile_1/instr_finished]
   connect_bd_net -net ControlUnit_0_mask_ctrl [get_bd_pins ControlUnit_0/mask_ctrl] [get_bd_pins DataMaskUnit_0/mask_ctrl]
   connect_bd_net -net ControlUnit_0_read_CSR [get_bd_pins ControlUnit_0/read_CSR] [get_bd_pins MUX_EC_CSR/read_CSR_CU]
-  connect_bd_net -net ControlUnit_0_register_read_A [get_bd_pins ControlUnit_0/register_read_A] [get_bd_pins RegisterFile_0/register_read_A]
-  connect_bd_net -net ControlUnit_0_register_read_B [get_bd_pins ControlUnit_0/register_read_B] [get_bd_pins RegisterFile_0/register_read_B]
-  connect_bd_net -net ControlUnit_0_register_write [get_bd_pins ControlUnit_0/register_write] [get_bd_pins RegisterFile_0/register_write]
+  connect_bd_net -net ControlUnit_0_register_read_A [get_bd_pins ControlUnit_0/register_read_A] [get_bd_pins RegisterFile_1/register_read_A]
+  connect_bd_net -net ControlUnit_0_register_read_B [get_bd_pins ControlUnit_0/register_read_B] [get_bd_pins RegisterFile_1/register_read_B]
+  connect_bd_net -net ControlUnit_0_register_write [get_bd_pins ControlUnit_0/register_write] [get_bd_pins RegisterFile_1/register_write]
   connect_bd_net -net ControlUnit_0_ret [get_bd_pins ControlUnit_0/ret] [get_bd_pins Exception_Control_0/ret]
-  connect_bd_net -net ControlUnit_0_save_CSR [get_bd_pins ControlUnit_0/save_CSR] [get_bd_pins RegisterFile_0/CSR_save]
+  connect_bd_net -net ControlUnit_0_save_CSR [get_bd_pins ControlUnit_0/save_CSR] [get_bd_pins RegisterFile_1/CSR_save]
   connect_bd_net -net ControlUnit_0_write_CSR [get_bd_pins ControlUnit_0/write_CSR] [get_bd_pins MUX_EC_CSR/write_CSR_CU]
+  connect_bd_net -net DEMUX_32_2_0_A_out [get_bd_pins ControlUnit_0/data_bus_B] [get_bd_pins DEMUX_32_2_0/A_out] [get_bd_pins MUX_B/B_in]
+  connect_bd_net -net DEMUX_32_2_0_B_out [get_bd_pins DEMUX_32_2_0/B_out] [get_bd_pins Exception_Control_0/data_in_EC]
+  connect_bd_net -net DataMaskUnit_0_data_load [get_bd_pins DataMaskUnit_0/data_load] [get_bd_pins MUX_R/A_in]
   connect_bd_net -net DataMaskUnit_0_data_store [get_bd_pins AXI4_lite_master_0/data_in] [get_bd_pins DataMaskUnit_0/data_store]
   connect_bd_net -net Exception_Control_0_CSR_address_EC [get_bd_pins Exception_Control_0/CSR_address_EC] [get_bd_pins MUX_EC_CSR/CSR_address_EC]
   connect_bd_net -net Exception_Control_0_CSR_read_EC [get_bd_pins Exception_Control_0/CSR_read_EC] [get_bd_pins MUX_EC_CSR/read_CSR_EC]
   connect_bd_net -net Exception_Control_0_CSR_write_EC [get_bd_pins Exception_Control_0/CSR_write_EC] [get_bd_pins MUX_EC_CSR/write_CSR_EC]
   connect_bd_net -net Exception_Control_0_PC_dra_write [get_bd_pins ControlUnit_0/PC_dra] [get_bd_pins Exception_Control_0/PC_dra_write]
   connect_bd_net -net Exception_Control_0_PC_write [get_bd_pins ControlUnit_0/pc_write] [get_bd_pins Exception_Control_0/PC_write]
-  connect_bd_net -net Exception_Control_0_halt_core [get_bd_pins AXI4_lite_master_0/halt_core] [get_bd_pins ControlUnit_0/halt_core] [get_bd_pins Exception_Control_0/halt_core]
+  connect_bd_net -net Exception_Control_0_data_out_EC [get_bd_pins Exception_Control_0/data_out_EC] [get_bd_pins MUX_EC_RF_in/B_in]
+  connect_bd_net -net Exception_Control_0_halt_core [get_bd_pins AXI4_lite_master_0/halt_core] [get_bd_pins ControlUnit_0/halt_core] [get_bd_pins DEMUX_32_2_0/control] [get_bd_pins Exception_Control_0/halt_core] [get_bd_pins MUX_EC_CSR/control] [get_bd_pins MUX_EC_RF_in/control]
   connect_bd_net -net LoadBufferRegister_0_data_out [get_bd_pins DataMaskUnit_0/LoadBufferRegister] [get_bd_pins LoadBufferRegister_0/data_out]
   connect_bd_net -net MUX_A_C_out [get_bd_pins ALU_0/in_a] [get_bd_pins MUX_A/C_out]
   connect_bd_net -net MUX_B_C_out [get_bd_pins ALU_0/in_b] [get_bd_pins MUX_B/C_out]
-  connect_bd_net -net MUX_EC_CSR_CSR_address [get_bd_pins MUX_EC_CSR/CSR_address] [get_bd_pins RegisterFile_0/CSR_address]
-  connect_bd_net -net MUX_EC_CSR_read_CSR [get_bd_pins MUX_EC_CSR/read_CSR] [get_bd_pins RegisterFile_0/CSR_read]
-  connect_bd_net -net MUX_EC_CSR_write_CSR [get_bd_pins MUX_EC_CSR/write_CSR] [get_bd_pins RegisterFile_0/CSR_write]
-  connect_bd_net -net MUX_EC_RF_in_C_out [get_bd_pins MUX_EC_RF_in/C_out] [get_bd_pins RegisterFile_0/data_in]
+  connect_bd_net -net MUX_EC_CSR_CSR_address [get_bd_pins MUX_EC_CSR/CSR_address] [get_bd_pins RegisterFile_1/CSR_address]
+  connect_bd_net -net MUX_EC_CSR_read_CSR [get_bd_pins MUX_EC_CSR/read_CSR] [get_bd_pins RegisterFile_1/CSR_read]
+  connect_bd_net -net MUX_EC_CSR_write_CSR [get_bd_pins MUX_EC_CSR/write_CSR] [get_bd_pins RegisterFile_1/CSR_write]
+  connect_bd_net -net MUX_EC_RF_in_C_out [get_bd_pins MUX_EC_RF_in/C_out] [get_bd_pins RegisterFile_1/data_in]
+  connect_bd_net -net MUX_PMP_C_out [get_bd_pins MUX_PMP/C_out] [get_bd_pins PMP_PMA_checker_0/address]
+  connect_bd_net -net MUX_R_C_out [get_bd_pins MUX_EC_RF_in/A_in] [get_bd_pins MUX_R/C_out]
+  connect_bd_net -net M_AXI_ACLK_0_1 [get_bd_ports M_AXI_ACLK_0] [get_bd_pins AXI4_lite_master_0/M_AXI_ACLK]
+  connect_bd_net -net M_AXI_ARSTN_0_1 [get_bd_ports M_AXI_ARSTN_0] [get_bd_pins AXI4_lite_master_0/M_AXI_ARSTN]
   connect_bd_net -net PMP_PMA_checker_0_address_dra [get_bd_pins Exception_Control_0/PMP_dra] [get_bd_pins PMP_PMA_checker_0/address_dra]
   connect_bd_net -net PMP_PMA_checker_0_address_out [get_bd_pins AXI4_lite_master_0/address_in] [get_bd_pins PMP_PMA_checker_0/address_out]
   connect_bd_net -net PMP_PMA_checker_0_enable_out [get_bd_pins AXI4_lite_master_0/enable] [get_bd_pins PMP_PMA_checker_0/enable_out]
@@ -2601,174 +2737,346 @@ proc cr_bd_EDRICO { parentCell } {
   connect_bd_net -net PMP_PMA_checker_0_size_out [get_bd_pins AXI4_lite_master_0/size] [get_bd_pins PMP_PMA_checker_0/size_out]
   connect_bd_net -net PMP_PMA_checker_0_storeAMO_afe_P [get_bd_pins Exception_Control_0/storeAMO_afe_P] [get_bd_pins PMP_PMA_checker_0/storeAMO_afe_P]
   connect_bd_net -net PMP_PMA_checker_0_storeAMO_ame_P [get_bd_pins Exception_Control_0/storeAMO_ame_P] [get_bd_pins PMP_PMA_checker_0/storeAMO_ame_P]
-  connect_bd_net -net RegisterFile_0_data_bus_B [get_bd_pins ControlUnit_0/data_bus_B] [get_bd_pins RegisterFile_0/data_bus_B]
-  connect_bd_net -net RegisterFile_0_iie_CSR [get_bd_pins Exception_Control_0/iie_CSR] [get_bd_pins RegisterFile_0/iie_CSR]
-  connect_bd_net -net RegisterFile_0_msi_CSR [get_bd_pins Exception_Control_0/si_CSR] [get_bd_pins RegisterFile_0/msi_CSR]
-  connect_bd_net -net RegisterFile_0_mti_CSR [get_bd_pins Exception_Control_0/ti_CSR] [get_bd_pins RegisterFile_0/mti_CSR]
-  connect_bd_net -net RegisterFile_0_pmpaddr_0 [get_bd_pins PMP_PMA_checker_0/pmpaddr_0] [get_bd_pins RegisterFile_0/pmpaddr_0]
-  connect_bd_net -net RegisterFile_0_pmpaddr_1 [get_bd_pins PMP_PMA_checker_0/pmpaddr_1] [get_bd_pins RegisterFile_0/pmpaddr_1]
-  connect_bd_net -net RegisterFile_0_pmpaddr_2 [get_bd_pins PMP_PMA_checker_0/pmpaddr_2] [get_bd_pins RegisterFile_0/pmpaddr_2]
-  connect_bd_net -net RegisterFile_0_pmpaddr_3 [get_bd_pins PMP_PMA_checker_0/pmpaddr_3] [get_bd_pins RegisterFile_0/pmpaddr_3]
-  connect_bd_net -net RegisterFile_0_pmpaddr_4 [get_bd_pins PMP_PMA_checker_0/pmpaddr_4] [get_bd_pins RegisterFile_0/pmpaddr_4]
-  connect_bd_net -net RegisterFile_0_pmpaddr_5 [get_bd_pins PMP_PMA_checker_0/pmpaddr_5] [get_bd_pins RegisterFile_0/pmpaddr_5]
-  connect_bd_net -net RegisterFile_0_pmpaddr_6 [get_bd_pins PMP_PMA_checker_0/pmpaddr_6] [get_bd_pins RegisterFile_0/pmpaddr_6]
-  connect_bd_net -net RegisterFile_0_pmpaddr_7 [get_bd_pins PMP_PMA_checker_0/pmpaddr_7] [get_bd_pins RegisterFile_0/pmpaddr_7]
-  connect_bd_net -net RegisterFile_0_pmpaddr_8 [get_bd_pins PMP_PMA_checker_0/pmpaddr_8] [get_bd_pins RegisterFile_0/pmpaddr_8]
-  connect_bd_net -net RegisterFile_0_pmpaddr_9 [get_bd_pins PMP_PMA_checker_0/pmpaddr_9] [get_bd_pins RegisterFile_0/pmpaddr_9]
-  connect_bd_net -net RegisterFile_0_pmpaddr_10 [get_bd_pins PMP_PMA_checker_0/pmpaddr_10] [get_bd_pins RegisterFile_0/pmpaddr_10]
-  connect_bd_net -net RegisterFile_0_pmpaddr_11 [get_bd_pins PMP_PMA_checker_0/pmpaddr_11] [get_bd_pins RegisterFile_0/pmpaddr_11]
-  connect_bd_net -net RegisterFile_0_pmpaddr_12 [get_bd_pins PMP_PMA_checker_0/pmpaddr_12] [get_bd_pins RegisterFile_0/pmpaddr_12]
-  connect_bd_net -net RegisterFile_0_pmpaddr_13 [get_bd_pins PMP_PMA_checker_0/pmpaddr_13] [get_bd_pins RegisterFile_0/pmpaddr_13]
-  connect_bd_net -net RegisterFile_0_pmpaddr_14 [get_bd_pins PMP_PMA_checker_0/pmpaddr_14] [get_bd_pins RegisterFile_0/pmpaddr_14]
-  connect_bd_net -net RegisterFile_0_pmpaddr_15 [get_bd_pins PMP_PMA_checker_0/pmpaddr_15] [get_bd_pins RegisterFile_0/pmpaddr_15]
-  connect_bd_net -net RegisterFile_0_pmpcfg_0 [get_bd_pins PMP_PMA_checker_0/pmpcfg_0] [get_bd_pins RegisterFile_0/pmpcfg_0]
-  connect_bd_net -net RegisterFile_0_pmpcfg_1 [get_bd_pins PMP_PMA_checker_0/pmpcfg_1] [get_bd_pins RegisterFile_0/pmpcfg_1]
-  connect_bd_net -net RegisterFile_0_pmpcfg_2 [get_bd_pins PMP_PMA_checker_0/pmpcfg_2] [get_bd_pins RegisterFile_0/pmpcfg_2]
-  connect_bd_net -net RegisterFile_0_pmpcfg_3 [get_bd_pins PMP_PMA_checker_0/pmpcfg_3] [get_bd_pins RegisterFile_0/pmpcfg_3]
-  connect_bd_net -net RegisterFile_0_pmpcfg_4 [get_bd_pins PMP_PMA_checker_0/pmpcfg_4] [get_bd_pins RegisterFile_0/pmpcfg_4]
-  connect_bd_net -net RegisterFile_0_pmpcfg_5 [get_bd_pins PMP_PMA_checker_0/pmpcfg_5] [get_bd_pins RegisterFile_0/pmpcfg_5]
-  connect_bd_net -net RegisterFile_0_pmpcfg_6 [get_bd_pins PMP_PMA_checker_0/pmpcfg_6] [get_bd_pins RegisterFile_0/pmpcfg_6]
-  connect_bd_net -net RegisterFile_0_pmpcfg_7 [get_bd_pins PMP_PMA_checker_0/pmpcfg_7] [get_bd_pins RegisterFile_0/pmpcfg_7]
-  connect_bd_net -net RegisterFile_0_pmpcfg_8 [get_bd_pins PMP_PMA_checker_0/pmpcfg_8] [get_bd_pins RegisterFile_0/pmpcfg_8]
-  connect_bd_net -net RegisterFile_0_pmpcfg_9 [get_bd_pins PMP_PMA_checker_0/pmpcfg_9] [get_bd_pins RegisterFile_0/pmpcfg_9]
-  connect_bd_net -net RegisterFile_0_pmpcfg_10 [get_bd_pins PMP_PMA_checker_0/pmpcfg_10] [get_bd_pins RegisterFile_0/pmpcfg_10]
-  connect_bd_net -net RegisterFile_0_pmpcfg_11 [get_bd_pins PMP_PMA_checker_0/pmpcfg_11] [get_bd_pins RegisterFile_0/pmpcfg_11]
-  connect_bd_net -net RegisterFile_0_pmpcfg_12 [get_bd_pins PMP_PMA_checker_0/pmpcfg_12] [get_bd_pins RegisterFile_0/pmpcfg_12]
-  connect_bd_net -net RegisterFile_0_pmpcfg_13 [get_bd_pins PMP_PMA_checker_0/pmpcfg_13] [get_bd_pins RegisterFile_0/pmpcfg_13]
-  connect_bd_net -net RegisterFile_0_pmpcfg_14 [get_bd_pins PMP_PMA_checker_0/pmpcfg_14] [get_bd_pins RegisterFile_0/pmpcfg_14]
-  connect_bd_net -net RegisterFile_0_pmpcfg_15 [get_bd_pins PMP_PMA_checker_0/pmpcfg_15] [get_bd_pins RegisterFile_0/pmpcfg_15]
-  connect_bd_net -net mmCSR_AXI4_slave_0_msip [get_bd_pins RegisterFile_0/msip_dra] [get_bd_pins mmCSR_AXI4_slave_0/msip]
-  connect_bd_net -net mmCSR_AXI4_slave_0_mtip [get_bd_pins RegisterFile_0/mtip_dra] [get_bd_pins mmCSR_AXI4_slave_0/mtip]
+  connect_bd_net -net RegisterFile_1_data_bus_A [get_bd_pins DataMaskUnit_0/data_bus_A] [get_bd_pins MUX_A/B_in] [get_bd_pins RegisterFile_1/data_bus_A]
+  connect_bd_net -net RegisterFile_1_data_bus_B [get_bd_pins DEMUX_32_2_0/C_in] [get_bd_pins RegisterFile_1/data_bus_B]
+  connect_bd_net -net RegisterFile_1_iie_CSR [get_bd_pins Exception_Control_0/iie_CSR] [get_bd_pins RegisterFile_1/iie_CSR]
+  connect_bd_net -net RegisterFile_1_mcause_debug [get_bd_ports mcause_debug_0] [get_bd_pins RegisterFile_1/mcause_debug]
+  connect_bd_net -net RegisterFile_1_mcountinhibit_debug [get_bd_ports mcountinhibit_debug_0] [get_bd_pins RegisterFile_1/mcountinhibit_debug]
+  connect_bd_net -net RegisterFile_1_mcycleH_debug [get_bd_ports mcycleH_debug_0] [get_bd_pins RegisterFile_1/mcycleH_debug]
+  connect_bd_net -net RegisterFile_1_mcycle_debug [get_bd_ports mcycle_debug_0] [get_bd_pins RegisterFile_1/mcycle_debug]
+  connect_bd_net -net RegisterFile_1_mepc_debug [get_bd_ports mepc_debug_0] [get_bd_pins RegisterFile_1/mepc_debug]
+  connect_bd_net -net RegisterFile_1_mie_debug [get_bd_ports mie_debug_0] [get_bd_pins RegisterFile_1/mie_debug]
+  connect_bd_net -net RegisterFile_1_minstretH_debug [get_bd_ports minstretH_debug_0] [get_bd_pins RegisterFile_1/minstretH_debug]
+  connect_bd_net -net RegisterFile_1_minstret_debug [get_bd_ports minstret_debug_0] [get_bd_pins RegisterFile_1/minstret_debug]
+  connect_bd_net -net RegisterFile_1_mip_debug [get_bd_ports mip_debug_0] [get_bd_pins RegisterFile_1/mip_debug]
+  connect_bd_net -net RegisterFile_1_misa_debug [get_bd_ports misa_debug_0] [get_bd_pins RegisterFile_1/misa_debug]
+  connect_bd_net -net RegisterFile_1_mscratch_debug [get_bd_ports mscratch_debug_0] [get_bd_pins RegisterFile_1/mscratch_debug]
+  connect_bd_net -net RegisterFile_1_msi_CSR [get_bd_pins Exception_Control_0/si_CSR] [get_bd_pins RegisterFile_1/msi_CSR]
+  connect_bd_net -net RegisterFile_1_mstatus_debug [get_bd_ports mstatus_debug_0] [get_bd_pins RegisterFile_1/mstatus_debug]
+  connect_bd_net -net RegisterFile_1_mti_CSR [get_bd_pins Exception_Control_0/ti_CSR] [get_bd_pins RegisterFile_1/mti_CSR]
+  connect_bd_net -net RegisterFile_1_mtval_debug [get_bd_ports mtval_debug_0] [get_bd_pins RegisterFile_1/mtval_debug]
+  connect_bd_net -net RegisterFile_1_mtvec_debug [get_bd_ports mtvec_debug_0] [get_bd_pins RegisterFile_1/mtvec_debug]
+  connect_bd_net -net RegisterFile_1_pmpaddr_0 [get_bd_pins PMP_PMA_checker_0/pmpaddr_0] [get_bd_pins RegisterFile_1/pmpaddr_0]
+  connect_bd_net -net RegisterFile_1_pmpaddr_1 [get_bd_pins PMP_PMA_checker_0/pmpaddr_1] [get_bd_pins RegisterFile_1/pmpaddr_1]
+  connect_bd_net -net RegisterFile_1_pmpaddr_2 [get_bd_pins PMP_PMA_checker_0/pmpaddr_2] [get_bd_pins RegisterFile_1/pmpaddr_2]
+  connect_bd_net -net RegisterFile_1_pmpaddr_3 [get_bd_pins PMP_PMA_checker_0/pmpaddr_3] [get_bd_pins RegisterFile_1/pmpaddr_3]
+  connect_bd_net -net RegisterFile_1_pmpaddr_4 [get_bd_pins PMP_PMA_checker_0/pmpaddr_4] [get_bd_pins RegisterFile_1/pmpaddr_4]
+  connect_bd_net -net RegisterFile_1_pmpaddr_5 [get_bd_pins PMP_PMA_checker_0/pmpaddr_5] [get_bd_pins RegisterFile_1/pmpaddr_5]
+  connect_bd_net -net RegisterFile_1_pmpaddr_6 [get_bd_pins PMP_PMA_checker_0/pmpaddr_6] [get_bd_pins RegisterFile_1/pmpaddr_6]
+  connect_bd_net -net RegisterFile_1_pmpaddr_7 [get_bd_pins PMP_PMA_checker_0/pmpaddr_7] [get_bd_pins RegisterFile_1/pmpaddr_7]
+  connect_bd_net -net RegisterFile_1_pmpaddr_8 [get_bd_pins PMP_PMA_checker_0/pmpaddr_8] [get_bd_pins RegisterFile_1/pmpaddr_8]
+  connect_bd_net -net RegisterFile_1_pmpaddr_9 [get_bd_pins PMP_PMA_checker_0/pmpaddr_9] [get_bd_pins RegisterFile_1/pmpaddr_9]
+  connect_bd_net -net RegisterFile_1_pmpaddr_10 [get_bd_pins PMP_PMA_checker_0/pmpaddr_10] [get_bd_pins RegisterFile_1/pmpaddr_10]
+  connect_bd_net -net RegisterFile_1_pmpaddr_11 [get_bd_pins PMP_PMA_checker_0/pmpaddr_11] [get_bd_pins RegisterFile_1/pmpaddr_11]
+  connect_bd_net -net RegisterFile_1_pmpaddr_12 [get_bd_pins PMP_PMA_checker_0/pmpaddr_12] [get_bd_pins RegisterFile_1/pmpaddr_12]
+  connect_bd_net -net RegisterFile_1_pmpaddr_13 [get_bd_pins PMP_PMA_checker_0/pmpaddr_13] [get_bd_pins RegisterFile_1/pmpaddr_13]
+  connect_bd_net -net RegisterFile_1_pmpaddr_14 [get_bd_pins PMP_PMA_checker_0/pmpaddr_14] [get_bd_pins RegisterFile_1/pmpaddr_14]
+  connect_bd_net -net RegisterFile_1_pmpaddr_15 [get_bd_pins PMP_PMA_checker_0/pmpaddr_15] [get_bd_pins RegisterFile_1/pmpaddr_15]
+  connect_bd_net -net RegisterFile_1_pmpcfg_0 [get_bd_pins PMP_PMA_checker_0/pmpcfg_0] [get_bd_pins RegisterFile_1/pmpcfg_0]
+  connect_bd_net -net RegisterFile_1_pmpcfg_1 [get_bd_pins PMP_PMA_checker_0/pmpcfg_1] [get_bd_pins RegisterFile_1/pmpcfg_1]
+  connect_bd_net -net RegisterFile_1_pmpcfg_2 [get_bd_pins PMP_PMA_checker_0/pmpcfg_2] [get_bd_pins RegisterFile_1/pmpcfg_2]
+  connect_bd_net -net RegisterFile_1_pmpcfg_3 [get_bd_pins PMP_PMA_checker_0/pmpcfg_3] [get_bd_pins RegisterFile_1/pmpcfg_3]
+  connect_bd_net -net RegisterFile_1_pmpcfg_4 [get_bd_pins PMP_PMA_checker_0/pmpcfg_4] [get_bd_pins RegisterFile_1/pmpcfg_4]
+  connect_bd_net -net RegisterFile_1_pmpcfg_5 [get_bd_pins PMP_PMA_checker_0/pmpcfg_5] [get_bd_pins RegisterFile_1/pmpcfg_5]
+  connect_bd_net -net RegisterFile_1_pmpcfg_6 [get_bd_pins PMP_PMA_checker_0/pmpcfg_6] [get_bd_pins RegisterFile_1/pmpcfg_6]
+  connect_bd_net -net RegisterFile_1_pmpcfg_7 [get_bd_pins PMP_PMA_checker_0/pmpcfg_7] [get_bd_pins RegisterFile_1/pmpcfg_7]
+  connect_bd_net -net RegisterFile_1_pmpcfg_8 [get_bd_pins PMP_PMA_checker_0/pmpcfg_8] [get_bd_pins RegisterFile_1/pmpcfg_8]
+  connect_bd_net -net RegisterFile_1_pmpcfg_9 [get_bd_pins PMP_PMA_checker_0/pmpcfg_9] [get_bd_pins RegisterFile_1/pmpcfg_9]
+  connect_bd_net -net RegisterFile_1_pmpcfg_10 [get_bd_pins PMP_PMA_checker_0/pmpcfg_10] [get_bd_pins RegisterFile_1/pmpcfg_10]
+  connect_bd_net -net RegisterFile_1_pmpcfg_11 [get_bd_pins PMP_PMA_checker_0/pmpcfg_11] [get_bd_pins RegisterFile_1/pmpcfg_11]
+  connect_bd_net -net RegisterFile_1_pmpcfg_12 [get_bd_pins PMP_PMA_checker_0/pmpcfg_12] [get_bd_pins RegisterFile_1/pmpcfg_12]
+  connect_bd_net -net RegisterFile_1_pmpcfg_13 [get_bd_pins PMP_PMA_checker_0/pmpcfg_13] [get_bd_pins RegisterFile_1/pmpcfg_13]
+  connect_bd_net -net RegisterFile_1_pmpcfg_14 [get_bd_pins PMP_PMA_checker_0/pmpcfg_14] [get_bd_pins RegisterFile_1/pmpcfg_14]
+  connect_bd_net -net RegisterFile_1_pmpcfg_15 [get_bd_pins PMP_PMA_checker_0/pmpcfg_15] [get_bd_pins RegisterFile_1/pmpcfg_15]
+  connect_bd_net -net RegisterFile_1_x1 [get_bd_ports x1_0] [get_bd_pins RegisterFile_1/x1]
+  connect_bd_net -net RegisterFile_1_x2 [get_bd_ports x2_0] [get_bd_pins RegisterFile_1/x2]
+  connect_bd_net -net RegisterFile_1_x3 [get_bd_ports x3_0] [get_bd_pins RegisterFile_1/x3]
+  connect_bd_net -net RegisterFile_1_x4 [get_bd_ports x4_0] [get_bd_pins RegisterFile_1/x4]
+  connect_bd_net -net RegisterFile_1_x5 [get_bd_ports x5_0] [get_bd_pins RegisterFile_1/x5]
+  connect_bd_net -net RegisterFile_1_x6 [get_bd_ports x6_0] [get_bd_pins RegisterFile_1/x6]
+  connect_bd_net -net RegisterFile_1_x7 [get_bd_ports x7_0] [get_bd_pins RegisterFile_1/x7]
+  connect_bd_net -net RegisterFile_1_x8 [get_bd_ports x8_0] [get_bd_pins RegisterFile_1/x8]
+  connect_bd_net -net RegisterFile_1_x9 [get_bd_ports x9_0] [get_bd_pins RegisterFile_1/x9]
+  connect_bd_net -net RegisterFile_1_x10 [get_bd_ports x10_0] [get_bd_pins RegisterFile_1/x10]
+  connect_bd_net -net RegisterFile_1_x11 [get_bd_ports x11_0] [get_bd_pins RegisterFile_1/x11]
+  connect_bd_net -net RegisterFile_1_x12 [get_bd_ports x12_0] [get_bd_pins RegisterFile_1/x12]
+  connect_bd_net -net RegisterFile_1_x13 [get_bd_ports x13_0] [get_bd_pins RegisterFile_1/x13]
+  connect_bd_net -net RegisterFile_1_x14 [get_bd_ports x14_0] [get_bd_pins RegisterFile_1/x14]
+  connect_bd_net -net RegisterFile_1_x15 [get_bd_ports x15_0] [get_bd_pins RegisterFile_1/x15]
+  connect_bd_net -net RegisterFile_1_x16 [get_bd_ports x16_0] [get_bd_pins RegisterFile_1/x16]
+  connect_bd_net -net RegisterFile_1_x17 [get_bd_ports x17_0] [get_bd_pins RegisterFile_1/x17]
+  connect_bd_net -net RegisterFile_1_x18 [get_bd_ports x18_0] [get_bd_pins RegisterFile_1/x18]
+  connect_bd_net -net RegisterFile_1_x19 [get_bd_ports x19_0] [get_bd_pins RegisterFile_1/x19]
+  connect_bd_net -net RegisterFile_1_x20 [get_bd_ports x20_0] [get_bd_pins RegisterFile_1/x20]
+  connect_bd_net -net RegisterFile_1_x21 [get_bd_ports x21_0] [get_bd_pins RegisterFile_1/x21]
+  connect_bd_net -net RegisterFile_1_x22 [get_bd_ports x22_0] [get_bd_pins RegisterFile_1/x22]
+  connect_bd_net -net RegisterFile_1_x23 [get_bd_ports x23_0] [get_bd_pins RegisterFile_1/x23]
+  connect_bd_net -net RegisterFile_1_x24 [get_bd_ports x24_0] [get_bd_pins RegisterFile_1/x24]
+  connect_bd_net -net RegisterFile_1_x25 [get_bd_ports x25_0] [get_bd_pins RegisterFile_1/x25]
+  connect_bd_net -net RegisterFile_1_x26 [get_bd_ports x26_0] [get_bd_pins RegisterFile_1/x26]
+  connect_bd_net -net RegisterFile_1_x27 [get_bd_ports x27_0] [get_bd_pins RegisterFile_1/x27]
+  connect_bd_net -net RegisterFile_1_x28 [get_bd_ports x28_0] [get_bd_pins RegisterFile_1/x28]
+  connect_bd_net -net RegisterFile_1_x29 [get_bd_ports x29_0] [get_bd_pins RegisterFile_1/x29]
+  connect_bd_net -net RegisterFile_1_x30 [get_bd_ports x30_0] [get_bd_pins RegisterFile_1/x30]
+  connect_bd_net -net RegisterFile_1_x31 [get_bd_ports x31_0] [get_bd_pins RegisterFile_1/x31]
+  connect_bd_net -net clk_0_1 [get_bd_ports system_clk] [get_bd_pins ControlUnit_0/clk] [get_bd_pins Exception_Control_0/clk] [get_bd_pins LoadBufferRegister_0/clk] [get_bd_pins PMP_PMA_checker_0/clk] [get_bd_pins RegisterFile_1/clk]
+  connect_bd_net -net mmCSR_AXI4_slave_0_msip [get_bd_pins RegisterFile_1/msip_dra] [get_bd_pins mmCSR_AXI4_slave_0/msip]
+  connect_bd_net -net mmCSR_AXI4_slave_0_mtip [get_bd_pins RegisterFile_1/mtip_dra] [get_bd_pins mmCSR_AXI4_slave_0/mtip]
+  connect_bd_net -net mmcsr_axi4_s_aclk_0_1 [get_bd_ports mmcsr_axi4_s_aclk_0] [get_bd_pins mmCSR_AXI4_slave_0/mmcsr_axi4_s_aclk]
+  connect_bd_net -net mmcsr_axi4_s_aresetn_0_1 [get_bd_ports mmcsr_axi4_s_aresetn_0] [get_bd_pins mmCSR_AXI4_slave_0/mmcsr_axi4_s_aresetn]
+  connect_bd_net -net reset_0_1 [get_bd_ports system_reset_async] [get_bd_pins AXI4_lite_master_0/reset] [get_bd_pins ControlUnit_0/reset] [get_bd_pins Exception_Control_0/reset] [get_bd_pins LoadBufferRegister_0/reset] [get_bd_pins PMP_PMA_checker_0/reset] [get_bd_pins RegisterFile_1/reset]
 
   # Create address segments
 
   # Perform GUI Layout
   regenerate_bd_layout -layout_string {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.236831",
-   "Default View_TopLeft":"-2669,-3103",
+   "Default View_ScaleFactor":"0.13101",
+   "Default View_TopLeft":"-5328,15",
    "ExpandedHierarchyInLayout":"",
+   "commentid":"",
    "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
-preplace inst mmCSR_AXI4_slave_0 -pg 1 -lvl 6 -x 950 -y -2400 -defaultsOSRD -orient R180
-preplace inst AXI4_lite_master_0 -pg 1 -lvl 8 -x 2040 -y -1510 -defaultsOSRD
-preplace inst RegisterFile_0 -pg 1 -lvl 6 -x 950 -y -1710 -defaultsOSRD
-preplace inst PMP_PMA_checker_0 -pg 1 -lvl 7 -x 1340 -y -1730 -defaultsOSRD
-preplace inst ControlUnit_0 -pg 1 -lvl 1 -x -1210 -y -1770 -defaultsOSRD
-preplace inst ALU_0 -pg 1 -lvl 3 -x -240 -y -1740 -defaultsOSRD
-preplace inst DataMaskUnit_0 -pg 1 -lvl 3 -x -240 -y -1250 -defaultsOSRD
-preplace inst Exception_Control_0 -pg 1 -lvl 3 -x -240 -y -2520 -defaultsOSRD
-preplace inst LoadBufferRegister_0 -pg 1 -lvl 3 -x -240 -y -1040 -defaultsOSRD
-preplace inst MUX_A -pg 1 -lvl 2 -x -780 -y -1830 -defaultsOSRD
-preplace inst MUX_B -pg 1 -lvl 2 -x -780 -y -1640 -defaultsOSRD
-preplace inst MUX_EC_RF_out -pg 1 -lvl 3 -x -240 -y -2100 -defaultsOSRD -orient R180
-preplace inst MUX_R -pg 1 -lvl 4 -x 220 -y -1750 -defaultsOSRD
-preplace inst MUX_EC_RF_in -pg 1 -lvl 5 -x 590 -y -1740 -defaultsOSRD
-preplace inst MUX_EC_CSR -pg 1 -lvl 4 -x 220 -y -1520 -defaultsOSRD
-preplace netloc LoadBufferRegister_0_data_out 1 2 2 -420 -1130 -60
-preplace netloc MUX_A_C_out 1 2 1 -600 -1830n
-preplace netloc MUX_B_C_out 1 2 1 -620 -1720n
-preplace netloc MUX_EC_CSR_read_CSR 1 4 2 450 -1660 760J
-preplace netloc MUX_EC_CSR_write_CSR 1 4 2 440 -1820 740J
-preplace netloc MUX_EC_CSR_CSR_address 1 4 2 430 -1830 750J
-preplace netloc MUX_EC_RF_in_C_out 1 5 1 720 -1790n
-preplace netloc PMP_PMA_checker_0_address_out 1 7 1 1590 -1840n
-preplace netloc PMP_PMA_checker_0_enable_out 1 7 1 1610 -1800n
-preplace netloc PMP_PMA_checker_0_readWrite_out 1 7 1 1600 -1780n
-preplace netloc PMP_PMA_checker_0_instruction_out 1 7 1 1580 -1760n
-preplace netloc PMP_PMA_checker_0_size_out 1 7 1 1570 -1740n
-preplace netloc DataMaskUnit_0_data_store 1 3 5 -60J -1250 NJ -1250 730J -1260 N -1260 1600
-preplace netloc Exception_Control_0_halt_core 1 0 8 -1420 -1430 N -1430 N -1430 -20J -1280 NJ -1280 NJ -1280 N -1280 1570
-preplace netloc PMP_PMA_checker_0_load_ame_P 1 2 6 -510 -1370 NJ -1370 NJ -1370 750J -1210 N -1210 1550
-preplace netloc PMP_PMA_checker_0_storeAMO_ame_P 1 2 6 -520 -1350 NJ -1350 NJ -1350 720J -1190 N -1190 1560
-preplace netloc PMP_PMA_checker_0_instruction_ame_P 1 2 6 -490 -1410 -50J -1240 NJ -1240 NJ -1240 N -1240 1510
-preplace netloc PMP_PMA_checker_0_load_afe_P 1 2 6 -530 -1380 NJ -1380 NJ -1380 760J -1220 N -1220 1520
-preplace netloc PMP_PMA_checker_0_storeAMO_afe_P 1 2 6 -540 -1360 NJ -1360 NJ -1360 740J -1200 N -1200 1530
-preplace netloc PMP_PMA_checker_0_instruction_afe_P 1 2 6 -500 -1390 NJ -1390 NJ -1390 770J -1250 N -1250 1500
-preplace netloc RegisterFile_0_pmpcfg_0 1 6 1 N -1970
-preplace netloc RegisterFile_0_pmpcfg_1 1 6 1 N -1950
-preplace netloc RegisterFile_0_pmpcfg_2 1 6 1 N -1930
-preplace netloc RegisterFile_0_pmpcfg_3 1 6 1 N -1910
-preplace netloc RegisterFile_0_pmpcfg_4 1 6 1 N -1890
-preplace netloc RegisterFile_0_pmpcfg_5 1 6 1 N -1870
-preplace netloc RegisterFile_0_pmpcfg_6 1 6 1 N -1850
-preplace netloc RegisterFile_0_pmpcfg_7 1 6 1 N -1830
-preplace netloc RegisterFile_0_pmpcfg_8 1 6 1 N -1810
-preplace netloc RegisterFile_0_pmpcfg_9 1 6 1 N -1790
-preplace netloc RegisterFile_0_pmpcfg_10 1 6 1 N -1770
-preplace netloc RegisterFile_0_pmpcfg_11 1 6 1 N -1750
-preplace netloc RegisterFile_0_pmpcfg_12 1 6 1 N -1730
-preplace netloc RegisterFile_0_pmpcfg_13 1 6 1 N -1710
-preplace netloc RegisterFile_0_pmpcfg_14 1 6 1 N -1690
-preplace netloc RegisterFile_0_pmpcfg_15 1 6 1 N -1670
-preplace netloc RegisterFile_0_pmpaddr_0 1 6 1 N -1650
-preplace netloc RegisterFile_0_pmpaddr_1 1 6 1 N -1630
-preplace netloc RegisterFile_0_pmpaddr_2 1 6 1 N -1610
-preplace netloc RegisterFile_0_pmpaddr_3 1 6 1 N -1590
-preplace netloc RegisterFile_0_pmpaddr_4 1 6 1 N -1570
-preplace netloc RegisterFile_0_pmpaddr_5 1 6 1 N -1550
-preplace netloc RegisterFile_0_pmpaddr_6 1 6 1 N -1530
-preplace netloc RegisterFile_0_pmpaddr_7 1 6 1 N -1510
-preplace netloc RegisterFile_0_pmpaddr_8 1 6 1 N -1490
-preplace netloc RegisterFile_0_pmpaddr_9 1 6 1 N -1470
-preplace netloc RegisterFile_0_pmpaddr_10 1 6 1 N -1450
-preplace netloc RegisterFile_0_pmpaddr_11 1 6 1 N -1430
-preplace netloc RegisterFile_0_pmpaddr_12 1 6 1 N -1410
-preplace netloc RegisterFile_0_pmpaddr_13 1 6 1 N -1390
-preplace netloc RegisterFile_0_pmpaddr_14 1 6 1 N -1370
-preplace netloc RegisterFile_0_pmpaddr_15 1 6 1 N -1350
-preplace netloc PMP_PMA_checker_0_address_dra 1 2 6 -470 -1400 NJ -1400 NJ -1400 780J -1230 NJ -1230 1540
-preplace netloc RegisterFile_0_iie_CSR 1 2 5 -450 -2210 NJ -2210 NJ -2210 NJ -2210 1130
-preplace netloc RegisterFile_0_mti_CSR 1 2 5 -430 -2190 NJ -2190 NJ -2190 NJ -2190 1120
-preplace netloc RegisterFile_0_msi_CSR 1 2 5 -440 -2200 NJ -2200 NJ -2200 NJ -2200 1140
-preplace netloc ControlUnit_0_iie_CU 1 1 2 -1000 -2550 NJ
-preplace netloc ControlUnit_0_ece_CU 1 1 2 -970 -2530 NJ
-preplace netloc ControlUnit_0_be_CU 1 1 2 -940 -2510 NJ
-preplace netloc AXI4_lite_master_0_instruction_afe_AXI 1 2 7 -420 -2230 NJ -2230 NJ -2230 NJ -2230 NJ -2230 NJ -2230 2210
-preplace netloc AXI4_lite_master_0_storeAMO_afe_AXI 1 2 7 -480 -2220 NJ -2220 NJ -2220 NJ -2220 NJ -2220 NJ -2220 2200
-preplace netloc AXI4_lite_master_0_load_afe_AXI 1 2 7 -460 -2250 NJ -2250 NJ -2250 NJ -2250 NJ -2250 NJ -2250 2240
-preplace netloc AXI4_lite_master_0_store_systemData 1 0 9 -1450 -1140 N -1140 -570 -1140 NJ -1140 NJ -1140 NJ -1140 NJ -1140 NJ -1140 2230
-preplace netloc AXI4_lite_master_0_memOp_finished 1 0 9 -1430 -1440 NJ -1440 NJ -1440 -30J -1290 NJ -1290 NJ -1290 NJ -1290 NJ -1290 2220
-preplace netloc AXI4_lite_master_0_data_out 1 0 9 -1410 -1150 N -1150 -440 -1150 NJ -1150 NJ -1150 NJ -1150 NJ -1150 NJ -1150 2200
-preplace netloc ALU_0_branch_re 1 0 4 -1380 -1450 NJ -1450 NJ -1450 -60
-preplace netloc Exception_Control_0_PC_dra_write 1 0 4 -1400 -2090 -920J -2010 NJ -2010 -50
-preplace netloc Exception_Control_0_PC_write 1 0 4 -1440 -2100 NJ -2100 -590J -2020 -60
-preplace netloc ControlUnit_0_IR_dra 1 1 2 -1020 -2410 NJ
-preplace netloc ControlUnit_0_PC_out 1 1 2 -990 -2370 NJ
-preplace netloc ControlUnit_0_ret 1 1 2 -1030 -2350 NJ
-preplace netloc ControlUnit_0_save_CSR 1 1 5 -920J -1720 -640J -1840 NJ -1840 NJ -1840 760
-preplace netloc ControlUnit_0_write_CSR 1 1 3 -1010J -1520 NJ -1520 N
-preplace netloc ControlUnit_0_read_CSR 1 1 3 -980J -1550 NJ -1550 10
-preplace netloc ControlUnit_0_CSR_address 1 1 3 -1020J -1480 NJ -1480 N
-preplace netloc Exception_Control_0_CSR_read_EC 1 3 1 30 -2580n
-preplace netloc Exception_Control_0_CSR_write_EC 1 3 1 20 -2560n
-preplace netloc Exception_Control_0_CSR_address_EC 1 3 1 0 -2540n
-preplace netloc ControlUnit_0_DMU_IN_MUX_ctrl 1 1 2 NJ -1910 -590
-preplace netloc ControlUnit_0_DMU_OUT_MUX_ctrl 1 1 2 -920J -1750 -610
-preplace netloc ControlUnit_0_mask_ctrl 1 1 2 -1040J -1490 -640
-preplace netloc ControlUnit_0_ALU_OP 1 1 2 -990J -1560 -630
-preplace netloc ControlUnit_0_instr_finished 1 1 5 NJ -1510 -550J -1630 -10J -1670 460J -1650 N
-preplace netloc ControlUnit_0_register_write 1 1 5 -960J -1530 -580J -1660 NJ -1660 420J -1630 N
-preplace netloc ControlUnit_0_register_read_B 1 1 5 -930J -1540 -570J -1640 NJ -1640 NJ -1640 770
-preplace netloc ControlUnit_0_register_read_A 1 1 5 -950J -1500 -560J -1650 NJ -1650 410J -1620 740
-preplace netloc ControlUnit_0_PMP_rw 1 1 6 -930J -2180 NJ -2180 NJ -2180 NJ -2180 NJ -2180 1180
-preplace netloc ControlUnit_0_PMP_size 1 1 6 NJ -1950 NJ -1950 -30J -2140 NJ -2140 NJ -2140 1170
-preplace netloc ControlUnit_0_PMP_instruction 1 1 6 NJ -1970 NJ -1970 -40J -2150 NJ -2150 NJ -2150 1160
-preplace netloc ControlUnit_0_PMP_enable 1 1 6 NJ -1990 NJ -1990 NJ -1990 NJ -1990 720J -2130 1150
-preplace netloc RegisterFile_0_data_bus_B 1 0 7 -1390 -1420 NJ -1420 NJ -1420 -40J -1270 NJ -1270 NJ -1270 1120
-preplace netloc mmCSR_AXI4_slave_0_msip 1 5 1 780 -2390n
-preplace netloc mmCSR_AXI4_slave_0_mtip 1 5 1 770 -2410n
-levelinfo -pg 1 -1470 -1210 -780 -240 220 590 950 1340 2040 2260
-pagesize -pg 1 -db -bbox -sgen -1470 -2790 2260 790
+preplace port M_AXI_0 -pg 1 -lvl 7 -x 3480 -y 1600 -defaultsOSRD
+preplace port mmCSR_AXI4_s_0 -pg 1 -lvl 0 -x -10 -y 4140 -defaultsOSRD
+preplace port port-id_system_reset_async -pg 1 -lvl 0 -x -10 -y 1470 -defaultsOSRD
+preplace port port-id_system_clk -pg 1 -lvl 0 -x -10 -y 1450 -defaultsOSRD
+preplace port port-id_M_AXI_ACLK_0 -pg 1 -lvl 0 -x -10 -y 1790 -defaultsOSRD
+preplace port port-id_M_AXI_ARSTN_0 -pg 1 -lvl 0 -x -10 -y 1810 -defaultsOSRD
+preplace port port-id_mmcsr_axi4_s_aresetn_0 -pg 1 -lvl 0 -x -10 -y 4120 -defaultsOSRD
+preplace port port-id_mmcsr_axi4_s_aclk_0 -pg 1 -lvl 0 -x -10 -y 4100 -defaultsOSRD
+preplace portBus x1_0 -pg 1 -lvl 7 -x 3480 -y 2700 -defaultsOSRD
+preplace portBus x2_0 -pg 1 -lvl 7 -x 3480 -y 2720 -defaultsOSRD
+preplace portBus x3_0 -pg 1 -lvl 7 -x 3480 -y 2740 -defaultsOSRD
+preplace portBus x4_0 -pg 1 -lvl 7 -x 3480 -y 2760 -defaultsOSRD
+preplace portBus x5_0 -pg 1 -lvl 7 -x 3480 -y 2780 -defaultsOSRD
+preplace portBus x6_0 -pg 1 -lvl 7 -x 3480 -y 2800 -defaultsOSRD
+preplace portBus x7_0 -pg 1 -lvl 7 -x 3480 -y 2820 -defaultsOSRD
+preplace portBus x8_0 -pg 1 -lvl 7 -x 3480 -y 2840 -defaultsOSRD
+preplace portBus x9_0 -pg 1 -lvl 7 -x 3480 -y 2860 -defaultsOSRD
+preplace portBus x10_0 -pg 1 -lvl 7 -x 3480 -y 2880 -defaultsOSRD
+preplace portBus x11_0 -pg 1 -lvl 7 -x 3480 -y 2900 -defaultsOSRD
+preplace portBus x12_0 -pg 1 -lvl 7 -x 3480 -y 2920 -defaultsOSRD
+preplace portBus x13_0 -pg 1 -lvl 7 -x 3480 -y 2940 -defaultsOSRD
+preplace portBus x14_0 -pg 1 -lvl 7 -x 3480 -y 2960 -defaultsOSRD
+preplace portBus x15_0 -pg 1 -lvl 7 -x 3480 -y 2980 -defaultsOSRD
+preplace portBus x16_0 -pg 1 -lvl 7 -x 3480 -y 3000 -defaultsOSRD
+preplace portBus x17_0 -pg 1 -lvl 7 -x 3480 -y 3020 -defaultsOSRD
+preplace portBus x18_0 -pg 1 -lvl 7 -x 3480 -y 3040 -defaultsOSRD
+preplace portBus x19_0 -pg 1 -lvl 7 -x 3480 -y 3060 -defaultsOSRD
+preplace portBus x20_0 -pg 1 -lvl 7 -x 3480 -y 3080 -defaultsOSRD
+preplace portBus x21_0 -pg 1 -lvl 7 -x 3480 -y 3100 -defaultsOSRD
+preplace portBus x22_0 -pg 1 -lvl 7 -x 3480 -y 3120 -defaultsOSRD
+preplace portBus x23_0 -pg 1 -lvl 7 -x 3480 -y 3140 -defaultsOSRD
+preplace portBus x24_0 -pg 1 -lvl 7 -x 3480 -y 3160 -defaultsOSRD
+preplace portBus x25_0 -pg 1 -lvl 7 -x 3480 -y 3180 -defaultsOSRD
+preplace portBus x26_0 -pg 1 -lvl 7 -x 3480 -y 3200 -defaultsOSRD
+preplace portBus x27_0 -pg 1 -lvl 7 -x 3480 -y 3220 -defaultsOSRD
+preplace portBus x28_0 -pg 1 -lvl 7 -x 3480 -y 3240 -defaultsOSRD
+preplace portBus x29_0 -pg 1 -lvl 7 -x 3480 -y 3260 -defaultsOSRD
+preplace portBus x30_0 -pg 1 -lvl 7 -x 3480 -y 3280 -defaultsOSRD
+preplace portBus x31_0 -pg 1 -lvl 7 -x 3480 -y 3300 -defaultsOSRD
+preplace portBus mcycle_debug_0 -pg 1 -lvl 7 -x 3480 -y 3320 -defaultsOSRD
+preplace portBus mcycleH_debug_0 -pg 1 -lvl 7 -x 3480 -y 3340 -defaultsOSRD
+preplace portBus minstret_debug_0 -pg 1 -lvl 7 -x 3480 -y 3360 -defaultsOSRD
+preplace portBus minstretH_debug_0 -pg 1 -lvl 7 -x 3480 -y 3380 -defaultsOSRD
+preplace portBus mcountinhibit_debug_0 -pg 1 -lvl 7 -x 3480 -y 3400 -defaultsOSRD
+preplace portBus mstatus_debug_0 -pg 1 -lvl 7 -x 3480 -y 3420 -defaultsOSRD
+preplace portBus misa_debug_0 -pg 1 -lvl 7 -x 3480 -y 3440 -defaultsOSRD
+preplace portBus mie_debug_0 -pg 1 -lvl 7 -x 3480 -y 3460 -defaultsOSRD
+preplace portBus mtvec_debug_0 -pg 1 -lvl 7 -x 3480 -y 3480 -defaultsOSRD
+preplace portBus mscratch_debug_0 -pg 1 -lvl 7 -x 3480 -y 3500 -defaultsOSRD
+preplace portBus mepc_debug_0 -pg 1 -lvl 7 -x 3480 -y 3520 -defaultsOSRD
+preplace portBus mcause_debug_0 -pg 1 -lvl 7 -x 3480 -y 3540 -defaultsOSRD
+preplace portBus mtval_debug_0 -pg 1 -lvl 7 -x 3480 -y 3560 -defaultsOSRD
+preplace portBus mip_debug_0 -pg 1 -lvl 7 -x 3480 -y 3580 -defaultsOSRD
+preplace portBus IR_debug -pg 1 -lvl 7 -x 3480 -y 90 -defaultsOSRD
+preplace portBus PC_debug -pg 1 -lvl 7 -x 3480 -y 110 -defaultsOSRD
+preplace inst ALU_0 -pg 1 -lvl 2 -x 520 -y 780 -defaultsOSRD
+preplace inst AXI4_lite_master_0 -pg 1 -lvl 6 -x 2930 -y 1660 -defaultsOSRD
+preplace inst ControlUnit_0 -pg 1 -lvl 6 -x 2930 -y 350 -defaultsOSRD
+preplace inst DataMaskUnit_0 -pg 1 -lvl 3 -x 950 -y 1040 -defaultsOSRD
+preplace inst Exception_Control_0 -pg 1 -lvl 4 -x 1730 -y 1230 -defaultsOSRD
+preplace inst LoadBufferRegister_0 -pg 1 -lvl 2 -x 520 -y 1440 -defaultsOSRD
+preplace inst MUX_A -pg 1 -lvl 1 -x 190 -y 770 -defaultsOSRD
+preplace inst MUX_B -pg 1 -lvl 1 -x 190 -y 950 -defaultsOSRD
+preplace inst MUX_EC_CSR -pg 1 -lvl 5 -x 2340 -y 1170 -defaultsOSRD
+preplace inst MUX_EC_RF_in -pg 1 -lvl 5 -x 2340 -y 1350 -defaultsOSRD
+preplace inst MUX_R -pg 1 -lvl 4 -x 1730 -y 850 -defaultsOSRD
+preplace inst PMP_PMA_checker_0 -pg 1 -lvl 4 -x 1730 -y 3290 -defaultsOSRD
+preplace inst mmCSR_AXI4_slave_0 -pg 1 -lvl 6 -x 2930 -y 4040 -defaultsOSRD -orient R180
+preplace inst RegisterFile_1 -pg 1 -lvl 6 -x 2930 -y 2770 -defaultsOSRD
+preplace inst DEMUX_32_2_0 -pg 1 -lvl 4 -x 1730 -y 1600 -defaultsOSRD -orient R180
+preplace inst MUX_PMP -pg 1 -lvl 3 -x 950 -y 860 -defaultsOSRD
+preplace netloc ALU_0_branch_re 1 2 4 690J 640 NJ 640 NJ 640 2530
+preplace netloc AXI4_lite_master_0_data_out 1 1 6 350 1350 690J 1500 NJ 1500 NJ 1500 2600 1500 3170
+preplace netloc AXI4_lite_master_0_instruction_afe_AXI 1 3 4 1350 1820 NJ 1820 NJ 1820 3130
+preplace netloc AXI4_lite_master_0_load_afe_AXI 1 3 4 1230 1830 NJ 1830 NJ 1830 3120
+preplace netloc AXI4_lite_master_0_memOp_finished 1 5 2 2690 720 3160
+preplace netloc AXI4_lite_master_0_storeAMO_afe_AXI 1 3 4 1240 1840 NJ 1840 NJ 1840 3180
+preplace netloc AXI4_lite_master_0_store_systemData 1 1 6 350 1530 NJ 1530 NJ 1530 NJ 1530 2540 1510 3120
+preplace netloc ControlUnit_0_ALU_OP 1 1 6 350 680 NJ 680 NJ 680 NJ 680 NJ 680 3140
+preplace netloc ControlUnit_0_CSR_address 1 4 3 2090 1040 NJ 1040 3230
+preplace netloc ControlUnit_0_DMU_IN_MUX_ctrl 1 2 5 720 740 NJ 740 NJ 740 NJ 740 3370
+preplace netloc ControlUnit_0_DMU_OUT_MUX_ctrl 1 2 5 730 750 NJ 750 NJ 750 NJ 750 3360
+preplace netloc ControlUnit_0_IR_dra 1 3 4 1340 30 NJ 30 NJ 30 3460
+preplace netloc ControlUnit_0_PC_out 1 0 7 50 1030 NJ 1030 690 940 1160 940 NJ 940 NJ 940 3460
+preplace netloc ControlUnit_0_PMP_enable 1 3 4 1140 4030 NJ 4030 2570J 3660 3440
+preplace netloc ControlUnit_0_PMP_instruction 1 3 4 1370 1710 2030J 1440 NJ 1440 3420
+preplace netloc ControlUnit_0_PMP_rw 1 3 4 1190 3900 NJ 3900 NJ 3900 3450
+preplace netloc ControlUnit_0_PMP_size 1 3 4 1400 1760 2050J 1450 NJ 1450 3410
+preplace netloc ControlUnit_0_be_CU 1 3 4 1420 1680 NJ 1680 2550J 1430 3150
+preplace netloc ControlUnit_0_ece_CU 1 3 4 1410 1800 2100J 1810 NJ 1810 3400
+preplace netloc ControlUnit_0_iie_CU 1 3 4 1430 1510 2020J 1460 NJ 1460 3210
+preplace netloc ControlUnit_0_instr_finished 1 5 2 2670 770 3130
+preplace netloc ControlUnit_0_mask_ctrl 1 2 5 730 1520 NJ 1520 2040J 1490 NJ 1490 3380
+preplace netloc ControlUnit_0_read_CSR 1 4 3 2110 1470 NJ 1470 3390
+preplace netloc ControlUnit_0_register_read_A 1 5 2 2640 700 3160
+preplace netloc ControlUnit_0_register_read_B 1 5 2 2660 780 3240
+preplace netloc ControlUnit_0_register_write 1 5 2 2690 3640 3430
+preplace netloc ControlUnit_0_ret 1 3 4 1460 1670 2060J 1480 NJ 1480 3180
+preplace netloc ControlUnit_0_save_CSR 1 5 2 2690 790 3190
+preplace netloc ControlUnit_0_write_CSR 1 4 3 2150 1050 NJ 1050 3220
+preplace netloc DataMaskUnit_0_data_store 1 3 3 1150J 1750 NJ 1750 N
+preplace netloc Exception_Control_0_CSR_address_EC 1 4 1 2060 1210n
+preplace netloc Exception_Control_0_CSR_read_EC 1 4 1 2000 1150n
+preplace netloc Exception_Control_0_CSR_write_EC 1 4 1 N 1190
+preplace netloc Exception_Control_0_PC_dra_write 1 4 2 1980J 650 2550
+preplace netloc Exception_Control_0_PC_write 1 4 2 1990J 660 2560
+preplace netloc Exception_Control_0_halt_core 1 4 2 2010 1560 2630
+preplace netloc LoadBufferRegister_0_data_out 1 2 1 710 1080n
+preplace netloc MUX_A_C_out 1 1 1 340 770n
+preplace netloc MUX_B_C_out 1 1 1 340 800n
+preplace netloc MUX_EC_CSR_CSR_address 1 5 1 2570 1190n
+preplace netloc MUX_EC_CSR_read_CSR 1 5 1 2590 1150n
+preplace netloc MUX_EC_CSR_write_CSR 1 5 1 2580 1170n
+preplace netloc MUX_EC_RF_in_C_out 1 5 1 2560 1350n
+preplace netloc PMP_PMA_checker_0_address_dra 1 3 2 1440 1780 1920
+preplace netloc PMP_PMA_checker_0_address_out 1 4 2 2130 1730 NJ
+preplace netloc PMP_PMA_checker_0_enable_out 1 4 2 2110 1610 NJ
+preplace netloc PMP_PMA_checker_0_instruction_afe_P 1 3 2 1220 1720 1960
+preplace netloc PMP_PMA_checker_0_instruction_ame_P 1 3 2 1370 1700 1950
+preplace netloc PMP_PMA_checker_0_instruction_out 1 4 2 2140 1650 NJ
+preplace netloc PMP_PMA_checker_0_load_afe_P 1 3 2 1450 960 1970
+preplace netloc PMP_PMA_checker_0_load_ame_P 1 3 2 1200 1910 1910
+preplace netloc PMP_PMA_checker_0_readWrite_out 1 4 2 2120 1630 NJ
+preplace netloc PMP_PMA_checker_0_size_out 1 4 2 2150 1670 NJ
+preplace netloc PMP_PMA_checker_0_storeAMO_afe_P 1 3 2 1190 1920 1940
+preplace netloc PMP_PMA_checker_0_storeAMO_ame_P 1 3 2 1210 1900 1930
+preplace netloc mmCSR_AXI4_slave_0_msip 1 5 1 2650 2710n
+preplace netloc mmCSR_AXI4_slave_0_mtip 1 5 1 2680 2730n
+preplace netloc RegisterFile_1_pmpcfg_0 1 3 4 1380 1870 NJ 1870 NJ 1870 3160
+preplace netloc RegisterFile_1_pmpcfg_1 1 3 4 1220 3820 NJ 3820 NJ 3820 3410
+preplace netloc RegisterFile_1_pmpcfg_2 1 3 4 1230 3830 NJ 3830 NJ 3830 3400
+preplace netloc RegisterFile_1_pmpcfg_3 1 3 4 1240 3840 NJ 3840 NJ 3840 3390
+preplace netloc RegisterFile_1_pmpcfg_4 1 3 4 1250 3850 NJ 3850 NJ 3850 3380
+preplace netloc RegisterFile_1_pmpcfg_5 1 3 4 1260 3860 NJ 3860 NJ 3860 3370
+preplace netloc RegisterFile_1_pmpcfg_6 1 3 4 1270 3870 NJ 3870 NJ 3870 3360
+preplace netloc RegisterFile_1_pmpcfg_7 1 3 4 1280 3880 NJ 3880 NJ 3880 3350
+preplace netloc RegisterFile_1_pmpcfg_8 1 3 4 1150 4000 NJ 4000 2550J 3680 3200
+preplace netloc RegisterFile_1_pmpcfg_9 1 3 4 1160 4010 NJ 4010 2590J 3710 3260
+preplace netloc RegisterFile_1_pmpcfg_10 1 3 4 1170 4020 NJ 4020 2620J 3720 3250
+preplace netloc RegisterFile_1_pmpcfg_11 1 3 4 1210 3980 NJ 3980 2640J 3760 3270
+preplace netloc RegisterFile_1_pmpcfg_12 1 3 4 1290 3890 NJ 3890 NJ 3890 3340
+preplace netloc RegisterFile_1_pmpcfg_13 1 3 4 1180 4120 NJ 4120 NJ 4120 3420
+preplace netloc RegisterFile_1_pmpcfg_14 1 3 4 1200 4040 NJ 4040 2610J 3690 3170
+preplace netloc RegisterFile_1_pmpcfg_15 1 3 4 1380 3760 NJ 3760 2600J 3750 3190
+preplace netloc RegisterFile_1_pmpaddr_0 1 3 4 1390 3770 NJ 3770 NJ 3770 3240
+preplace netloc RegisterFile_1_pmpaddr_1 1 3 4 1400 3780 NJ 3780 NJ 3780 3230
+preplace netloc RegisterFile_1_pmpaddr_2 1 3 4 1410 3790 NJ 3790 NJ 3790 3220
+preplace netloc RegisterFile_1_pmpaddr_3 1 3 4 1420 3800 NJ 3800 NJ 3800 3210
+preplace netloc RegisterFile_1_pmpaddr_4 1 3 4 1440 3730 NJ 3730 2530J 3700 3140
+preplace netloc RegisterFile_1_pmpaddr_5 1 3 4 1450 3740 NJ 3740 2560J 3730 3160
+preplace netloc RegisterFile_1_pmpaddr_6 1 3 4 1460 3750 NJ 3750 2580J 3740 3150
+preplace netloc RegisterFile_1_pmpaddr_7 1 3 4 1430 3810 NJ 3810 NJ 3810 3180
+preplace netloc RegisterFile_1_pmpaddr_8 1 3 4 1320 3910 NJ 3910 NJ 3910 3320
+preplace netloc RegisterFile_1_pmpaddr_9 1 3 4 1330 3920 NJ 3920 NJ 3920 3310
+preplace netloc RegisterFile_1_pmpaddr_10 1 3 4 1340 3930 NJ 3930 NJ 3930 3300
+preplace netloc RegisterFile_1_pmpaddr_11 1 3 4 1300 3960 NJ 3960 NJ 3960 3330
+preplace netloc RegisterFile_1_pmpaddr_12 1 3 4 1360 3940 NJ 3940 NJ 3940 3290
+preplace netloc RegisterFile_1_pmpaddr_13 1 3 4 1370 3950 NJ 3950 NJ 3950 3280
+preplace netloc RegisterFile_1_pmpaddr_14 1 3 4 1350 3970 2030J 3650 NJ 3650 3120
+preplace netloc RegisterFile_1_pmpaddr_15 1 3 4 1310 3990 NJ 3990 2540J 3670 3130
+preplace netloc RegisterFile_1_x1 1 6 1 NJ 2700
+preplace netloc RegisterFile_1_x2 1 6 1 NJ 2720
+preplace netloc RegisterFile_1_x3 1 6 1 NJ 2740
+preplace netloc RegisterFile_1_x4 1 6 1 NJ 2760
+preplace netloc RegisterFile_1_x5 1 6 1 NJ 2780
+preplace netloc RegisterFile_1_x6 1 6 1 NJ 2800
+preplace netloc RegisterFile_1_x7 1 6 1 NJ 2820
+preplace netloc RegisterFile_1_x8 1 6 1 NJ 2840
+preplace netloc RegisterFile_1_x9 1 6 1 NJ 2860
+preplace netloc RegisterFile_1_x10 1 6 1 NJ 2880
+preplace netloc RegisterFile_1_x11 1 6 1 NJ 2900
+preplace netloc RegisterFile_1_x12 1 6 1 NJ 2920
+preplace netloc RegisterFile_1_x13 1 6 1 NJ 2940
+preplace netloc RegisterFile_1_x14 1 6 1 NJ 2960
+preplace netloc RegisterFile_1_x15 1 6 1 NJ 2980
+preplace netloc RegisterFile_1_x16 1 6 1 NJ 3000
+preplace netloc RegisterFile_1_x17 1 6 1 NJ 3020
+preplace netloc RegisterFile_1_x18 1 6 1 NJ 3040
+preplace netloc RegisterFile_1_x19 1 6 1 NJ 3060
+preplace netloc RegisterFile_1_x20 1 6 1 NJ 3080
+preplace netloc RegisterFile_1_x21 1 6 1 NJ 3100
+preplace netloc RegisterFile_1_x22 1 6 1 NJ 3120
+preplace netloc RegisterFile_1_x23 1 6 1 NJ 3140
+preplace netloc RegisterFile_1_x24 1 6 1 NJ 3160
+preplace netloc RegisterFile_1_x25 1 6 1 NJ 3180
+preplace netloc RegisterFile_1_x26 1 6 1 NJ 3200
+preplace netloc RegisterFile_1_x27 1 6 1 NJ 3220
+preplace netloc RegisterFile_1_x28 1 6 1 NJ 3240
+preplace netloc RegisterFile_1_x29 1 6 1 NJ 3260
+preplace netloc RegisterFile_1_x30 1 6 1 NJ 3280
+preplace netloc RegisterFile_1_x31 1 6 1 NJ 3300
+preplace netloc RegisterFile_1_mcycle_debug 1 6 1 NJ 3320
+preplace netloc RegisterFile_1_mcycleH_debug 1 6 1 NJ 3340
+preplace netloc RegisterFile_1_minstret_debug 1 6 1 NJ 3360
+preplace netloc RegisterFile_1_minstretH_debug 1 6 1 NJ 3380
+preplace netloc RegisterFile_1_mcountinhibit_debug 1 6 1 NJ 3400
+preplace netloc RegisterFile_1_mstatus_debug 1 6 1 NJ 3420
+preplace netloc RegisterFile_1_misa_debug 1 6 1 NJ 3440
+preplace netloc RegisterFile_1_mie_debug 1 6 1 NJ 3460
+preplace netloc RegisterFile_1_mtvec_debug 1 6 1 NJ 3480
+preplace netloc RegisterFile_1_mscratch_debug 1 6 1 NJ 3500
+preplace netloc RegisterFile_1_mepc_debug 1 6 1 NJ 3520
+preplace netloc RegisterFile_1_mcause_debug 1 6 1 NJ 3540
+preplace netloc RegisterFile_1_mtval_debug 1 6 1 NJ 3560
+preplace netloc RegisterFile_1_mip_debug 1 6 1 NJ 3580
+preplace netloc RegisterFile_1_iie_CSR 1 3 4 1380 1860 NJ 1860 NJ 1860 3150
+preplace netloc RegisterFile_1_mti_CSR 1 3 4 1390 1880 NJ 1880 NJ 1880 3130
+preplace netloc RegisterFile_1_msi_CSR 1 3 4 1360 1890 NJ 1890 NJ 1890 3120
+preplace netloc RegisterFile_1_data_bus_B 1 4 3 2070 1620 2600J 1900 3140
+preplace netloc DEMUX_32_2_0_B_out 1 3 1 1450 1320n
+preplace netloc DEMUX_32_2_0_A_out 1 0 6 40 690 330J 700 NJ 700 1180 380 NJ 380 NJ
+preplace netloc ControlUnit_0_A_MUX_ctrl 1 0 7 10 20 NJ 20 NJ 20 NJ 20 NJ 20 NJ 20 3210
+preplace netloc ControlUnit_0_B_MUX_ctrl 1 0 7 30 680 340J 690 NJ 690 NJ 690 NJ 690 NJ 690 3170
+preplace netloc ControlUnit_0_immediate 1 0 7 20 670 NJ 670 NJ 670 NJ 670 NJ 670 NJ 670 3120
+preplace netloc RegisterFile_1_data_bus_A 1 0 7 20 1060 NJ 1060 700 1490 1140J 1850 NJ 1850 NJ 1850 3170
+preplace netloc ALU_0_alu_result 1 2 2 700 780 1160
+preplace netloc DataMaskUnit_0_data_load 1 3 1 1150 850n
+preplace netloc ControlUnit_0_R_MUX_ctrl 1 3 4 1450 760 NJ 760 NJ 760 3350
+preplace netloc MUX_R_C_out 1 4 1 2080 850n
+preplace netloc Exception_Control_0_data_out_EC 1 4 1 2050 1230n
+preplace netloc MUX_PMP_C_out 1 3 1 1130 860n
+preplace netloc ControlUnit_0_PMP_MUX_ctrl 1 2 5 710 710 NJ 710 NJ 710 NJ 710 3200
+preplace netloc reset_0_1 1 0 6 NJ 1470 330 1550 NJ 1550 1170 1690 NJ 1690 2610
+preplace netloc clk_0_1 1 0 6 NJ 1450 340 1540 NJ 1540 1160 1740 NJ 1740 2620
+preplace netloc M_AXI_ACLK_0_1 1 0 6 NJ 1790 NJ 1790 NJ 1790 NJ 1790 2080J 1570 NJ
+preplace netloc M_AXI_ARSTN_0_1 1 0 6 NJ 1810 NJ 1810 NJ 1810 NJ 1810 2090J 1590 NJ
+preplace netloc mmcsr_axi4_s_aresetn_0_1 1 0 7 20J 4160 NJ 4160 NJ 4160 NJ 4160 NJ 4160 NJ 4160 3140
+preplace netloc mmcsr_axi4_s_aclk_0_1 1 0 7 40J 4150 NJ 4150 NJ 4150 NJ 4150 NJ 4150 NJ 4150 3130
+preplace netloc AXI4_lite_master_0_M_AXI 1 6 1 NJ 1600
+preplace netloc mmCSR_AXI4_s_0_1 1 0 7 NJ 4140 NJ 4140 NJ 4140 NJ 4140 NJ 4140 NJ 4140 3120
+levelinfo -pg 1 -10 190 520 950 1730 2340 2930 3480
+pagesize -pg 1 -db -bbox -sgen -240 0 3750 4170
 "
 }
 
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  validate_bd_design
   save_bd_design
-common::send_gid_msg -ssname BD::TCL -id 2050 -severity "WARNING" "This Tcl script was generated from a block design that has not been validated. It is possible that design <$design_name> may result in errors during validation."
-
   close_bd_design $design_name 
 }
 # End of cr_bd_EDRICO()
@@ -2782,10 +3090,10 @@ make_wrapper -files [get_files EDRICO.bd] -import -top
 
 # Create 'synth_1' run (if not found)
 if {[string equal [get_runs -quiet synth_1] ""]} {
-    create_run -name synth_1 -part xc7z020clg400-1 -flow {Vivado Synthesis 2020} -strategy "Vivado Synthesis Defaults" -report_strategy {No Reports} -constrset constrs_1
+    create_run -name synth_1 -part xc7z020clg400-1 -flow {Vivado Synthesis 2021} -strategy "Vivado Synthesis Defaults" -report_strategy {No Reports} -constrset constrs_1
 } else {
   set_property strategy "Vivado Synthesis Defaults" [get_runs synth_1]
-  set_property flow "Vivado Synthesis 2020" [get_runs synth_1]
+  set_property flow "Vivado Synthesis 2021" [get_runs synth_1]
 }
 set obj [get_runs synth_1]
 set_property set_report_strategy_name 1 $obj
@@ -2807,10 +3115,10 @@ current_run -synthesis [get_runs synth_1]
 
 # Create 'impl_1' run (if not found)
 if {[string equal [get_runs -quiet impl_1] ""]} {
-    create_run -name impl_1 -part xc7z020clg400-1 -flow {Vivado Implementation 2020} -strategy "Vivado Implementation Defaults" -report_strategy {No Reports} -constrset constrs_1 -parent_run synth_1
+    create_run -name impl_1 -part xc7z020clg400-1 -flow {Vivado Implementation 2021} -strategy "Vivado Implementation Defaults" -report_strategy {No Reports} -constrset constrs_1 -parent_run synth_1
 } else {
   set_property strategy "Vivado Implementation Defaults" [get_runs impl_1]
-  set_property flow "Vivado Implementation 2020" [get_runs impl_1]
+  set_property flow "Vivado Implementation 2021" [get_runs impl_1]
 }
 set obj [get_runs impl_1]
 set_property set_report_strategy_name 1 $obj
