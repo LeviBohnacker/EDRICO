@@ -26,6 +26,8 @@ Each one of the components will be described in more detail in the following sec
 
 \section{Control Unit}
 The \ac{CU} is the heart of the processor and controls the other parts of the processor depending on the input instruction. The CU is responsible for fetching instructions from the instruction memory, decode the bitstream and set the respective control signals for the other processor components. Due to the complexity of the CU, there are several sub-modules which together form the overall CU.
+\subsection{Architecture \& Design}
+\label{CU_arch}
 A general overview of the CU architecture is displayed in Figure \ref{fig:cuarchitecture}. 
 
 \begin{figure}[H]
@@ -74,6 +76,101 @@ Table \ref{tableFSM} shows a more detailed overview of the clock cycles and the 
 
 During an execution cycle, the FSM controls the rest of the CU consisting of memory, decoding unit, PC control and the different multiplexers. To understand what the purpose of the different signals are, the other components of the Control Unit are described in the following sections.
 
+After loading an instruction from the memory to the instruction register, the decoding process can begin. The responsible part for this process is the decoding unit which is described below.(Also visible in figure \ref{fig:cuarchitecture})\\
+In this project the RISC-V RS32I instruction set is used which consists of 32-bit instruction words. The instruction words have a pre-defined structure and are divided into six instruction formats.
+The instruction formats are shown in Figure \ref{fig:instrtypes}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{instr_types.png}
+	\caption{RISC-V Instruction formats \cite{riscv}}
+	\label{fig:instrtypes}
+\end{figure}
+The different instruction formats are useful for the decoding process since e.g. all LOAD instructions have the same structure and therefore, the effort to decode the 32-bit word can be reduced. Since the control signals are unique for every instruction and depending on the content of the 32-bit word, the decoder has to identify the encoded instruction, extract the information and respectively set the control signals, calculate immediates and control the multiplexers. A more detailed description of the decoding process can be found in section \ref{CU_impl}.\\
+After the instruction is decoded, all output control signals are stable and ready to be fed through. Before leaving the CU, the \textit{Execute Buffer} (figure \ref{fig:cuarchitecture}) buffers the control signals. Once the FSM sets the \textit{execute\_enable} flag, the control signals are fed through. This buffer prevents the processor to confuse timing and clock cycles, or use signals which are not yet set correctly.\\
+During an instruction execution, the program counter has to be incremented for the processor to know what instruction will follow. \textit{But} since there are several instructions that modify the program counter, a so called \textit{PC control} is designed. The PC control receives information from the decoder which consists of a 4 bit signal. The different instructions and the respective action as well as the respective control signal are shown in following table \ref{PCcontrol}:\clearpage
+
+\begin{table}[h]
+	\resizebox{\textwidth}{!}{
+		\begin{tabular}{|l|l|l|}
+			\hline
+			\textbf{Instruction} & \textbf{Action} & \textbf{Control Signal}\\
+			\hline
+			Default & No action required & \textbf{0000}\\
+			\hline
+			Branch & Depending on the result of branch operation, PC will be incremented respectively & \textbf{0010}\\
+			\hline
+			JAL & Target address obtained by adding current PC and immediate, rejump address stored in register & \textbf{0100}\\
+			\hline
+			JALR & Target address obtained by adding input register to immediate & \textbf{1000}\\
+			\hline
+		\end{tabular}}
+	\label{PCcontrol}
+	\caption{Program Counter control: Instructions and resulting actions}
+\end{table}
+For instructions which do not influence the program counter, the standard operation performs the \textbf{PC + 4} operation.
+
+The instruction register displayed in figure \ref{fig:cuarchitecture} manages the instruction string coming from the memory.
+All of these parts together form the Control Unit and are responsible for the correct execution of the instructions. The implementation of the sub-units in VHDL are described in the following section \ref{CU_impl}.\clearpage
+
+\subsection{Implementation}
+\label{CU_impl}
+The implementation of the Control Unit is split up into multiple sub-implementations. As shown in figure \ref{fig:cuarchitecture} those sub-modules are the \textit{FSM, decoder, execute\_buffer, PC control and instruction register}. Since the implementation of the FSM is very similar to other FSM implementations in this project, the detailed description of a FSM in VHDL is found in the next chapters.\\
+In this section the implementation of the decoder will be described more closely.
+As already described in section \ref{CU_arch} the instructions can be separated in different instruction formats. To distinguish the different instructions, so-called \textit{instruction clusters} are created. These clusters sum up instructions which are encoded in the same instruction format or in general are similar.
+The following table shows the different clusters and the corresponding instructions:
+\begin{table}[h]
+		\begin{tabular}{|l|l|}
+			\hline
+			\textbf{Cluster} & \textbf{Instructions}\\
+		
+			\hline
+			LOAD & Load - Byte \textbackslash Halfword \textbackslash Word\\
+			
+			\hline
+			STORE & Store - Byte \textbackslash Halfword \textbackslash Word\\
+			
+			\hline
+			BRANCH & Different Branch Instructions (e.b. Branch if equal)\\
+			
+			\hline
+			JALR & only JALR, since it has a unique instruction structure\\
+			
+			\hline
+			JAL & only JAL, since it has a unique instruction structure\\
+			
+			\hline
+			OP & All arithmetic instructions like ADD, SUB, shift and comparisons\\
+			
+			\hline
+			OP-IMM & All arithmetic instructions performed with immediate\\
+			\hline
+			AUIPC & only AUIPC, since it has a unique instruction structure\\
+			\hline
+			LUI & only LUI, since it has a unique instruction structure\\
+			\hline			
+	\end{tabular}
+	\label{instructioncluster}
+	\caption{Decoding instruction clusters}
+\end{table}
+
+
+To determine the cluster for each instruction, a decoding procedure is implemented in VHDL based on structure visualized in figure \ref{fig:decode_structure}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 120mm]{Decode_Structure}
+	\caption{Decoding Structure to determine instruction cluster}
+	\label{fig:decode_structure}
+\end{figure}
+After determining the cluster, the VHDL code assigns all the outputs visible in figure \ref{fig:cuarchitecture} with the respective information. For a better understanding of the information extraction, figure \ref{fig:instruction_bits} shows how the 32-bit instruction word is split up (in this case for the \textit{OP} and \textit{OP-IMM} instructions.)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 200mm,angle = 270, origin = c]{instruction_bits}
+	\caption{Information extraction from 32-bit instruction word}
+	\label{fig:instruction_bits}
+\end{figure}
+
 \section{ALU}
 \subsection{Architecture \& Design}
 \subsection{Implementation}
@@ -97,5 +194,3 @@ During an execution cycle, the FSM controls the rest of the CU consisting of mem
 \section{AXI4-Lite Slave}
 \subsection{Architecture \& Design}
 \subsection{Implementation}
-
-
