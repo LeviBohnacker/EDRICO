@@ -351,7 +351,6 @@ begin
 end process;
 
 IR_dra <= IR;
-
 ----------------------------------------------------------------------------------
 --PMP multiplexer
 --  multiplexer to connect the PMP_PMA_checker signals to either the execution

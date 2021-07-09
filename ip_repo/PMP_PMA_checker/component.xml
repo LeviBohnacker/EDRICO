@@ -74,7 +74,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>97c1e091</spirit:value>
+            <spirit:value>1cb768c7</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -964,6 +964,11 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
+      <spirit:file>
+        <spirit:name>src/PMP_lib/PMP_PMA_checker.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
+      </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
       <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
@@ -1005,11 +1010,11 @@
       </xilinx:taxonomies>
       <xilinx:displayName>PMP_PMA_checker_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>user.org:user:PMP_PMA_checker:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2021-07-07T10:54:04Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2021-07-09T14:49:22Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.df@58aefd0f_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@e9b13f3_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
@@ -1026,12 +1031,36 @@
         <xilinx:tag xilinx:name="ui.data.coregen.df@550ed28a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@251eaa37_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@6f9e5138_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@27d62523_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@518ad754_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1c03c345_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71e98f0b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@d8f1282_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@41136a82_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@528345ea_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@addce58_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@9670c16_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@579a3de1_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1733618e_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5b4f7dee_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@e2a2085_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@32ebb5bd_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@65ba2465_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@140aa10c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@155fad31_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ac240e9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@10c80107_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@bc37856_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4a084b02_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@37e66ccf_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4295f049_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@f2096dd_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/PMP_PMA_checker</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="50102c5c"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b1a8536e"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="ca5f97a2"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="cc610b63"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="dc2f9fe9"/>
     </xilinx:packagingInfo>

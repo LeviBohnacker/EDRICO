@@ -58,7 +58,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>967dd604</spirit:value>
+            <spirit:value>637524c8</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -74,7 +74,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>0e8bb332</spirit:value>
+            <spirit:value>637524c8</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -1683,10 +1683,10 @@
         <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
-        <spirit:name>src/PMP_lib/PMP_PMA_pkg.vhd</spirit:name>
+        <spirit:name>src/RF_lib/PMP_PMA_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>PMP_lib</spirit:logicalName>
+        <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/RF_lib/CSR_pkg.vhd</spirit:name>
@@ -1726,43 +1726,41 @@
         <spirit:name>src/RF_lib/CSR_controller.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/RF_lib/CSR_interrupt_gen.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
-        <spirit:name>src/PMP_lib/PMP_PMA_pkg.vhd</spirit:name>
+        <spirit:name>src/RF_lib/PMP_PMA_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>PMP_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/RF_lib/CSR_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/RF_lib/CSR_top.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/RF_lib/RF_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>RF_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/RF_lib/RV32I_RF.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>RF_lib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/RF_lib/RegisterFile_top.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1805,11 +1803,11 @@
       </xilinx:taxonomies>
       <xilinx:displayName>RegisterFile_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:coreRevision>4</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>user.org:user:RegisterFile_top:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2021-07-09T09:41:48Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2021-07-09T14:51:09Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.df@13a82e3d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@269bf1df_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
@@ -1870,12 +1868,48 @@
         <xilinx:tag xilinx:name="ui.data.coregen.df@72d823ad_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@2869f718_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@53518f3a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@76f99fab_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@389402d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d9902be_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@21bd909_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@59904670_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2462d0d2_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a4860c9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7d2aa135_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@701a632a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d157c20_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d6c6fad_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6cce0a39_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@8ada9c2_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@167d1177_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50034907_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1205aa28_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@75ac14f8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1a08952a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@399a6704_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@75e4d47a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1c830f5d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6d7d1a93_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@aadf28b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@43505914_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@313a6602_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@608a3cb5_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@37358a01_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2d68fcfa_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7604c252_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@12ace862_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@8b874c8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1751b572_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@420af08e_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6df3c5f_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1719a299_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6f5cf891_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/RegisterFile</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="50102c5c"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b427a214"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b17cbf31"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="14b7c6b3"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="b18eb1dd"/>
     </xilinx:packagingInfo>

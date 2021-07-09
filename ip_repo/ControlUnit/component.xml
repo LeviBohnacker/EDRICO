@@ -58,7 +58,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c3c13d58</spirit:value>
+            <spirit:value>b2e7c34d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -74,7 +74,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>5035ad23</spirit:value>
+            <spirit:value>b2e7c34d</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -669,7 +669,7 @@
       <spirit:file>
         <spirit:name>src/CU_lib/CU_top.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_218943e1</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_42e36e84</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
         <spirit:logicalName>CU_lib</spirit:logicalName>
       </spirit:file>
@@ -702,6 +702,12 @@
       </spirit:file>
       <spirit:file>
         <spirit:name>src/CU_lib/CU_pkg.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
+        <spirit:logicalName>CU_lib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/CU_lib/CU_top.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
         <spirit:logicalName>CU_lib</spirit:logicalName>
@@ -747,11 +753,11 @@
       </xilinx:taxonomies>
       <xilinx:displayName>ControlUnit_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>6</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>user.org:user:CU_top:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2021-07-07T10:51:56Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2021-07-09T15:44:00Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.df@4f3ae66a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@187330bf_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
@@ -765,12 +771,117 @@
         <xilinx:tag xilinx:name="ui.data.coregen.df@26250efe_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@2e1fba2f_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@6332af69_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@f8bb612_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2dc3aa17_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2aaa1fff_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6cf305d3_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6b455457_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2940f921_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@53e94be4_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3e099a45_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@b080be4_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7bb23743_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@43901ad3_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4fe59ab4_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29514222_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6d95077c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@50d32d02_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@72455149_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4572a1d6_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@693eeb53_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7f3206a5_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4529db81_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@73305360_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5a20256f_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@116f56a5_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@fe8a602_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3561f6b9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@291ccbaa_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@14ed85a6_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@74936f4a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@62297fc5_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@56d4f012_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@355e1307_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@32d7e290_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5351b30_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3dfccb69_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@62f5954e_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@393df9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d7dd27f_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@166329f8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5e92e968_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7501709_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@638e0f7c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@70cf5d1c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6696b62f_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@587927c9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@19008399_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@271a6685_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1ea10b05_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@100c68da_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3b98b97d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5d7321e3_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5ca492b5_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@15fcd4a1_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@160b0ddf_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@70d8804b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@51d36e6e_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@40ee58df_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5a4ceb61_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@acb5536_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2c792e25_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@708acf6b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@37870ac_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@42d3acd9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@113c00c8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@96a79d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@622065a6_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@28eedc70_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2a2e2105_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3c21de5c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@709ddcc9_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3bfbcfbb_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@70e27f26_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3a1a83c4_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@44bd5452_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@44541d5b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@26f88c18_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4d45a9da_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@47accafb_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3e8682b8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7169c40c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@33cfd200_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6b9bd8a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@74d64c6a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4f75f627_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@297c802a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@25363c95_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3d1d0bec_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@79239197_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@39e1c76d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@51d4bb15_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@30d1d1a0_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6000b778_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3676bd8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@71f979cd_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@66f227e8_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@1386214_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@d3afe01_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@345f1ff6_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2806a4b3_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@28668e1b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6157f0fd_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7f476746_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@6b28912a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@62279beb_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@52e525b0_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2a62a7d1_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ControlUnit</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="50102c5c"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="dc4ca6b0"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="00af232a"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="019b9651"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="a826a4bd"/>
     </xilinx:packagingInfo>

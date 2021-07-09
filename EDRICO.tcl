@@ -18,6 +18,18 @@
 proc checkRequiredFiles { origin_dir} {
   set status true
   set files [list \
+   "${origin_dir}/RTL/MUX/DEMUX_32_2.vhd" \
+   "${origin_dir}/RTL/LoadBufferRegister/LoadBufferRegister.vhd" \
+   "${origin_dir}/RTL/MUX/MUX_32_3.vhd" \
+   "${origin_dir}/RTL/MUX/MUX_32_2.vhd" \
+   "${origin_dir}/RTL/MUX/MUX_CSR.vhd" \
+   "${origin_dir}/RTL/MUX/MUX_pkg.vhd" \
+   "${origin_dir}/RTL/ALU/ALU_pkg.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd" \
+   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd" \
    "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd" \
    "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd" \
@@ -26,16 +38,11 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/ALU/ALU_tb.vhd" \
    "${origin_dir}/RTL/RegisterFile/CSR_controller.vhd" \
    "${origin_dir}/RTL/RegisterFile/CSR_interrupt_gen.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd" \
    "${origin_dir}/RTL/RegisterFile/CSR_pkg.vhd" \
    "${origin_dir}/RTL/RegisterFile/CSR_top.vhd" \
    "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd" \
    "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd" \
    "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd" \
-   "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_PC.vhd" \
    "${origin_dir}/RTL/ControlUnit/CU_decoder.vhd" \
@@ -48,15 +55,8 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd" \
    "${origin_dir}/RTL/ExceptionControll/arbiter.vhd" \
    "${origin_dir}/RTL/ExceptionControll/Exception_Controll.vhd" \
-   "${origin_dir}/RTL/ALU/ALU_pkg.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd" \
    "${origin_dir}/ip_repo/DataMaskUnit/component.xml" \
-   "${origin_dir}/RTL/MUX/MUX_pkg.vhd" \
-   "${origin_dir}/RTL/MUX/MUX_32_2.vhd" \
-   "${origin_dir}/RTL/MUX/MUX_32_3.vhd" \
-   "${origin_dir}/RTL/MUX/MUX_CSR.vhd" \
-   "${origin_dir}/RTL/LoadBufferRegister/LoadBufferRegister.vhd" \
-   "${origin_dir}/RTL/MUX/DEMUX_32_2.vhd" \
    "${origin_dir}/RTL/DataMaskUnit/DMU_UV_1_tb.vhd" \
    "${origin_dir}/simulation/sim_DMU_UV_1/sim_DMU_UV_1.wcfg" \
    "${origin_dir}/simulation/sim_EC_FSM_UV_1/EC_FSM_UV_1_tb.vhd" \
@@ -205,6 +205,7 @@ proc checkRequiredFiles { origin_dir} {
    "${origin_dir}/simulation/sim_AXI4_IV_1/sim_AXI4_IV_1_pkg.vhd" \
    "${origin_dir}/simulation/sim_AXI4_IV_1/sim_AXI4_IV_1_tb.vhd" \
    "${origin_dir}/simulation/sim_AXI4_IV_1/sim_AXI4_IV_1_tb_behav.wcfg" \
+   "${origin_dir}/simulation/sim_EDRICO_AV_1/sim_EDRICO_AV_1_tb.vhd" \
   ]
   foreach ifile $files {
     if { ![file isfile $ifile] } {
@@ -330,14 +331,15 @@ set_property -name "sim.central_dir" -value "$proj_dir/${_xil_proj_name_}.ip_use
 set_property -name "sim.ip.auto_export_scripts" -value "1" -objects $obj
 set_property -name "simulator_language" -value "Mixed" -objects $obj
 set_property -name "target_language" -value "VHDL" -objects $obj
-set_property -name "webtalk.activehdl_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.ies_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.modelsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.questa_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.riviera_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.vcs_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_export_sim" -value "1" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "237" -objects $obj
+set_property -name "webtalk.activehdl_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.ies_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.modelsim_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.questa_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.riviera_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.vcs_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.xcelium_export_sim" -value "5" -objects $obj
+set_property -name "webtalk.xsim_export_sim" -value "6" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "243" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
@@ -356,6 +358,18 @@ update_ip_catalog -rebuild
 # Set 'sources_1' fileset object
 set obj [get_filesets sources_1]
 set files [list \
+ [file normalize "${origin_dir}/RTL/MUX/DEMUX_32_2.vhd"] \
+ [file normalize "${origin_dir}/RTL/LoadBufferRegister/LoadBufferRegister.vhd"] \
+ [file normalize "${origin_dir}/RTL/MUX/MUX_32_3.vhd"] \
+ [file normalize "${origin_dir}/RTL/MUX/MUX_32_2.vhd"] \
+ [file normalize "${origin_dir}/RTL/MUX/MUX_CSR.vhd"] \
+ [file normalize "${origin_dir}/RTL/MUX/MUX_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/ALU/ALU_pkg.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"] \
+ [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit.vhd"] \
  [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/AXI4_Lite_Master/AXI4_lite_master_control_unit.vhd"] \
@@ -364,16 +378,11 @@ set files [list \
  [file normalize "${origin_dir}/RTL/ALU/ALU_tb.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/CSR_controller.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/CSR_interrupt_gen.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/CSR_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/CSR_top.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/RF_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/RV32I_RF.vhd"] \
  [file normalize "${origin_dir}/RTL/RegisterFile/RegisterFile_top.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMA_checker.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_checker.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_unit.vhd"] \
- [file normalize "${origin_dir}/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"] \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_FSM.vhd"] \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_PC.vhd"] \
  [file normalize "${origin_dir}/RTL/ControlUnit/CU_decoder.vhd"] \
@@ -386,19 +395,85 @@ set files [list \
  [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll_FSM.vhd"] \
  [file normalize "${origin_dir}/RTL/ExceptionControll/arbiter.vhd"] \
  [file normalize "${origin_dir}/RTL/ExceptionControll/Exception_Controll.vhd"] \
- [file normalize "${origin_dir}/RTL/ALU/ALU_pkg.vhd"] \
  [file normalize "${origin_dir}/RTL/DataMaskUnit/data_mask_unit_pkg.vhd"] \
  [file normalize "${origin_dir}/ip_repo/DataMaskUnit/component.xml"] \
- [file normalize "${origin_dir}/RTL/MUX/MUX_pkg.vhd"] \
- [file normalize "${origin_dir}/RTL/MUX/MUX_32_2.vhd"] \
- [file normalize "${origin_dir}/RTL/MUX/MUX_32_3.vhd"] \
- [file normalize "${origin_dir}/RTL/MUX/MUX_CSR.vhd"] \
- [file normalize "${origin_dir}/RTL/LoadBufferRegister/LoadBufferRegister.vhd"] \
- [file normalize "${origin_dir}/RTL/MUX/DEMUX_32_2.vhd"] \
 ]
 add_files -norecurse -fileset $obj $files
 
 # Set 'sources_1' fileset file properties for remote files
+set file "$origin_dir/RTL/MUX/DEMUX_32_2.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "MUX_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/LoadBufferRegister/LoadBufferRegister.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+
+set file "$origin_dir/RTL/MUX/MUX_32_3.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "MUX_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/MUX/MUX_32_2.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "MUX_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/MUX/MUX_CSR.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "MUX_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/MUX/MUX_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "MUX_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/ALU/ALU_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "ALU_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMA_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+set_property -name "used_in" -value "synthesis" -objects $file_obj
+set_property -name "used_in_simulation" -value "0" -objects $file_obj
+
+set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "library" -value "PMP_lib" -objects $file_obj
+
 set file "$origin_dir/RTL/DataMaskUnit/data_mask_unit.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -433,6 +508,7 @@ set file "$origin_dir/RTL/ALU/ALU_tb.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
+set_property -name "is_enabled" -value "0" -objects $file_obj
 set_property -name "library" -value "ALU_lib" -objects $file_obj
 set_property -name "used_in" -value "synthesis" -objects $file_obj
 set_property -name "used_in_simulation" -value "0" -objects $file_obj
@@ -448,12 +524,6 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "RF_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
 
 set file "$origin_dir/RTL/RegisterFile/CSR_pkg.vhd"
 set file [file normalize $file]
@@ -484,32 +554,6 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "VHDL" -objects $file_obj
 set_property -name "library" -value "RF_lib" -objects $file_obj
-set_property -name "used_in" -value "synthesis" -objects $file_obj
-set_property -name "used_in_simulation" -value "0" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMA_checker.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_checker.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_unit.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/PMP_PMA_checker/PMP_PMA_checker.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "PMP_lib" -objects $file_obj
 set_property -name "used_in" -value "synthesis" -objects $file_obj
 set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
@@ -589,12 +633,6 @@ set_property -name "library" -value "EC_lib" -objects $file_obj
 set_property -name "used_in" -value "synthesis" -objects $file_obj
 set_property -name "used_in_simulation" -value "0" -objects $file_obj
 
-set file "$origin_dir/RTL/ALU/ALU_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "ALU_lib" -objects $file_obj
-
 set file "$origin_dir/RTL/DataMaskUnit/data_mask_unit_pkg.vhd"
 set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
@@ -606,48 +644,13 @@ set file [file normalize $file]
 set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
 set_property -name "file_type" -value "IP-XACT" -objects $file_obj
 
-set file "$origin_dir/RTL/MUX/MUX_pkg.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "MUX_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/MUX/MUX_32_2.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "MUX_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/MUX/MUX_32_3.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "MUX_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/MUX/MUX_CSR.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "MUX_lib" -objects $file_obj
-
-set file "$origin_dir/RTL/LoadBufferRegister/LoadBufferRegister.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-
-set file "$origin_dir/RTL/MUX/DEMUX_32_2.vhd"
-set file [file normalize $file]
-set file_obj [get_files -of_objects [get_filesets sources_1] [list "*$file"]]
-set_property -name "file_type" -value "VHDL" -objects $file_obj
-set_property -name "library" -value "MUX_lib" -objects $file_obj
-
 
 # Set 'sources_1' fileset file properties for local files
 # None
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-set_property -name "top" -value "data_mask_unit" -objects $obj
+set_property -name "top" -value "EDRICO_wrapper" -objects $obj
 set_property -name "top_auto_set" -value "0" -objects $obj
 
 # Create 'constrs_1' fileset (if not found)
@@ -2304,6 +2307,33 @@ set_property -name "top_auto_set" -value "0" -objects $obj
 set_property -name "top_lib" -value "AXI4M_lib" -objects $obj
 set_property -name "xsim.simulate.runtime" -value "250 ns" -objects $obj
 
+# Create 'sim_EDRICO_AV_1' fileset (if not found)
+if {[string equal [get_filesets -quiet sim_EDRICO_AV_1] ""]} {
+  create_fileset -simset sim_EDRICO_AV_1
+}
+
+# Set 'sim_EDRICO_AV_1' fileset object
+set obj [get_filesets sim_EDRICO_AV_1]
+set files [list \
+ [file normalize "${origin_dir}/simulation/sim_EDRICO_AV_1/sim_EDRICO_AV_1_tb.vhd"] \
+]
+add_files -norecurse -fileset $obj $files
+
+# Set 'sim_EDRICO_AV_1' fileset file properties for remote files
+set file "$origin_dir/simulation/sim_EDRICO_AV_1/sim_EDRICO_AV_1_tb.vhd"
+set file [file normalize $file]
+set file_obj [get_files -of_objects [get_filesets sim_EDRICO_AV_1] [list "*$file"]]
+set_property -name "file_type" -value "VHDL" -objects $file_obj
+
+
+# Set 'sim_EDRICO_AV_1' fileset file properties for local files
+# None
+
+# Set 'sim_EDRICO_AV_1' fileset properties
+set obj [get_filesets sim_EDRICO_AV_1]
+set_property -name "top" -value "sim_EDRICO_AV_1_tb" -objects $obj
+set_property -name "top_lib" -value "xil_defaultlib" -objects $obj
+
 # Set 'utils_1' fileset object
 set obj [get_filesets utils_1]
 # Empty (no sources present)
@@ -2313,6 +2343,9 @@ set obj [get_filesets utils_1]
 
 
 # Adding sources referenced in BDs, if not already added
+if { [get_files DEMUX_32_2.vhd] == "" } {
+  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/DEMUX_32_2.vhd
+}
 if { [get_files LoadBufferRegister.vhd] == "" } {
   import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/LoadBufferRegister/LoadBufferRegister.vhd
 }
@@ -2330,9 +2363,6 @@ if { [get_files MUX_32_2.vhd] == "" } {
 }
 if { [get_files MUX_32_2.vhd] == "" } {
   import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
-}
-if { [get_files DEMUX_32_2.vhd] == "" } {
-  import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/DEMUX_32_2.vhd
 }
 if { [get_files MUX_32_2.vhd] == "" } {
   import_files -quiet -fileset sources_1 /home/levi/Software/EDRICO/RTL/MUX/MUX_32_2.vhd
@@ -2466,7 +2496,7 @@ proc cr_bd_EDRICO { parentCell } {
 
   set mmCSR_AXI4_s_0 [ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 mmCSR_AXI4_s_0 ]
   set_property -dict [ list \
-   CONFIG.ADDR_WIDTH {5} \
+   CONFIG.ADDR_WIDTH {16} \
    CONFIG.ARUSER_WIDTH {0} \
    CONFIG.AWUSER_WIDTH {0} \
    CONFIG.BUSER_WIDTH {0} \
@@ -2828,249 +2858,6 @@ proc cr_bd_EDRICO { parentCell } {
 
   # Create address segments
 
-  # Perform GUI Layout
-  regenerate_bd_layout -layout_string {
-   "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.13101",
-   "Default View_TopLeft":"-5328,15",
-   "ExpandedHierarchyInLayout":"",
-   "commentid":"",
-   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
-#  -string -flagsOSRD
-preplace port M_AXI_0 -pg 1 -lvl 7 -x 3480 -y 1600 -defaultsOSRD
-preplace port mmCSR_AXI4_s_0 -pg 1 -lvl 0 -x -10 -y 4140 -defaultsOSRD
-preplace port port-id_system_reset_async -pg 1 -lvl 0 -x -10 -y 1470 -defaultsOSRD
-preplace port port-id_system_clk -pg 1 -lvl 0 -x -10 -y 1450 -defaultsOSRD
-preplace port port-id_M_AXI_ACLK_0 -pg 1 -lvl 0 -x -10 -y 1790 -defaultsOSRD
-preplace port port-id_M_AXI_ARSTN_0 -pg 1 -lvl 0 -x -10 -y 1810 -defaultsOSRD
-preplace port port-id_mmcsr_axi4_s_aresetn_0 -pg 1 -lvl 0 -x -10 -y 4120 -defaultsOSRD
-preplace port port-id_mmcsr_axi4_s_aclk_0 -pg 1 -lvl 0 -x -10 -y 4100 -defaultsOSRD
-preplace portBus x1_0 -pg 1 -lvl 7 -x 3480 -y 2700 -defaultsOSRD
-preplace portBus x2_0 -pg 1 -lvl 7 -x 3480 -y 2720 -defaultsOSRD
-preplace portBus x3_0 -pg 1 -lvl 7 -x 3480 -y 2740 -defaultsOSRD
-preplace portBus x4_0 -pg 1 -lvl 7 -x 3480 -y 2760 -defaultsOSRD
-preplace portBus x5_0 -pg 1 -lvl 7 -x 3480 -y 2780 -defaultsOSRD
-preplace portBus x6_0 -pg 1 -lvl 7 -x 3480 -y 2800 -defaultsOSRD
-preplace portBus x7_0 -pg 1 -lvl 7 -x 3480 -y 2820 -defaultsOSRD
-preplace portBus x8_0 -pg 1 -lvl 7 -x 3480 -y 2840 -defaultsOSRD
-preplace portBus x9_0 -pg 1 -lvl 7 -x 3480 -y 2860 -defaultsOSRD
-preplace portBus x10_0 -pg 1 -lvl 7 -x 3480 -y 2880 -defaultsOSRD
-preplace portBus x11_0 -pg 1 -lvl 7 -x 3480 -y 2900 -defaultsOSRD
-preplace portBus x12_0 -pg 1 -lvl 7 -x 3480 -y 2920 -defaultsOSRD
-preplace portBus x13_0 -pg 1 -lvl 7 -x 3480 -y 2940 -defaultsOSRD
-preplace portBus x14_0 -pg 1 -lvl 7 -x 3480 -y 2960 -defaultsOSRD
-preplace portBus x15_0 -pg 1 -lvl 7 -x 3480 -y 2980 -defaultsOSRD
-preplace portBus x16_0 -pg 1 -lvl 7 -x 3480 -y 3000 -defaultsOSRD
-preplace portBus x17_0 -pg 1 -lvl 7 -x 3480 -y 3020 -defaultsOSRD
-preplace portBus x18_0 -pg 1 -lvl 7 -x 3480 -y 3040 -defaultsOSRD
-preplace portBus x19_0 -pg 1 -lvl 7 -x 3480 -y 3060 -defaultsOSRD
-preplace portBus x20_0 -pg 1 -lvl 7 -x 3480 -y 3080 -defaultsOSRD
-preplace portBus x21_0 -pg 1 -lvl 7 -x 3480 -y 3100 -defaultsOSRD
-preplace portBus x22_0 -pg 1 -lvl 7 -x 3480 -y 3120 -defaultsOSRD
-preplace portBus x23_0 -pg 1 -lvl 7 -x 3480 -y 3140 -defaultsOSRD
-preplace portBus x24_0 -pg 1 -lvl 7 -x 3480 -y 3160 -defaultsOSRD
-preplace portBus x25_0 -pg 1 -lvl 7 -x 3480 -y 3180 -defaultsOSRD
-preplace portBus x26_0 -pg 1 -lvl 7 -x 3480 -y 3200 -defaultsOSRD
-preplace portBus x27_0 -pg 1 -lvl 7 -x 3480 -y 3220 -defaultsOSRD
-preplace portBus x28_0 -pg 1 -lvl 7 -x 3480 -y 3240 -defaultsOSRD
-preplace portBus x29_0 -pg 1 -lvl 7 -x 3480 -y 3260 -defaultsOSRD
-preplace portBus x30_0 -pg 1 -lvl 7 -x 3480 -y 3280 -defaultsOSRD
-preplace portBus x31_0 -pg 1 -lvl 7 -x 3480 -y 3300 -defaultsOSRD
-preplace portBus mcycle_debug_0 -pg 1 -lvl 7 -x 3480 -y 3320 -defaultsOSRD
-preplace portBus mcycleH_debug_0 -pg 1 -lvl 7 -x 3480 -y 3340 -defaultsOSRD
-preplace portBus minstret_debug_0 -pg 1 -lvl 7 -x 3480 -y 3360 -defaultsOSRD
-preplace portBus minstretH_debug_0 -pg 1 -lvl 7 -x 3480 -y 3380 -defaultsOSRD
-preplace portBus mcountinhibit_debug_0 -pg 1 -lvl 7 -x 3480 -y 3400 -defaultsOSRD
-preplace portBus mstatus_debug_0 -pg 1 -lvl 7 -x 3480 -y 3420 -defaultsOSRD
-preplace portBus misa_debug_0 -pg 1 -lvl 7 -x 3480 -y 3440 -defaultsOSRD
-preplace portBus mie_debug_0 -pg 1 -lvl 7 -x 3480 -y 3460 -defaultsOSRD
-preplace portBus mtvec_debug_0 -pg 1 -lvl 7 -x 3480 -y 3480 -defaultsOSRD
-preplace portBus mscratch_debug_0 -pg 1 -lvl 7 -x 3480 -y 3500 -defaultsOSRD
-preplace portBus mepc_debug_0 -pg 1 -lvl 7 -x 3480 -y 3520 -defaultsOSRD
-preplace portBus mcause_debug_0 -pg 1 -lvl 7 -x 3480 -y 3540 -defaultsOSRD
-preplace portBus mtval_debug_0 -pg 1 -lvl 7 -x 3480 -y 3560 -defaultsOSRD
-preplace portBus mip_debug_0 -pg 1 -lvl 7 -x 3480 -y 3580 -defaultsOSRD
-preplace portBus IR_debug -pg 1 -lvl 7 -x 3480 -y 90 -defaultsOSRD
-preplace portBus PC_debug -pg 1 -lvl 7 -x 3480 -y 110 -defaultsOSRD
-preplace inst ALU_0 -pg 1 -lvl 2 -x 520 -y 780 -defaultsOSRD
-preplace inst AXI4_lite_master_0 -pg 1 -lvl 6 -x 2930 -y 1660 -defaultsOSRD
-preplace inst ControlUnit_0 -pg 1 -lvl 6 -x 2930 -y 350 -defaultsOSRD
-preplace inst DataMaskUnit_0 -pg 1 -lvl 3 -x 950 -y 1040 -defaultsOSRD
-preplace inst Exception_Control_0 -pg 1 -lvl 4 -x 1730 -y 1230 -defaultsOSRD
-preplace inst LoadBufferRegister_0 -pg 1 -lvl 2 -x 520 -y 1440 -defaultsOSRD
-preplace inst MUX_A -pg 1 -lvl 1 -x 190 -y 770 -defaultsOSRD
-preplace inst MUX_B -pg 1 -lvl 1 -x 190 -y 950 -defaultsOSRD
-preplace inst MUX_EC_CSR -pg 1 -lvl 5 -x 2340 -y 1170 -defaultsOSRD
-preplace inst MUX_EC_RF_in -pg 1 -lvl 5 -x 2340 -y 1350 -defaultsOSRD
-preplace inst MUX_R -pg 1 -lvl 4 -x 1730 -y 850 -defaultsOSRD
-preplace inst PMP_PMA_checker_0 -pg 1 -lvl 4 -x 1730 -y 3290 -defaultsOSRD
-preplace inst mmCSR_AXI4_slave_0 -pg 1 -lvl 6 -x 2930 -y 4040 -defaultsOSRD -orient R180
-preplace inst RegisterFile_1 -pg 1 -lvl 6 -x 2930 -y 2770 -defaultsOSRD
-preplace inst DEMUX_32_2_0 -pg 1 -lvl 4 -x 1730 -y 1600 -defaultsOSRD -orient R180
-preplace inst MUX_PMP -pg 1 -lvl 3 -x 950 -y 860 -defaultsOSRD
-preplace netloc ALU_0_branch_re 1 2 4 690J 640 NJ 640 NJ 640 2530
-preplace netloc AXI4_lite_master_0_data_out 1 1 6 350 1350 690J 1500 NJ 1500 NJ 1500 2600 1500 3170
-preplace netloc AXI4_lite_master_0_instruction_afe_AXI 1 3 4 1350 1820 NJ 1820 NJ 1820 3130
-preplace netloc AXI4_lite_master_0_load_afe_AXI 1 3 4 1230 1830 NJ 1830 NJ 1830 3120
-preplace netloc AXI4_lite_master_0_memOp_finished 1 5 2 2690 720 3160
-preplace netloc AXI4_lite_master_0_storeAMO_afe_AXI 1 3 4 1240 1840 NJ 1840 NJ 1840 3180
-preplace netloc AXI4_lite_master_0_store_systemData 1 1 6 350 1530 NJ 1530 NJ 1530 NJ 1530 2540 1510 3120
-preplace netloc ControlUnit_0_ALU_OP 1 1 6 350 680 NJ 680 NJ 680 NJ 680 NJ 680 3140
-preplace netloc ControlUnit_0_CSR_address 1 4 3 2090 1040 NJ 1040 3230
-preplace netloc ControlUnit_0_DMU_IN_MUX_ctrl 1 2 5 720 740 NJ 740 NJ 740 NJ 740 3370
-preplace netloc ControlUnit_0_DMU_OUT_MUX_ctrl 1 2 5 730 750 NJ 750 NJ 750 NJ 750 3360
-preplace netloc ControlUnit_0_IR_dra 1 3 4 1340 30 NJ 30 NJ 30 3460
-preplace netloc ControlUnit_0_PC_out 1 0 7 50 1030 NJ 1030 690 940 1160 940 NJ 940 NJ 940 3460
-preplace netloc ControlUnit_0_PMP_enable 1 3 4 1140 4030 NJ 4030 2570J 3660 3440
-preplace netloc ControlUnit_0_PMP_instruction 1 3 4 1370 1710 2030J 1440 NJ 1440 3420
-preplace netloc ControlUnit_0_PMP_rw 1 3 4 1190 3900 NJ 3900 NJ 3900 3450
-preplace netloc ControlUnit_0_PMP_size 1 3 4 1400 1760 2050J 1450 NJ 1450 3410
-preplace netloc ControlUnit_0_be_CU 1 3 4 1420 1680 NJ 1680 2550J 1430 3150
-preplace netloc ControlUnit_0_ece_CU 1 3 4 1410 1800 2100J 1810 NJ 1810 3400
-preplace netloc ControlUnit_0_iie_CU 1 3 4 1430 1510 2020J 1460 NJ 1460 3210
-preplace netloc ControlUnit_0_instr_finished 1 5 2 2670 770 3130
-preplace netloc ControlUnit_0_mask_ctrl 1 2 5 730 1520 NJ 1520 2040J 1490 NJ 1490 3380
-preplace netloc ControlUnit_0_read_CSR 1 4 3 2110 1470 NJ 1470 3390
-preplace netloc ControlUnit_0_register_read_A 1 5 2 2640 700 3160
-preplace netloc ControlUnit_0_register_read_B 1 5 2 2660 780 3240
-preplace netloc ControlUnit_0_register_write 1 5 2 2690 3640 3430
-preplace netloc ControlUnit_0_ret 1 3 4 1460 1670 2060J 1480 NJ 1480 3180
-preplace netloc ControlUnit_0_save_CSR 1 5 2 2690 790 3190
-preplace netloc ControlUnit_0_write_CSR 1 4 3 2150 1050 NJ 1050 3220
-preplace netloc DataMaskUnit_0_data_store 1 3 3 1150J 1750 NJ 1750 N
-preplace netloc Exception_Control_0_CSR_address_EC 1 4 1 2060 1210n
-preplace netloc Exception_Control_0_CSR_read_EC 1 4 1 2000 1150n
-preplace netloc Exception_Control_0_CSR_write_EC 1 4 1 N 1190
-preplace netloc Exception_Control_0_PC_dra_write 1 4 2 1980J 650 2550
-preplace netloc Exception_Control_0_PC_write 1 4 2 1990J 660 2560
-preplace netloc Exception_Control_0_halt_core 1 4 2 2010 1560 2630
-preplace netloc LoadBufferRegister_0_data_out 1 2 1 710 1080n
-preplace netloc MUX_A_C_out 1 1 1 340 770n
-preplace netloc MUX_B_C_out 1 1 1 340 800n
-preplace netloc MUX_EC_CSR_CSR_address 1 5 1 2570 1190n
-preplace netloc MUX_EC_CSR_read_CSR 1 5 1 2590 1150n
-preplace netloc MUX_EC_CSR_write_CSR 1 5 1 2580 1170n
-preplace netloc MUX_EC_RF_in_C_out 1 5 1 2560 1350n
-preplace netloc PMP_PMA_checker_0_address_dra 1 3 2 1440 1780 1920
-preplace netloc PMP_PMA_checker_0_address_out 1 4 2 2130 1730 NJ
-preplace netloc PMP_PMA_checker_0_enable_out 1 4 2 2110 1610 NJ
-preplace netloc PMP_PMA_checker_0_instruction_afe_P 1 3 2 1220 1720 1960
-preplace netloc PMP_PMA_checker_0_instruction_ame_P 1 3 2 1370 1700 1950
-preplace netloc PMP_PMA_checker_0_instruction_out 1 4 2 2140 1650 NJ
-preplace netloc PMP_PMA_checker_0_load_afe_P 1 3 2 1450 960 1970
-preplace netloc PMP_PMA_checker_0_load_ame_P 1 3 2 1200 1910 1910
-preplace netloc PMP_PMA_checker_0_readWrite_out 1 4 2 2120 1630 NJ
-preplace netloc PMP_PMA_checker_0_size_out 1 4 2 2150 1670 NJ
-preplace netloc PMP_PMA_checker_0_storeAMO_afe_P 1 3 2 1190 1920 1940
-preplace netloc PMP_PMA_checker_0_storeAMO_ame_P 1 3 2 1210 1900 1930
-preplace netloc mmCSR_AXI4_slave_0_msip 1 5 1 2650 2710n
-preplace netloc mmCSR_AXI4_slave_0_mtip 1 5 1 2680 2730n
-preplace netloc RegisterFile_1_pmpcfg_0 1 3 4 1380 1870 NJ 1870 NJ 1870 3160
-preplace netloc RegisterFile_1_pmpcfg_1 1 3 4 1220 3820 NJ 3820 NJ 3820 3410
-preplace netloc RegisterFile_1_pmpcfg_2 1 3 4 1230 3830 NJ 3830 NJ 3830 3400
-preplace netloc RegisterFile_1_pmpcfg_3 1 3 4 1240 3840 NJ 3840 NJ 3840 3390
-preplace netloc RegisterFile_1_pmpcfg_4 1 3 4 1250 3850 NJ 3850 NJ 3850 3380
-preplace netloc RegisterFile_1_pmpcfg_5 1 3 4 1260 3860 NJ 3860 NJ 3860 3370
-preplace netloc RegisterFile_1_pmpcfg_6 1 3 4 1270 3870 NJ 3870 NJ 3870 3360
-preplace netloc RegisterFile_1_pmpcfg_7 1 3 4 1280 3880 NJ 3880 NJ 3880 3350
-preplace netloc RegisterFile_1_pmpcfg_8 1 3 4 1150 4000 NJ 4000 2550J 3680 3200
-preplace netloc RegisterFile_1_pmpcfg_9 1 3 4 1160 4010 NJ 4010 2590J 3710 3260
-preplace netloc RegisterFile_1_pmpcfg_10 1 3 4 1170 4020 NJ 4020 2620J 3720 3250
-preplace netloc RegisterFile_1_pmpcfg_11 1 3 4 1210 3980 NJ 3980 2640J 3760 3270
-preplace netloc RegisterFile_1_pmpcfg_12 1 3 4 1290 3890 NJ 3890 NJ 3890 3340
-preplace netloc RegisterFile_1_pmpcfg_13 1 3 4 1180 4120 NJ 4120 NJ 4120 3420
-preplace netloc RegisterFile_1_pmpcfg_14 1 3 4 1200 4040 NJ 4040 2610J 3690 3170
-preplace netloc RegisterFile_1_pmpcfg_15 1 3 4 1380 3760 NJ 3760 2600J 3750 3190
-preplace netloc RegisterFile_1_pmpaddr_0 1 3 4 1390 3770 NJ 3770 NJ 3770 3240
-preplace netloc RegisterFile_1_pmpaddr_1 1 3 4 1400 3780 NJ 3780 NJ 3780 3230
-preplace netloc RegisterFile_1_pmpaddr_2 1 3 4 1410 3790 NJ 3790 NJ 3790 3220
-preplace netloc RegisterFile_1_pmpaddr_3 1 3 4 1420 3800 NJ 3800 NJ 3800 3210
-preplace netloc RegisterFile_1_pmpaddr_4 1 3 4 1440 3730 NJ 3730 2530J 3700 3140
-preplace netloc RegisterFile_1_pmpaddr_5 1 3 4 1450 3740 NJ 3740 2560J 3730 3160
-preplace netloc RegisterFile_1_pmpaddr_6 1 3 4 1460 3750 NJ 3750 2580J 3740 3150
-preplace netloc RegisterFile_1_pmpaddr_7 1 3 4 1430 3810 NJ 3810 NJ 3810 3180
-preplace netloc RegisterFile_1_pmpaddr_8 1 3 4 1320 3910 NJ 3910 NJ 3910 3320
-preplace netloc RegisterFile_1_pmpaddr_9 1 3 4 1330 3920 NJ 3920 NJ 3920 3310
-preplace netloc RegisterFile_1_pmpaddr_10 1 3 4 1340 3930 NJ 3930 NJ 3930 3300
-preplace netloc RegisterFile_1_pmpaddr_11 1 3 4 1300 3960 NJ 3960 NJ 3960 3330
-preplace netloc RegisterFile_1_pmpaddr_12 1 3 4 1360 3940 NJ 3940 NJ 3940 3290
-preplace netloc RegisterFile_1_pmpaddr_13 1 3 4 1370 3950 NJ 3950 NJ 3950 3280
-preplace netloc RegisterFile_1_pmpaddr_14 1 3 4 1350 3970 2030J 3650 NJ 3650 3120
-preplace netloc RegisterFile_1_pmpaddr_15 1 3 4 1310 3990 NJ 3990 2540J 3670 3130
-preplace netloc RegisterFile_1_x1 1 6 1 NJ 2700
-preplace netloc RegisterFile_1_x2 1 6 1 NJ 2720
-preplace netloc RegisterFile_1_x3 1 6 1 NJ 2740
-preplace netloc RegisterFile_1_x4 1 6 1 NJ 2760
-preplace netloc RegisterFile_1_x5 1 6 1 NJ 2780
-preplace netloc RegisterFile_1_x6 1 6 1 NJ 2800
-preplace netloc RegisterFile_1_x7 1 6 1 NJ 2820
-preplace netloc RegisterFile_1_x8 1 6 1 NJ 2840
-preplace netloc RegisterFile_1_x9 1 6 1 NJ 2860
-preplace netloc RegisterFile_1_x10 1 6 1 NJ 2880
-preplace netloc RegisterFile_1_x11 1 6 1 NJ 2900
-preplace netloc RegisterFile_1_x12 1 6 1 NJ 2920
-preplace netloc RegisterFile_1_x13 1 6 1 NJ 2940
-preplace netloc RegisterFile_1_x14 1 6 1 NJ 2960
-preplace netloc RegisterFile_1_x15 1 6 1 NJ 2980
-preplace netloc RegisterFile_1_x16 1 6 1 NJ 3000
-preplace netloc RegisterFile_1_x17 1 6 1 NJ 3020
-preplace netloc RegisterFile_1_x18 1 6 1 NJ 3040
-preplace netloc RegisterFile_1_x19 1 6 1 NJ 3060
-preplace netloc RegisterFile_1_x20 1 6 1 NJ 3080
-preplace netloc RegisterFile_1_x21 1 6 1 NJ 3100
-preplace netloc RegisterFile_1_x22 1 6 1 NJ 3120
-preplace netloc RegisterFile_1_x23 1 6 1 NJ 3140
-preplace netloc RegisterFile_1_x24 1 6 1 NJ 3160
-preplace netloc RegisterFile_1_x25 1 6 1 NJ 3180
-preplace netloc RegisterFile_1_x26 1 6 1 NJ 3200
-preplace netloc RegisterFile_1_x27 1 6 1 NJ 3220
-preplace netloc RegisterFile_1_x28 1 6 1 NJ 3240
-preplace netloc RegisterFile_1_x29 1 6 1 NJ 3260
-preplace netloc RegisterFile_1_x30 1 6 1 NJ 3280
-preplace netloc RegisterFile_1_x31 1 6 1 NJ 3300
-preplace netloc RegisterFile_1_mcycle_debug 1 6 1 NJ 3320
-preplace netloc RegisterFile_1_mcycleH_debug 1 6 1 NJ 3340
-preplace netloc RegisterFile_1_minstret_debug 1 6 1 NJ 3360
-preplace netloc RegisterFile_1_minstretH_debug 1 6 1 NJ 3380
-preplace netloc RegisterFile_1_mcountinhibit_debug 1 6 1 NJ 3400
-preplace netloc RegisterFile_1_mstatus_debug 1 6 1 NJ 3420
-preplace netloc RegisterFile_1_misa_debug 1 6 1 NJ 3440
-preplace netloc RegisterFile_1_mie_debug 1 6 1 NJ 3460
-preplace netloc RegisterFile_1_mtvec_debug 1 6 1 NJ 3480
-preplace netloc RegisterFile_1_mscratch_debug 1 6 1 NJ 3500
-preplace netloc RegisterFile_1_mepc_debug 1 6 1 NJ 3520
-preplace netloc RegisterFile_1_mcause_debug 1 6 1 NJ 3540
-preplace netloc RegisterFile_1_mtval_debug 1 6 1 NJ 3560
-preplace netloc RegisterFile_1_mip_debug 1 6 1 NJ 3580
-preplace netloc RegisterFile_1_iie_CSR 1 3 4 1380 1860 NJ 1860 NJ 1860 3150
-preplace netloc RegisterFile_1_mti_CSR 1 3 4 1390 1880 NJ 1880 NJ 1880 3130
-preplace netloc RegisterFile_1_msi_CSR 1 3 4 1360 1890 NJ 1890 NJ 1890 3120
-preplace netloc RegisterFile_1_data_bus_B 1 4 3 2070 1620 2600J 1900 3140
-preplace netloc DEMUX_32_2_0_B_out 1 3 1 1450 1320n
-preplace netloc DEMUX_32_2_0_A_out 1 0 6 40 690 330J 700 NJ 700 1180 380 NJ 380 NJ
-preplace netloc ControlUnit_0_A_MUX_ctrl 1 0 7 10 20 NJ 20 NJ 20 NJ 20 NJ 20 NJ 20 3210
-preplace netloc ControlUnit_0_B_MUX_ctrl 1 0 7 30 680 340J 690 NJ 690 NJ 690 NJ 690 NJ 690 3170
-preplace netloc ControlUnit_0_immediate 1 0 7 20 670 NJ 670 NJ 670 NJ 670 NJ 670 NJ 670 3120
-preplace netloc RegisterFile_1_data_bus_A 1 0 7 20 1060 NJ 1060 700 1490 1140J 1850 NJ 1850 NJ 1850 3170
-preplace netloc ALU_0_alu_result 1 2 2 700 780 1160
-preplace netloc DataMaskUnit_0_data_load 1 3 1 1150 850n
-preplace netloc ControlUnit_0_R_MUX_ctrl 1 3 4 1450 760 NJ 760 NJ 760 3350
-preplace netloc MUX_R_C_out 1 4 1 2080 850n
-preplace netloc Exception_Control_0_data_out_EC 1 4 1 2050 1230n
-preplace netloc MUX_PMP_C_out 1 3 1 1130 860n
-preplace netloc ControlUnit_0_PMP_MUX_ctrl 1 2 5 710 710 NJ 710 NJ 710 NJ 710 3200
-preplace netloc reset_0_1 1 0 6 NJ 1470 330 1550 NJ 1550 1170 1690 NJ 1690 2610
-preplace netloc clk_0_1 1 0 6 NJ 1450 340 1540 NJ 1540 1160 1740 NJ 1740 2620
-preplace netloc M_AXI_ACLK_0_1 1 0 6 NJ 1790 NJ 1790 NJ 1790 NJ 1790 2080J 1570 NJ
-preplace netloc M_AXI_ARSTN_0_1 1 0 6 NJ 1810 NJ 1810 NJ 1810 NJ 1810 2090J 1590 NJ
-preplace netloc mmcsr_axi4_s_aresetn_0_1 1 0 7 20J 4160 NJ 4160 NJ 4160 NJ 4160 NJ 4160 NJ 4160 3140
-preplace netloc mmcsr_axi4_s_aclk_0_1 1 0 7 40J 4150 NJ 4150 NJ 4150 NJ 4150 NJ 4150 NJ 4150 3130
-preplace netloc AXI4_lite_master_0_M_AXI 1 6 1 NJ 1600
-preplace netloc mmCSR_AXI4_s_0_1 1 0 7 NJ 4140 NJ 4140 NJ 4140 NJ 4140 NJ 4140 NJ 4140 3120
-levelinfo -pg 1 -10 190 520 950 1730 2340 2930 3480
-pagesize -pg 1 -db -bbox -sgen -240 0 3750 4170
-"
-}
 
   # Restore current instance
   current_bd_instance $oldCurInst

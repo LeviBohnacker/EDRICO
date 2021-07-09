@@ -74,7 +74,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>d2b4dfb4</spirit:value>
+            <spirit:value>6ca915b9</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -548,31 +548,31 @@
         <spirit:name>src/EC_lib/CSR_access_controll.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>EC_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/EC_lib/DRA_controll.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>EC_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/EC_lib/Exception_Controll_pkg.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>EC_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/EC_lib/Exception_Controll_FSM.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>EC_lib</spirit:logicalName>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/EC_lib/arbiter.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
-        <spirit:logicalName>EC_lib</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/EC_lib/Exception_Controll.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -615,11 +615,11 @@
       </xilinx:taxonomies>
       <xilinx:displayName>Exception_Control_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>user.org:user:Exception_Controll:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2021-07-07T10:49:59Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2021-07-09T14:46:31Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.df@256a3c9d_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/EDRICO</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@469aa880_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/EDRICO</xilinx:tag>
@@ -636,12 +636,24 @@
         <xilinx:tag xilinx:name="ui.data.coregen.df@32404094_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/EDRICO</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@7fe199ad_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/EDRICO</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@3dcff596_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/EDRICO</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@5f3c29af_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@26278679_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4ee7d004_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@343b5fba_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@20e7166b_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@48401060_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2c0e5f16_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@565ddd97_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@67ffeb16_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4397d206_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2ac862cc_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4e6c6ba2_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ExceptionControl</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="50102c5c"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="247851b6"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="89d77492"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="c24b8096"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="98f1f64c"/>
     </xilinx:packagingInfo>
