@@ -152,6 +152,17 @@
 ]{biblatex}
 }
 
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+	language     = VHDL,
+	basicstyle   = \ttfamily,
+	keywordstyle = \color{keyword}\bfseries,
+	commentstyle = \color{comment}
+}
+
+
 \usepackage{tabularx}
 \usepackage{graphicx}
 

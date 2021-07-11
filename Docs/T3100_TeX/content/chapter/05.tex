@@ -7,10 +7,8 @@ instruction set architecture. Besides the mandatory “Zicsr” extension no oth
 instruction set extensions are implemented. To keep the implementation simple and
 straight-forward only one privilege mode (Machine-mode) is implemented. This mode
 allows full access to the processor and peripherals. Future Versions could be
-extended to implement S-Mode and U-Mode.
-The core is a simple \acf{SISD} processor without any pipeline or even cache. The basic
-instruction cycle of fetch, decode, execute, store is performed for every instruction
-one at a time.\\
+extended to implement S-Mode and U-Mode.\\
+The core is a simple \acf{SISD} processor without any pipeline or even cache. The basic instruction cycle of fetch, decode, execute, store is performed for every instruction one at a time.\\
 Figure \ref{fig:edricooverview} shows the full overview of the processor design:
 
 \begin{figure}[H]
@@ -120,6 +118,7 @@ In this section the implementation of the decoder will be described more closely
 As already described in section \ref{CU_arch} the instructions can be separated in different instruction formats. To distinguish the different instructions, so-called \textit{instruction clusters} are created. These clusters sum up instructions which are encoded in the same instruction format or in general are similar.
 The following table shows the different clusters and the corresponding instructions:
 \begin{table}[h]
+	\centering
 		\begin{tabular}{|l|l|}
 			\hline
 			\textbf{Cluster} & \textbf{Instructions}\\
@@ -171,12 +170,115 @@ After determining the cluster, the VHDL code assigns all the outputs visible in 
 	\label{fig:instruction_bits}
 \end{figure}
 
-\section{ALU}
-\subsection{Architecture \& Design}
-\subsection{Implementation}
 
-\section{Register Files}
+\section{Arithmetic Logical Unit}
+The \acf{ALU} is the part of the processor that performs the arithmetic and logical operations. Figure \ref{fig:alu} gives an overview of what type of operations are performed.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{ALU.png}
+	\caption{ALU operations}
+	\label{fig:alu}
+\end{figure}
+
 \subsection{Architecture \& Design}
+To implement the ALU, it is required to have the data inputs as well as clock input and a control signal consisting of 4 bits to specify the required operation to be performed. Since there are instructions that require a branch response to know whether the next instructions shall be skipped or not, the ALU needs an additional output called \textit{branch\_re} other than the result output of the arithmetic/logical operation. The architecture of the ALU is shown in figure \ref{fig:alu_arch}:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{alu_arch.png}
+	\caption{ALU operations}
+	\label{fig:alu_arch}
+\end{figure}
+Not only the instructions e.g. \textit{ADD, SUB, XOR...} require an arithmetic operation but also \textit{LOAD, STORE..} require an ALU action. While \textit{ADD, SUB, XOR...} require an operation between the two input values (either register-register or register-immediate) to get a mathematical or logical result, the \textit{LOAD, STORE...} instructions require the ALU to build the target addresses for the memory access.
+\subsection{Implementation}
+The implementation of the ALU is based on figure \ref{fig:alu} and performs a switch-case on all the different input values of \textit{ALU\_OP}. The 4-bit input variable specifies the operation based on following declarations:
+\begin{table}[H]
+\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{ALU\_OP} & \textbf{Operation} \\
+		\hline
+		0000 & ADD \\
+		\hline
+		0001 & SUB \\
+		\hline
+		0010 & AND \\
+		\hline
+		0011 & OR \\
+		\hline
+		0100 & XOR \\
+		\hline
+		0101 & EQUAL \\
+		\hline
+		0110 & NEQUAL \\
+		\hline
+		0111 & shift\_left \\
+		\hline
+		1000 & shift\_right \\
+		\hline
+		1001 & shift\_right (arithmetic) \\
+		\hline
+		1010 & <\\
+		\hline
+		1011 & < (unsigned) \\
+		\hline
+		1100 & $\geq$ \\
+		\hline
+		1101 & $\geq$ (unsigned) \\
+		\hline
+	\end{tabular}
+\caption{Input code and respective operation}
+\end{table}
+To visualize the implementation, a part of the VHDL code is displayed in the following. The case statement is based on the input \textit{alu\_op}. The ALU then performs the corresponding operation with the two inputs \textit{in\_a and in\_b}.\clearpage
+
+\begin{lstlisting}[style=vhdl, caption=ALU VHDL code]
+begin
+	process(in_a, in_b, alu_op)
+	begin
+	--default output is 0
+	branch_re <= '0';
+	alu_result <= "00000000000000000000000000000000";	
+		case alu_op is	
+			when "0000" =>--"ADD"	
+				alu_result <= in_b + in_a;	
+			when "0001" =>--"SUB"	
+				alu_result <= in_b -in_a;	
+			when "0010" =>--"AND"	
+				alu_result <= in_b AND in_a;
+			when "0011" =>--"OR"
+				alu_result <= in_b OR in_a;
+			when "0100" =>--"XOR"
+				alu_result <= in_b XOR in_a;
+			when "0101" =>--"EQUAL"	
+				if(in_b = in_a) then
+				branch_re <= '1';
+				else
+				branch_re <= '0';
+				end if;
+	...
+\end{lstlisting}
+In case the operation determined by \textit{alu\_op} might be originating of a branch instruction, the \textit{branch\_re} flag has to be set respectively (line  19). Since the branch instructions only include some of the arithmetic and logical operations of the ALU, the default value for the \textit{branch\_re} is set as \textit{0}.
+
+\section{\acf{RF}}
+The Register can be used to store data and configure the core. General Purpose
+registers are mostly used to temporarily store data like operands and results of
+calculations. The CSR Register File is used to configure the core and retrieve
+information about it. More detailed information about these two RFs can be found in
+the following chapters.
+\clearpage
+\subsection{Architecture \& Design}
+The architecture of the register files is shown in following figure \ref{fig:RF_arch}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{RF_arch.png}
+	\caption{Register Files architecture}
+	\label{fig:RF_arch}
+\end{figure}
+
+In order to write data to a register, the value needs to be put on the \textit{data\_in} bus and the corresponding control signals need to be configured. Data can be read either via the \textit{data\_busA} or \textit{data\_busB}, the CSR registers can only be accessed on \textit{data\_busB} via a MUX controlled by the \textit{CSR\_read} signal. If the bit is set, the CSR specified by \textit{CSR\_address} will be visible on \textit{data\_busB} at the next rising clock edge.\\
+In order to store data to a CSR register, it has to be put on the \textit{data\_in} bus. If the \textit{CSR\_write} bit is set, the data is saved to the register specified by \textit{CSR\_address} on the next falling clock edge.\\
+If the \textit{CSR\_save} signal is applied, the CSR Register File output is connected to the data input bus of the general purpose registers. This allows to save CSR data directly to the RV32I registers without using the system data bus. Some of the CSR registers allow direct memory accesses, e.g. the \textit{msip\_dra} \& \textit{mtip\_dra} signals are used to set the software and timer interrupt pending bits respectively. To increase the performance of memory accesses, the PMP CSRs can be read via a dedicated bus.\\
+While the CSR RF is accessed by 12 Bit addresses, RV32I registers are accessed without addressing in order to decrease decoding time. Therefore, each register requires three Signals resulting in a total of 96 signals for read and write. The RFs are clocked with the system clock and reset on system reset. As per usual, data is stored on the falling clock and displayed on the rising clock.
 \subsection{Implementation}
 
 \section{PMP \& PMA Checker}
