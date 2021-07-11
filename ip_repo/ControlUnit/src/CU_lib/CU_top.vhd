@@ -31,6 +31,9 @@ use CU_lib.CU_pkg.ALL;
 --ENTITY
 ----------------------------------------------------------------------------------
 entity CU_top is
+generic(
+    PC_base_address : STD_LOGIC_VECTOR(31 downto 0) := x"00000000"
+);
 port (
     ------------------------------------------------------------------------------
     --input signals
@@ -311,6 +314,9 @@ immediate <= immediate_EX;
 --  component to hold and modify the PC
 ----------------------------------------------------------------------------------
 ProgramCounter: CU_PC
+generic map(
+    PC_base_address => PC_base_address
+)
 port map( 
     ------------------------------------------------------------------------------
     --input signals

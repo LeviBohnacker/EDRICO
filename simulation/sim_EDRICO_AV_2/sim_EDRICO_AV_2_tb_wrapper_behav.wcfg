@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="sim_EDRICO_AV_2_tb_wrapper_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="axi4_lite_master_pkg" />
+            <top_module name="axi_bram_ctrl_funcs" />
+            <top_module name="csr_pkg" />
+            <top_module name="cu_pkg" />
+            <top_module name="exception_controll_pkg" />
+            <top_module name="glbl" />
+            <top_module name="pmp_pma_pkg" />
+            <top_module name="rf_pkg" />
+            <top_module name="sim_EDRICO_AV_2_tb_wrapper" />
+            <top_module name="vcomponents" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="586.001 ns"></ZoomEndTime>
+      <Cursor1Time time="197.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="280"></NameColumnWidth>
+      <ValueColumnWidth column_width="133"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="142" />
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_IR_debug">
+      <obj_property name="ElementShortName">EDRICO_1_IR_debug[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_IR_debug[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_PC_debug">
+      <obj_property name="ElementShortName">EDRICO_1_PC_debug[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_PC_debug[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mcause_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mcause_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mcause_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mcountinhibit_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mcountinhibit_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mcountinhibit_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mcycleH_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mcycleH_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mcycleH_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mcycle_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mcycle_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mcycle_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mepc_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mepc_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mepc_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mie_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mie_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mie_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_minstretH_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_minstretH_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_minstretH_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_minstret_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_minstret_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_minstret_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mip_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mip_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mip_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_misa_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_misa_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_misa_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mscratch_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mscratch_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mscratch_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mstatus_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mstatus_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mstatus_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mtval_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mtval_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mtval_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_mtvec_debug_0">
+      <obj_property name="ElementShortName">EDRICO_1_mtvec_debug_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_mtvec_debug_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x1_0">
+      <obj_property name="ElementShortName">EDRICO_1_x1_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x1_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x2_0">
+      <obj_property name="ElementShortName">EDRICO_1_x2_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x2_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x3_0">
+      <obj_property name="ElementShortName">EDRICO_1_x3_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x3_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x4_0">
+      <obj_property name="ElementShortName">EDRICO_1_x4_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x4_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x5_0">
+      <obj_property name="ElementShortName">EDRICO_1_x5_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x5_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x6_0">
+      <obj_property name="ElementShortName">EDRICO_1_x6_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x6_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x7_0">
+      <obj_property name="ElementShortName">EDRICO_1_x7_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x7_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x8_0">
+      <obj_property name="ElementShortName">EDRICO_1_x8_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x8_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x9_0">
+      <obj_property name="ElementShortName">EDRICO_1_x9_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x9_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x10_0">
+      <obj_property name="ElementShortName">EDRICO_1_x10_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x10_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x11_0">
+      <obj_property name="ElementShortName">EDRICO_1_x11_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x11_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x12_0">
+      <obj_property name="ElementShortName">EDRICO_1_x12_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x12_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x13_0">
+      <obj_property name="ElementShortName">EDRICO_1_x13_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x13_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x14_0">
+      <obj_property name="ElementShortName">EDRICO_1_x14_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x14_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x15_0">
+      <obj_property name="ElementShortName">EDRICO_1_x15_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x15_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x16_0">
+      <obj_property name="ElementShortName">EDRICO_1_x16_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x16_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x17_0">
+      <obj_property name="ElementShortName">EDRICO_1_x17_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x17_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x18_0">
+      <obj_property name="ElementShortName">EDRICO_1_x18_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x18_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x19_0">
+      <obj_property name="ElementShortName">EDRICO_1_x19_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x19_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x20_0">
+      <obj_property name="ElementShortName">EDRICO_1_x20_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x20_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x21_0">
+      <obj_property name="ElementShortName">EDRICO_1_x21_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x21_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x22_0">
+      <obj_property name="ElementShortName">EDRICO_1_x22_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x22_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x23_0">
+      <obj_property name="ElementShortName">EDRICO_1_x23_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x23_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x24_0">
+      <obj_property name="ElementShortName">EDRICO_1_x24_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x24_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x25_0">
+      <obj_property name="ElementShortName">EDRICO_1_x25_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x25_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x26_0">
+      <obj_property name="ElementShortName">EDRICO_1_x26_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x26_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x27_0">
+      <obj_property name="ElementShortName">EDRICO_1_x27_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x27_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x28_0">
+      <obj_property name="ElementShortName">EDRICO_1_x28_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x28_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x29_0">
+      <obj_property name="ElementShortName">EDRICO_1_x29_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x29_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x30_0">
+      <obj_property name="ElementShortName">EDRICO_1_x30_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x30_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_1_x31_0">
+      <obj_property name="ElementShortName">EDRICO_1_x31_0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EDRICO_1_x31_0[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_ARADDR">
+      <obj_property name="ElementShortName">S00_AXI_1_ARADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_ARADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_ARPROT">
+      <obj_property name="ElementShortName">S00_AXI_1_ARPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_ARPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_ARREADY">
+      <obj_property name="ElementShortName">S00_AXI_1_ARREADY</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_ARREADY</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_ARVALID">
+      <obj_property name="ElementShortName">S00_AXI_1_ARVALID</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_ARVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_AWADDR">
+      <obj_property name="ElementShortName">S00_AXI_1_AWADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_AWADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_AWPROT">
+      <obj_property name="ElementShortName">S00_AXI_1_AWPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_AWPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_AWREADY">
+      <obj_property name="ElementShortName">S00_AXI_1_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_AWVALID">
+      <obj_property name="ElementShortName">S00_AXI_1_AWVALID</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_AWVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_BREADY">
+      <obj_property name="ElementShortName">S00_AXI_1_BREADY</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_BREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_BRESP">
+      <obj_property name="ElementShortName">S00_AXI_1_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_BRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_BVALID">
+      <obj_property name="ElementShortName">S00_AXI_1_BVALID</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_RDATA">
+      <obj_property name="ElementShortName">S00_AXI_1_RDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_RDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_RREADY">
+      <obj_property name="ElementShortName">S00_AXI_1_RREADY</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_RREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_RRESP">
+      <obj_property name="ElementShortName">S00_AXI_1_RRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_RRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_RVALID">
+      <obj_property name="ElementShortName">S00_AXI_1_RVALID</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_RVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_WDATA">
+      <obj_property name="ElementShortName">S00_AXI_1_WDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_WDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_WREADY">
+      <obj_property name="ElementShortName">S00_AXI_1_WREADY</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_WSTRB">
+      <obj_property name="ElementShortName">S00_AXI_1_WSTRB[3:0]</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_WSTRB[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/S00_AXI_1_WVALID">
+      <obj_property name="ElementShortName">S00_AXI_1_WVALID</obj_property>
+      <obj_property name="ObjectShortName">S00_AXI_1_WVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_ARADDR">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_ARADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_ARADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_ARPROT">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_ARPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_ARPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_ARREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_ARREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_ARREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_ARVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_ARVALID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_ARVALID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_AWADDR">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_AWADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_AWADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_AWPROT">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_AWPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_AWPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_AWREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_AWVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_AWVALID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_AWVALID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_BREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_BREADY[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_BREADY[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_BRESP">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_BRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_BVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_BVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_RDATA">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_RDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_RDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_RREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_RREADY[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_RREADY[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_RRESP">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_RRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_RRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_RVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_RVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_RVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_WDATA">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_WDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_WDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_WREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_WREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_WSTRB">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_WSTRB[3:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_WSTRB[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M00_AXI_WVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M00_AXI_WVALID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M00_AXI_WVALID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_ARADDR">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_ARADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_ARADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_ARPROT">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_ARPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_ARPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_ARREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_ARREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_ARREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_ARVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_ARVALID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_ARVALID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_AWADDR">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_AWADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_AWADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_AWPROT">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_AWPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_AWPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_AWREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_AWVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_AWVALID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_AWVALID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_BREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_BREADY[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_BREADY[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_BRESP">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_BRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_BVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_BVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_RDATA">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_RDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_RDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_RREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_RREADY[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_RREADY[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_RRESP">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_RRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_RRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_RVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_RVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_RVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_WDATA">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_WDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_WDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_WREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_WREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_WSTRB">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_WSTRB[3:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_WSTRB[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M01_AXI_WVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M01_AXI_WVALID[0:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M01_AXI_WVALID[0:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_ARADDR">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_ARADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_ARADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_ARPROT">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_ARPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_ARPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_ARREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_ARREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_ARREADY</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_ARVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_ARVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_ARVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_AWADDR">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_AWADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_AWADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_AWPROT">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_AWPROT[2:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_AWPROT[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_AWREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_AWREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_AWREADY</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_AWVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_AWVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_AWVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_BREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_BREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_BREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_BRESP">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_BRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_BRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_BVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_BVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_BVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_RDATA">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_RDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_RDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_RREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_RREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_RREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_RRESP">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_RRESP[1:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_RRESP[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_RVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_RVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_RVALID</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_WDATA">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_WDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_WDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_WREADY">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_WREADY</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_WREADY</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_WSTRB">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_WSTRB[3:0]</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_WSTRB[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/axi_mem_intercon_M02_AXI_WVALID">
+      <obj_property name="ElementShortName">axi_mem_intercon_M02_AXI_WVALID</obj_property>
+      <obj_property name="ObjectShortName">axi_mem_intercon_M02_AXI_WVALID</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/clk_wiz_clk_out1">
+      <obj_property name="ElementShortName">clk_wiz_clk_out1</obj_property>
+      <obj_property name="ObjectShortName">clk_wiz_clk_out1</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_ADDR">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_ADDR[12:0]</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_ADDR[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_CLK">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_CLK</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_CLK</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_DIN">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_DIN[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_DIN[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_DOUT">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_DOUT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_DOUT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_EN">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_EN</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_EN</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_RST">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_RST</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_RST</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/data_ram_BRAM_PORTA_WE">
+      <obj_property name="ElementShortName">data_ram_BRAM_PORTA_WE[3:0]</obj_property>
+      <obj_property name="ObjectShortName">data_ram_BRAM_PORTA_WE[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/instruction_ram_BRAM_PORTA_ADDR">
+      <obj_property name="ElementShortName">instruction_ram_BRAM_PORTA_ADDR[12:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_ram_BRAM_PORTA_ADDR[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/instruction_ram_BRAM_PORTA_CLK">
+      <obj_property name="ElementShortName">instruction_ram_BRAM_PORTA_CLK</obj_property>
+      <obj_property name="ObjectShortName">instruction_ram_BRAM_PORTA_CLK</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/instruction_ram_BRAM_PORTA_DOUT">
+      <obj_property name="ElementShortName">instruction_ram_BRAM_PORTA_DOUT[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instruction_ram_BRAM_PORTA_DOUT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/instruction_ram_BRAM_PORTA_EN">
+      <obj_property name="ElementShortName">instruction_ram_BRAM_PORTA_EN</obj_property>
+      <obj_property name="ObjectShortName">instruction_ram_BRAM_PORTA_EN</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/instruction_ram_BRAM_PORTA_RST">
+      <obj_property name="ElementShortName">instruction_ram_BRAM_PORTA_RST</obj_property>
+      <obj_property name="ObjectShortName">instruction_ram_BRAM_PORTA_RST</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/rst_clk_wiz_100M_peripheral_aresetn">
+      <obj_property name="ElementShortName">rst_clk_wiz_100M_peripheral_aresetn</obj_property>
+      <obj_property name="ObjectShortName">rst_clk_wiz_100M_peripheral_aresetn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/sim_EDRICO_AV_2_test_0_system_reset_async">
+      <obj_property name="ElementShortName">sim_EDRICO_AV_2_test_0_system_reset_async</obj_property>
+      <obj_property name="ObjectShortName">sim_EDRICO_AV_2_test_0_system_reset_async</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/NLW_EDRICO_1_M_AXI_0_arcache_UNCONNECTED">
+      <obj_property name="ElementShortName">NLW_EDRICO_1_M_AXI_0_arcache_UNCONNECTED[3:0]</obj_property>
+      <obj_property name="ObjectShortName">NLW_EDRICO_1_M_AXI_0_arcache_UNCONNECTED[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/NLW_EDRICO_1_M_AXI_0_awcache_UNCONNECTED">
+      <obj_property name="ElementShortName">NLW_EDRICO_1_M_AXI_0_awcache_UNCONNECTED[3:0]</obj_property>
+      <obj_property name="ObjectShortName">NLW_EDRICO_1_M_AXI_0_awcache_UNCONNECTED[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/NLW_instruction_ram_bram_we_a_UNCONNECTED">
+      <obj_property name="ElementShortName">NLW_instruction_ram_bram_we_a_UNCONNECTED[3:0]</obj_property>
+      <obj_property name="ObjectShortName">NLW_instruction_ram_bram_we_a_UNCONNECTED[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/NLW_instruction_ram_bram_wrdata_a_UNCONNECTED">
+      <obj_property name="ElementShortName">NLW_instruction_ram_bram_wrdata_a_UNCONNECTED[31:0]</obj_property>
+      <obj_property name="ObjectShortName">NLW_instruction_ram_bram_wrdata_a_UNCONNECTED[31:0]</obj_property>
+   </wvobject>
+</wave_config>

@@ -36,7 +36,7 @@ port (
     ------------------------------------------------------------------------------
     --clock and reset
     M_AXI_ACLK : in STD_LOGIC;
-    M_AXI_ARSTN : in STD_LOGIC;
+    M_AXI_ARESETN : in STD_LOGIC;
     --read address channel
     M_AXI_ARADDR : out STD_LOGIC_VECTOR (31 downto 0);
     M_AXI_ARCACHE : out STD_LOGIC_VECTOR (3 downto 0);
@@ -121,7 +121,7 @@ port map(
     ------------------------------------------------------------------------------
     --clock and reset
     M_AXI_ACLK => M_AXI_ACLK,
-    M_AXI_ARSTN => M_AXI_ARSTN,
+    M_AXI_ARSTN => M_AXI_ARESETN,
     --read address channel
     M_AXI_ARCACHE => M_AXI_ARCACHE,
     M_AXI_ARPROT => M_AXI_ARPROT,
@@ -174,9 +174,9 @@ port map(
 ----------------------------------------------------------------------------------
 --address register
 ----------------------------------------------------------------------------------
-addr_reg: process(M_AXI_ACLK, reset, M_AXI_ARSTN, reset_local)
+addr_reg: process(M_AXI_ACLK, reset, M_AXI_ARESETN, reset_local)
 begin
-    if(reset = '1' or M_AXI_ARSTN = '0') then
+    if(reset = '1' or M_AXI_ARESETN = '0') then
         address_register <= (others => '0');
     elsif(M_AXI_ACLK'event and M_AXI_ACLK = '1') then
         if(reset_local = '1') then
@@ -190,9 +190,9 @@ end process;
 ----------------------------------------------------------------------------------
 --data register
 ----------------------------------------------------------------------------------
-data_reg: process(M_AXI_ACLK, reset, M_AXI_ARSTN, reset_local)
+data_reg: process(M_AXI_ACLK, reset, M_AXI_ARESETN, reset_local)
 begin
-    if(reset = '1' or M_AXI_ARSTN = '0') then
+    if(reset = '1' or M_AXI_ARESETN = '0') then
         data_register <= (others => '0');
     elsif(M_AXI_ACLK'event and M_AXI_ACLK = '1') then
         if(reset_local = '1') then

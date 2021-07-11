@@ -31,6 +31,9 @@ package CU_pkg is
 --components
 ----------------------------------------------------------------------------------
 component CU_PC is
+generic(
+    PC_base_address : STD_LOGIC_VECTOR(31 downto 0) := x"00000000"
+);
 port( 
     ------------------------------------------------------------------------------
     --input signals

@@ -12,7 +12,7 @@ entity mmCSR_AXI4_slave_v1_0_mmCSR_AXI4_s is
 		-- Width of S_AXI data bus
 		C_S_AXI_DATA_WIDTH	: integer	:= 32;
 		-- Width of S_AXI address bus
-		C_S_AXI_ADDR_WIDTH	: integer	:= 5
+		C_S_AXI_ADDR_WIDTH	: integer	:= 16
 	);
 	port (
 		-- Users to add ports here
@@ -222,7 +222,7 @@ begin
 	    else
 	      if (slv_reg_wren = '1') then
 	        case axi_awaddr is
-	          when x"02000000" =>
+	          when x"0000" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
 	                -- Respective byte enables are asserted as per write strobes                   
@@ -230,7 +230,7 @@ begin
 	                slv_reg0(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;
-	          when x"02004000" =>
+	          when x"4000" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
 	                -- Respective byte enables are asserted as per write strobes                   
@@ -238,7 +238,7 @@ begin
 	                slv_reg1(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;
-	          when x"02004004" =>
+	          when x"4004" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
 	                -- Respective byte enables are asserted as per write strobes                   
@@ -246,7 +246,7 @@ begin
 	                slv_reg2(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;
-	          when x"0200BFF8" =>
+	          when x"BFF8" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
 	                -- Respective byte enables are asserted as per write strobes                   
@@ -254,7 +254,7 @@ begin
 	                slv_reg3(byte_index*8+7 downto byte_index*8) <= S_AXI_WDATA(byte_index*8+7 downto byte_index*8);
 	              end if;
 	            end loop;
-	          when x"0200BFFC" =>
+	          when x"BFFC" =>
 	            for byte_index in 0 to (C_S_AXI_DATA_WIDTH/8-1) loop
 	              if ( S_AXI_WSTRB(byte_index) = '1' ) then
 	                -- Respective byte enables are asserted as per write strobes                   
@@ -359,15 +359,15 @@ begin
 	begin
 	    -- Address decoding for reading registers
 	    case axi_araddr is
-	      when x"02000000" =>
+	      when x"0000" =>
 	        reg_data_out <= slv_reg0;
-	      when x"02004000" =>
+	      when x"4000" =>
 	        reg_data_out <= slv_reg1;
-	      when x"02004004" =>
+	      when x"4004" =>
 	        reg_data_out <= slv_reg2;
-	      when x"0200BFF8" =>
+	      when x"BFF8" =>
 	        reg_data_out <= slv_reg3;
-	      when x"0200BFFC" =>
+	      when x"BFFC" =>
 	        reg_data_out <= slv_reg4;
 	      when others =>
 	        reg_data_out  <= (others => '0');
