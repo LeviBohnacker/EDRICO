@@ -19,17 +19,17 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.156 ns"></ZoomStartTime>
-      <ZoomEndTime time="3,260.157 ns"></ZoomEndTime>
-      <Cursor1Time time="775.156 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,700.001 ns"></ZoomEndTime>
+      <Cursor1Time time="491.362 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="270"></NameColumnWidth>
-      <ValueColumnWidth column_width="131"></ValueColumnWidth>
+      <ValueColumnWidth column_width="127"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="326" />
    <wave_markers>
-      <marker label="" time="858000" />
+      <marker label="" time="875000" />
       <marker label="" time="817156" />
    </wave_markers>
    <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/clk_wiz_clk_out1">
@@ -311,6 +311,7 @@
    <wvobject type="group" fp_name="group3632">
       <obj_property name="label">DMU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/EDRICO_0/U0/DataMaskUnit_0/U0/DMU_IN_MUX_ctrl">
          <obj_property name="ElementShortName">DMU_IN_MUX_ctrl</obj_property>
          <obj_property name="ObjectShortName">DMU_IN_MUX_ctrl</obj_property>
@@ -1687,6 +1688,7 @@
    <wvobject type="group" fp_name="group316">
       <obj_property name="label">data memory</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/sim_EDRICO_AV_2_tb_wrapper/sim_EDRICO_AV_2_tb_i/blk_mem_gen_1/inst/\native_mem_mapped_module.blk_mem_gen_v8_4_4_inst /memory">
          <obj_property name="ElementShortName">memory[0:2047][31:0]</obj_property>
          <obj_property name="ObjectShortName">memory[0:2047][31:0]</obj_property>
