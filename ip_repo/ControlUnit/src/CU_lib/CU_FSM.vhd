@@ -35,6 +35,7 @@ port (
     reset: in std_logic;
     clk: in std_logic;
     type_of_instruction: in std_logic_vector(3 downto 0);
+    exception: in std_logic;
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -43,6 +44,7 @@ port (
     PMP_size_FSM: out std_logic_vector(1 downto 0);
     PMP_rw_FSM: out std_logic;
     instruction_fetch: out std_logic;
+    clear_execute_Buffer: out std_logic;
     execute_enable: out std_logic;
     PC_load: out std_logic;
     instruction_finished: out std_logic               
@@ -94,6 +96,7 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0';
+            clear_execute_Buffer <= '0';
               
 
         when FSM_HALT_CORE =>
@@ -111,6 +114,7 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0';
+            clear_execute_Buffer <= '1';
                        
 
         when FSM_FETCH =>
@@ -130,6 +134,8 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0';
+            clear_execute_Buffer <= '1';
+           
                       
         
         when FSM_EXECUTE =>
@@ -149,11 +155,12 @@ begin
             execute_enable <= '1';
             PC_load <= '0';
             instruction_finished <= '0';
+            clear_execute_Buffer <= '0';
                          
 
         when FSM_EXECUTE_MEM =>
         -- wait for memory execution or go to wait state if operation finished
-            if(halt_core = '1') then
+            if(halt_core = '1' or exception = '1') then
                 next_state <= FSM_HALT_CORE;
             elsif(memOP_finished = '1') then
                 next_state <= FSM_WAIT;
@@ -168,6 +175,7 @@ begin
             execute_enable <= '0';
             PC_load <= '0';
             instruction_finished <= '0'; 
+            clear_execute_Buffer <= '0';
           
 
         when FSM_WAIT =>
@@ -185,6 +193,7 @@ begin
             execute_enable <= '0';
             PC_load <= '1';
             instruction_finished <= '1';
+            clear_execute_Buffer <= '0';
                         
     end case;
 end process comb_process;

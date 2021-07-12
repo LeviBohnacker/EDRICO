@@ -136,6 +136,7 @@ port (
     execute_enable: in std_logic;
     clk: in std_logic;
     reset: in std_logic;
+    instruction_fetch: in std_logic;
     -- instruction register
     type_of_instruction_int: in std_logic_vector(3 downto 0);
     -- PMP ctrl

@@ -114,6 +114,7 @@ signal pmpaddr: type_pmpaddr;
 signal enable_PMA: std_logic;
 signal enable_PMP: std_logic;
 signal address_register: std_logic_vector(31 downto 0);
+signal enable_register : std_logic;
 begin
 ----------------------------------------------------------------------------------
 --pmp signal associations
@@ -217,8 +218,10 @@ address_reg: process(reset , clk)
 begin
     if(reset = '1') then
         address_register <= x"00000000";
+        enable_register <= '0';
     elsif(clk'event and clk = '0' and enable = '1') then
         address_register <= address;
+        --enable_register <= enable_PMA and enable_PMP;
     end if;
 end process;                   
                    

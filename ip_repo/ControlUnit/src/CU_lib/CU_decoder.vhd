@@ -176,7 +176,7 @@ begin
             -- and data from register. loaded data stores in respective destination register
                 type_of_instruction_int <= "0001";
                 PMP_enable_int <= '1';  
-                PMP_instruction_int <= '1';
+                PMP_instruction_int <= '0';
                 DMU_OUT_MUX_int <= '1';
                 PMP_MUX_int <= '1';
                 B_MUX_int <= '1';
@@ -210,7 +210,7 @@ begin
             -- and data from register 
                 type_of_instruction_int <= "0001";
                 PMP_enable_int <= '1';
-                PMP_instruction_int <= '1';
+                PMP_instruction_int <= '0';
                 PMP_rw_int <= '1';
                 DMU_IN_MUX_int <= '1';
                 DMU_OUT_MUX_int <= '0';

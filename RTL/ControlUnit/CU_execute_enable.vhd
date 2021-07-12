@@ -34,6 +34,7 @@ port (
     execute_enable: in std_logic;
     clk: in std_logic;
     reset: in std_logic;
+    instruction_fetch: in std_logic;
     -- instruction register
     type_of_instruction_int: in std_logic_vector(3 downto 0);
     -- PMP ctrl
@@ -139,7 +140,34 @@ begin
         ALU_op <= "0000";
         immediate <= "00000000000000000000000000000000";
         mask_ctrl <= "100";
-    elsif(clk'event and clk = '0' and execute_enable = '1') then
+    elsif(clk'event and clk = '0') then
+    if(instruction_fetch = '1') then
+        type_of_instruction <= "0000";
+        PMP_enable <= '0';
+        PMP_instruction <= '0';
+        PMP_size <= "00";
+        PMP_rw <= '0';
+        DMU_IN_MUX<= '0';
+        DMU_OUT_MUX <= '0';
+        R_MUX <= '0';
+        PMP_MUX <= '0';
+        B_MUX <= '0';
+        A_MUX <= "00";
+        reg_read_A <= "00000";
+        reg_read_B <= "00000";
+        reg_write <= "00000";
+        CSR_save <= '0';
+        CSR_address <= "000000000000";
+        CSR_write <= '0';
+        CSR_read <= '0';
+        iie_CU <= '0';
+        ece_CU <= '0';
+        be_CU <= '0';
+        return_out <= '0';
+        ALU_op <= "0000";
+        immediate <= "00000000000000000000000000000000";
+        mask_ctrl <= "100";    
+    elsif(execute_enable = '1') then
     -- if clock is falling and execute_enable is 1, signals are fed through
         type_of_instruction <= type_of_instruction_int;
         PMP_enable <= PMP_enable_int;
@@ -166,6 +194,7 @@ begin
         ALU_op <= ALU_op_int;
         immediate <= immediate_int;
         mask_ctrl <= mask_ctrl_int;   
+    end if;
     end if;     
 end process exec_en;
 end architecture;

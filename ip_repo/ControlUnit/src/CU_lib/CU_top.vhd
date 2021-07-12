@@ -146,8 +146,10 @@ signal PMP_instruction_EX : std_logic;
 signal PMP_rw_EX : std_logic;
 signal PMP_size_EX : std_logic_vector(1 downto 0);
 signal immediate_EX : std_logic_vector(31 downto 0);
-
-
+signal clear_execute_buffer : std_logic;
+signal exception : std_logic;
+signal iie_int, ece_int, be_int : std_logic;
+signal PMP_enable_EX_buf : std_logic;
 begin
 
 ----------------------------------------------------------------------------------
@@ -164,6 +166,7 @@ port map(
     reset => reset,
     clk => clk,
     type_of_instruction => type_of_instruction,
+    exception => exception,
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -172,6 +175,7 @@ port map(
     PMP_size_FSM => PMP_size_FSM,
     PMP_rw_FSM => PMP_rw_FSM,
     instruction_fetch => instruction_fetch,
+    clear_execute_buffer => clear_execute_buffer,
     execute_enable => execute_enable,
     PC_load => PC_load,
     instruction_finished => instr_finished 
@@ -238,6 +242,7 @@ port map(
     execute_enable => execute_enable,
     clk => clk,
     reset => reset,
+    clear_execute_buffer => clear_execute_buffer,
     -- instruction register
     type_of_instruction_int => type_of_instruction_int,
     -- PMP ctrl
@@ -297,16 +302,19 @@ port map(
     CSR_write => write_CSR,
     CSR_read => read_CSR,
     -- exception ctrl
-    iie_CU => iie_CU,
-    ece_CU => ece_CU,
-    be_CU => be_CU,
+    iie_CU => iie_int,
+    ece_CU => ece_int,
+    be_CU => be_int,
     return_out => ret,
     -- other signals
-    ALU_op => ALU_op,
+    ALU_op => ALU_OP,
     immediate => immediate_EX,
     mask_ctrl => mask_ctrl
 );
-
+iie_CU <= iie_int;
+be_CU <= be_int;
+ece_CU <= ece_int;
+exception <= iie_int or ece_int or be_int;
 immediate <= immediate_EX;
 
 ----------------------------------------------------------------------------------
@@ -357,12 +365,13 @@ begin
 end process;
 
 IR_dra <= IR;
+
 ----------------------------------------------------------------------------------
---PMP multiplexer
---  multiplexer to connect the PMP_PMA_checker signals to either the execution
---  buffer or FSM outputs.
+--instruction fetch multiplexer
+--  multiplexer to connect the output signals to either the execution
+--  buffer or FSM outputs and base values
 ----------------------------------------------------------------------------------
-PMP_mux: process(instruction_fetch, PMP_enable_EX, PMP_instruction_EX, PMP_size_EX, PMP_rw_EX, PMP_enable_FSM, PMP_instruction_FSM, PMP_size_FSM, PMP_rw_FSM)
+PMP_mux: process(instruction_fetch, PMP_enable_EX_buf, PMP_instruction_EX, PMP_size_EX, PMP_rw_EX, PMP_enable_FSM, PMP_instruction_FSM, PMP_size_FSM, PMP_rw_FSM)
 begin
     if(instruction_fetch = '1') then
         PMP_enable <= PMP_enable_FSM;
@@ -370,10 +379,19 @@ begin
         PMP_size <= PMP_size_FSM;
         PMP_rw <= PMP_rw_FSM;
     else
-        PMP_enable <= PMP_enable_EX;
+        PMP_enable <= PMP_enable_EX_buf;
         PMP_instruction <= PMP_instruction_EX;
         PMP_size <= PMP_size_EX;
         PMP_rw <= PMP_rw_EX;
+    end if;
+end process;
+
+PMP_enable_EX_buffer: process(clk, reset, clear_execute_buffer)
+begin
+    if(reset = '1' or clear_execute_buffer = '1') then
+        PMP_enable_EX_buf <= '0';
+    elsif(clk'event and clk = '1') then
+        PMP_enable_EX_buf <= PMP_enable_EX;
     end if;
 end process;
 

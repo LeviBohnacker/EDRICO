@@ -69,6 +69,7 @@ port (
     reset: in std_logic;
     clk: in std_logic;
     type_of_instruction: in std_logic_vector(3 downto 0);
+    exception : in std_logic;
     ------------------------------------------------------------------------------
     --output signals
     ------------------------------------------------------------------------------
@@ -77,9 +78,10 @@ port (
     PMP_size_FSM: out std_logic_vector(1 downto 0);
     PMP_rw_FSM: out std_logic;
     instruction_fetch: out std_logic;
+    clear_execute_Buffer: out std_logic;
     execute_enable: out std_logic;
     PC_load: out std_logic;
-    instruction_finished: out std_logic
+    instruction_finished: out std_logic               
 );
 end component;
 
@@ -136,6 +138,7 @@ port (
     execute_enable: in std_logic;
     clk: in std_logic;
     reset: in std_logic;
+    clear_execute_buffer: in std_logic;
     -- instruction register
     type_of_instruction_int: in std_logic_vector(3 downto 0);
     -- PMP ctrl

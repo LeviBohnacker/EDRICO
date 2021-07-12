@@ -64,8 +64,27 @@ component EDRICO_wrapper is
     M_AXI_0_wstrb : out STD_LOGIC_VECTOR ( 3 downto 0 );
     M_AXI_0_wvalid : out STD_LOGIC;
     M_AXI_ACLK_0 : in STD_LOGIC;
-    M_AXI_ARSTN_0 : in STD_LOGIC;
+    M_AXI_ARESETN_0 : in STD_LOGIC;
     PC_debug : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_0_araddr : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    S00_AXI_0_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S00_AXI_0_arready : out STD_LOGIC;
+    S00_AXI_0_arvalid : in STD_LOGIC;
+    S00_AXI_0_awaddr : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    S00_AXI_0_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    S00_AXI_0_awready : out STD_LOGIC;
+    S00_AXI_0_awvalid : in STD_LOGIC;
+    S00_AXI_0_bready : in STD_LOGIC;
+    S00_AXI_0_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S00_AXI_0_bvalid : out STD_LOGIC;
+    S00_AXI_0_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_0_rready : in STD_LOGIC;
+    S00_AXI_0_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
+    S00_AXI_0_rvalid : out STD_LOGIC;
+    S00_AXI_0_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
+    S00_AXI_0_wready : out STD_LOGIC;
+    S00_AXI_0_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    S00_AXI_0_wvalid : in STD_LOGIC;
     mcause_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     mcountinhibit_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     mcycleH_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -76,31 +95,12 @@ component EDRICO_wrapper is
     minstret_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     mip_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     misa_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    mmCSR_AXI4_s_0_araddr : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    mmCSR_AXI4_s_0_arprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    mmCSR_AXI4_s_0_arready : out STD_LOGIC;
-    mmCSR_AXI4_s_0_arvalid : in STD_LOGIC;
-    mmCSR_AXI4_s_0_awaddr : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    mmCSR_AXI4_s_0_awprot : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    mmCSR_AXI4_s_0_awready : out STD_LOGIC;
-    mmCSR_AXI4_s_0_awvalid : in STD_LOGIC;
-    mmCSR_AXI4_s_0_bready : in STD_LOGIC;
-    mmCSR_AXI4_s_0_bresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    mmCSR_AXI4_s_0_bvalid : out STD_LOGIC;
-    mmCSR_AXI4_s_0_rdata : out STD_LOGIC_VECTOR ( 31 downto 0 );
-    mmCSR_AXI4_s_0_rready : in STD_LOGIC;
-    mmCSR_AXI4_s_0_rresp : out STD_LOGIC_VECTOR ( 1 downto 0 );
-    mmCSR_AXI4_s_0_rvalid : out STD_LOGIC;
-    mmCSR_AXI4_s_0_wdata : in STD_LOGIC_VECTOR ( 31 downto 0 );
-    mmCSR_AXI4_s_0_wready : out STD_LOGIC;
-    mmCSR_AXI4_s_0_wstrb : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    mmCSR_AXI4_s_0_wvalid : in STD_LOGIC;
-    mmcsr_axi4_s_aclk_0 : in STD_LOGIC;
-    mmcsr_axi4_s_aresetn_0 : in STD_LOGIC;
     mscratch_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     mstatus_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     mtval_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
     mtvec_debug_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
+    s00_axi_aclk_0 : in STD_LOGIC;
+    s00_axi_aresetn_0 : in STD_LOGIC;
     system_clk : in STD_LOGIC;
     system_reset_async : in STD_LOGIC;
     x10_0 : out STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -174,27 +174,27 @@ for all: EDRICO_wrapper use entity work.EDRICO_wrapper(STRUCTURE);
     signal minstret_debug_0 : STD_LOGIC_VECTOR ( 31 downto 0 );
     signal mip_debug_0 : STD_LOGIC_VECTOR ( 31 downto 0 );
     signal misa_debug_0 : STD_LOGIC_VECTOR ( 31 downto 0 );
-    signal mmCSR_AXI4_s_0_araddr : STD_LOGIC_VECTOR ( 15 downto 0 );
-    signal mmCSR_AXI4_s_0_arprot : STD_LOGIC_VECTOR ( 2 downto 0 );
-    signal mmCSR_AXI4_s_0_arready : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_arvalid : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_awaddr : STD_LOGIC_VECTOR ( 15 downto 0 );
-    signal mmCSR_AXI4_s_0_awprot : STD_LOGIC_VECTOR ( 2 downto 0 );
-    signal mmCSR_AXI4_s_0_awready : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_awvalid : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_bready : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_bresp : STD_LOGIC_VECTOR ( 1 downto 0 );
-    signal mmCSR_AXI4_s_0_bvalid : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_rdata : STD_LOGIC_VECTOR ( 31 downto 0 );
-    signal mmCSR_AXI4_s_0_rready : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_rresp : STD_LOGIC_VECTOR ( 1 downto 0 );
-    signal mmCSR_AXI4_s_0_rvalid : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_wdata : STD_LOGIC_VECTOR ( 31 downto 0 );
-    signal mmCSR_AXI4_s_0_wready : STD_LOGIC;
-    signal mmCSR_AXI4_s_0_wstrb : STD_LOGIC_VECTOR ( 3 downto 0 );
-    signal mmCSR_AXI4_s_0_wvalid : STD_LOGIC;
-    signal mmcsr_axi4_s_aclk_0 : STD_LOGIC := '0';
-    signal mmcsr_axi4_s_aresetn_0 : STD_LOGIC := '1';
+    signal S00_AXI_0_araddr : STD_LOGIC_VECTOR ( 15 downto 0 );
+    signal S00_AXI_0_arprot : STD_LOGIC_VECTOR ( 2 downto 0 );
+    signal S00_AXI_0_arready : STD_LOGIC;
+    signal S00_AXI_0_arvalid : STD_LOGIC;
+    signal S00_AXI_0_awaddr : STD_LOGIC_VECTOR ( 15 downto 0 );
+    signal S00_AXI_0_awprot : STD_LOGIC_VECTOR ( 2 downto 0 );
+    signal S00_AXI_0_awready : STD_LOGIC;
+    signal S00_AXI_0_awvalid : STD_LOGIC;
+    signal S00_AXI_0_bready : STD_LOGIC;
+    signal S00_AXI_0_bresp : STD_LOGIC_VECTOR ( 1 downto 0 );
+    signal S00_AXI_0_bvalid : STD_LOGIC;
+    signal S00_AXI_0_rdata : STD_LOGIC_VECTOR ( 31 downto 0 );
+    signal S00_AXI_0_rready : STD_LOGIC;
+    signal S00_AXI_0_rresp : STD_LOGIC_VECTOR ( 1 downto 0 );
+    signal S00_AXI_0_rvalid : STD_LOGIC;
+    signal S00_AXI_0_wdata : STD_LOGIC_VECTOR ( 31 downto 0 );
+    signal S00_AXI_0_wready : STD_LOGIC;
+    signal S00_AXI_0_wstrb : STD_LOGIC_VECTOR ( 3 downto 0 );
+    signal S00_AXI_0_wvalid : STD_LOGIC;
+    signal s00_axi_aclk_0 : STD_LOGIC := '0';
+    signal s00_axi_aresetn_0 : STD_LOGIC := '1';
     signal mscratch_debug_0 : STD_LOGIC_VECTOR ( 31 downto 0 );
     signal mstatus_debug_0 : STD_LOGIC_VECTOR ( 31 downto 0 );
     signal mtval_debug_0 : STD_LOGIC_VECTOR ( 31 downto 0 );
@@ -238,14 +238,14 @@ constant T : time := 10 ns;
 begin
 
 system_clk <= not system_clk after T/2;
-mmcsr_axi4_s_aclk_0 <= not mmcsr_axi4_s_aclk_0 after T/2;
+s00_axi_aclk_0 <= not s00_axi_aclk_0 after T/2;
 M_AXI_ACLK_0 <= not M_AXI_ACLK_0 after T/2;
 
 test: process
 begin
     wait for 31 ns;
     system_reset_async <= '0';
-    mmcsr_axi4_s_aresetn_0 <= '1';
+    s00_axi_aresetn_0 <= '1';
     M_AXI_ARSTN_0 <= '1';
     wait;
 end process;
@@ -276,7 +276,7 @@ dut: EDRICO_wrapper
     M_AXI_0_wstrb => M_AXI_0_wstrb,
     M_AXI_0_wvalid => M_AXI_0_wvalid,
     M_AXI_ACLK_0 => M_AXI_ACLK_0,
-    M_AXI_ARSTN_0 => M_AXI_ARSTN_0,
+    M_AXI_ARESETN_0 => M_AXI_ARSTN_0,
     PC_debug => PC_debug,
     mcause_debug_0 => mcause_debug_0,
     mcountinhibit_debug_0 => mcountinhibit_debug_0,
@@ -288,27 +288,27 @@ dut: EDRICO_wrapper
     minstret_debug_0 => minstret_debug_0,
     mip_debug_0 => mip_debug_0,
     misa_debug_0 => misa_debug_0,
-    mmCSR_AXI4_s_0_araddr => mmCSR_AXI4_s_0_araddr,
-    mmCSR_AXI4_s_0_arprot => mmCSR_AXI4_s_0_arprot,
-    mmCSR_AXI4_s_0_arready => mmCSR_AXI4_s_0_arready,
-    mmCSR_AXI4_s_0_arvalid => mmCSR_AXI4_s_0_arvalid,
-    mmCSR_AXI4_s_0_awaddr => mmCSR_AXI4_s_0_awaddr,
-    mmCSR_AXI4_s_0_awprot => mmCSR_AXI4_s_0_awprot,
-    mmCSR_AXI4_s_0_awready => mmCSR_AXI4_s_0_awready,
-    mmCSR_AXI4_s_0_awvalid => mmCSR_AXI4_s_0_awvalid,
-    mmCSR_AXI4_s_0_bready => mmCSR_AXI4_s_0_bready,
-    mmCSR_AXI4_s_0_bresp => mmCSR_AXI4_s_0_bresp,
-    mmCSR_AXI4_s_0_bvalid => mmCSR_AXI4_s_0_bvalid,
-    mmCSR_AXI4_s_0_rdata => mmCSR_AXI4_s_0_rdata,
-    mmCSR_AXI4_s_0_rready => mmCSR_AXI4_s_0_rready,
-    mmCSR_AXI4_s_0_rresp => mmCSR_AXI4_s_0_rresp,
-    mmCSR_AXI4_s_0_rvalid => mmCSR_AXI4_s_0_rvalid,
-    mmCSR_AXI4_s_0_wdata => mmCSR_AXI4_s_0_wdata,
-    mmCSR_AXI4_s_0_wready => mmCSR_AXI4_s_0_wready,
-    mmCSR_AXI4_s_0_wstrb => mmCSR_AXI4_s_0_wstrb,
-    mmCSR_AXI4_s_0_wvalid => mmCSR_AXI4_s_0_wvalid,
-    mmcsr_axi4_s_aclk_0 => mmcsr_axi4_s_aclk_0,
-    mmcsr_axi4_s_aresetn_0 => mmcsr_axi4_s_aresetn_0,
+    S00_AXI_0_araddr => S00_AXI_0_araddr,
+    S00_AXI_0_arprot => S00_AXI_0_arprot,
+    S00_AXI_0_arready => S00_AXI_0_arready,
+    S00_AXI_0_arvalid => S00_AXI_0_arvalid,
+    S00_AXI_0_awaddr => S00_AXI_0_awaddr,
+    S00_AXI_0_awprot => S00_AXI_0_awprot,
+    S00_AXI_0_awready => S00_AXI_0_awready,
+    S00_AXI_0_awvalid => S00_AXI_0_awvalid,
+    S00_AXI_0_bready => S00_AXI_0_bready,
+    S00_AXI_0_bresp => S00_AXI_0_bresp,
+    S00_AXI_0_bvalid => S00_AXI_0_bvalid,
+    S00_AXI_0_rdata => S00_AXI_0_rdata,
+    S00_AXI_0_rready => S00_AXI_0_rready,
+    S00_AXI_0_rresp => S00_AXI_0_rresp,
+    S00_AXI_0_rvalid => S00_AXI_0_rvalid,
+    S00_AXI_0_wdata => S00_AXI_0_wdata,
+    S00_AXI_0_wready => S00_AXI_0_wready,
+    S00_AXI_0_wstrb => S00_AXI_0_wstrb,
+    S00_AXI_0_wvalid => S00_AXI_0_wvalid,
+    s00_axi_aclk_0 => s00_axi_aclk_0,
+    s00_axi_aresetn_0 => s00_axi_aresetn_0,
     mscratch_debug_0 => mscratch_debug_0,
     mstatus_debug_0 => mstatus_debug_0,
     mtval_debug_0 => mtval_debug_0,

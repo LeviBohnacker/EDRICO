@@ -181,7 +181,7 @@ begin
             PMP_instruction_FSM <= '1';
             PMP_size_FSM <= "10";
             PMP_rw_FSM <= '0';
-            instruction_fetch <= '1';
+            instruction_fetch <= '0';
             execute_enable <= '0';
             PC_load <= '1';
             instruction_finished <= '1';

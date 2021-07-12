@@ -34,6 +34,7 @@ port (
     execute_enable: in std_logic;
     clk: in std_logic;
     reset: in std_logic;
+    clear_execute_buffer: in std_logic;
     -- instruction register
     type_of_instruction_int: in std_logic_vector(3 downto 0);
     -- PMP ctrl
@@ -110,9 +111,9 @@ end entity;
 architecture rtl of CU_execute_enable is
 begin
 
-exec_en: process(clk, execute_enable, reset)
+exec_en: process(clk, execute_enable, reset, clear_execute_buffer)
 begin
-    if(reset = '1') then
+    if(reset = '1' or clear_execute_buffer = '1') then
     -- if reset, default value for all signals
         type_of_instruction <= "0000";
         PMP_enable <= '0';
@@ -139,7 +140,8 @@ begin
         ALU_op <= "0000";
         immediate <= "00000000000000000000000000000000";
         mask_ctrl <= "100";
-    elsif(clk'event and clk = '0' and execute_enable = '1') then
+    elsif(clk'event and clk = '0') then
+    if(execute_enable = '1') then
     -- if clock is falling and execute_enable is 1, signals are fed through
         type_of_instruction <= type_of_instruction_int;
         PMP_enable <= PMP_enable_int;
@@ -166,6 +168,7 @@ begin
         ALU_op <= ALU_op_int;
         immediate <= immediate_int;
         mask_ctrl <= mask_ctrl_int;   
+    end if;
     end if;     
 end process exec_en;
 end architecture;

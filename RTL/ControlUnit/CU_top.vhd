@@ -238,6 +238,7 @@ port map(
     execute_enable => execute_enable,
     clk => clk,
     reset => reset,
+    instruction_fetch => instruction_fetch,
     -- instruction register
     type_of_instruction_int => type_of_instruction_int,
     -- PMP ctrl
@@ -302,7 +303,7 @@ port map(
     be_CU => be_CU,
     return_out => ret,
     -- other signals
-    ALU_op => ALU_op,
+    ALU_op => ALU_OP,
     immediate => immediate_EX,
     mask_ctrl => mask_ctrl
 );
@@ -359,9 +360,9 @@ end process;
 IR_dra <= IR;
 
 ----------------------------------------------------------------------------------
---PMP multiplexer
---  multiplexer to connect the PMP_PMA_checker signals to either the execution
---  buffer or FSM outputs.
+--instruction fetch multiplexer
+--  multiplexer to connect the output signals to either the execution
+--  buffer or FSM outputs and base values
 ----------------------------------------------------------------------------------
 PMP_mux: process(instruction_fetch, PMP_enable_EX, PMP_instruction_EX, PMP_size_EX, PMP_rw_EX, PMP_enable_FSM, PMP_instruction_FSM, PMP_size_FSM, PMP_rw_FSM)
 begin
