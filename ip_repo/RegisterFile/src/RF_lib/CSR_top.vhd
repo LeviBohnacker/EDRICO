@@ -263,7 +263,7 @@ mie <= x"00000" & mie_reg(8) & '0' & mie_reg(7 downto 5) & '0' & mie_reg(4 downt
 mstatus_proc: process(reset, clk)
 begin
     if(reset = '1') then
-        mstatus_reg <= (others => '1');
+        mstatus_reg <= (others => '0');
     elsif(clk'event and clk = '0' and write(0) = '1') then
         mstatus_reg <= data_in(7) & data_in(3);
     end if;
@@ -282,7 +282,7 @@ misa <= x"00000100";
 mtvec_proc: process(reset, clk)
 begin
     if(reset = '1') then
-        mtvec <= (others => '1');
+        mtvec <= (others => '0');
     elsif(clk'event and clk='0' and write(3) = '1') then
         mtvec <= data_in;
     end if;
@@ -294,7 +294,7 @@ end process;
 mscratch_proc: process(reset, clk)
 begin
     if(reset = '1') then
-        mscratch <= (others => '1');
+        mscratch <= (others => '0');
     elsif(clk'event and clk='0' and write(5) = '1') then
         mscratch <= data_in;
     end if;
@@ -306,7 +306,7 @@ end process;
 mepc_proc: process(reset, clk)
 begin
     if(reset = '1') then
-        mepc <= (others => '1');
+        mepc <= (others => '0');
     elsif(clk'event and clk='0' and write(6) = '1') then
         mepc <= data_in;
     end if;
@@ -318,7 +318,7 @@ end process;
 mcause_proc: process(reset, clk)
 begin
     if(reset = '1') then
-        mcause <= (others => '1');
+        mcause <= (others => '0');
     elsif(clk'event and clk='0' and write(7) = '1') then
         mcause <= data_in;
     end if;
@@ -330,7 +330,7 @@ end process;
 mtval_proc: process(reset, clk)
 begin
     if(reset = '1') then
-        mtval <= (others => '1');
+        mtval <= (others => '0');
     elsif(clk'event and clk='0' and write(8) = '1') then
         mtval <= data_in;
     end if;

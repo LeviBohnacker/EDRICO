@@ -190,14 +190,14 @@ set_property -name "sim.central_dir" -value "$proj_dir/${_xil_proj_name_}.ip_use
 set_property -name "sim.ip.auto_export_scripts" -value "1" -objects $obj
 set_property -name "simulator_language" -value "Mixed" -objects $obj
 set_property -name "target_language" -value "VHDL" -objects $obj
-set_property -name "webtalk.activehdl_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.ies_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.modelsim_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.questa_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.riviera_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.vcs_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.xsim_export_sim" -value "35" -objects $obj
-set_property -name "webtalk.xsim_launch_sim" -value "300" -objects $obj
+set_property -name "webtalk.activehdl_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.ies_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.modelsim_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.questa_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.riviera_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.vcs_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.xsim_export_sim" -value "37" -objects $obj
+set_property -name "webtalk.xsim_launch_sim" -value "304" -objects $obj
 
 # Create 'sources_1' fileset (if not found)
 if {[string equal [get_filesets -quiet sources_1] ""]} {
