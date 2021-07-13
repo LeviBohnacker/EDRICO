@@ -76,6 +76,7 @@
 \usepackage{longtable}
 \usepackage{enumitem}	                                                 
 \usepackage{graphicx}
+\usepackage[table]{xcolor}
 \usepackage{pdfpages}                                                         
 \usepackage{xcolor} 	                                                    
 \usepackage{float}
@@ -152,9 +153,21 @@
 ]{biblatex}
 }
 
+\usepackage{xcolor}
+\colorlet{keyword}{blue!100!black!80}
+\colorlet{comment}{green!90!black!90}
+\lstdefinestyle{vhdl}{
+	language     = VHDL,
+	basicstyle   = \ttfamily,
+	keywordstyle = \color{keyword}\bfseries,
+	commentstyle = \color{comment}
+}
+
+
 \usepackage{tabularx}
 \usepackage{graphicx}
-
+\definecolor{light-gray}{gray}{0.85}
+\definecolor{dark-green}{rgb}{0.0, 0.5, 0.0}
 \addbibresource{bibliographie.bib}
 
 % Hurenkinder und Schusterjungen verhindern
