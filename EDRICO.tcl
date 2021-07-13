@@ -1086,9 +1086,8 @@ proc cr_bd_EDRICO { parentCell } {
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  validate_bd_design
   save_bd_design
-common::send_gid_msg -ssname BD::TCL -id 2050 -severity "WARNING" "This Tcl script was generated from a block design that has not been validated. It is possible that design <$design_name> may result in errors during validation."
-
   close_bd_design $design_name 
 }
 # End of cr_bd_EDRICO()
@@ -1328,6 +1327,81 @@ proc cr_bd_sim_EDRICO_AV_2_tb { parentCell } {
   assign_bd_address -offset 0x00000000 -range 0x00002000 -target_address_space [get_bd_addr_spaces EDRICO_0/M_AXI_0] [get_bd_addr_segs instruction_rom/S_AXI/Mem0] -force
   assign_bd_address -offset 0xA0000000 -range 0x00002000 -target_address_space [get_bd_addr_spaces EDRICO_0/M_AXI_0] [get_bd_addr_segs data_ram/S_AXI/Mem0] -force
 
+  # Perform GUI Layout
+  regenerate_bd_layout -layout_string {
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.273314",
+   "Default View_TopLeft":"-1416,552",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.0r4  2019-12-20 bk=1.5203 VDI=41 GEI=36 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace inst instruction_rom -pg 1 -lvl 3 -x 1820 -y 1410 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 4 -x 2570 -y 1410 -defaultsOSRD
+preplace inst data_ram -pg 1 -lvl 3 -x 1820 -y 1580 -defaultsOSRD
+preplace inst blk_mem_gen_1 -pg 1 -lvl 4 -x 2570 -y 1580 -defaultsOSRD
+preplace inst axi_mem_intercon -pg 1 -lvl 2 -x 1420 -y 1470 -defaultsOSRD
+preplace inst sim_EDRICO_AV_2_test_0 -pg 1 -lvl 1 -x 700 -y 2380 -defaultsOSRD
+preplace inst EDRICO_0 -pg 1 -lvl 3 -x 1820 -y 670 -defaultsOSRD
+preplace netloc EDRICO_0_IR_debug 1 0 4 70 1450 1120J 1630 1580J 1490 2200
+preplace netloc EDRICO_0_PC_debug 1 0 4 80 1460 1270J 1720 NJ 1720 2340
+preplace netloc EDRICO_0_mcause_debug_0 1 0 4 90 1470 1190J 1670 NJ 1670 2210
+preplace netloc EDRICO_0_mcountinhibit_debug_0 1 0 4 100 1490 1050J 1730 NJ 1730 2310
+preplace netloc EDRICO_0_mcycleH_debug_0 1 0 4 110 1500 1250J 1740 NJ 1740 2300
+preplace netloc EDRICO_0_mcycle_debug_0 1 0 4 30 140 NJ 140 NJ 140 2140
+preplace netloc EDRICO_0_mepc_debug_0 1 0 4 20 100 NJ 100 NJ 100 2290
+preplace netloc EDRICO_0_mie_debug_0 1 0 4 60 1510 1170J 1750 NJ 1750 2290
+preplace netloc EDRICO_0_minstretH_debug_0 1 0 4 230 1810 NJ 1810 NJ 1810 2390
+preplace netloc EDRICO_0_minstret_debug_0 1 0 4 240 1820 NJ 1820 NJ 1820 2380
+preplace netloc EDRICO_0_mip_debug_0 1 0 4 40 1520 1220J 1900 NJ 1900 2430
+preplace netloc EDRICO_0_misa_debug_0 1 0 4 50 1530 930J 1880 NJ 1880 2420
+preplace netloc EDRICO_0_mscratch_debug_0 1 0 4 150 1750 1050J 1760 NJ 1760 2250
+preplace netloc EDRICO_0_mstatus_debug_0 1 0 4 140 1670 1180J 1680 NJ 1680 2140
+preplace netloc EDRICO_0_mtval_debug_0 1 0 4 120 1630 1100J 1650 1620J 1830 2330
+preplace netloc EDRICO_0_mtvec_debug_0 1 0 4 130 1640 1030J 1990 NJ 1990 2440
+preplace netloc EDRICO_0_x10_0 1 0 4 480 1740 960J 2030 NJ 2030 2460
+preplace netloc EDRICO_0_x11_0 1 0 4 470 1730 970J 2040 NJ 2040 2450
+preplace netloc EDRICO_0_x12_0 1 0 4 160 110 NJ 110 NJ 110 2240
+preplace netloc EDRICO_0_x13_0 1 0 4 170 120 NJ 120 NJ 120 2230
+preplace netloc EDRICO_0_x14_0 1 0 4 180 130 NJ 130 NJ 130 2220
+preplace netloc EDRICO_0_x15_0 1 0 4 440 1720 1010J 1920 NJ 1920 2410
+preplace netloc EDRICO_0_x16_0 1 0 4 410 1700 1020J 1930 NJ 1930 2400
+preplace netloc EDRICO_0_x17_0 1 0 4 420 1710 1040J 1870 NJ 1870 2260
+preplace netloc EDRICO_0_x18_0 1 0 4 390 1660 1100J 1800 NJ 1800 2160
+preplace netloc EDRICO_0_x19_0 1 0 4 190 1480 1260J 1700 NJ 1700 2100
+preplace netloc EDRICO_0_x1_0 1 0 4 400 1680 1120J 1770 NJ 1770 2120
+preplace netloc EDRICO_0_x20_0 1 0 4 250 1540 1210J 1940 NJ 1940 2370
+preplace netloc EDRICO_0_x21_0 1 0 4 260 1550 1150J 1950 NJ 1950 2360
+preplace netloc EDRICO_0_x22_0 1 0 4 270 1560 1130J 1960 NJ 1960 2350
+preplace netloc EDRICO_0_x23_0 1 0 4 280 1570 1110J 1710 NJ 1710 2070
+preplace netloc EDRICO_0_x24_0 1 0 4 290 1580 1240J 1660 NJ 1660 2040
+preplace netloc EDRICO_0_x25_0 1 0 4 300 1590 1070J 1970 NJ 1970 2280
+preplace netloc EDRICO_0_x26_0 1 0 4 310 1600 1060J 1980 NJ 1980 2270
+preplace netloc EDRICO_0_x27_0 1 0 4 450 1850 NJ 1850 1580J 1860 2130
+preplace netloc EDRICO_0_x28_0 1 0 4 460 1860 NJ 1860 1570J 1890 2150
+preplace netloc EDRICO_0_x29_0 1 0 4 430 1840 NJ 1840 NJ 1840 2110
+preplace netloc EDRICO_0_x2_0 1 0 4 330 1690 1080J 1780 NJ 1780 2060
+preplace netloc EDRICO_0_x30_0 1 0 4 200 1610 1230J 1640 1600J 1500 2030
+preplace netloc EDRICO_0_x31_0 1 0 4 210 1620 990J 2050 NJ 2050 2320
+preplace netloc EDRICO_0_x3_0 1 0 4 360 1780 1000J 1790 NJ 1790 2050
+preplace netloc EDRICO_0_x4_0 1 0 4 370 1790 940J 2000 NJ 2000 2190
+preplace netloc EDRICO_0_x5_0 1 0 4 220 1650 1090J 1690 NJ 1690 2020
+preplace netloc EDRICO_0_x6_0 1 0 4 380 1830 NJ 1830 1600J 1850 2080
+preplace netloc EDRICO_0_x7_0 1 0 4 350 1800 920J 2010 NJ 2010 2180
+preplace netloc EDRICO_0_x8_0 1 0 4 340 1770 950J 2020 NJ 2020 2170
+preplace netloc EDRICO_0_x9_0 1 0 4 320 1760 980J 1910 NJ 1910 2090
+preplace netloc clk_wiz_clk_out1 1 1 2 1200 1310 1610
+preplace netloc rst_clk_wiz_100M_peripheral_aresetn 1 1 2 1140 1300 1620
+preplace netloc sim_EDRICO_AV_2_test_0_system_reset_async 1 1 2 1160J 1290 1580
+preplace netloc EDRICO_0_M_AXI_0 1 1 3 1270 90 NJ 90 2200
+preplace netloc axi_bram_ctrl_0_BRAM_PORTA 1 3 1 NJ 1410
+preplace netloc axi_bram_ctrl_1_BRAM_PORTA 1 3 1 NJ 1580
+preplace netloc axi_mem_intercon_M00_AXI 1 2 1 1580 1390n
+preplace netloc axi_mem_intercon_M01_AXI 1 2 1 1590 1470n
+preplace netloc axi_mem_intercon_M02_AXI 1 2 1 1570 610n
+levelinfo -pg 1 0 700 1420 1820 2570 2690
+pagesize -pg 1 -db -bbox -sgen 0 0 2690 2900
+"
+}
 
   # Restore current instance
   current_bd_instance $oldCurInst
