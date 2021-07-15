@@ -18,7 +18,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>7abf7719</spirit:value>
+            <spirit:value>25e03702</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -34,7 +34,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>7abf7719</spirit:value>
+            <spirit:value>25e03702</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -143,7 +143,7 @@
       <spirit:file>
         <spirit:name>src/ALU_lib/ALU.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_7abf7719</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_25e03702</spirit:userFileType>
         <spirit:userFileType>IMPORTED_FILE</spirit:userFileType>
         <spirit:logicalName>ALU_lib</spirit:logicalName>
       </spirit:file>
@@ -197,11 +197,11 @@
       </xilinx:taxonomies>
       <xilinx:displayName>ALU_v1_0</xilinx:displayName>
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
-      <xilinx:coreRevision>1</xilinx:coreRevision>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>user.org:user:ALU:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2021-07-07T10:58:39Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2021-07-15T15:46:27Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="ui.data.coregen.df@2f7669bf_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@281ec8f7_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
@@ -212,11 +212,22 @@
         <xilinx:tag xilinx:name="ui.data.coregen.df@1bbb79c2_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@6ad575ab_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.df@551fb2ab_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7c130c91_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@29b2f78a_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@16dd1fe7_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@754a512e_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@48b77d13_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@7b679071_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@374d220c_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2a5c0607_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@4098ca0e_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@3256d651_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.df@2f292681_ARCHIVE_LOCATION">/home/levi/Software/EDRICO/ip_repo/ALU</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2021.1</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="2eedd8dc"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="88a696c9"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="fc2bacfe"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="dae4712f"/>
     </xilinx:packagingInfo>

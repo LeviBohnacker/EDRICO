@@ -1,0 +1,5 @@
+the folder must contain an empty mem.coe file and the <file_name>.s file
+do: "riscv32-unknown-elf-gcc -march=rv32i test_code.s -o test_code -nostdlib -nostartfiles" to compile the code
+do: "riscv32-unknown-elf-objcopy -O binary -j .text test_code binfile" to copy the .text segement to the binfile 
+do: "xxd -ps -c 4 -u -C binfile test_code_bin.txt" to store the hexdump in correct format to test_code_bin.txt
+do: "python3 build_mem_init.py test_code_bin.txt" to format the hexdump and write it to the proper file

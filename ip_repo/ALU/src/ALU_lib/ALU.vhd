@@ -120,7 +120,7 @@ begin
                 if(signed(in_b) < signed(in_a)) then
                 -- if b < a, branch or write b to the output
                     branch_re <= '1';
-                    alu_result <= in_b;
+                    alu_result <= x"00000001";
                 else
                     branch_re <= '0';
                 end if;
@@ -129,7 +129,7 @@ begin
 
                 if(unsigned(in_b) < unsigned(in_a)) then
                     branch_re <= '1';
-                    alu_result <= in_b;
+                    alu_result <= x"00000001";
                 else
                     branch_re <= '0';
                 end if;

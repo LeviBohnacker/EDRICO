@@ -243,7 +243,7 @@ begin
                 reg_read_A_int <= ir(24 downto 20);
                 reg_read_B_int <= ir(19 downto 15);
                 ALU_op_int <= "0000";
-                immediate_int <= std_logic_vector((31 downto 12 => ir(31)) & ir(31) & ir(7) & ir(30 downto 25) & ir(11 downto 8));
+                immediate_int <= std_logic_vector((31 downto 13 => ir(31)) & ir(31) & ir(7) & ir(30 downto 25) & ir(11 downto 8) & 0);
 
                     case ir(14 downto 12) is 
                         when "000" => --BEQ    
