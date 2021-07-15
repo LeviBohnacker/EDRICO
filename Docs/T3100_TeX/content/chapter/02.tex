@@ -1,17 +1,56 @@
 %!TEX root = ../../main.tex
 
-\chapter{Motivation}
+\chapter{Basics}
+\section{Processing Units}
+\section{RISC vs CISC}
+\section{RISC-V}
+RISC-V is an open standard \acf{ISA} developed by the
+University of California, Berkely. The ISA is based on reduced instruction set
+computer (RISC) principles. The ISA supports 32, 64 and 128 bit architectures and
+includes different extensions like Multiplication, Atomic, Floating Point and more. The
+ISA is open source and therefore can be used by everyone without licensing issues
+and high fee requirements. Due to the open source nature of the RISC-V project,
+many companies like Alibaba and NVIDIA have started to develop hardware based
+on this ISA.
+RISC-V opens the opportunity to optimize and configure computer hardware to a
+level that would not be realizable with licensed ISA like ARM or x86. As a result of
+this possibility there are many projects and companies working on hardware and
+software that are beating common CPU in terms of performance and power usage
+by a lot.
 
-RISC-V was first proposed at Berkeley University in 2010. The architecture is
-therefore relatively new in comparison to others like x86, ARM or SPARC. Even
-though its young age is already very promising, every year new breakthroughs are
-achieved in the field of RISC-V based cores.
-MicroMagic for example announced in 2020 a chip with a total CoreMark score of
-13000 and an incredible 110000 Coremark/Watt. This poses a significant
-development and is approximately 10 times better than any CISC, RISC or MIPS
-implementation in terms of Performance per Watt.
-Many other companies like Alibaba, Nvidia and SiFive are currently increasing
-research on RISC-V based cores.
-The Motivation behind this project was to gain experience in processor and \ac{FPGA}
-design and verification. Furthermore it poses an interesting opportunity for students
-to work on a new and upcoming processor architecture.
+\section{Benchmarks}
+\subsection{Coremark}
+\subsection{SPECint}
+\section{Memory Management}
+\subsection{Memory Hierarchy}
+\subsection{Communication Interfaces}
+
+\section{FPGA}
+To verify a digital circuit software simulations as well as implementing the design on
+a prototype are common practice. For prototyping and even implementing a finished
+product, FPGA are widely used.
+FPGAs are special fine granularity Programmable Logic Devices. The digital logic
+can be described using hardware description languages such as Verilog or VHDL.
+These designs are then synthesized, placed and routed in order to generate a
+hardware configuration file, also called bitstream. The bitstream can then be loaded
+onto the FPGA via a programming interface e.g. JTAG.
+Many different vendors produce FPGAs, the most famous ones are Xilinx,
+Altera/Intel and Microchip. Some smaller vendors like NanoXplore produce FPGAs
+targeting rare use cases like space applications.
+Despite the many differences in design of an FPGA, the basic architecture always
+remains the same. An array of logic cells and building blocks of different features
+9 like BRAM and DSP slices are connected to each other through configurable routing
+channels.
+Figure \ref{fig:FPGA} shows the basic architecture of a Xilinx FPGA:\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.9]{fpga.png}
+\caption{Xilinx FPGA \cite{xilinx:2017}}
+\label{fig:FPGA}
+\end{figure}
+
+\section{Hardware Description Languages}
+
+
+The CLBs in this architecture are comprised of LUTs and Flip-Flops, in order to implement boolean functions and allow the design of synchronous circuits. FPGAs produced by Xilinx are mostly SRAM based, other approaches are flash or anti-fuse based architectures.
