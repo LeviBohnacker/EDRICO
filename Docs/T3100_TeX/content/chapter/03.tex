@@ -7,8 +7,8 @@ instruction set architecture. Besides the mandatory “Zicsr” extension no oth
 instruction set extensions are implemented. To keep the implementation simple and
 straight-forward only one privilege mode (Machine-mode) is implemented. This mode
 allows full access to the processor and peripherals. Future Versions could be
-extended to implement S-Mode and U-Mode.\\
-The core is a simple \acf{SISD} processor without any pipeline or even cache. The basic instruction cycle of fetch, decode, execute, store is performed for every instruction one at a time.\\
+extended to implement Supervisor-Mode and User-Mode.\\
+The core is a simple \acf{SISD} processor without any pipeline or cache. The basic instruction cycle of fetch, decode, execute, store is performed for every instruction one at a time.\\
 Figure \ref{fig:edricooverview} shows the full overview of the processor design:
 
 \begin{figure}[H]
@@ -19,8 +19,32 @@ Figure \ref{fig:edricooverview} shows the full overview of the processor design:
 \end{figure}
 
 Its main components are the Exception Control, Control Unit, Arithmetic Unit,
-Register Files, PMP \& PMA checker and the AXI4 Interfaces.
-Each one of the components will be described in more detail in the following section.
+Register Files, PMP \& PMA checker and the AXI4 Interfaces. How these components interact with each other, in order to execute Instructions, is specified in the Data Path.
+The following sections will describe each one of the sections in more detail.
+
+\section{Data Path}
+The Data Path specifies how the data is passed through the Processor Core at run time. It therefore determines what registers are read and written at which clock cycle, what control signals need to be applied and how many cycles the instruction execution takes.\\
+To run an instruction, it must be fetched, decoded and executed. Execution varies for different instructions.\\
+To perform for example a load, the target address must be calculated and verified for possible access constraints. After successfully accessing the memory space, the obtained data is modified to satisfy the instruction specific formatting. 
+A load half-word unsigned operation for instance must return a 32-Bit value by zero extending the loaded two bytes of data.\\
+In case of a simple register-register addition, execution is found to be a lot simpler. Addition is performed inside the Arithmetic Logic Unit on two register values. The result is stored to the target register on the next falling clock edge.\\
+With the end of the execute phase, the Programm Counter is updated. This ensures that the 32-Bit register always contains the address of the current instruction to be fetched, decoded and executed.  \\
+Figure \ref{fig:datapath_generic} shows the different actions that are performed on each clock cycles during run time:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=150mm,scale=0.5]{DataPath}
+	\caption{Generic Data Path}
+	\label{fig:datapath_generic}
+\end{figure}
+
+Prior to memory access, the address must be checked for possible violations of the physical memory protection (PMP) and physical memory attribute (PMA) rules. Therefore the PC is passed to the PMP and PMA checker unit (see: \ref{fig:edricooverview}).\\
+PMP and PMA checks are finished one clock cycle later, if an exception is generated, the trap is taken. Otherwise the data as well as the control signals are passed to the AXI4-Lite master.
+The AXI4-Lite transfer will take multiple clock cycles. Its length can be increased by external factors, such as the memory to be accessed or the amount of data currently passing through the AXI-interconnect. To simplify the depiction in \ref{fig:datapath_generic} it is assumed to take only two clock cycles.\\
+After successfully accessing the memory, decoding is performed in half a clock cycle. Decoding returns all the control signals of EDRICO set to the correct levels in order to perform the desired operation. Hence, no control signals do change during execution. This is desired since it will allow an easier pipelined implementation of a RISC-V core based on EDRICO.\\
+Execution is displayed to take one and a half clock cycles. The registers are written at the falling clock cycle, one cycle after decoding started. Therefore execution is finished after only one clock cycle and not one and a half. Since the next instruction fetch is issued at a rising clock edge the machine must remain in execution state for an additional half clock cycle. \\
+The fact that some registers are falling-edge and others rising-edge sensitive may seem a little bit disturbing at first glance. It is done to allow easier implementation and achieving of timing-closure during place and rout. If, for example, a critical path is found to be at the decode process, the duty cycle of the clock can be modified in order to achieve a higher possible clock frequency.
+
 
 \section{Control Unit}
 The \ac{CU} is the heart of the processor and controls the other parts of the processor depending on the input instruction. The CU is responsible for fetching instructions from the instruction memory, decode the bitstream and set the respective control signals for the other processor components. Due to the complexity of the CU, there are several sub-modules which together form the overall CU.
@@ -266,15 +290,18 @@ begin
 \end{lstlisting}
 In case the operation determined by \textit{alu\_op} might be originating of a branch instruction, the \textit{branch\_re} flag has to be set respectively (line  19). Since the branch instructions only include some of the arithmetic and logical operations of the ALU, the default value for the \textit{branch\_re} is set as \textit{0}.
 
-\section{\acf{RF}}
-The Register can be used to store data and configure the core. General Purpose
-registers are mostly used to temporarily store data like operands and results of
-calculations. The CSR Register File is used to configure the core and retrieve
-information about it. More detailed information about these two RFs can be found in
-the following chapters.
 \clearpage
+\section{\acf{RF}}
+A register is a small memory element with high read and write speeds. It is therefore often used inside digital circuits to store data locally. In the case of a processor core, the total data stored in all registers specifies the machine state.\\
+If the contents of each register are saved to some arbitrary memory the current state of the core can later be restored by loading this data to the corresponding registers. \\
+The RISC-V unprivileged specification specifies 32 32-Bit general purpose register for the RV32I base instruction set \cite{riscv:unprivileged}.
+To configure the core as well as storing status and general information about it multiple \acf{CSR} are introduced by the RISC-V privileged specification \cite{riscv:privileged}.\\
+EDRICO implements both, all 32 32-Bit integer general-purpose registers as well as a selection of required \acp{CSR}.
+
 \subsection{Architecture and Design}
-The architecture of the register files is shown in following figure \ref{fig:RF_arch}
+A requirement for the Register Files is to allow access on one input data bus and two output data bus, each with a size of 32-Bit respectively. Multiple control signals can be accessed to control the data flow through the module. Registers are read asynchronously, hence a read operation is not dependent on any clock. Writes to a register are performed on a falling clock edge.\\
+Some of the \acp{CSR} need to provide their contents to other modules without using one of the two designated output buses. This decreases unnecessary overhead on e.g. load and store operations. \\
+Figure \ref{fig:RF_arch} depicts the architecture of the Register File module.
 
 \begin{figure}[H]
 	\centering
@@ -285,12 +312,17 @@ The architecture of the register files is shown in following figure \ref{fig:RF_
 
 In order to write data to a register, the value needs to be put on the \textit{data\_in} bus and the corresponding control signals need to be configured. Data can be read either via the \textit{data\_busA} or \textit{data\_busB}, the CSR registers can only be accessed on \textit{data\_busB} via a MUX controlled by the \textit{CSR\_read} signal. If the bit is set, the CSR specified by \textit{CSR\_address} will be visible on \textit{data\_busB} at the next rising clock edge.\\
 In order to store data to a CSR register, it has to be put on the \textit{data\_in} bus. If the \textit{CSR\_write} bit is set, the data is saved to the register specified by \textit{CSR\_address} on the next falling clock edge.\\
-If the \textit{CSR\_save} signal is applied, the CSR Register File output is connected to the data input bus of the general purpose registers. This allows to save CSR data directly to the RV32I registers without using the system data bus. Some of the CSR registers allow direct memory accesses, e.g. the \textit{msip\_dra} \& \textit{mtip\_dra} signals are used to set the software and timer interrupt pending bits respectively. To increase the performance of memory accesses, the PMP CSRs can be read via a dedicated bus.\\
-While the CSR RF is accessed by 12 Bit addresses, RV32I registers are accessed without addressing in order to decrease decoding time. Therefore, each register requires three Signals resulting in a total of 96 signals for read and write. The RFs are clocked with the system clock and reset on system reset. As per usual, data is stored on the falling clock and displayed on the rising clock.
+Execution of special \ac{CSR} instructions, like the Atomic Read/Write CSRRW \cite{riscv:unprivileged}, requires writing to both a general-purpose RV32I register and a \ac{CSR}. Since the control signals are not allowed to change during execution, it is mandatory to allow the \ac{CSR} \ac{RF} to write directly to the \ac{RV32I} \ac{RF} without utilizing the \textit{data\_in} bus.
+In order to do so, the \textit{CSR\_save} signal is added to design. 
+If it is applied, the \ac{CSR} Register File output is connected to the data input bus of the general purpose registers.  \\
+Some of the \ac{CSR} allow direct memory accesses. These are implemented in a separate module, including the \textit{mtime}, \textit{mtimecmp} and \textit{msip} registers as well as a dedicated AXI4-Lite slave interface. To set the software and timer interrupt pending bits (which are caused by the memory mapped \ac{CSR}), the \textit{msip\_dra} and \textit{mtip\_dra} inputs are implemented.\\
+The \ac{CSR} Register File is accessed by a 12 Bit addresses, \ac{RV32I} registers are accessed using a four byte address signal for each data bus, respectively.   
 \subsubsection{General Purpose Registers}
+The general purpose registers are used to store the data on which operations are performed on. Since RISC-V is a load-store architecture no data from the memory can be modified directly without loading it to a \ac{GPR} first (except when using atomic operations) \cite{riscv:unprivileged}.\\
+Figure \ref{fig:gppr} shows the design of \ac{RV32I} Register File:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{gppr.png}
+	\includegraphics[width=\textwidth]{RV32I_new.png}
 	\caption{General Purpose Registers}
 	\label{fig:gppr}
 \end{figure}
@@ -401,36 +433,91 @@ The architecture of the CSR Register File is shown in \ref{fig:csrarch}.
 	\label{fig:csrarch}
 \end{figure}
 The CSR Register File is comprised of the different CSR Registers, \textit{CSR\_Controller} and \textit{interrupt\_generator}.\\
-Some of the implemented CSR registers are hardwired to zero, reads to those addresses return \textit{0x00000000} and writes have no effect if the register is defined as read only the write will result in an \textit{illegal\_instruction\_exception}. Other CSR registers may be defined as read-only. The \textit{CSR\_Controller} checks if a CSR access is allowed and produces access signals for each register from the given address. If an address is not writable but yet a write is requested, the \textit{CSR\_Controller} raises an \textit{illegal\_instruction\_exception}.\\
-The \textit{interrupt\_generator} checks if an interrupt is pending, enabled and if interrupts are globally enabled. In that case the corresponding interrupt is raised. The interrupts remain pending, as long as the corresponding direct register access signals it. To prevent the machine from being stuck in the interrupt, the programmer of the ISR must clear the pending interrupts, e.g. the timer interrupt by writing to the memory mapped CSRs.\\
-The Hardware Performance Monitor registers are incremented at special events (clock cycle and instruction finish) therefore two 64-Bit increment units have to be implemented. The increments are only performed, if the corresponding bit inside the
-\textit{mcounterinhibit} register is set.\\
-The PMP CSRs are composed of the 16 \textit{pmpaddr} registers and four \textit{pmpcfg} registers. They can be read and written, additional direct memory access is implemented in order to decrease memory access latency
+Some of the implemented CSR registers are hardwired to zero, reads to those addresses return \textit{0x00000000} and writes have no effect if the register is defined as read only the write will result in an \textit{illegal\_instruction\_exception}. Other CSR registers may be defined as read-only. \\
+The \textit{CSR\_Controller} checks if a CSR access is allowed and produces access signals for each register from the given address. If an address is not writable but yet a write is requested, the \textit{CSR\_Controller} raises an \textit{illegal\_instruction\_exception}.\\
+The \textit{interrupt\_generator} checks if an interrupt is pending, enabled and if interrupts are globally enabled. In that case the corresponding interrupt is raised. The interrupts remain pending, as long as the corresponding direct register access signals it. To prevent the machine from being stuck in the interrupt, the programmer of the \ac{ISR} must clear the pending interrupts, e.g. the timer interrupt by writing to the memory mapped CSRs.\\
+Some registers have special functionalities. The Hardware Performance Monitor for example counts the number of clock cycles as well as the number of executed instructions. Calculation of the \ac{CPI} can be performed as shown in \eqref{eq:CPI}:
+
+\begin{align}
+	CPI=\frac{mcycleH>>32+mcylce}{minstretH>>32+minstret}\label{eq:CPI}
+\end{align}
+
+During Benchmarks these registers can be used to calculate the performance of the core.\\
+For physical memory protection, several attributes such as read and write can be specified inside the \ac{PMP} \ac{CSR}, a more detailed description of these specific registers can be found in: \cite{riscv:privileged}.\\
+There are 16 \textit{pmpaddr} and four \textit{pmpcfg} registers. In order to verify that a memory access does not violate any \ac{PMP} rules, the PMP and PMA checker needs access to these registers. Performing this accesses over the \textit{data\_out\_B} bus would result in 16+4 data transfers, so 20 register accesses in total. This would impose a significant overhead of at least 20 clock cycles on every memory access. To reduce the effect of checking the \ac{PMP} rules a direct register access is implemented. 
 \subsection{Implementation}
+Implementing the \ac{RV32I} \ac{RF} is done by defining an array of 32 \textit{std\_logic\_vector} of 32-Bit each. The zeroth element in the array corresponds to the x0 register, therefore it can not be written and is hardwired to zero.\\
+On a write, the 5-Bit \textit{register\_write} signal is used to index the corresponding array element. This is only possible since writes to the x0 register do not effect the state of the machine. Hence, no writes are performed if the write signal is set to \textit{0b00000}.\\
+Since some \ac{CSR} have additional features they need to be implemented individually, therefore the matrix approach used for the \ac{RV32I} register files can not be taken. There are multiple registers that are hardwired to zero, they are implemented as one and the read write multiplexers access the same register if an access to one of these registers occurs.\\
+To safe resources all \ac{CSR} implement just the bits that are needed, the others are hardwired to zero. The following listing illustrates this concept, using the \textit{mstatus} register as an example, figure \ref{fig:mstatus} shows the mstatus register according to \cite{riscv:privileged}:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{mstatus.png}
+	\caption{32-Bit machine mode register (\textit{mstatus}) \cite{riscv:privileged}}
+	\label{fig:mstatus}
+\end{figure}
+
+\begin{lstlisting}[style=vhdl, caption=mstatus implementation]
+	---------------------------------------------------------
+	--mstatus register
+	---------------------------------------------------------
+	mstatus_proc: process(reset, clk)
+	begin
+	if(reset = '1') then
+	mstatus_reg <= (others => '0');
+	elsif(clk'event and clk = '0' and write(0) = '1') then
+	mstatus_reg <= data_in(7) & data_in(3);
+	end if;
+	end process;
+	
+	mstatus <= x"000018" & mstatus_reg(1) & "000" & mstatus_reg(0) & "000";
+\end{lstlisting}
+
+For the chosen implementation only two bits in the status register are relevant, \ac(MPIE) and \ac{MIE}. Every Other bit can be hardwired to a specific value. Since neither supervisor nor user mode are implemented are the corresponding (prior) interrupt enable bits tied to zero. The \textit(xPP) fields hold the previous privilege mode in which the machine was prior to a trap. Only machine mode is implemented, hence \ac{MPP} can be hardwired to "11" and \ac{SPP} to "00". According to \cite{riscv:privileged} all other bits may be hardwired to zero if only machine mode is implemented. \\
 
 \section{PMP and PMA Checker}
-Physical memory protection and physical memory attribute checking must be done in
-order to ensure that only allowed/defined memory regions are accessed to provide a
-minimum of security and prevent the core from accessing not defined regions, which
+Physical memory protection and attribute checking must be done in
+order to ensure that only allowed and defined memory regions are accessed, providing
+minimum of security and preventing the core from accessing not defined regions, which
 may result in the core getting stuck.\\
 
 
 \subsection{Architecture and Design}
-An overview of the PMP \& PMA Checker is presented by \ref{fig:pmparch}:
+An overview of the \ac{PMP} \& \ac{PMA} Checker is illustrated by \ref{fig:pmparch}:
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{pmparch.png}
 	\caption{PMP \& PMA Checker Architecture}
 	\label{fig:pmparch}
 \end{figure}
-The PMP Unit is used to define memory regions and enforce several rules onto
+
+The \textit{PMP\_checker} is used to define memory regions and enforce several rules onto
 those, for example if instructions may be fetched from a region or if writes are
 allowed. In order to apply the rules the corresponding region must be locked by
-setting the L-bit inside the corresponding \textit{pmpcfg} CSR. Once locked, regions may only be unlocked by a system reset. After a restart every region is unlocked and
-reset, e.g. a boot loader could enforce several rules for memory accesses in M-Mode before control hand-over to the main software running on the core. If a PMP entry is not locked, every memory access that matches this address space may succeed.
+setting the L-bit inside the corresponding \textit{pmpcfg} \ac{CSR}. Once locked, regions may only be unlocked by a system reset. After a restart every region is unlocked and
+reset, e.g. a boot loader could enforce several rules for memory accesses in M-Mode before control hand-over to the main software running on the core. If a \ac{PMP} entry is not locked, every memory access that matches this address space succeeds.
 \\
-In order to specify, if reads, writes or instruction fetches are possible to a certain address, it needs to be specified inside the \textit{pmpaddr} and corresponding \textit{pmpcfg} CSRs. The PMP unit has direct access to those and enforces the rules. If an address is not specified every access is allowed.\\
-\\
+In order to specify, if reads, writes or instruction fetches are possible to a certain address, it needs to be specified inside the \textit{pmpaddr} and corresponding \textit{pmpcfg} CSRs. If an address is not specified every access is allowed, as long as the hart operates in machine mode. The PMP unit has direct access to those and enforces the rules. Figure \ref{fig:pmpaddr} and \ref{fig:pmpcfg} show these two registers.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{pmpcfg.png}
+	\caption{8 Bit from 32-Bit \textit{pmpcfg} register \cite{riscv:privileged}}
+	\label{fig:pmpaddr}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{pmpaddr.png}
+	\caption{\textit{pmpaddr} register \cite{riscv:privileged}}
+	\label{fig:pmpcfg}
+\end{figure}
+
+One \textit{pmpcfg} register is comprised of four 8-bit configuration fields, one of which is shown in \ref{fig:pmpcfg}. The X, W and R bit specify whether or not the region defined by this entry is fit for instruction accesses, reads or writes. The size and range of the region is specified by the mode chosen by setting the A field in the configuration register. It can be configured to disable the region, specify it as \ac{TOR}, \ac{NA4} or \ac{NAPOT}. 
+
 Right now there is a single PMA check implemented, its job is to check if the memory
 access is aligned. A word is 32-bit, halfword 16-bit and byte 8-bit. The smallest
 addressable data unit is one byte long. Therefore a word access is aligned, if the
