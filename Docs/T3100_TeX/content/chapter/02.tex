@@ -149,8 +149,9 @@ Therefore, ratios are higher for faster machines, and lower for slower machines.
 	\caption{SPECint2006 programs \cite{specint}}
 	\label{table:spec2006int}
 \end{table}
-
+\clearpage
 \section{Memory Management}
+Memory Management defines how the memory can be accessed and how changes propagate through different levels of the memory hierarchy. The following section will describe what a memory hierarchy is and why it is needed in modern computer designs. Furthermore one particular communication interface or bus system will be introduced which can be used to access memory in an embedded system. 
 \subsection{Memory Hierarchy}
 One of the major performance factors in computing is how fast can information be accessed. Information in this case is both: data and code. Therefore high-speed infinite sized memory would be the optimum to achieve the best possible performance. Unfortunately multiple difficulties are raised by this requirement. How can an infinite sized memory be achieved, how to guarantee that access time does not increase when increasing the memory size and how to keep costs to minimum are only a few of the many questions that can be asked on this topic.\\
 In general it can be said that infinite sized memory is not possible, therefore the new requirement would be: as big as possible. To achieve low access times, the memory must be placed as close as possible to the processor. The amount of extremely fast memory is therefore restricted to a finite size. Increasing the distance to the processor yields more space, hence a bigger possible memory. Access speed is reduced at the same time.\\
