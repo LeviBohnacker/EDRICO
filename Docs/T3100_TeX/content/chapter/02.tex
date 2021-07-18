@@ -1,9 +1,49 @@
 %!TEX root = ../../main.tex
 
 \chapter{Basics}
-This chapter will give a brief overview over some topics that are essential for this project.
 \section{Processing Units}
-Harvard, Neumann, ALU, Control Unit
+Processing Units are the central and most important part of a computer. The processing unit executes the instructions, is responsible for memory and communication and overall execute the program, that is given to the computer. Processing units consist of a Control Unit, Memory, Arithmetic Logical Unit and I/O elements. All of these parts together form a processing unit capable of performing many different instructions, mathematical operations, memory operations and much more. A basic overview of a processing unit is displayed in following graphic:\\
+\begin{center}
+	\begin{figure}[H]
+		\centering
+	\begin{tikzpicture}
+		\draw (0,0) rectangle  (10,3);
+		\draw (1,0.5) rectangle node{Memory}(3,2.5);
+		\draw (3.6,0.5) rectangle node{\small Control Unit}(6.4,2.5);
+		\draw (7,0.5) rectangle node{ALU}(9,2.5);
+		\draw (4,3.5) rectangle node{Input}(6,5.5);
+		\draw (4,-0.5) rectangle node{Output}(6,-2.5);
+		\draw[very thick] [<->] (3,1.5) -- (3.6,1.5);
+		\draw[very thick] [<->] (6.4,1.5) -- (7,1.5);
+		\draw[very thick] [<->] (5,2.5) -- (5,3.5);
+		\draw[very thick] [<->] (5,0.5) -- (5,-0.5);
+	\end{tikzpicture}
+\caption{Processing unit block diagram}
+\end{figure}
+\end{center}
+\clearpage
+The tasks and functionality of the different parts of a processing unit are described more closely in the dedicated section in chapter \ref{chapter:edrico}.\\
+During the long history of computers and processors, different architectures have evolved. This section will give a quick overview of the so called \textit{Von-Neumann-Architecture} and the \textit{Harvard-Architecutre}.\\
+The main difference between those two architectures is the memory access. While a Von-Neumann machine has a commonly used memory for data memory and program memory, a Harvard machine has separately dedicated memory units. This means, a Harvard machine can access to the program memory and the data memory simultaneously. The advantage of a Von-Neumann machine is that there is no limitations on how big the code and the data is. Sometimes, the program takes a lot of memory while the data amount only is very small and sometimes its the other way around. However with a Von-Neumann machine this is not a problem since the memory is used for program and data. In comparison to a Harvard machine, it would be bad to waste a lot of memory space, if the program only takes very little space or the other way around.\\
+However, this advantage of the Von-Neumann architecture is a disadvantage at the same time, since some operations will take much longer than on Harvard machines, because memory cannot be accessed directly after loading an instruction.\\
+In general it can be said, that the Von-Neumann architecture is more simple than the Harvard architecture, but the advantages it originally offered are nowadays solved with several principles and methods using the Harvard architecture. Nowadays, the Harvard architecture is used especially for applications where program size and data size are already known, which often is the case for embedded systems like digital signal processing units etc..\\
+For this project, due to the big complexity of a Harvard architecture, the Von-Neumann architecture is implemented using a shared memory for program and data. \cite{hellmann2013}
+The block diagrams of the two different architectures are displayed in following figures \ref{fig:neumann}, \ref{fig:harvard}:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{neumann.png}
+	\caption{Von-Neumann architecture \cite{hellmann2013}}
+	\label{fig:neumann}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{harvard.png}
+	\caption{Harvard Architecture \cite{hellmann2013}}
+	\label{fig:harvard}
+\end{figure}
+
+
 \section{RISC vs CISC}
 In the history of processors and computers, speed and efficiency have always been key factors for development and innovation. In the early days of computers, instructions were very simple and straight forward. Coming with time and innovation, instructions and computer architectures became more complex. To prevent instructions from becoming too complex and too big, the \acf{RISC} architecture was introduced. The main point of RISC is to have a small but highly optimized set of instructions. Another advantage of RISC is a broadly uniform format of instructions and the possibility to establish pipelining which means starting the next instruction while the previous is being executed.\\
 On the other hand, \acf{CISC} machines can have special instructions and more complex instructions to perform many things in one instruction cycle. However, the CPI can get greater than the CPI at for RISC architectures. Since the complexity of instructions increases, the time and computing effort increases as well. In CISC architectures, instructions do not have a standardized format and therefore, can differ in size and complexity. It is also possible to envelope microcode inside of instructions. This means that small pieces of programming can conclude small programs. Since instructions are very individual and not highly optimized, the amount of instructions can get very large. The differences between the two architectures are summarized in table \ref{table:riscvscisc}:
@@ -27,7 +67,7 @@ On the other hand, \acf{CISC} machines can have special instructions and more co
 			\hline 
 			Small number of fixed-length instructions & Large number, variable sized instructions\\
 			\hline
-	\end{tabular}}
+		\end{tabular}}
 	\caption{RISC vs CISC \cite{hellmann2013}}
 	\label{table:riscvscisc}
 \end{table}
@@ -238,6 +278,9 @@ Figure \ref{fig:FPGA} shows the basic architecture of a Xilinx FPGA:\\
 \label{fig:FPGA}
 \end{figure}
 \section{Hardware Description Languages}
-
+A \acf{HDL} is a computer language specialized to describe structure and behavior of electronic circuits. HDLs were created to implement register-transfer level abstraction which is a model of the data flow and timing of a circuit.\\
+HDL can be used to express designs in structural, register-transfer-lever or behavioral architectures for a specific functionality.\\
+VHDL is a description language used to describe hardware. It is utilized in electronic design to express digital systems such as integrated circuits and FPGA. VHDL is also used as a general-purpose parallel programming language. VHDL is used to write text models that describe or express logic circuits. If the text model is part of the logic design, the model is processed by a synthesis program. Implementation and testing of VHDL is described more closely in following chapters. The critical advantage of VHDL, with regard to system design utilization is that it permits the behavior of the essential system to be verified and modeled in advance of the synthesis tools translation of the design into actual hardware. In addition, it is a dataflow language, which means it can simultaneously consider every statement for execution other than procedural computing languages like C. As a last advantage to be mentioned here, VHDL projects can be multipurpose. It is possible to create units and blocks and re use them for other applications.\\
+Another HDL on the market is Verilog. Verilog is a more compact language and often results in less lines of code and is more similar to programming languages like C. However, Verilog is not as wordy as VHDL, which accounts for its compact nature. Verilog also is more of a hardware modeling language and not so natural in use as VHDL. Nonetheless, Verilog is often considered as easier to learn. 
 
 

@@ -4,8 +4,7 @@ As already mentioned in previous chapters, the whole EDRICO CPU is designed and 
 \section{Unit Verification}
 The first step in Test and Verification is the Unit Verification. In this step, the lowest units of the project are tested to prevent possible bugs from occurring in later stages of the verification. It is crucial to test every unit of the project because in a later stage of verification it is very complicated and time intensive to localize the bug and fix it in a top-down way. The main goal is to identify and fix bugs as early as possible. In this section, the unit verification process for the CU decoding unit is described in detail.\\
 The task of the decoding unit is to parse the 32-bit instruction string, extract information and set the control signals respectively.\\
-To get a better understanding of how the decoding process is executed, the source code of the decoder can be found in the appendix (\textbf{A. CU decoder}).\\
-Unit verification starts by inserting source files of the implementation into a Xilinx Vivado\textcopyright  project. To test a unit, it is required to implement a so called testbench. This testbench will serve as a test environment for the \ac{UUT}. Testbenches are used for simulation purpose only (not for synthesis). Therefore, several VHDL constructs like \textit{assert}, \textit{report}, or \textit{loop} can be used. The corresponding testbench for the decoder can be found in the appendix (\textbf{B. CU decoder testbench}). During the testbench simulation, the UUT is stimulated with different input data. In this case, the decoder receives a different 32-bit instruction string. The following code shows how the stimulation process is implemented:
+Unit verification starts by inserting source files of the implementation into a Xilinx Vivado\textcopyright  project. To test a unit, it is required to implement a so called testbench. This testbench will serve as a test environment for the \ac{UUT}. Testbenches are used for simulation purpose only (not for synthesis). Therefore, several VHDL constructs like \textit{assert}, \textit{report}, or \textit{loop} can be used. During the testbench simulation, the UUT is stimulated with different input data. In this case, the decoder receives a different 32-bit instruction string. The following code shows how the stimulation process is implemented:
 \begin{lstlisting}[style=vhdl, caption=CU testbench stimulation process]
 stim: process
 begin
@@ -37,7 +36,7 @@ Figure \ref{fig:cutiming} shows the full timing diagram for the full testbench d
 \end{figure}
 
 Another unit that had to be verified outside of the control unit is the ALU. Since the complexity of the ALU is not as high as of the control unit, the testbench and also the timing diagram are very simple. The stimulation process of the ALU testbench is shown in the code below:
-\begin{lstlisting}[style=vhdl, caption=CU testbench stimulation process]
+\begin{lstlisting}[style=vhdl, caption=ALU testbench stimulation process]
 stim: process
 begin
 	-- set input signal
@@ -99,7 +98,7 @@ This code shows the first few operations that the ALU performs. First of all a p
 	\label{table:alutb}
 	\caption{ALU testbench correct outputs}
 \end{table}
-The branch\_re output is only relevant for operations that can be called by branch instructions. In this case, the \textit{EQUAL} and \textit{NEQUAL} operations have to deliver a branch response. Apparently, the two inputs are not the same which is the reason for why the \textit{EQUAL} operation shall return 0 while the \textit{NEQUAL} operation shall return 1. The other operations are basic mathematical and arithmetical operations and the output is calculated by just performing the respective operations on the two inputs. After simulating the testbench in Vivado the resulting timing diagram (figure \ref{fig:alutb}) shows that everything works as desired. 
+The branch\_re output is only relevant for operations that can be called by branch instructions. In this case, the \textit{EQUAL} and \textit{NEQUAL} operations have to deliver a branch response. Since the two inputs are not the same, the \textit{EQUAL} operation shall return 0 while the \textit{NEQUAL} operation shall return 1. The other operations are basic mathematical and arithmetical operations and the output is calculated by just performing the respective operations on the two inputs. After simulating the testbench in Vivado the resulting timing diagram (figure \ref{fig:alutb}) shows that everything works as desired. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{ALUtb}
@@ -108,7 +107,60 @@ The branch\_re output is only relevant for operations that can be called by bran
 \end{figure}
 With the same approach, every other unit is verified and occuring bugs are fixed until simulation and desired output are equal.
 \section{Integration Verification}
-During this stage of Test and Verification, all of the units have already been tested and verified. In this step, it is verified, that the units created and tested independently can coexist and communicate among themselves. In this project, the Integration Verification consists of creating so called \textit{top-files} which conclude all the corresponding units to a sub system. This section describes how the Control Unit of the EDRICO CPU went through this stage. 
+During this stage of Test and Verification, all of the units have already been tested and verified. In this step, it is verified, that the units created and tested independently can coexist and communicate among themselves. In this project, the Integration Verification consists of creating so called \textit{top-files} which conclude all the corresponding units to a sub system. This section describes how the Control Unit of the EDRICO CPU went through this stage.\\
+Since the CU consists of the units \textit{CU\_decoder, CU\_execute\_enable, CU\_FSM and CU\_PC}, the top file gets very big since it combines and connects all the mentioned units. As shown in figure \ref{fig:cuarchitecture} there are a lot of control signals going out of the control unit and some signals going in. These inputs and outputs are the only signals visible from the 'outside' and therefore are the only signals to be monitored during testing. Since all units are already verified, the internal communication and processing should be working correctly. The creation of the testbench for this integration is much more complex than the testing for the single units. Since the timing of the state machine is working autonomously, the input signal manipulation has to be adapted respectively. Due to this high complexity, a package file was created to outsource input signal manipulation and also output signal monitoring.\\
+In this package file, there are multiple vectors consisting of the different input signals and the desired output signals. An example for these vectors is shown in the code below:
+\begin{lstlisting}[style=vhdl, caption=CU top testbench package]
+type data_stim is array(natural range <>) of std_logic_vector(31 downto 0);
+type result_vec is array(natural range <>) of std_logic_vector(149 downto 0);
+
+constant instruction : data_stim(38 downto 0) :=
+	(
+	1 => "00000000001000100000000010010011",    --ADDI
+	2 => "00000000001000100010000010010011",    --SLTI
+	3 => "00000000001000100011000010010011",    --SLTIU
+	...
+	22 => "00000100000100001001000011101111",   --JAL
+	23 => "00000010101000100000000011100111",   --JALR
+	24 => "10000010011100100000100011100011",   --BEQ
+	29 => "00010000010100000000000001110011",   --WFI
+	30 => "00000000010000110001001001110011",   --CSRRW
+	...
+constant results : result_vec(38 downto 0) :=
+	(
+	1 => x"00220093" & x"00000008" & '0' & '0' & "00" & '0' & '0' & '0' & '1' & '0' & '1' & "01" & "00000" & "00100" & "00001" & "000000000000" & '0' & '0' & '0' & "0000" & "100" & '0' & '0' & '0' & '0' & x"00000002" & '1',    --ADDI
+	...
+	10 => x"004200B3" & x"0000002C" & '0' & '0' & "00" & '0' & '0' & '0' & '1' & '0' & '1' & "10" & "00100" & "00100" & "00001" & "000000000000" & '0' & '0' & '0' & "0000" & "100" & '0' & '0' & '0' & '0' & x"00000000" & '1',   --ADD
+	...
+	 26 => x"00000073" & x"00000000" & '0' & '0' & "00" & '0' & '0' & '0' & '0' & '0' & '0' & "00" & "00000" & "00000" & "00000" & "000000000000" & '0' & '0' & '0' & "0000" & "100" & '0' & '1' & '0' & '0' & x"00000000" & '1',   --ECALL
+	 ...
+	 35 => x"00120423" & x"00000000" & '1' & '1' & "00" & '1' & '1' & '0' & '0' & '1' & '1' & "01" & "00001" & "00100" & "00000" & "000000000000" & '0' & '0' & '0' & "0000" & "001" & '0' & '0' & '0' & '0' & x"00000008" & '1',   --SB
+	 ...
+\end{lstlisting}
+The \textit{instruction} vector of type \textit{data\_stim} contains the 32-bit instruction word. The \textit{results} vector of type \textit{result\_vec} contains all the desired output signals for the respective instruction string. \\
+ As displayed in the code, every vector contains of in total 38 elements which means that the testbench for the CU integration goes through a \textit{for loops} 38 times to test every single instruction and validate the output signals. 
+ To validate the output signals and compare them to the desired output from \textit{results} vector, an if-statement is performed for every output signal and the corresponding position in the \textit{results} vector. This may look for example like stated in following code:
+ \begin{lstlisting}[style=vhdl, caption=CU top testbench output validation]
+if(results(i)(73 downto 69) /= register_read_A) then
+	report "register_read_A" & integer'image(i) severity error;
+	error_flag := true;
+	error_cnt := error_cnt + 1;
+end if;  
+if(results(i)(68 downto 64) /= register_read_B) then
+	report "register_read_B" & integer'image(i) severity error;
+	error_flag := true;
+	error_cnt := error_cnt + 1;
+end if;  
+ 	...
+ \end{lstlisting}
+With this error checking, the validation process gets easier since not every output has to be checked in the timing diagram. However, the timing diagram is crucial for the validation to proof the timing and correct signal changes. The whole timing diagram for the CU integration is shown in figure \ref{fig:cutoptiming}:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{CUtoptiming}
+	\caption{Vivado timing diagram for full CU integration testbench}
+	\label{fig:cutoptiming}
+\end{figure}
+After carefully reviewing all of the output signals and the timing of the CU, the CU integration can be validated. After identifying a few bugs, the CU finally worked as it should and was ready for the next step of Test and Verification.
 
 \section{System Verification}
 After successful unit and integration verification, the entire system must be verified. This is done in Simulation to ensure that the system works before performing synthesis and \ac{PaR} to map the core in a \ac{FPGA}.\\
