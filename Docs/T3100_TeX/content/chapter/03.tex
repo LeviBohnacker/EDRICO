@@ -45,7 +45,7 @@ After successfully accessing the memory, decoding is performed in half a clock c
 Execution is displayed to take one and a half clock cycles. The registers are written at the falling clock cycle, one cycle after decoding started. Therefore execution is finished after only one clock cycle and not one and a half. Since the next instruction fetch is issued at a rising clock edge the machine must remain in execution state for an additional half clock cycle. \\
 The fact that some registers are falling-edge and others rising-edge sensitive may seem a little bit disturbing at first glance. It is done to allow easier implementation and achieving of timing-closure during place and rout. If, for example, a critical path is found to be at the decode process, the duty cycle of the clock can be modified in order to achieve a higher possible clock frequency.
 
-
+\clearpage
 \section{Control Unit}
 The \ac{CU} is the heart of the processor and controls the other parts of the processor depending on the input instruction. The CU is responsible for fetching instructions from the instruction memory, decode the bitstream and set the respective control signals for the other processor components. Due to the complexity of the CU, there are several sub-modules which together form the overall CU.
 \subsection{Architecture and Design}
@@ -475,7 +475,7 @@ To safe resources all \ac{CSR} implement just the bits that are needed, the othe
 	mstatus <= x"000018" & mstatus_reg(1) & "000" & mstatus_reg(0) & "000";
 \end{lstlisting}
 
-For the chosen implementation only two bits in the status register are relevant, \ac(MPIE) and \ac{MIE}. Every Other bit can be hardwired to a specific value. Since neither supervisor nor user mode are implemented are the corresponding (prior) interrupt enable bits tied to zero. The \textit(xPP) fields hold the previous privilege mode in which the machine was prior to a trap. Only machine mode is implemented, hence \ac{MPP} can be hardwired to "11" and \ac{SPP} to "00". According to \cite{riscv:privileged} all other bits may be hardwired to zero if only machine mode is implemented. \\
+For the chosen implementation only two bits in the status register are relevant, \ac{MPIE} and \ac{MIE}. Every Other bit can be hardwired to a specific value. Since neither supervisor nor user mode are implemented are the corresponding (prior) interrupt enable bits tied to zero. The \textit{xPP} fields hold the previous privilege mode in which the machine was prior to a trap. Only machine mode is implemented, hence \ac{MPP} can be hardwired to "11" and \ac{SPP} to "00". According to \cite{riscv:privileged} all other bits may be hardwired to zero if only machine mode is implemented. \\
 
 \section{PMP and PMA Checker}
 Physical memory protection and attribute checking must be done in

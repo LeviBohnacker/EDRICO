@@ -135,9 +135,11 @@ Table \ref{SysVer_results} compares expected and actual register values:
 \begin{table}[H]
 	\setlength\arrayrulewidth{2pt}
 	\centering
+	\resizebox{\textwidth}{!}{
 	\begin{tabular}{|c|c|c|c|c|c|}
+		\rowcolor{light-gray}
 		\hline
-		Register & Expected  & Actual & Register & Expected & Actual \\
+		\textbf{Register} & \textbf{Expected}  & \textbf{Actual} & \textbf{Register} & \textbf{Expected} & \textbf{Actual} \\
 		\hline
 		PC & 0x000000C0 & 0x00000000 & x16 & 0x0A000000 & 0x0A000000 \\
 		\hline
@@ -171,7 +173,7 @@ Table \ref{SysVer_results} compares expected and actual register values:
 		\hline
 		x15 & 0xFA000000 & 0xFA000000 & x31 & 0x000000B8 & 0x000000B8 \\
 		\hline
-	\end{tabular}
+	\end{tabular}}
 	\label{SysVer_results}
 	\caption{System Verification results and expected values}
 \end{table}
