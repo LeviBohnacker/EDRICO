@@ -218,6 +218,7 @@ To implement the ALU, it is required to have the data inputs as well as clock in
 	\label{fig:alu_arch}
 \end{figure}
 Not only the instructions e.g. \textit{ADD, SUB, XOR...} require an arithmetic operation but also \textit{LOAD, STORE..} require an ALU action. While \textit{ADD, SUB, XOR...} require an operation between the two input values (either register-register or register-immediate) to get a mathematical or logical result, the \textit{LOAD, STORE...} instructions require the ALU to build the target addresses for the memory access.
+\clearpage
 \subsection{Implementation}
 The implementation of the ALU is based on figure \ref{fig:alu} and performs a switch-case on all the different input values of \textit{ALU\_OP}. The 4-bit input variable specifies the operation based on following declarations:
 \begin{table}[H]

@@ -5,6 +5,7 @@ As already mentioned in previous chapters, the whole EDRICO CPU is designed and 
 The first step in Test and Verification is the Unit Verification. In this step, the lowest units of the project are tested to prevent possible bugs from occurring in later stages of the verification. It is crucial to test every unit of the project because in a later stage of verification it is very complicated and time intensive to localize the bug and fix it in a top-down way. The main goal is to identify and fix bugs as early as possible. In this section, the unit verification process for the CU decoding unit is described in detail.\\
 The task of the decoding unit is to parse the 32-bit instruction string, extract information and set the control signals respectively.\\
 Unit verification starts by inserting source files of the implementation into a Xilinx Vivado\textcopyright  project. To test a unit, it is required to implement a so called testbench. This testbench will serve as a test environment for the \ac{UUT}. Testbenches are used for simulation purpose only (not for synthesis). Therefore, several VHDL constructs like \textit{assert}, \textit{report}, or \textit{loop} can be used. During the testbench simulation, the UUT is stimulated with different input data. In this case, the decoder receives a different 32-bit instruction string. The following code shows how the stimulation process is implemented:
+\clearpage
 \begin{lstlisting}[style=vhdl, caption=CU testbench stimulation process]
 stim: process
 begin
@@ -36,6 +37,7 @@ Figure \ref{fig:cutiming} shows the full timing diagram for the full testbench d
 \end{figure}
 
 Another unit that had to be verified outside of the control unit is the ALU. Since the complexity of the ALU is not as high as of the control unit, the testbench and also the timing diagram are very simple. The stimulation process of the ALU testbench is shown in the code below:
+\clearpage
 \begin{lstlisting}[style=vhdl, caption=ALU testbench stimulation process]
 stim: process
 begin

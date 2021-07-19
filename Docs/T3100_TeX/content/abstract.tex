@@ -6,6 +6,11 @@
 \renewcommand{\abstractname}{Abstract}
 
 \begin{abstract}
-EDRICO is a project executed by two electrical engineering students at the DHBW Ravensburg. In the very fast evolving technical world, it is important to keep up with new and upcoming technology. RISC-V is a modern open source ISA gaining a lot of popularity not only from the open-source community but also from international companies.
-This project combines theoretical knowledge from lectures and research that has to be done during the course of the project. The tasks and challenges in this project will result in a deep understanding of FPGA, HDL and RISC-V as well as general computer theory, hardware design and processor technology.
+EDRICO is a project executed by two electrical engineering students at the DHBW Ravensburg. In the very fast evolving technical world, it is important to keep up with new and upcoming technology. RISC-V is a modern open source ISA gaining a lot of popularity not only from the open-source community but also from international companies.\\
+
+This project combines theoretical knowledge from lectures and research that has to be done during the course of the project with practical work that has to be performed in order to implement the design. The tasks and challenges in this project will result in a deep understanding of FPGA, HDL and RISC-V as well as general computer theory, hardware design and processor technology. Tools to be used are the Vivado design suit for HDL coding and simulation, Github for version control and the V-Modell to provide a project management framework. \\
+
+A full implementation of the RV32I ISA is performed and fully tested on RTL level. The Zicsr instruction set extension is implemented in order to provide access to necessary control and status registers. EDRICO runs in one of the three available privilege modes: machine-mode. No additional memory ordering models are applied, since no cache, write buffer or out-of-order execution is performed. Memory accesses are secured to a minimum by implementing dedicated physical memory protection registers. Once locked these can only be unlocked by a system reset. EDRICO is shown to execute instructions with an average CPI of 12,07.\\
+
+Future versions of the proposed design may focus on different improvements, such as security, execution speed or low power consumption.
 \end{abstract}

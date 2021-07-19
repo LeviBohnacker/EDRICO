@@ -76,7 +76,7 @@ On the other hand, \acf{CISC} machines can have special instructions and more co
 RISC-V is an open standard \acf{ISA} developed by the
 University of California, Berkely. The ISA is based on reduced instruction set
 computer (RISC) principles. The ISA supports 32, 64 and 128 bit architectures and
-includes different extensions like Multiplication, Atomic, Floating Point and more. The
+includes different extensions like Multiplication, Atomic, Floating Point and more \cite{riscv:unprivileged}. The
 ISA is open source and therefore can be used by everyone without licensing issues
 and high fee requirements. Due to the open source nature of the RISC-V project,
 many companies like Alibaba and NVIDIA have started to develop hardware based
@@ -85,8 +85,13 @@ RISC-V opens the opportunity to optimize and configure computer hardware to a
 level that would not be realizable with licensed ISA like ARM or x86. As a result of
 this possibility there are many projects and companies working on hardware and
 software that are beating common CPU in terms of performance and power usage
-by a lot.
-
+by a lot.\\
+RISC-V is a load store architecture, therefore only load and store operations are able to access the main memory. All other instructions can only operate on register and immediate data. This decreases complexity of the design, if atomic operations are required the A \ac{ISA} extension can implemented.\\
+Three privilege-levels are supported, making the architecture feasible for every field of operation \cite{riscv:privileged}. RISC-V cores can be developed to run small bare-metal implementations as well as full scale operating systems, such as Linux.\\
+One specialty of the \ac{ISA} is that there is no flag register \cite{riscv:unprivileged}. Branches are executed in one instruction by comparing two operands and modifying the \ac{PC} accordingly to the result of the operation. \\
+An additional privileged specification of the \ac{ISA} introduces so called \ac{CSR} to the architecture. These are used to control and indicate the status of the core. A status register for example is implemented to reflect the current privilege level in which a hart is running. Other registers provide a framework for exception handling by holding the trap vector and providing registers for trap specific information as well as the jump back address \cite{riscv:privileged}.\\
+RISC-V is not only comprised off its \ac{ISA} specification but also multiple open source tools to allow easy workflow. Toolchains such as the gcc compiler are available for RISC-V to allow easy development of code to said platform \cite{gcc}. The RISC-V ecosystem is comprised of both, open-source and commercial services. Codasip for example is a company selling RISC-V based \ac{IP} cores. 
+\clearpage
 \section{Benchmarks}
 Benchmarks are measurement methods to evaluate performance of a computer. To measure benchmarks, a testing system is required. This testing environment is often established by using pre defined code or programs. These programs then are compiled and executed. The time this process takes is measured. The goal of a benchmark is to establish a certain comparability between different computers and processing units. \cite{gessler2014}\\
 Working with benchmarks, a few principles have to be kept in mind. These vital characteristics of benchmarks are \cite{kounev2020systems}:
@@ -189,7 +194,7 @@ Therefore, ratios are higher for faster machines, and lower for slower machines.
 	\caption{SPECint2006 programs \cite{specint}}
 	\label{table:spec2006int}
 \end{table}
-
+\clearpage
 \section{Memory Management}
 Memory Management defines how the memory can be accessed and how changes propagate through different levels of the memory hierarchy. The following section will describe what a memory hierarchy is and why it is needed in modern computer designs. Furthermore one particular communication interface or bus system will be introduced which can be used to access memory in an embedded system. 
 \subsection{Memory Hierarchy}

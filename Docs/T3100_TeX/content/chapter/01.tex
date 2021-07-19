@@ -1,32 +1,21 @@
 %!TEX root = ../../main.tex
 
 \chapter{Introduction}
-These days one of the key benchmarks for technology is processing speed and
-calculation power. To realize mathematical operations and execute programs,
-different platforms can be utilized. The most commonly used unit is the standard
-processor consisting of transistors realized on silicium and other materials.
-Another crucial technology that is gaining more attention is the so-called
-\acf{FPGA}. The FPGA consists of logical units that can
-be wired and configured individually for the required use-case. The advantage of
-FPGA is that the speed of applications can be drastically increased since the
-hardware will be very optimized for the specific application.
-This project aims to develop a \acf{IP}-core based on the Open
-Source Instruction Set \acs{RISC}-V. The goal is to build a reusable unit of logic that can
-interpret compiled C-Code. The IP core is realized in the \ac{VHDL} language and will be deployed on a FPGA. IP Cores are used in every computer, phone and electronic device that requires to execute some computational function. The developers of these IP Cores are big
-companies like Intel, ARM or AMD. These IP Cores and Instruction Sets are strictly
-licensed and not available for everyone. For the development of an own IP Core the
-Instruction Set is the main source of information and therefore the RISC-V
-open-source Instruction Set is used for this project.
+\ac{RISC} based processing units are currently gaining more and more influence on future technologies. Nowadays, \ac{ARM} cores are found in nearly every embedded device such as smartphones and \acp{SoC}. Since a few years even the long time undisputed x86 architecture is challenged by advances to run personal computers based on \ac{RISC} devices.\\
+One of the biggest moves towards this trend was carried out by apple when the announced a complete change in their product line-up. The first \ac{ARM} based macbook was released in 2020, with more to follow. Apple plans to transition their whole product portfolio to in house developed \ac{ARM} based \acp{CPU} in a time frame of about two years \cite{apple}. 
+Many other companies like Intel or NVIDIA are showing increased interest in RISC. This can be seen by NVIDIA buying ARM and Intel making offers to buy one of the biggest RISC-V companies, SiFive. \\
+Using ARM cores has multiple downsides, they are extremely cost expensive and could possibly be restricted by export bans. One alternative of ARM is presented in RISC-V, an open source \ac{RISC} architecture. The microarchitecture is increasingly gaining influence, since its launch in 2010. SiFive started shipping desktop level RISC-V based solutions just recently, displaying the future potential of the RISC-V \ac{ISA} \cite{hifive}. \\
+The aim of this project is to develop a 32-bit RISC-V core from scratch. A main objective is for students to gain a deeper understanding of processor and digital design as well as to get familiar with one of the most promising upcoming \acp{ISA} of future processors. The project is performed over the course of six months. Its goals are to completely develop, implement and verify the core named \ac{EDRICO}.
+\clearpage
 \section{Motivation}
 RISC-V was first proposed at Berkeley University in 2010. The architecture is
 therefore relatively new in comparison to others like x86, ARM or SPARC. Even
 though its young age is already very promising, every year new breakthroughs are
 achieved in the field of RISC-V based cores.
-MicroMagic for example announced in 2020 a chip with a total CoreMark score of
-13000 and an incredible 110000 Coremark/Watt. This poses a significant
-development and is approximately 10 times better than any CISC, RISC or MIPS
-implementation in terms of Performance per Watt.
-Many other companies like Alibaba, Nvidia and SiFive are currently increasing
+Micro Magic for example announced a chip with a total CoreMark score of
+2500 Coremarks running at 1 GHz and an incredible 250000 Coremarks/Watt  in 2021. This poses a significant
+development, \acp{ARM} cortex A 9 processor achieves a maximum Coremarks/Watt score of approximately 1112 \cite{arma9}.
+Many other companies like Alibaba, NVIDIA and SiFive are currently increasing
 research on RISC-V based cores.
 The Motivation behind this project was to gain experience in processor and \ac{FPGA}
 design and verification. Furthermore it poses an interesting opportunity for students
