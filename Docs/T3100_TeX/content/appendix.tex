@@ -1,8 +1,15 @@
 % !TeX root = ../main.tex
 
 \addchap{\appendixPhrase}
-\section{Exception Control FSM States}
-\begin{longtable}{| p{.20\textwidth} | p{.70\textwidth} |}
+{\LARGE Appendix Content:
+\begin{enumerate}
+	\item 1. Exception Control FSM States
+	\item 2. AXI4-Lite master FSM States
+\end{enumerate}}
+\clearpage
+{\LARGE \textbf{Exception Control FSM States}}
+\begin{small}
+\begin{longtable}{| p{.15\textwidth} | p{.75\textwidth} |}
 		\hline
 		\rowcolor{light-gray}
 		\textbf{STATE} & \textbf{OUTPUT} \\
@@ -62,11 +69,11 @@
 		sMEPC & \makecell{--halt core signal\\
 		halt\_core <= '1';\\
 		--buffer register signals
-		if (save\_address or save\_IR or save\_PC) = '1' buffer\_register\_w <= '1';\\
+		if (save\_address or save\_IR or save\_PC)\\ = '1' buffer\_register\_w <= '1';\\
 		buffer\_register\_CSR\_DRA <= '0';\\
 		modify\_mstatus\_EI <= '0';\\
 		modify\_mstatus\_RET <= '0';\\
-		if not (save\_address or save\_IR or save\_PC) = '1' reset\_buffer <= '1';\\
+		if not (save\_address or save\_IR or save\_PC) = '1'\\ reset\_buffer <= '1';\\
 		--DRA signal\\
 		PC\_rw <= '0';\\
 		--DRA\_controll signals\\
@@ -292,13 +299,11 @@
 		--arbiter buffer control\\
 		local\_reset <= '0';\\
 		buffer\_arbiter <= '0';}\\
-	\hline
-	\caption{EC FSM states and corresponding output signals}
 	\label{EC_FSM}
 \end{longtable}
-
+\end{small}
 \clearpage
-\section{AXI4-Lite master FSM States}
+{\LARGE \textbf{AXI4-Lite master FSM States}}
 \begin{longtable}{| p{.20\textwidth} | p{.70\textwidth} |}
 	\hline
 	\rowcolor{light-gray}
@@ -338,7 +343,4 @@
 		reset\_local <= '0';\\
 		error\_detected <= '0';\\
 		memOp\_finished\_int <= '0';} \\
-	\hline
-	\caption{EC FSM states and corresponding output signals}
-	\label{EC_FSM}
 \end{longtable}
