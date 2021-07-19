@@ -1,5 +1,346 @@
 % !TeX root = ../main.tex
 
 \addchap{\appendixPhrase}
-
-
+{\LARGE Appendix Content:
+\begin{enumerate}
+	\item 1. Exception Control FSM States
+	\item 2. AXI4-Lite master FSM States
+\end{enumerate}}
+\clearpage
+{\LARGE \textbf{Exception Control FSM States}}
+\begin{small}
+\begin{longtable}{| p{.15\textwidth} | p{.75\textwidth} |}
+		\hline
+		\rowcolor{light-gray}
+		\textbf{STATE} & \textbf{OUTPUT} \\
+		\hline
+		WFI & \makecell{--halt core signal\\
+		halt\_core <= '0';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '0';\\
+		buffer\_register\_CSR\_DRA <= '0';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '1';}\\
+		\hline
+				TrapEntry & \makecell{--halt core signal\\
+			halt\_core <= '1';\\
+			--buffer register signals\\
+			buffer\_register\_w <= '1';\\
+			buffer\_register\_CSR\_DRA <= '0';\\
+			modify\_mstatus\_EI <= '0';\\
+			modify\_mstatus\_RET <= '0';\\
+			reset\_buffer <= '0';\\
+			--DRA signal\\
+			PC\_rw <= '0';\\
+			--DRA\_controll signals\\
+			load\_PC <= '1';\\
+			load\_IR <= '0';\\
+			load\_PMP <= '0';\\
+			--CSR\_access\_unit signals\\
+			load\_mepc <= '0';\\
+			load\_mtvec <= '0';\\
+			load\_mstatus <= '0';\\
+			store\_mepc <= '0';\\
+			store\_mcause <= '0';\\
+			store\_mtval <= '0';\\
+			store\_mstatus <= '0';\\
+			--arbiter buffer control\\
+			local\_reset <= '0';\\
+			buffer\_arbiter <= '0';} \\
+		\hline
+		sMEPC & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals
+		if (save\_address or save\_IR or save\_PC)\\ = '1' buffer\_register\_w <= '1';\\
+		buffer\_register\_CSR\_DRA <= '0';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		if not (save\_address or save\_IR or save\_PC) = '1'\\ reset\_buffer <= '1';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		if save\_PC = '1' then load\_PC <= '1';\\
+		if save\_IR = '1' then load\_IR <= '1';\\
+		if save\_address = '1' then load\_PMP <= '1';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '1';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	sMTVAL & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '0';\\
+		buffer\_register\_CSR\_DRA <= '0';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '1';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	lMSTATUS & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '1';\\
+		buffer\_register\_CSR\_DRA <= '1';\\
+		modify\_mstatus\_EI <= '1';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '1';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	sMSTATUS & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '0';\\
+		buffer\_register\_CSR\_DRA <= '0';\\
+		modify\_mstatus\_EI <= '1';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '1';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	lMTVEC & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '1';\\
+		buffer\_register\_CSR\_DRA <= '1';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '1';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	sPC & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '0';\\
+		buffer\_register\_CSR\_DRA <= '0';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '1';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '1';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '1';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	TrapExit & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '1';\\
+		buffer\_register\_CSR\_DRA <= '1';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '1';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	sPC\_ex & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '1';\\
+		buffer\_register\_CSR\_DRA <= '1';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '0';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '1';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '1';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '0';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';} \\
+	\hline
+	sMSTATUS\_ex & \makecell{--halt core signal\\
+		halt\_core <= '1';\\
+		--buffer register signals\\
+		buffer\_register\_w <= '0';\\
+		buffer\_register\_CSR\_DRA <= '0';\\
+		modify\_mstatus\_EI <= '0';\\
+		modify\_mstatus\_RET <= '1';\\
+		reset\_buffer <= '0';\\
+		--DRA signal\\
+		PC\_rw <= '0';\\
+		--DRA\_controll signals\\
+		load\_PC <= '0';\\
+		load\_IR <= '0';\\
+		load\_PMP <= '0';\\
+		--CSR\_access\_unit signals\\
+		load\_mepc <= '0';\\
+		load\_mtvec <= '0';\\
+		load\_mstatus <= '0';\\
+		store\_mepc <= '0';\\
+		store\_mcause <= '0';\\
+		store\_mtval <= '0';\\
+		store\_mstatus <= '1';\\
+		--arbiter buffer control\\
+		local\_reset <= '0';\\
+		buffer\_arbiter <= '0';}\\
+	\label{EC_FSM}
+\end{longtable}
+\end{small}
+\clearpage
+{\LARGE \textbf{AXI4-Lite master FSM States}}
+\begin{longtable}{| p{.20\textwidth} | p{.70\textwidth} |}
+	\hline
+	\rowcolor{light-gray}
+	\textbf{STATE} & \textbf{OUTPUT} \\
+	\hline
+	idle & \makecell{size\_buf <= "00";\\
+		reset\_local <= '1';\\
+		error\_detected <= '0';\\
+		memOp\_finished\_int <= '0';}\\
+	\hline
+	read & \makecell{size\_buf <= size;\\
+		reset\_local <= '0';\\
+		error\_detected <= '0';\\
+		memOp\_finished\_int <= '0';} \\
+	\hline
+	end\_read & \makecell{
+		reset\_local <= '0';\\
+		error\_detected <= '0';\\
+		memOp\_finished\_int <= '1';} \\
+	\hline
+	write & \makecell{size\_buf <= size;\\
+		reset\_local <= '0';\\
+		error\_detected <= '0';\\
+		memOp\_finished\_int <= '0';} \\
+	\hline
+	end\_write & \makecell{
+		reset\_local <= '0';\\
+		error\_detected <= '0';\\
+		memOp\_finished\_int <= '1';} \\
+	\hline
+	error & \makecell{
+		reset\_local <= '0';\\
+		error\_detected <= '1';\\
+		memOp\_finished\_int <= '0';} \\
+	\hline
+	wait & \makecell{
+		reset\_local <= '0';\\
+		error\_detected <= '0';\\
+		memOp\_finished\_int <= '0';} \\
+\end{longtable}

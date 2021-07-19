@@ -67,24 +67,24 @@
 
 
 %%%%%%% Package Includes %%%%%%%
-
+\usepackage[table]{xcolor}
 \usepackage[margin=\margin,foot=1cm]{geometry}
 \usepackage[activate]{microtype}                                         
 \usepackage[onehalfspacing]{setspace}
 \usepackage{makeidx}
 \usepackage[autostyle=true,german=quotes]{csquotes}
 \usepackage{longtable}
-\usepackage{enumitem}	                                                 
+\usepackage{enumitem}	                                              \usepackage{url}
 \usepackage{graphicx}
-\usepackage[table]{xcolor}
-\usepackage{pdfpages}                                                         
-\usepackage{xcolor} 	                                                    
+\usepackage{tikz}
+\usepackage{pdfpages}                                                   
+\usepackage[toc,page]{appendix}	                                                    
 \usepackage{float}
 \usepackage{array}
 \usepackage{calc}		                         
 \usepackage[right]{eurosym}
 \usepackage{wrapfig}
-\usepackage{pgffor}                                                             
+\usepackage{pgffor}                                                          
 \usepackage[perpage, hang, multiple, stable]{footmisc}  
 \usepackage[printonlyused]{acronym}                                 
 \usepackage{listings}
@@ -104,10 +104,9 @@
 	pdflang={\documentLanguage}, % Document language
 ]{hyperref}
 \usepackage{bookmark}
-\usepackage[nonumberlist,toc]{glossaries}
-
+\usepackage[nonumberlist,toc]{glossaries} 
 % Generate glossary
-\makeglossaries{}
+%\makeglossaries{}
 
 % Load colors
 \defineColors{}
@@ -152,7 +151,8 @@
 	style=\quoteStyle,
 ]{biblatex}
 }
-
+\usepackage{makecell}
+%\bibliographystyle{ieeetr}
 \usepackage{xcolor}
 \colorlet{keyword}{blue!100!black!80}
 \colorlet{comment}{green!90!black!90}
@@ -162,7 +162,6 @@
 	keywordstyle = \color{keyword}\bfseries,
 	commentstyle = \color{comment}
 }
-
 
 \usepackage{tabularx}
 \usepackage{graphicx}

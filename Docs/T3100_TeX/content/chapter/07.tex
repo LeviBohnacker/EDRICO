@@ -1,2 +1,7 @@
 %!TEX root = ../../main.tex
-\chapter{Future Work}
+\chapter{Conclusion}
+During the course of this project, a preliminary version of the proposed processor design was developed, implemented and partly verified. Using the V-Modell project management approach, the design was developed leveraging a top-down line of action. Step by step decreasing granularity of the design from Requirements, System Design, Architecture Design to finally Module Design and Implementation. \\
+Accompanying documents are provided to each of the corresponding V-Modell design phases. These mark milestones in the project and provide a good overview of the different levels of abstraction.\\
+\ac{EDRICO} implements the full \ac{RV32I} \ac{ISA} including the Zicsr instruction, running in machine-mode only. It is composed of a \textit{Control Unit}, \ac{ALU}, \textit{Register File}, \textit{Exception Control Unit}, \textit{PMP \& PMA checker} as well as a \ac{AXI4-Lite} master and slave interface. It executes one instruction at a time by running the fetch, decode and execute phases. All required exceptions as well as the timer and software interrupt are implemented and can be handled by the machine. \\
+\ac{EDRICO} is shown to work in simulation with an average \ac{CPI} of 12,07. Especially the time required for memory access imposes a significant overhead to the execution.\\
+Future improvements are best deployed on increasing memory performance, for example by adding a cache structure. The source code, documentation and accompanying documents can be found under the official github repository of \ac{EDRICO}: \underline{\href{https://github.com/LeviBohnacker/EDRICO}{Github Repository}}.

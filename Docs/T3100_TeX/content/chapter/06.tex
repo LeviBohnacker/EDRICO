@@ -1,6 +1,22 @@
 %!TEX root = ../../main.tex
-\chapter{Test \& Verification}
-\section{Unit \& Integration Verification}
-\section{System Verification}
-\section{Acceptance Verification}
-\section{Benchmarks}
+\chapter{Future Work}
+Even thought \ac{EDRICO} is verified to execute all \ac{RV32I} instructions correctly, there is still a lot of work to be done in order to bring this project to live. The following list contains all steps that are necessary to verify and finish version one of \ac{EDRICO}:\\
+
+\begin{itemize}
+\item verify the correct execution of the Zicsr instruction
+\item execute acceptance verification (test \ac{EDRICO} on actual hardware, e.g. a Spartan 6 \ac{FPGA} or the Arty Z7 development board)
+\item port benchmarks like SPEC or Coremark to the platform
+\item run and evaluate said benchmarks
+\end{itemize}
+
+Extended future work could contain developing an improved version two of \ac{EDRICO}. The following list contains ideas that did not make it to implementation in version one but could be added to future implementations:\\
+
+
+\begin{itemize}
+	\item increase performance of the instruction fetches by optimizing the time to access main memory using the \ac{AXI4-Lite} master
+	\item increasing overall memory performance by adding L1 instruction and data caches
+	\item implementing a small scale pipeline into the design
+	\item implementing a proper debug specification, such as \cite{riscv:debug}
+	\item allow atomic operations by implementing the corresponding \ac{ISA} extension
+	\item add further ISA extensions such as single precision floating point support
+\end{itemize}
