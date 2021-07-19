@@ -109,7 +109,8 @@ With the same approach, every other unit is verified and occuring bugs are fixed
 \section{Integration Verification}
 During this stage of Test and Verification, all of the units have already been tested and verified. In this step, it is verified, that the units created and tested independently can coexist and communicate among themselves. In this project, the Integration Verification consists of creating so called \textit{top-files} which conclude all the corresponding units to a sub system. This section describes how the Control Unit of the EDRICO CPU went through this stage.\\
 Since the CU consists of the units \textit{CU\_decoder, CU\_execute\_enable, CU\_FSM and CU\_PC}, the top file gets very big since it combines and connects all the mentioned units. As shown in figure \ref{fig:cuarchitecture} there are a lot of control signals going out of the control unit and some signals going in. These inputs and outputs are the only signals visible from the 'outside' and therefore are the only signals to be monitored during testing. Since all units are already verified, the internal communication and processing should be working correctly. The creation of the testbench for this integration is much more complex than the testing for the single units. Since the timing of the state machine is working autonomously, the input signal manipulation has to be adapted respectively. Due to this high complexity, a package file was created to outsource input signal manipulation and also output signal monitoring.\\
-In this package file, there are multiple vectors consisting of the different input signals and the desired output signals. An example for these vectors is shown in the code below:
+In this package file, there are multiple vectors consisting of the different input signals and the desired output signals. An example for these vectors is shown in the code below:\clearpage
+
 \begin{lstlisting}[style=vhdl, caption=CU top testbench package]
 type data_stim is array(natural range <>) of std_logic_vector(31 downto 0);
 type result_vec is array(natural range <>) of std_logic_vector(149 downto 0);
@@ -118,7 +119,6 @@ constant instruction : data_stim(38 downto 0) :=
 	(
 	1 => "00000000001000100000000010010011",    --ADDI
 	2 => "00000000001000100010000010010011",    --SLTI
-	3 => "00000000001000100011000010010011",    --SLTIU
 	...
 	22 => "00000100000100001001000011101111",   --JAL
 	23 => "00000010101000100000000011100111",   --JALR
@@ -132,8 +132,6 @@ constant results : result_vec(38 downto 0) :=
 	...
 	10 => x"004200B3" & x"0000002C" & '0' & '0' & "00" & '0' & '0' & '0' & '1' & '0' & '1' & "10" & "00100" & "00100" & "00001" & "000000000000" & '0' & '0' & '0' & "0000" & "100" & '0' & '0' & '0' & '0' & x"00000000" & '1',   --ADD
 	...
-	 26 => x"00000073" & x"00000000" & '0' & '0' & "00" & '0' & '0' & '0' & '0' & '0' & '0' & "00" & "00000" & "00000" & "00000" & "000000000000" & '0' & '0' & '0' & "0000" & "100" & '0' & '1' & '0' & '0' & x"00000000" & '1',   --ECALL
-	 ...
 	 35 => x"00120423" & x"00000000" & '1' & '1' & "00" & '1' & '1' & '0' & '0' & '1' & '1' & "01" & "00001" & "00100" & "00000" & "000000000000" & '0' & '0' & '0' & "0000" & "001" & '0' & '0' & '0' & '0' & x"00000008" & '1',   --SB
 	 ...
 \end{lstlisting}
@@ -233,6 +231,7 @@ Table \ref{SysVer_results} compares expected and actual register values:
 The test code is made up of 48 instructions, therefore the PC is expected to be:
 $$PC=48*4=192=0xC0$$
 after execution. When taking a look at table \ref{SysVer_results} one sees a difference between the expected and actual result for the PC. This problem is caused by the last instruction that is executed. It is a jump back to the start of the address, hence 0x00000000. After investigating the assembly code, the cause for this behavior is found. The last instruction is a \ac{JALR} instruction.
+\clearpage
 
 \begin{lstlisting}[caption=Snippet 1 from the executed test code]
 	JAL x31, 8 #jump 8 byte

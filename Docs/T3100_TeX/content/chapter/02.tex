@@ -71,7 +71,7 @@ On the other hand, \acf{CISC} machines can have special instructions and more co
 	\caption{RISC vs CISC \cite{hellmann2013}}
 	\label{table:riscvscisc}
 \end{table}
-
+\clearpage
 \section{RISC-V}
 RISC-V is an open standard \acf{ISA} developed by the
 University of California, Berkely. The ISA is based on reduced instruction set
@@ -100,7 +100,7 @@ Working with benchmarks, a few principles have to be kept in mind. These vital c
 	\item \textbf{Transparency}: Metrics should be easy to understand
 \end{enumerate}
 There are several commonly used benchmarks depending on the type of system to be measured.\\
-A very popular CPU benchmark is the \textit{SPEC CPU}. This benchmark is being released ever since 1998 and gets updated and extended every couple of years. The most recent version is the \textit{SPEC CPU2017}. This benchmark suite concludes a lot of different benchmarks for different use-cases. The suite differs between \textit{rate} and \textit{speed} benchmarks and offers \textit{integer} as well as \textit{floating point} tests. The following table \ref{table:cpu2017} gives a brief overview of a few examples and their characteristics (only integer speed benchmark):
+A very popular \ac{CPU} benchmark is the \textit{SPEC CPU}. This benchmark is being released ever since 1998 and gets updated and extended every couple of years. The most recent version is the \textit{SPEC CPU2017}. This benchmark suite concludes a lot of different benchmarks for different use-cases. The suite differs between \textit{rate} and \textit{speed} benchmarks and offers \textit{integer} as well as \textit{floating point} tests. The following table \ref{table:cpu2017} gives a brief overview of a few examples and their characteristics (only integer speed benchmark):
 \begin{table}[H]
 	\setlength\arrayrulewidth{2pt}
 	\centering
@@ -189,7 +189,7 @@ Therefore, ratios are higher for faster machines, and lower for slower machines.
 	\caption{SPECint2006 programs \cite{specint}}
 	\label{table:spec2006int}
 \end{table}
-\clearpage
+
 \section{Memory Management}
 Memory Management defines how the memory can be accessed and how changes propagate through different levels of the memory hierarchy. The following section will describe what a memory hierarchy is and why it is needed in modern computer designs. Furthermore one particular communication interface or bus system will be introduced which can be used to access memory in an embedded system. 
 \subsection{Memory Hierarchy}
@@ -218,6 +218,7 @@ Different ways of increasing cache performance are described in \cite{patterson:
 
 
 \subsection{Communication Interfaces}
+\label{chapter:axiCommInterfaces}
 In order to access memory, some sort of communication interface / bus system is required. There are countless options like the widely used \ac{PCIe} and \ac{CAN} bus or application specific systems, e.g. SpaceWire used in satellite systems or \acp{ARM} \ac{AMBA}.\\
 The following section will provide an overview of the \ac{AXI4-Lite} protocol which is implemented in the \ac{EDRICO}.\\
 An AXI interface has four independent channels: read address, write address, read data, write data and write response. Figure \ref{fig:AXI_channels_write} and \ref{fig:AXI_channels_read} visualizes these three channels:

@@ -1,16 +1,9 @@
 %!TEX root = ../../main.tex
 
 \chapter{EDRICO}
-<<<<<<< HEAD
-
-The Proposed Processor design named \ac{EDRICO} implements a basic \ac{RV32I}
-instruction set architecture. Besides the mandatory Zicsr extension no other
-=======
 \label{chapter:edrico}
-The Proposed Processor design named Educational DHBW RISC-V Core (EDRICO) implements a basic RV32I
-instruction set architecture. Besides the mandatory “Zicsr” extension no other
->>>>>>> 11e7a5a18fb89c84c3d44061ef46d9eba6d9893f
-instruction set extensions are implemented. To keep the implementation simple and
+The Proposed Processor design named \acf{EDRICO} implements a basic \ac{RV32I}
+instruction set architecture. Besides the mandatory Zicsr extension no other instruction set extensions are implemented. To keep the implementation simple and
 straight-forward only one privilege mode (machine-mode) is implemented. This mode
 allows full access to the processor and peripherals. Future versions could be
 extended to implement supervisor- and user-mode.\\
@@ -113,7 +106,7 @@ The instruction formats are shown in Figure \ref{fig:instrtypes}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{instr_types.png}
-	\caption{RISC-V Instruction formats \cite{riscv}}
+	\caption{RISC-V Instruction formats \cite{riscv:privileged}}
 	\label{fig:instrtypes}
 \end{figure}
 The different instruction formats are useful for the decoding process since e.g. all LOAD instructions have the same structure and therefore, the effort to decode the 32-bit word can be reduced. Since the control signals are unique for every instruction and depending on the content of the 32-bit word, the decoder has to identify the encoded instruction, extract the information and respectively set the control signals, calculate immediates and control the multiplexers. A more detailed description of the decoding process can be found in section \ref{CU_impl}.\\
@@ -138,7 +131,7 @@ During an instruction execution, the program counter has to be incremented for t
 			\hline
 		\end{tabular}}
 	\label{PCcontrol}
-	\caption{Program Counter control: Instructions and rAXIesulting actions}
+	\caption{Program Counter control: Instructions and resulting actions}
 \end{table}
 For instructions which do not influence the program counter, the standard operation performs the \textbf{PC + 4} operation.
 
@@ -552,12 +545,11 @@ The \ac{LUT} chooses the lowest order \ac{PMP} region matching the address and s
 
 \subsection{Implementation}
 The implementation of the \textit{PMA\_checker} is relatively simple. A simple multiplexer chooses whether or not an intern enable signal is set or not, depending on the lower to bits of the address and the size of the transfer. The enable output is connected to the intern enable signal as soon as the enable input is set. A simple and gate is used to connect the intern signal with the external one. \\
-The following listing shows how the access misaligned exception signals are generated inside the \textit{PMA\_checker}:
-
+The following listing shows how the access misaligned exception signals are generated inside the \textit{PMA\_checker}:\clearpage
 \begin{lstlisting}[style=vhdl, caption=access misaligend exception generation]
-	load_ame_P <= not enable_int and enable and not readWrite;
-	storeAMO_ame_P <= not enable_int and enable and readWrite;
-	instruction_ame_P <= not enable_int and enable and instruction;
+   load_ame_P <= not enable_int and enable and not readWrite;
+   storeAMO_ame_P <= not enable_int and enable and readWrite;
+   instruction_ame_P <= not enable_int and enable and instruction;
 \end{lstlisting}
 
 In order to perform the \ac{PMP} checks inside a \textit{PMP\_unit}, the size of a possible \ac{NAPOT} region has to be determined. A simple \ac{LUT} does the trick. Table \ref{table:NAPOT} shows its configuration:
@@ -610,7 +602,7 @@ The address hit is only detected, if the \ac{PMP} entry is locked. Using the A f
 The Exception Control Unit is used to guard exception entries and exits. Its
 tasks are to modify the \ac{PC} accordingly, save the old \ac{PC} as well as information about the exception.
 In addition, two interrupt entries are guarded by the unit. A list of all supported
-exceptions and interrupts is listed below:\\\\
+exceptions and interrupts is listed below:\\
 
 Exceptions can be caused by the following modules:
 \begin{itemize}
@@ -706,7 +698,7 @@ Figure \ref{fig:aximaster} depicts the architecture of it:
 	\label{fig:aximaster}
 \end{figure}
 It includes two registers, for data and address. These are loaded on the rising edge of the system clock, if the corresponding load signal is applied. Both register outputs are constantly connected to the corresponding \ac{AXI} signals \textit{(AWADDR/ARADDR and WDATA)}.\\
-The \textit{AXI4-Lite Master Control Unit} is in charge of controlling the \ac{AXI} transfer. It controls the ready and valid signals as well as the register reads and writes. It is clocked with \textit{M\_AXI\_ACLK}. To reset the module either the reset (active high) or \textit{M\_AXI\_ARSTN} (active low) may be applied. To start a transfer, the enable signal must be high on a rising clock edge. This will cause the corresponding registers and valid signals to be updated (see section 2.5.2 for more information on the \ac{AXI} protocol). It is mandatory, that the correct address and data values are present as soon as the enable signal is high. Otherwise a faulty transfer will be initiated, since the valid signals are set to high even though data and address are not valid yet. \\
+The \textit{AXI4-Lite Master Control Unit} is in charge of controlling the \ac{AXI} transfer. It controls the ready and valid signals as well as the register reads and writes. It is clocked with \textit{M\_AXI\_ACLK}. To reset the module either the reset (active high) or \textit{M\_AXI\_ARSTN} (active low) may be applied. To start a transfer, the enable signal must be high on a rising clock edge. This will cause the corresponding registers and valid signals to be updated (see section \ref{chapter:axiCommInterfaces} for more information on the \ac{AXI} protocol). It is mandatory, that the correct address and data values are present as soon as the enable signal is high. Otherwise a faulty transfer will be initiated, since the valid signals are set to high even though data and address are not valid yet. \\
 If data is ready to be read from the system bus, it is routed to an output of the master and the \textit{store\_systemSystemData} is set to high, in order to ensure a correct read, this process shall not be clocked. The surrounding system is responsible to store the received data in the correct register.\\
 At the end of a data transfer, the \textit{memOp\_finished} signal is set to high, informing the Control Unit that it can proceed operations.\\
 If an error occurred during an access, the \textit{instruction\_afe\_P}, \textit{storeAMO\_afe\_P} or \textit{load\_afe\_P} exceptions are raised. And remain high until the \textit{halt\_core} signal is applied to the \textit{AXI4-Lite Master Control Unit}.
@@ -760,7 +752,6 @@ Five \ac{AXI4-Lite} signals are generated without using the FSM, in order to dec
 The\textit{ M\_AXI\_AxCACHE} is hardwired to \textit{"0011"} to determine that the access is normal non-cacheable bufferable. This is specified since \ac{EDRICO} does not employ any memory consistency model. The first two bits of the protection signals are set to 0, in order to ensure that every access is secure and unprivileged since the only implemented privilege mode is machine-mode. \textit{M\_AXI\_AxPROT}(2) is adjusted, accordingly to the executed access (instruction or data).\\
 \textit{M\_AXI\_WSTRB} signals what bytes of the transfer are valid to be used. For a word it is set to \textit{0x1}. for a half-word to \textit{0x3} and for a word transfer to \textit{0xF}.
 
-\clearpage
 \section{AXI4-Lite Slave}
 \label{axi4slave}
 Some of the RISC-V \acp{CSR} must be memory mapped, meaning the must be
